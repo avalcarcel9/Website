@@ -51,12 +51,6 @@
   </url>
   
   <url>
-    <loc>https://shenoybr.github.io/hugo-goa-demo/</loc>
-    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://shenoybr.github.io/hugo-goa-demo/categories/articles/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
@@ -95,6 +89,12 @@
   <url>
     <loc>https://shenoybr.github.io/hugo-goa-demo/tags/ceo/</loc>
     <lastmod>2016-10-01T16:59:13-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shenoybr.github.io/hugo-goa-demo/</loc>
+    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
