@@ -34,14 +34,9 @@ keywords = "minimalist,blog,goa,hugo,developer"
 
 ## Social Accounts
 [params.social]
-github = "<username>"
-instagram = "<username>"
-xing = "<username>"
+github = "avalcarcel9"
 linkedin = "<username>"
-twitter = "<username>"
-facebook = "<username>"
 google = "<username>"
-stackoverflow = "<username>"
 email = "you@example.com"
 
 ## Extras
