@@ -17,6 +17,11 @@ weight = 5
 
 # List your qualifications (such as academic degrees).
 [[education.courses]]
+  course = "PhD Student in Biostatistics"
+  institution = "University of Pennsylvania"
+  year = 2020
+
+[[education.courses]]
   course = "MS in Biostatistics"
   institution = "University of Pennsylvania"
   year = 2017

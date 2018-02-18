@@ -15,14 +15,4 @@ weight = 60
 
 +++
 
-This is an example of using the *custom* widget to create your own homepage section.
-
-I am a teaching instructor for the following courses at University X:
-
-- CS101: An intro to computer science
-- CS102: An intro to computer science
-- CS103: An intro to computer science
-- CS104: An intro to computer science
-- CS105: An intro to computer science
-- CS106: An intro to computer science
-- CS107: An intro to computer science
+I have been a teaching assistant for HPR 604: Introduction to Statistics for Health Policy in Fall 2016 and Fall 2017. I was responsible for teaching Stata labs, holding office hours, and grading.
