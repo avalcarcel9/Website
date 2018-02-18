@@ -9,8 +9,8 @@ contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
 
-author = "Erlich Bachman"
-title = "Erlich Bachman"
+author = "Alessandra Valcarcel"
+title = "Alessandra Valcarcel"
 
 theme = "hugo-goa"
 
