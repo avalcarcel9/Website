@@ -24,7 +24,7 @@ enableRobotsTXT = true
 author = "Alessandra Valcarcel"
 intro = "PhD Student"
 description = "University of Pennsylvania"
-authorimage = "headshot.jpg"
+authorimage = "me.jpg"
 dateformat = "Jan 2, 2006"
 
 ## Site Meta Settings
