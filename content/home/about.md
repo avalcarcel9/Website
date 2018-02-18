@@ -10,31 +10,26 @@ weight = 5
 # List your academic interests.
 [interests]
   interests = [
-    "Artificial Intelligence",
-    "Computational Linguistics",
-    "Information Retrieval"
+    "Imaging",
+    "Multiple Sclerosis",
+    "Machine Learning"
   ]
 
 # List your qualifications (such as academic degrees).
 [[education.courses]]
-  course = "PhD in Artificial Intelligence"
-  institution = "Stanford University"
-  year = 2012
+  course = "MS in Biostatistics"
+  institution = "University of Pennsylvania"
+  year = 2017
 
 [[education.courses]]
-  course = "MEng in Artificial Intelligence"
-  institution = "Massachusetts Institute of Technology"
-  year = 2009
-
-[[education.courses]]
-  course = "BSc in Artificial Intelligence"
-  institution = "Massachusetts Institute of Technology"
-  year = 2008
+  course = "BA in Biology and Statistics (Honors)"
+  institution = "University of Pennsylvania"
+  year = 2015
  
 +++
 
 # Biography
 
-Lena Smith is a professor of artificial intelligence at the Stanford AI Lab. Her research interests include distributed robotics, mobile computing and programmable matter. She leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
+I'm currently a third-year PhD student in Biostatistics in the Department of Biostatistics, Epidemiology, and Informatics at the University of Pennsylvania. I am an active researcher in the [PennSIVE](https://www.med.upenn.edu/pennsive/) lab under the mentorship of [Russell [Taki] Shinohara](https://www.med.upenn.edu/pennsive/personnel.html). Primarily, my research interests lie in the development of statistical methods for analyzing neuroimaging data sets with the goal of understanding disease processes in the brain. Currently,  my projects involve the analysis of multi-sequence structural MRI for the study of multiple sclerosis.  I collaborate regularly with experts in bioengineering, radiology, and neurology. 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate. 
+I earned my M.S. in Biostatistics from University of Pennsylvania in 2017. My thesis proposed a novel machine learning algorithm, MIMoSA, to automatically detect T2 hyperintense white matter lesions in multiple sclerosis. Before coming to Penn, I obtained my undergraduate degree in Biology and Statistics (Honors) from University of Connecticut.
