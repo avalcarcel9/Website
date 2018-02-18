@@ -21,8 +21,22 @@ publication = "In *Signal Image Technology & Internet Systems (SITIS)*, IEEE."
 publication_short = "In *SITIS*"
 
 # Abstract and optional shortened version.
-abstract = "Person re-identification is a critical security task for recognizing a person across spatially disjoint sensors. Previous work can be computationally intensive and is mainly based on low-level cues extracted from RGB data and implemented on a PC for a fixed sensor network (such as traditional CCTV). We present a practical and efficient framework for mobile devices (such as smart phones and robots) where high-level semantic soft biometrics are extracted from RGB and depth data. By combining these cues, our approach attempts to provide robustness to noise, illumination, and minor variations in clothing. This mobile approach may be particularly useful for the identification of persons in areas ill-served by fixed sensors or for tasks where the sensor position and direction need to dynamically adapt to a target. Results on the BIWI dataset are preliminary but encouraging. Further evaluation and demonstration of the system will be available on our website."
-abstract_short = ""
+abstract = "
+__Background and Purpose__
+
+Magnetic resonance imaging (MRI) is crucial for in vivo detection and characterization of white matter lesions (WML) in multiple sclerosis. While WML have been studied for over two decades using MRI, automated segmentation remains challenging. Although the majority of statistical techniques for the automated segmentation of WML are based on single imaging modalities, recent advances have used multimodal techniques for identifying WML. Complementary modalities emphasize different tissue properties, which help identify interrelated features of lesions. 
+
+__Methods__
+
+MIMoSA, a fully automatic lesion segmentation algorithm which utilizes novel covariance features from inter-modal coupling regression in addition to mean structure to model the probability lesion is contained in each voxel, is proposed. MIMoSA was validated by comparison with both expert manual and other automated segmentation methods in two datasets. The first included 98 subjects imaged at Johns Hopkins Hospital in which bootstrap cross-validation was used to compare the performance of MIMoSA against OASIS and LesionTOADS, two popular automatic segmentation approaches. For a secondary validation, a publicly available data from a segmentation challenge was used for performance benchmarking.
+
+__Results__
+
+In the Johns Hopkins study, MIMoSA yielded average Sørensen-Dice coefficient (DSC) of 0.57 and partial AUC of 0.68 calculated with false positive rates up to 1%. This was superior to performance using OASIS and LesionTOADS. The proposed method also performed competitively in the segmentation challenge dataset.
+
+__Conclusion__
+
+MIMoSA resulted in statistically significant improvements in lesion segmentation performance compared with LesionTOADS and OASIS, and performed competitively in an additional validation study."
 
 # Featured image thumbnail (optional)
 image_preview = ""
@@ -33,10 +47,10 @@ selected = false
 # Projects (optional).
 #   Associate this publication with one or more of your projects.
 #   Simply enter the filename (excluding '.md') of your project file in `content/project/`.
-projects = ["deep-learning"]
+projects = ["segmentation"]
 
 # Links (optional).
-url_pdf = "http://arxiv.org/pdf/1512.04133v1"
+url_pdf = "https://www.biorxiv.org/content/early/2017/06/15/150284"
 url_preprint = ""
 url_code = ""
 url_dataset = ""
