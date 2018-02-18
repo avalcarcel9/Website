@@ -24,7 +24,7 @@ enableRobotsTXT = true
 author = "Alessandra Valcarcel"
 intro = "PhD Student"
 description = "University of Pennsylvania"
-authorimage = "me.jpg"
+authorimage = "mebuil.jpg"
 dateformat = "Jan 2, 2006"
 
 ## Site Meta Settings
@@ -35,12 +35,9 @@ keywords = "minimalist,blog,goa,hugo,developer"
 ## Social Accounts
 [params.social]
 github = "avalcarcel9"
-linkedin = "<username>"
-twitter = "<username>"
-facebook = "<username>"
-google = "<username>"
-stackoverflow = "<username>"
-email = "you@example.com"
+linkedin = "alessandravalcarcel"
+google-scholar = "<username>"
+email = "alval@pennmedicine.upenn.edu"
 
 ## Extras
 [params.extra]
