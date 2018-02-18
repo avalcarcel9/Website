@@ -9,8 +9,8 @@ contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
 
-author = "Erlich Bachman"
-title = "Erlich Bachman"
+author = "Alessandra Valcarcel"
+title = "Alessandra Valcarcel"
 
 theme = "hugo-goa"
 
@@ -21,10 +21,10 @@ enableRobotsTXT = true
 
 ## Site Settings
 [params]
-author = "Erlich Bachman"
-intro = "Startup Guru Extraordinaire"
-description = "Now @Pied Piper. Previously @Hacker Hostel, @Bachmanity and @Aviato. <br/> \"What is F times 5? It's Fleventy-five.\""
-authorimage = "headshot.jpg"
+author = "Alessandra Valcarcel"
+intro = "PhD Student"
+description = "University of Pennsylvania doctoral student studying biostatistics."
+authorimage = "me.jpg"
 dateformat = "Jan 2, 2006"
 
 ## Site Meta Settings
@@ -46,7 +46,7 @@ email = "you@example.com"
 
 ## Extras
 [params.extra]
-copyright = "© 2016. Erlich Bachman. [Some Rights Reserved](http://creativecommons.org/licenses/by/3.0/)." 
+copyright = "© 2018." 
 poweredby = true
 highlightjs = true
 
