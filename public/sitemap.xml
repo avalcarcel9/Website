@@ -33,13 +33,13 @@
   </url>
   
   <url>
-    <loc>/hugo-goa-demo/categories/about/</loc>
+    <loc>/hugo-goa-demo/tags/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/hugo-goa-demo/tags/about/</loc>
+    <loc>/hugo-goa-demo/categories/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
@@ -47,6 +47,12 @@
   <url>
     <loc>/hugo-goa-demo/categories/ad/</loc>
     <lastmod>2016-10-02T15:59:13-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/hugo-goa-demo/</loc>
+    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -89,12 +95,6 @@
   <url>
     <loc>/hugo-goa-demo/tags/ceo/</loc>
     <lastmod>2016-10-01T16:59:13-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/hugo-goa-demo/</loc>
-    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
