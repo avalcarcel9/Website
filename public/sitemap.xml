@@ -3,157 +3,157 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://alessandravalcarcel/blog/third/</loc>
+    <loc>/blog/third/</loc>
     <lastmod>2016-10-03T16:59:13-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/coderag/</loc>
+    <loc>/coderag/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/blog/first/</loc>
+    <loc>/blog/first/</loc>
     <lastmod>2016-10-02T15:59:13-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/blog/second/</loc>
+    <loc>/blog/second/</loc>
     <lastmod>2016-10-01T16:59:13-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/blog/2015-07-23-r-rmarkdown/</loc>
+    <loc>/blog/2015-07-23-r-rmarkdown/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/about/</loc>
+    <loc>/categories/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/categories/about/</loc>
+    <loc>/tags/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/categories/ad/</loc>
+    <loc>/categories/ad/</loc>
     <lastmod>2016-10-02T15:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/</loc>
+    <loc>/</loc>
     <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/categories/articles/</loc>
+    <loc>/categories/articles/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/aviato/</loc>
+    <loc>/tags/aviato/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/bachman/</loc>
+    <loc>/tags/bachman/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/belson/</loc>
+    <loc>/tags/belson/</loc>
     <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/blog/</loc>
+    <loc>/blog/</loc>
     <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/categories/</loc>
+    <loc>/categories/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/ceo/</loc>
+    <loc>/tags/ceo/</loc>
     <lastmod>2016-10-01T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/gavin/</loc>
+    <loc>/tags/gavin/</loc>
     <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/hardware/</loc>
+    <loc>/tags/hardware/</loc>
     <lastmod>2016-10-02T15:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/hooli/</loc>
+    <loc>/tags/hooli/</loc>
     <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/pied-piper/</loc>
+    <loc>/tags/pied-piper/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/plot/</loc>
+    <loc>/tags/plot/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/categories/propaganda/</loc>
+    <loc>/categories/propaganda/</loc>
     <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/categories/r/</loc>
+    <loc>/categories/r/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/r-markdown/</loc>
+    <loc>/tags/r-markdown/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/regression/</loc>
+    <loc>/tags/regression/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alessandravalcarcel/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>

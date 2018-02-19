@@ -24,13 +24,13 @@ enableRobotsTXT = true
 author = "Alessandra Valcarcel"
 intro = "PhD Candidate"
 description = "Studying biostatistics at the University of Pennsylvania under Dr. Russell [Taki] Shinohara"
-authorimage = "me.png"
+authorimage = "headshot.jpg"
 dateformat = "Jan 2, 2006"
 
 ## Site Meta Settings
 [params.meta]
 description = "Simple minimalist theme"
-keywords = "minimalist,blog,goa,hugo,developer"
+keywords = "Alessandra,Valcarcel,University,Pennsylvania,graduate"
 
 ## Social Accounts
 [params.social]
@@ -47,15 +47,15 @@ highlightjs = true
 
 ## Main Menu
 [[menu.main]]
-    name = "blog"
-    weight = 100
-    identifier = "blog"
-    url = "/blog/"
-[[menu.main]]
     name = "about"
     identifier = "about"
     weight = 200
     url = "/about/"
+[[menu.main]]
+    name = "blog"
+    weight = 100
+    identifier = "blog"
+    url = "/blog/"
 [[menu.main]]
     name = "coderag"
     identifier = "coderag"
