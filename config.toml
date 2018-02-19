@@ -1,6 +1,6 @@
 ## Basic Configuration
 
-baseurl = "https://shenoybr.github.io/hugo-goa-demo/" 
+baseurl = "https://alessandravalcarcel" 
 builddrafts = false
 canonifyurls = false
 languageCode = "en-US"
@@ -35,7 +35,7 @@ keywords = "minimalist,blog,goa,hugo,developer"
 ## Social Accounts
 [params.social]
 github = "avalcarcel9"
-linkedin = "<username>"
+linkedin = "alessandravalcarcel"
 google = "<username>"
 email = "you@example.com"
 
