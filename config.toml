@@ -41,7 +41,7 @@ email = "you@example.com"
 
 ## Extras
 [params.extra]
-copyright = "© 2018. Alessandra Valcarcel. [Some Rights Reserved](http://creativecommons.org/licenses/by/3.0/)." 
+copyright = "© 2018. Alessandra Valcarcel." 
 poweredby = true
 highlightjs = true
 
