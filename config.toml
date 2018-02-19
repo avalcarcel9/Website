@@ -33,11 +33,25 @@ description = "Simple minimalist theme"
 keywords = "Alessandra,Valcarcel,University,Pennsylvania,graduate"
 
 ## Social Accounts
-[params.social]
-github = "avalcarcel9"
-linkedin = "alessandravalcarcel"
-google = "<username>"
-email = "you@example.com"
+[[params.social]]
+  icon = "envelope"
+  icon_pack = "fa"
+  link = "alval@pennmedicine.upenn.edu"
+
+[[params.social]]
+  icon = "linkedin"
+  icon_pack = "fa"
+  link = "https://www.linkedin.com/in/alessandravalcarcel"
+
+[[params.social]]
+  icon = "google-scholar"
+  icon_pack = "ai"
+  link = "https://scholar.google.com/citations?user=u22eIVEAAAAJ&hl=en"
+
+[[params.social]]
+  icon = "github"
+  icon_pack = "fa"
+  link = "//github.com/avalvarcel9"
 
 ## Extras
 [params.extra]
