@@ -55,7 +55,6 @@ keywords = "minimalist,blog,goa,hugo,developer"
   icon_pack = "fa"
   link = "//github.com/avalcarcel9"
 
-
 ## Extras
 [params.extra]
 copyright = "© 2018. Alessandra Valcarcel." 
@@ -64,15 +63,15 @@ highlightjs = true
 
 ## Main Menu
 [[menu.main]]
-    name = "blog"
-    weight = 100
-    identifier = "blog"
-    url = "/blog/"
-[[menu.main]]
     name = "about"
     identifier = "about"
     weight = 200
     url = "/about/"
+[[menu.main]]
+    name = "blog"
+    weight = 100
+    identifier = "blog"
+    url = "/blog/"
 [[menu.main]]
     name = "coderag"
     identifier = "coderag"
