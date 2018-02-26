@@ -69,7 +69,7 @@ scholar = "u22eIVEAAAAJ"
 ## Extras
 [params.extra]
 copyright = "© 2018. Alessandra Valcarcel." 
-poweredby = true
+poweredby = false
 highlightjs = true
 
 ## Main Menu
