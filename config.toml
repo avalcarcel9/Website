@@ -40,7 +40,7 @@ keywords = "minimalist,blog,goa,hugo,developer"
 
 ## Social Accounts
 [params.social]
-github = "//github.com/avalcarcel9"
+github = "avalcarcel9"
 instagram = ""
 xing = ""
 linkedin = ""
