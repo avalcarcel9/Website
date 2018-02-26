@@ -15,7 +15,7 @@ title = "Alessandra Valcarcel"
 theme = "hugo-goa"
 
 ## Hugo Built-in Features
-disqusShortname = "https-shenoybr-github-io-hugo-goa-demo" # Comment out to disable Disqus.
+disqusShortname = "https-shenoybr-github-io-hugo-goa-demo"
 googleAnalytics = "XYZ"
 enableRobotsTXT = true
 
@@ -38,7 +38,6 @@ keywords = "minimalist,blog,goa,hugo,developer"
 #linkedin = "alessandravalcarcel"
 #google = "<username>"
 #email = "you@example.com"
-
 
 [[params.social]]
   icon = "envelope"
