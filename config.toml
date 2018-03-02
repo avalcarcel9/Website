@@ -8,8 +8,8 @@ contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
 
-author = "Alessandra Valcarcel"
-title = "Alessandra Valcarcel"
+author = "Alessandra [Ali] Valcarcel"
+title = "Alessandra [Ali] Valcarcel"
 
 theme = "hugo-goa"
 
@@ -50,13 +50,15 @@ highlightjs = true
     identifier = "about"
     weight = 100
     url = "/about/"
+
+[[menu.main]]
+    name = "research"
+    identifier = "research"
+    weight = 200
+    url = "/research/"
+    
 [[menu.main]]
     name = "blog"
-    weight = 200
+    weight = 300
     identifier = "blog"
     url = "/blog/"
-[[menu.main]]
-    name = "coderag"
-    identifier = "coderag"
-    weight = 300
-    url = "/coderag/"

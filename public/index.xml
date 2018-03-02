@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Alessandra Valcarcel</title>
+    <title>Alessandra [Ali] Valcarcel</title>
     <link>/</link>
-    <description>Recent content on Alessandra Valcarcel</description>
+    <description>Recent content on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Mon, 03 Oct 2016 16:59:13 -0400</lastBuildDate>
@@ -31,13 +31,12 @@ When Hooli acquired Endframe, no one could wait to see what the tech giant would
     </item>
     
     <item>
-      <title>CodeRag</title>
-      <link>/coderag/</link>
+      <title>Research</title>
+      <link>/research/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>/coderag/</guid>
-      <description>Notes: This article originally appeared in CodeRag.
-Code/Rag has always been more than just another online tech blog. We strive to be part of the tech community—serving an essential, fundamental look at what’s going on in the valley. It’s why our tagline is “Know Your Code.” We think a tech news publication should know the basics. Be the source. Get down to brass tacks. We can do that because we’re part of the very ecosystem we’re reporting on.</description>
+      <guid>/research/</guid>
+      <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</description>
     </item>
     
     <item>

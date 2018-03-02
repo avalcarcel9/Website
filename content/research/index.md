@@ -1,0 +1,28 @@
++++
+categories = ["articles"]
+comments = false
+date = "2016-10-02T22:55:05-04:00"
+draft = false
+slug = ""
+tags = ["bachman", "pied piper", "aviato"]
+title = "Research"
+
+showcomments = false
+showpagemeta = false
++++
+
+I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.
+
+
+I have previously applied statistical methods to functional neuroimaging data to quantify the pain network in the brain. Additionally, I worked in statistical genetics both in GWAS studies as well as gene based testing methods and pathway based testing methods.
+
+
+Below are a few images stemming from my recent work:
+
+## Automatic Lesion Segmentation
+
+Multiple sclerosis is an inflammatory disease of the brain and spinal cord characterized by demyelinating white matter referred to as white matter lesions. The number and volume of lesions are essential for evaluating disease-modifying therapies and monitoring disease activity. The current gold standard approach for lesion classification is the manual segmentation by a radiologist or other imaging scientist. Unfortunately, these methods are prone to a large amount of intra- and inter- observer variability. Automated segmentation reduces cost, variability, and time but remains challenging. The majority of statistical techniques for the automated segmentation of WML are based on a single imaging modality, recent advances have used multimodal techniques for identifying WML. This motivated me to develop MIMoSA a machine learning algorithm which leverages features that capture not only the mean structure within an image but also the covariance structure between complementary MRI contrasts.
+
+![picture](lesionseg.jpg)
+
+[picture](https://alval7.wixsite.com/alessandravalcarcel/research)
