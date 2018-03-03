@@ -18,19 +18,24 @@ I'm currently a third-year PhD student in Biostatistics in the [Department of Bi
 
 I earned my M.S. in Biostatistics from University of Pennsylvania in 2017. My thesis proposed a novel machine learning algorithm, MIMoSA, to automatically detect T2 hyperintense white matter lesions in multiple sclerosis. Before coming to Penn, I obtained my undergraduate degree in Biology and Statistics (Honors) from University of Connecticut.
 
+<center>:earth_americas:</center>
 
-Outside of biostatistics and data science, I love to wander where the wifi is weak. Sometimes it is in-tents. Here are some of my favorites.
+Outside of biostatistics and data science, I love to wander where the wifi is weak. Sometimes it is in-tents. The photo at the top of this page is from the hiking a cloud forest in Monteverde Costa Rica. Here are some of my other favorites adventures.
+
 
 Not sure I understood the gravity of the whole sky diving thing.
 
 <center>![picture](/img/skydive.jpeg)</center>
 
 
+
 I tried to see the sunset in San Diego but then I got dusk in my eyes...
 
 <center>![picture](/img/sunset.jpg)</center>
 
+
 Throwback to my days studying abroad in Granada Spain. Though this was actually in Ronda, it is my favorite hike of all time since its not too main-stream.
+
 
 <center>![picture](/img/ronda.jpeg)</center>
 
