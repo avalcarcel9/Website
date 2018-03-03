@@ -19,8 +19,15 @@ I have previously applied statistical methods to functional neuroimaging data to
 
 Below are a few images stemming from my recent work:
 
-## Automatic Lesion Segmentation
+### Automatic Lesion Segmentation
 
 Multiple sclerosis is an inflammatory disease of the brain and spinal cord characterized by demyelinating white matter referred to as white matter lesions. The number and volume of lesions are essential for evaluating disease-modifying therapies and monitoring disease activity. The current gold standard approach for lesion classification is the manual segmentation by a radiologist or other imaging scientist. Unfortunately, these methods are prone to a large amount of intra- and inter- observer variability. Automated segmentation reduces cost, variability, and time but remains challenging. The majority of statistical techniques for the automated segmentation of WML are based on a single imaging modality, recent advances have used multimodal techniques for identifying WML. This motivated me to develop MIMoSA a machine learning algorithm which leverages features that capture not only the mean structure within an image but also the covariance structure between complementary MRI contrasts.
 
 <center>![picture](/img/lesionseg.png)</center>
+
+Our paper on this topic is currently in press at the Journal of Neuroimaging; a preprint is available [here](https://www.biorxiv.org/content/early/2017/06/15/150284). Our methods are implemented as an R package `mimosa`, hosted on Neuroconductor. You can download it [here](https://neuroconductor.org/package/details/mimosa). For the most recent version, check out my GitHub repo [here](https://github.com/avalcarcel9/mimosa).
+
+### Game of Thrones
+
+- describe briefly
+- put a plot and sentiment
