@@ -23,7 +23,7 @@ enableRobotsTXT = true
 author = "Alessandra Valcarcel"
 intro = "PhD Candidate"
 description = "Studying biostatistics at the University of Pennsylvania under Dr. Russell [Taki] Shinohara"
-authorimage = "me.jpg"
+authorimage = "me_conference.jpg"
 dateformat = "Jan 2, 2006"
 
 ## Site Meta Settings
