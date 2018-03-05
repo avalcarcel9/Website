@@ -29,7 +29,7 @@ Our paper on this topic is currently in press at the Journal of Neuroimaging; a 
 
 ### Game of Thrones
 
-__Warning: The content below contains game of thrones spoilers and some foul language.__
+__Warning: The content below contains spoilers for Game of Thrones some foul language.__
 
 I am currently working on a project to analyze the Game of Thrones TV scripts. This is still a work in progress but to get an idea I've included a graphic below.
 
