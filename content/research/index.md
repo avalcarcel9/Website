@@ -29,8 +29,15 @@ Our paper on this topic is currently in press at the Journal of Neuroimaging; a 
 
 ### Game of Thrones
 
+__Warning: The content below contains game of thrones spoilers and some foul language.__
+
 I am currently working on a project to analyze the Game of Thrones TV scripts. This is still a work in progress but to get an idea I've included a graphic below.
 
-<center>![picture](/img/GoT_lines.jpeg)</center>
+<center>![picture](/img/GoT_freq.png)</center>
 
-From the graphic, you can see that Tyrion Lannister has the most lines which is not surpised. A somewhat more surpising result though, is that Eddard Stark is a top speaking character yet he died in season 1. Check back later for a more detailed summary.
+From the graphic, you can see that Tyrion Lannister has the most lines which is not a surpise. A somewhat more surpising result though, is that Eddard Stark is a top speaking character yet he died in season 1. Check back later for a more detailed summary.
+
+<center>![picture](/img/GoT_sent.png)</center>
+
+This graphic include the most frequent words that appear in the Game of Thrones scripts and breaks them into positive and negative sentiment. Unsurprisingly, the most frequent negative words used include kill, death, and words stemming from these but in different tenses. On the other hand, honor, protect, and free are some of the most commonly used positive words.
+
