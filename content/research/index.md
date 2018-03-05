@@ -29,5 +29,8 @@ Our paper on this topic is currently in press at the Journal of Neuroimaging; a 
 
 ### Game of Thrones
 
-- describe briefly
-- put a plot and sentiment
+I am currently working on a project to analyze the Game of Thrones TV scripts. This is still a work in progress but to get an idea I've included a graphic below.
+
+<center>![picture](/img/GoT_lines.jpeg)</center>
+
+From the graphic, you can see that Tyrion Lannister has the most lines which is not surpised. A somewhat more surpising result though, is that Eddard Stark is a top speaking character yet he died in season 1. Check back later for a more detailed summary.
