@@ -31,11 +31,30 @@ When Hooli acquired Endframe, no one could wait to see what the tech giant would
     </item>
     
     <item>
+      <title>CV</title>
+      <link>/cv/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/cv/</guid>
+      <description> CV ### Alessandra [Ali] Valcarcel #### Born in Miami, FL #### Lives in Philadelphia, PA ##### Email: alval@pennmedicine.upenn.edu  
+#content  </description>
+    </item>
+    
+    <item>
       <title>Research</title>
       <link>/research/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/research/</guid>
+      <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</description>
+    </item>
+    
+    <item>
+      <title>Research</title>
+      <link>/software/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/software/</guid>
       <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</description>
     </item>
     

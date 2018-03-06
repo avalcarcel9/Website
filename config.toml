@@ -58,7 +58,19 @@ highlightjs = true
     url = "/research/"
     
 [[menu.main]]
-    name = "blog"
+    name = "software"
     weight = 300
+    identifier = "software"
+    url = "/software/"
+    
+[[menu.main]]
+    name = "CV"
+    weight = 400
+    identifier = "CV"
+    url = "/CV/"
+    
+[[menu.main]]
+    name = "blog"
+    weight = 500
     identifier = "blog"
     url = "/blog/"
