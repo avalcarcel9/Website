@@ -12,12 +12,12 @@ showpagemeta = false
 
 <div id="left">
 
-Alessandra [Ali] Valcarcel
+Alessandra [Ali] Valcarcel \n
 
-Born in Miami, FL
-Lives in Philadelphia, PA
+  Born in Miami, FL \n
+  Lives in Philadelphia, PA \n
 
-Email: alval@pennmedicine.upenn.edu
+  Email: alval@pennmedicine.upenn.edu
 </div>
 
 <center>![picture](/img/lesionseg.png)</center>
