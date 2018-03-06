@@ -10,20 +10,22 @@ showcomments = false
 showpagemeta = false
 +++
 
-<div id="left">
 
-Alessandra [Ali] Valcarcel \n
+### Alessandra [Ali] Valcarcel
 
-  Born in Miami, FL \n
-  Lives in Philadelphia, PA \n
+#### Born in Miami, FL
 
-  Email: alval@pennmedicine.upenn.edu
-</div>
+#### Lives in Philadelphia, PA
+
+##### Contact Information
+
+Alessandra Valcarcel 
+[Department of Biostatistics, Epidemiology, and Informatics](http://www.dbei.med.upenn.edu/)
+[Perelman School of Medicine](https://www.med.upenn.edu/)
+218 Blockley Hall,
+423 Guardian Drive
+Philadelphia, PA, 19104
+
+Email: alval@pennmedicine.upenn.edu
 
 <center>![picture](/img/lesionseg.png)</center>
-
-
-
-<div id="right">
-  #content
-</div>
