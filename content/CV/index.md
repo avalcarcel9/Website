@@ -16,27 +16,7 @@ showpagemeta = false
 ### Born in Miami, FL
 
 ### Lives in Philadelphia, PA
-
-#### Contact Information
-
-Alessandra Valcarcel  
-[Department of Biostatistics, Epidemiology, and Informatics](http://www.dbei.med.upenn.edu/)  
-[Perelman School of Medicine](https://www.med.upenn.edu/)  
-218 Blockley Hall,  
-423 Guardian Drive  
-Philadelphia, PA, 19104  
-
-Email: alval@pennmedicine.upenn.edu
-
 ***
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
 
 <style type="text/css">
 #wrap {
@@ -56,12 +36,19 @@ Email: alval@pennmedicine.upenn.edu
 <div id="wrap">
     <div id="left_col">
         <dt>Contact Information</dt>
-        <dd>Department of Biostatistics</dd>
-        <dd>Department of Biostatistics</dd>
+        <dd>Alessandra Valcarcel</dd>
+        <dd><a href="http://www.dbei.med.upenn.edu/">Department of Biostatistics, Epidemiology, <br> and Informatics </a></dd>
+        <dd><a href="https://www.med.upenn.edu/">Perelman School of Medicine</a></dd>
+        <dd>218 Blockley Hall</dd>
+        <dd>423 Guardian Drive</dd>
+        <dd>Philadelphia, PA, 19104</dd>
+        <dd>Email: alval@pennmedicine.upenn.edu</dd>
 
     </div>
     <div id="right_col">
-        CV
+        <dt>Contact Information</dt>
+        <dd>Department of Biostatistics</dd>
+        <dd><a href="content/CV/CV -- 2018.pdf" download="CV -- 2018.pdf">Download</a></dd>
     </div>
 </div>
 
