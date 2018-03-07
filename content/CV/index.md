@@ -46,11 +46,12 @@ showpagemeta = false
 
     </div>
     <div id="right_col">
-        <dt>Contact Information</dt>
-        <dd>Department of Biostatistics</dd>
-        <dd><a href="content/CV/CV--2018.pdf" download="">Download</a></dd>
+         <br>
+         <br>
+         <br>
+         <br>
+        <a href="CV--2018.pdf" download=""><button>Download CV</button></a>
     </div>
 </div>
-
 
 <center>![picture](/img/lesionseg.png)</center>
