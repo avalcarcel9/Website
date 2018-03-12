@@ -14,8 +14,8 @@ title = "Alessandra [Ali] Valcarcel"
 theme = "hugo-goa"
 
 ## Hugo Built-in Features
-disqusShortname = "https-shenoybr-github-io-hugo-goa-demo"
-googleAnalytics = "XYZ"
+# disqusShortname = "https-shenoybr-github-io-hugo-goa-demo"
+googleAnalytics = "UA-115574303-1"
 enableRobotsTXT = true
 
 ## Site Settings
@@ -28,8 +28,8 @@ dateformat = "Jan 2, 2006"
 
 ## Site Meta Settings
 [params.meta]
-description = "Simple minimalist theme"
-keywords = "minimalist,blog,goa,hugo,developer"
+description = "Personal website"
+keywords = "student,statistics,biostatistics,Penn"
 
 ## Social Accounts
 [params.social]

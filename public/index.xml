@@ -28,14 +28,14 @@ When Hooli acquired Endframe, no one could wait to see what the tech giant would
       
       <guid>/cv/</guid>
       <description>Alessandra [Ali] Valcarcel Born in Miami, FL Lives in Philadelphia, PA Education:
-Ph.D. Biostatistics (2015 - 2020 (expected))
+Ph.D. Biostatistics (anticipated 2020)
 University of Pennsylvania
-M.S. Biostatistics (2015 - 2017)
+M.S. Biostatistics (2017)
 University of Pennsylvania
-B.A. Biology and Statistics (Honors) (2011 - 2015)
+B.A. Biology and Statistics (Honors) (2015)
 University of Connecticut
 Select Publications:
-2018 - Journal of Neuroimaging. &amp;ldquo;MIMoSA: A Method for Inter-Modal Segmentation Analysis.&amp;rdquo;
+2018 - Journal of Neuroimaging. &amp;ldquo;MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions.&amp;rdquo;
 2017 - Frontiers in Genetics. &amp;ldquo;Illustrating, Quantifying and Correcting for Bias in Post-hoc Analysis of Gene-Based Rare Variant Tests of Association.</description>
     </item>
     
@@ -63,7 +63,7 @@ Select Publications:
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/software/</guid>
-      <description>MIMoSA The mimosa package is now live on Neuroconductor. You can access the page directly here. For the most up to date version please see my github here
+      <description>MIMoSA The mimosa R package is now live on Neuroconductor. You can access the page directly here. For the most up to date version please see my GitHub here
 To download from Neuroconductor run the following code:
 source(&amp;quot;https://neuroconductor.org/neurocLite.R&amp;quot;) neuro_install(mimosa, release = &amp;quot;stable&amp;quot;, release_repo = latest_neuroc_release(release = release)) neuro_install(mimosa, release = &amp;quot;current&amp;quot;, release_repo = latest_neuroc_release(release = release))  To download from GitHub run the following code:
 install.packages(&amp;quot;devtools&amp;quot;) devtools::install_github(&amp;quot;avalcarcel9/mimosa&amp;quot;)  You can find documentation and a tutorial provided on my GitHub here.</description>

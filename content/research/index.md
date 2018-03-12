@@ -13,9 +13,7 @@ showpagemeta = false
 
 I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.
 
-
 I have previously applied statistical methods to functional neuroimaging data to quantify the pain network in the brain. Additionally, I worked in statistical genetics both in GWAS studies as well as gene based testing methods and pathway based testing methods.
-
 
 Below are a few images stemming from my recent work:
 
@@ -25,11 +23,13 @@ Multiple sclerosis is an inflammatory disease of the brain and spinal cord chara
 
 <center>![picture](/img/lesionseg.png)</center>
 
-Our paper on this topic is currently in press at the Journal of Neuroimaging; a preprint is available [here](https://www.biorxiv.org/content/early/2017/06/15/150284). Our methods are implemented as an R package `mimosa`, hosted on Neuroconductor. You can download it [here](https://neuroconductor.org/package/details/mimosa). For the most recent version, check out my GitHub repo [here](https://github.com/avalcarcel9/mimosa).
+Our paper on this topic is available through the Journal of Neuroimaging [here](http://onlinelibrary.wiley.com/doi/10.1111/jon.12506/full). Our methods are implemented as an R package `mimosa`, hosted on Neuroconductor and GitHub. You can download it [here](https://neuroconductor.org/package/details/mimosa). For the most recent version, check out my GitHub repo [here](https://github.com/avalcarcel9/mimosa).
+
+<br>
 
 ### Game of Thrones
 
-__Warning: The content below contains spoilers for Game of Thrones some foul language.__
+__Warning: The content below contains spoilers for Game of Thrones and some foul language.__
 
 I am currently working on a project to analyze the Game of Thrones TV scripts. This is still a work in progress but to get an idea I've included a graphic below.
 
@@ -40,6 +40,8 @@ From the graphic, you can see that Tyrion Lannister has the most lines which is 
 <center>![picture](/img/GoT_sent.png)</center>
 
 This graphic include the most frequent words that appear in the Game of Thrones scripts and breaks them into positive and negative sentiment. Unsurprisingly, the most frequent negative words used include kill, death, and words stemming from these but in different tenses. On the other hand, honor, protect, and free are some of the most commonly used positive words.
+
+<br>
 
 Check back later for a more detailed summary.
 

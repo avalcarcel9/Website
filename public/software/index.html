@@ -7,8 +7,8 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<meta name="description" content="Simple minimalist theme">
-<meta name="keywords" content="minimalist,blog,goa,hugo,developer">
+<meta name="description" content="Personal website">
+<meta name="keywords" content="student,statistics,biostatistics,Penn">
 
 <base href="/">
 
@@ -56,13 +56,19 @@
 
 <h3 id="mimosa">MIMoSA</h3>
 
-<p>The <code>mimosa</code> package is now live on <a href="https://neuroconductor.org/">Neuroconductor</a>. You can access the page directly <a href="https://neuroconductor.org/package/details/mimosa">here</a>. For the most up to date version please see my github <a href="https://github.com/avalcarcel9/mimosa">here</a></p>
+<p>The <code>mimosa</code> R package is now live on <a href="https://neuroconductor.org/">Neuroconductor</a>. You can access the page directly <a href="https://neuroconductor.org/package/details/mimosa">here</a>. For the most up to date version please see my GitHub <a href="https://github.com/avalcarcel9/mimosa">here</a></p>
 
 <p>To download from Neuroconductor run the following code:</p>
 
 <pre><code class="language-r">source(&quot;https://neuroconductor.org/neurocLite.R&quot;)
-neuro_install(mimosa, release = &quot;stable&quot;, release_repo = latest_neuroc_release(release = release)) 
-neuro_install(mimosa, release = &quot;current&quot;, release_repo = latest_neuroc_release(release = release))
+
+neuro_install(mimosa, 
+              release = &quot;stable&quot;, 
+              release_repo = latest_neuroc_release(release = release))
+              
+neuro_install(mimosa, 
+              release = &quot;current&quot;, 
+              release_repo = latest_neuroc_release(release = release))
 </code></pre>
 
 <p>To download from GitHub run the following code:</p>
@@ -125,7 +131,7 @@ hljs.initHighlightingOnLoad();
 
 <script>
 window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'XYZ', 'auto');
+ga('create', 'UA-115574303-1', 'auto');
 ga('send', 'pageview');
 </script>
 <script async src='//www.google-analytics.com/analytics.js'></script>

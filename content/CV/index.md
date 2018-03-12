@@ -21,21 +21,21 @@ showpagemeta = false
 
 __Education:__  
 
-Ph.D. Biostatistics _(2015 - 2020 (expected))_  
+Ph.D. Biostatistics _(anticipated 2020)_  
 University of Pennsylvania  
 
-M.S. Biostatistics _(2015 - 2017)_  
+M.S. Biostatistics _(2017)_  
 University of Pennsylvania  
 
 
-B.A. Biology and Statistics (Honors) _(2011 - 2015)_  
+B.A. Biology and Statistics (Honors) _(2015)_  
 University of Connecticut
 
 ***
 
 __Select Publications:__
 
-2018 - Journal of Neuroimaging. "MIMoSA: A Method for Inter-Modal Segmentation Analysis."
+2018 - Journal of Neuroimaging. "MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions."
 
 2017 - Frontiers in Genetics. "Illustrating, Quantifying and Correcting for Bias in Post-hoc Analysis of Gene-Based Rare Variant Tests of Association."
 
