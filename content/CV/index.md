@@ -16,6 +16,7 @@ showpagemeta = false
 ### Born in Miami, FL
 
 ### Lives in Philadelphia, PA
+
 ***
 
 <style type="text/css">
@@ -54,4 +55,16 @@ showpagemeta = false
     </div>
 </div>
 
-<center>![picture](/img/lesionseg.png)</center>
+***
+
+__Education__:
+
+Ph.D. Biostatistics _(2015 - 2020 (expected))_
+University of Pennsylvania  
+
+M.S. Biostatistics _(2015 - 2017)_
+University of Pennsylvania  
+
+
+B.A. Biology and Statistics (Honors) _(2011 - 2015)_  
+University of Connecticut
