@@ -69,8 +69,8 @@ highlightjs = true
     identifier = "CV"
     url = "/CV/"
     
-[[menu.main]]
-    name = "blog"
-    weight = 500
-    identifier = "blog"
-    url = "/blog/"
+#[[menu.main]]
+#    name = "blog"
+#    weight = 500
+#    identifier = "blog"
+#    url = "/blog/"
