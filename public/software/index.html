@@ -45,7 +45,7 @@
 
 
 <header class="row text-left title">
-  <h1 class="title">Research</h1>
+  <h1 class="title">Software</h1>
 </header>
 <section id="category-pane" class="row meta">
   
@@ -54,35 +54,32 @@
   <div class="col-md-12 text-justify content">
     
 
-<p>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</p>
+<h3 id="mimosa">MIMoSA</h3>
 
-<p>I have previously applied statistical methods to functional neuroimaging data to quantify the pain network in the brain. Additionally, I worked in statistical genetics both in GWAS studies as well as gene based testing methods and pathway based testing methods.</p>
+<p>The <code>mimosa</code> package is now live on <a href="https://neuroconductor.org/">Neuroconductor</a>. You can access the page directly <a href="https://neuroconductor.org/package/details/mimosa">here</a>. For the most up to date version please see my github <a href="https://github.com/avalcarcel9/mimosa">here</a></p>
 
-<p>Below are a few images stemming from my recent work:</p>
+<p>To download from Neuroconductor run the following code:</p>
 
-<h3 id="automatic-lesion-segmentation">Automatic Lesion Segmentation</h3>
+<pre><code class="language-r">source(&quot;https://neuroconductor.org/neurocLite.R&quot;)
+neuro_install(mimosa, release = &quot;stable&quot;, release_repo = latest_neuroc_release(release = release)) 
+neuro_install(mimosa, release = &quot;current&quot;, release_repo = latest_neuroc_release(release = release))
+</code></pre>
 
-<p>Multiple sclerosis is an inflammatory disease of the brain and spinal cord characterized by demyelinating white matter referred to as white matter lesions. The number and volume of lesions are essential for evaluating disease-modifying therapies and monitoring disease activity. The current gold standard approach for lesion classification is the manual segmentation by a radiologist or other imaging scientist. Unfortunately, these methods are prone to a large amount of intra- and inter- observer variability. Automated segmentation reduces cost, variability, and time but remains challenging. The majority of statistical techniques for the automated segmentation of WML are based on a single imaging modality, recent advances have used multimodal techniques for identifying WML. This motivated me to develop MIMoSA a machine learning algorithm which leverages features that capture not only the mean structure within an image but also the covariance structure between complementary MRI contrasts.</p>
+<p>To download from GitHub run the following code:</p>
 
-<p><center><img src="/img/lesionseg.png" alt="picture" /></center></p>
+<pre><code class="language-r">install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;avalcarcel9/mimosa&quot;)
+</code></pre>
 
-<p>Our paper on this topic is currently in press at the Journal of Neuroimaging; a preprint is available <a href="https://www.biorxiv.org/content/early/2017/06/15/150284">here</a>. Our methods are implemented as an R package <code>mimosa</code>, hosted on Neuroconductor. You can download it <a href="https://neuroconductor.org/package/details/mimosa">here</a>. For the most recent version, check out my GitHub repo <a href="https://github.com/avalcarcel9/mimosa">here</a>.</p>
+<p>You can find documentation and a tutorial provided on my GitHub <a href="https://github.com/avalcarcel9/mimosa/blob/master/vignettes/mimosa_git.md">here</a>.</p>
 
 <h3 id="game-of-thrones">Game of Thrones</h3>
 
-<p><strong>Warning: The content below contains spoilers for Game of Thrones some foul language.</strong></p>
+<p>I am currently still analyzing this data. When I am finished, I will provide an R package with the cleaned data as well as a shiny app so users can run their own analyses.</p>
 
-<p>I am currently working on a project to analyze the Game of Thrones TV scripts. This is still a work in progress but to get an idea I&rsquo;ve included a graphic below.</p>
+<p><br></p>
 
-<p><center><img src="/img/GoT_freq.png" alt="picture" /></center></p>
-
-<p>From the graphic, you can see that Tyrion Lannister has the most lines which is not a surpise. A somewhat more surpising result though, is that Eddard Stark is a top speaking character yet he died in season 1.</p>
-
-<p><center><img src="/img/GoT_sent.png" alt="picture" /></center></p>
-
-<p>This graphic include the most frequent words that appear in the Game of Thrones scripts and breaks them into positive and negative sentiment. Unsurprisingly, the most frequent negative words used include kill, death, and words stemming from these but in different tenses. On the other hand, honor, protect, and free are some of the most commonly used positive words.</p>
-
-<p>Check back later for a more detailed summary.</p>
+<p>Check back for updates later!</p>
 
   </div>
 </section>
