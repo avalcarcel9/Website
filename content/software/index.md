@@ -10,11 +10,10 @@ title = "Software"
 showcomments = false
 showpagemeta = false
 +++
-<center>
-<img src="https://github.com/avalcarcel9/mimosa/blob/master/sticker.png" height="192">
-</center>
 
 ### MIMoSA
+
+<center>![picture](/img/sticker.png)</center>
 
 The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/). You can access the page directly [here](https://neuroconductor.org/package/details/mimosa). For the most up to date version please see my GitHub [here](https://github.com/avalcarcel9/mimosa)
 
