@@ -10,6 +10,9 @@ title = "Software"
 showcomments = false
 showpagemeta = false
 +++
+<center>
+<img src="https://github.com/avalcarcel9/mimosa/blob/master/sticker.png" height="192">
+</center>
 
 ### MIMoSA
 
