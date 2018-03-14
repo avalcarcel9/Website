@@ -4,7 +4,7 @@ comments = false
 date = "2016-10-02T22:55:05-04:00"
 draft = false
 slug = ""
-tags = ["bachman", "pied piper", "aviato"]
+tags = ["mimosa", "neuroconductor", "github"]
 title = "Software"
 
 showcomments = false
@@ -15,7 +15,7 @@ showpagemeta = false
 
 <center>![picture](/img/sticker.png)</center>
 
-The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/). You can access the page directly [here](https://neuroconductor.org/package/details/mimosa). For the most up to date version please see my GitHub [here](https://github.com/avalcarcel9/mimosa)
+The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/). You can access the page directly [here](https://neuroconductor.org/package/details/mimosa). For the most up to date version please see my GitHub [here](https://github.com/avalcarcel9/mimosa).
 
 To download from Neuroconductor run the following code:
 

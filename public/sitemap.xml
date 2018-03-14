@@ -115,6 +115,12 @@
   </url>
   
   <url>
+    <loc>/tags/github/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/hardware/</loc>
     <lastmod>2016-10-02T15:59:13-04:00</lastmod>
     <priority>0</priority>
@@ -123,6 +129,18 @@
   <url>
     <loc>/tags/hooli/</loc>
     <lastmod>2016-10-03T16:59:13-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/mimosa/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/neuroconductor/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
