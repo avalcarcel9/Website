@@ -13,6 +13,9 @@ showpagemeta = false
 
 ### MIMoSA
 
+
+<a href="https://github.com/avalcarcel9/mimosa/blob/master/vignettes/mimosa_git.md"><img src="https://github.com/avalcarcel9/mimosa/blob/master/sticker.png" height="215" alt="mimosa logo" align="right" /></a>
+
 <center>![picture](/img/sticker.png)</center>
 
 The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/). You can access the page directly [here](https://neuroconductor.org/package/details/mimosa). For the most up to date version please see my GitHub [here](https://github.com/avalcarcel9/mimosa).
