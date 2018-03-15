@@ -18,10 +18,7 @@
       
       <guid>/software/</guid>
       <description>MIMoSA 
-The mimosa R package is now live on Neuroconductor. You can access the page directly here. For the most up to date version please see my GitHub here.
-To download from Neuroconductor run the following code:
-source(&amp;quot;https://neuroconductor.org/neurocLite.R&amp;quot;) neuro_install(mimosa, release = &amp;quot;stable&amp;quot;, release_repo = latest_neuroc_release(release = release)) neuro_install(mimosa, release = &amp;quot;current&amp;quot;, release_repo = latest_neuroc_release(release = release))  To download from GitHub run the following code:
-install.packages(&amp;quot;devtools&amp;quot;) devtools::install_github(&amp;quot;avalcarcel9/mimosa&amp;quot;)  You can find documentation and a tutorial provided on my GitHub here.</description>
+The mimosa R package is now live on Neuroconductor. This package allows you to implement the MIMoSA method discussed in our paper to automatically segment white matter lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data. You can access the page directly here.</description>
     </item>
     
   </channel>

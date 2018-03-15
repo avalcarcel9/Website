@@ -14,11 +14,9 @@ showpagemeta = false
 ### MIMoSA
 
 
-<a href="https://github.com/avalcarcel9/mimosa/blob/master/vignettes/mimosa_git.md"><img src="https://github.com/avalcarcel9/mimosa/blob/master/sticker.png" height="215" alt="mimosa logo" align="right" /></a>
+<a href="https://github.com/avalcarcel9/mimosa/blob/master/vignettes/mimosa_git.md"><img src="/img/sticker.png" height="192" alt="mimosa logo" align="right" /></a>
 
-<center>![picture](/img/sticker.png)</center>
-
-The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/). You can access the page directly [here](https://neuroconductor.org/package/details/mimosa). For the most up to date version please see my GitHub [here](https://github.com/avalcarcel9/mimosa).
+The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/). This package allows you to implement the MIMoSA method discussed in our [paper](http://onlinelibrary.wiley.com/doi/10.1111/jon.12506/full) to automatically segment white matter lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data. You can access the page directly [here](https://neuroconductor.org/package/details/mimosa). For the most up to date version please see my GitHub [here](https://github.com/avalcarcel9/mimosa).
 
 To download from Neuroconductor run the following code:
 
