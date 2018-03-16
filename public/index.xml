@@ -13,12 +13,11 @@
     
     <item>
       <title>Make a Personal Website with blogdown</title>
-      <link>/blog/2015-07-23-r-rmarkdown/</link>
+      <link>/blog/2018-03-15-r-rmarkdown/</link>
       <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
       
-      <guid>/blog/2015-07-23-r-rmarkdown/</guid>
-      <description>In this post, I am going to cover the basics to create a website using blogdown and Hugo. We will create and deploy a template website as well as cover some basics about changing content. You should be extremely comfortable coding in R and working with R Markdown and have a working knowledge of GitHub.
-Useful Resources Before going through the instructions I’ve included some resources that I found really useful.</description>
+      <guid>/blog/2018-03-15-r-rmarkdown/</guid>
+      <description>In this post, I am going to cover the basics to create a website using blogdown and Hugo. We will create and deploy a template website as well as cover some basics about changing content. You should be extremely comfortable coding in R, writing in R Markdown, and a working knowledge of GitHub. You should have R, R Studio, R Markdown all installed on your computer and an account on GitHub before we start.</description>
     </item>
     
     <item>
