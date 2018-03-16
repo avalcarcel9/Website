@@ -22,16 +22,6 @@ Useful Resources Before going through the instructions I’ve included some reso
     </item>
     
     <item>
-      <title>Hooli’s Hot New Hardware</title>
-      <link>/blog/third/</link>
-      <pubDate>Mon, 03 Oct 2016 16:59:13 -0400</pubDate>
-      
-      <guid>/blog/third/</guid>
-      <description>Note: This article originally appeared in CodeRag.
-When Hooli acquired Endframe, no one could wait to see what the tech giant would do with the revolutionary, middle-out compression technology. The wait is over: In a savvy pivot, Hooli took the software and created their newest hardware: the Hooli/Endframe Box. While initially conceived as a consumer-facing platform, the Endframe technology has been repurposed to “make the world a better place through secure, high-capacity enterprise data storage servers utilizing middle-out compression technology.</description>
-    </item>
-    
-    <item>
       <title></title>
       <link>/cv/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
@@ -75,25 +65,6 @@ Select Publications:
       <guid>/software/</guid>
       <description>MIMoSA 
 The mimosa R package is now live on Neuroconductor. This package allows you to implement the MIMoSA method discussed in our paper to automatically segment white matter lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data. You can access the page directly here.</description>
-    </item>
-    
-    <item>
-      <title>Gavin Belson</title>
-      <link>/blog/first/</link>
-      <pubDate>Sun, 02 Oct 2016 15:59:13 -0400</pubDate>
-      
-      <guid>/blog/first/</guid>
-      <description>junk</description>
-    </item>
-    
-    <item>
-      <title>Belson Back on Top</title>
-      <link>/blog/second/</link>
-      <pubDate>Sat, 01 Oct 2016 16:59:13 -0400</pubDate>
-      
-      <guid>/blog/second/</guid>
-      <description>Note: This post originally appeared in CodeRag
-Gavin Belson’s brilliant leadership is unstoppable. While allegedly taking a personal hiatus from day-to-day operations at Hooli, Belson couldn’t resist brokering a blockbuster deal between Hooli and Maleant Data Systems, deploying Hooli’s innovative new Hooli/Endframe Box. The multi-year deal brings handsome margins for Hooli and can easily be a template to apply across the entire Fortune 1000. An inside source tells me that, no surprise, the board was no longer satisfied to let Belson fade into the background.</description>
     </item>
     
   </channel>

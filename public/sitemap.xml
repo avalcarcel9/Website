@@ -8,11 +8,6 @@
   </url>
   
   <url>
-    <loc>/blog/third/</loc>
-    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/cv/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
   </url>
@@ -33,16 +28,6 @@
   </url>
   
   <url>
-    <loc>/blog/first/</loc>
-    <lastmod>2016-10-02T15:59:13-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/blog/second/</loc>
-    <lastmod>2016-10-01T16:59:13-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
@@ -51,12 +36,6 @@
   <url>
     <loc>/categories/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/ad/</loc>
-    <lastmod>2016-10-02T15:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -85,12 +64,6 @@
   </url>
   
   <url>
-    <loc>/tags/belson/</loc>
-    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/blogdown/</loc>
     <lastmod>2018-03-15T21:13:14-05:00</lastmod>
     <priority>0</priority>
@@ -115,32 +88,8 @@
   </url>
   
   <url>
-    <loc>/tags/ceo/</loc>
-    <lastmod>2016-10-01T16:59:13-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/gavin/</loc>
-    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/github/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/hardware/</loc>
-    <lastmod>2016-10-02T15:59:13-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/hooli/</loc>
-    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -165,12 +114,6 @@
   <url>
     <loc>/tags/pied-piper/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/propaganda/</loc>
-    <lastmod>2016-10-03T16:59:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
