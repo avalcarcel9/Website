@@ -6,20 +6,19 @@
     <description>Recent content in Plot on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 15 Mar 2018 21:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/tags/plot/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Hello R Markdown</title>
+      <title>Make a Personal Website with blogdown</title>
       <link>/blog/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
       
       <guid>/blog/2015-07-23-r-rmarkdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <description>In this post, I am going to cover the basics to create a website using blogdown and Hugo. We will create and deploy a template website as well as cover some basics about changing content. You should be extremely comfortable coding in R and working with R Markdown and have a working knowledge of GitHub.
+Useful Resources Before going through the instructions I’ve included some resources that I found really useful.</description>
     </item>
     
   </channel>
