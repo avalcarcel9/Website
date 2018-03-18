@@ -20,7 +20,7 @@ enableRobotsTXT = true
 
 ## Site Settings
 [params]
-author = "Alessandra Valcarcel"
+author = "Alessandra [Ali] Valcarcel"
 intro = "PhD Candidate"
 description = "Studying biostatistics at the University of Pennsylvania under Dr. Russell [Taki] Shinohara."
 authorimage = "me_conference.jpg"
@@ -40,7 +40,7 @@ scholar = "u22eIVEAAAAJ"
 
 ## Extras
 [params.extra]
-copyright = "© 2018. Alessandra Valcarcel." 
+copyright = "© 2018. Alessandra [Ali] Valcarcel." 
 poweredby = false
 highlightjs = true
 
