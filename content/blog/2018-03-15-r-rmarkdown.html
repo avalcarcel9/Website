@@ -9,15 +9,15 @@ output: html_document
 
 
 
-<p>In this post, I am going to cover the basics to create a website using <code>blogdown</code> and Hugo. We will create and deploy a template website as well as cover some basics about changing content. You should be extremely comfortable coding in R, writing in R Markdown, and have a working knowledge of GitHub. You should have R, R Studio, R Markdown all installed on your computer and an account on GitHub before we start.</p>
+<p>In this post, I am going to cover the basics to creating a website using <code>blogdown</code> and Hugo. We will create and deploy a template website as well as cover some basics about changing content. You should be extremely comfortable coding in R, writing in R Markdown, and have a working knowledge of GitHub. You should have R, R Studio, R Markdown all installed on your computer and an account on GitHub before we start.</p>
 <div id="useful-resources" class="section level2">
 <h2>Useful Resources</h2>
-<p>Before going through the instructions I’ve included some resources that I found really useful.</p>
+<p>Before going through the instructions, I’ve included some resources that I found really useful.</p>
 <ul>
 <li><a href="https://alison.rbind.io/post/up-and-running-with-blogdown/">A similar blog post with instructions on getting started</a></li>
 <li><a href="https://bookdown.org/yihui/blogdown/">A bookdown about blogdown</a>
 <ul>
-<li>Chapters 1, 2.4, and 3 are especially useful for starting from scratch</li>
+<li>Chapter 1, section 2.4, and chapter 3 are especially useful for starting from scratch</li>
 <li>Chapter 4 is useful if you want to migrate a website from Jekyll, WordPress, and other systems</li>
 </ul></li>
 <li><a href="https://www.youtube.com/watch?v=syWAKaj-4ck">A youtube video by John Muschelli</a></li>
@@ -35,7 +35,7 @@ output: html_document
 <li>You have to generate and format content (lots of humble bragging and writing involved here)</li>
 <li>You have to code and customize the actual website layout</li>
 </ol>
-<p>Though <code>blogdown</code> and Hugo simplify the creation but there is still a learning curve. In the end, you are left with a single product but breaking down the process into these separate tasks will streamline the workload and isolate debugging.</p>
+<p>Though <code>blogdown</code> and Hugo simplify creating the site, there is still a learning curve. In the end, you are left with a single product but breaking down the process into these separate tasks will streamline the workload and isolate debugging.</p>
 <ol style="list-style-type: decimal">
 <li>Create the content
 <ol style="list-style-type: lower-alpha">
@@ -45,7 +45,7 @@ output: html_document
 </ol></li>
 <li>Deploy the template and customize your website
 <ol style="list-style-type: lower-alpha">
-<li>After figuring out what you like and generating some content find a <a href="https://themes.gohugo.io/">hugo theme</a> that matches what you want and need. The less you have to change about the template the easier the process. Customizing the template may require a basic knowledge of html, css, and java so choose your template wisely.</li>
+<li>After figuring out what you like and generating some content find a <a href="https://themes.gohugo.io/">Hugo theme</a> that matches what you want and need. The less you have to change about the template the easier the process. Customizing the template may require a basic knowledge of html, css, and java so choose your template wisely.</li>
 <li>Deploy the theme using Netlify. For this step, don’t change anything about the theme template simply get the website direcotry locally, on GitHub, and deployed using Netlify.</li>
 <li>At this point, you are ready to start making some changes. Start by making your large obvious changes. These may include adding some of your content, changing some images, adapting some of the layout. If this proves difficult you should consider another theme. I personally went through about 5 themes before settling in on my current theme.</li>
 <li>After playing with, pick your favorite and begin moving your content over from 1.</li>
@@ -67,7 +67,7 @@ devtools::install_github(&#39;rstudio/blogdown&#39;)
 
 # Load into memory
 library(blogdown)</code></pre>
-<p><code>blogdown</code> has a variety of functions to help in making and changing your website but I found that I use only 3.</p>
+<p><code>blogdown</code> has a variety of functions to help in making and changing your website but I found that I only used 3.</p>
 <pre class="r"><code>blogdown::new_site(dir = &quot;.&quot;, 
                    install_hugo = TRUE, 
                    format = &quot;toml&quot;, 
@@ -81,7 +81,7 @@ library(blogdown)</code></pre>
 
 blogdown::build_site()</code></pre>
 <p>These functions do almost the same thing. <code>blogdown::serve_site()</code> will build and show your website dynamically in the R Studio viewer. The website in the viewer is dynamic in that you can click on the material and be re-directed. <code>blogdown::build_site()</code> builds the site but doesn’t put it into the viewer.</p>
-<p><code>blogdown</code> uses <em>LiveReload</em> technology. This means your website automatically builds and reloads in your viewer when you modify any source file when saving. Due to this, you don’t even need the two previous functions that often.</p>
+<p><code>blogdown</code> uses <em>LiveReload</em> technology. This means your website automatically builds and reloads in your viewer when you modify any source file when saving. Because of this, you won’t need the two previous functions very often.</p>
 <p>Without further ado, let’s make a website!</p>
 </div>
 <div id="create-a-github-repositories" class="section level2">
@@ -140,9 +140,9 @@ Unpacking objects: 100% (3/3), done.</code></pre>
 <li>Move over some of the content you drafted</li>
 <li>Add pictures</li>
 <li>Add files, like a CV, for download</li>
-<li>Add blog posts or mini projects you’ve been doing</li>
+<li>Add blog posts or mini projects you’ve been working on</li>
 </ul>
-<p>Playing with some of these items will give you an idea about how easy the template is to manipulate. There is more you can do than just this to adapt the website and customize the template but you have to do more digging into the css files and html layouts so for this tutorial I’ve skipped this more complicated stuff.</p>
+<p>Playing with some of these items will give you an idea about how easy the template is to manipulate. There is more you can do to adapt the website and customize the template but you have to do more digging into the css files and html layouts so for this tutorial I’ve skipped this more complicated stuff.</p>
 <p>Once you have begun using your site, there are <code>blogdown</code> commands to easily create new posts. You can find more info <a href="https://bookdown.org/yihui/blogdown/rstudio-ide.html">here</a>. Personally, I find it easier to just create a new folder in content and copy over a previous draft from another page.</p>
 </div>
 <div id="push-changes-to-git" class="section level2">
