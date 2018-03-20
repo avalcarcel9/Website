@@ -62,7 +62,7 @@ html
 {
     overflow: auto;
 
-    max-width: 680px;
+    max-width: 1000px;
     padding: 0 15px;
 }
 .content
@@ -241,7 +241,7 @@ header.title
     margin-top: 50px;
     padding: 0 15px;
 }
-@media (max-width: 991px)
+@media (max-width: 1000px)
 {
     .header
     {

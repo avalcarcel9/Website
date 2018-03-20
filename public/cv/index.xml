@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Abouts on Alessandra [Ali] Valcarcel</title>
-    <link>/about/</link>
-    <description>Recent content in Abouts on Alessandra [Ali] Valcarcel</description>
+    <title>CVs on Alessandra [Ali] Valcarcel</title>
+    <link>/cv/</link>
+    <description>Recent content in CVs on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
     
-	<atom:link href="/about/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/cv/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>About Me</title>
-      <link>/about/</link>
+      <title></title>
+      <link>/cv/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>/about/</guid>
-      <description>I&amp;rsquo;m currently a third-year PhD student in Biostatistics in the Department of Biostatistics, Epidemiology, and Informatics at the University of Pennsylvania. I am an active researcher in the PennSIVE working group under the mentorship of Russell [Taki] Shinohara. Primarily, my research interests lie in the development of statistical methods for analyzing neuroimaging data sets with the goal of understanding disease processes in the brain. Currently, my projects involve the analysis of multi-sequence structural MRI for the study of multiple sclerosis.</description>
+      <guid>/cv/</guid>
+      <description>Alessandra [Ali] Valcarcel Born in Miami, FL Lives in Philadelphia, PA Education:
+Ph.D. Biostatistics (anticipated 2020)
+University of Pennsylvania
+M.S. Biostatistics (2017)
+University of Pennsylvania
+B.A. Biology and Statistics (Honors) (2015)
+University of Connecticut
+Select Publications:
+2018 - Journal of Neuroimaging. &amp;ldquo;MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions.&amp;rdquo;
+2017 - Frontiers in Genetics. &amp;ldquo;Illustrating, Quantifying and Correcting for Bias in Post-hoc Analysis of Gene-Based Rare Variant Tests of Association.</description>
     </item>
     
     <item>
       <title></title>
-      <link>/about/</link>
+      <link>/cv/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>/cv/</guid>
       <description>code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
     </item>
     
