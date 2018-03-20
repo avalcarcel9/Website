@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Abouts on Alessandra [Ali] Valcarcel</title>
-    <link>/about/</link>
-    <description>Recent content in Abouts on Alessandra [Ali] Valcarcel</description>
+    <title>Softwares on Alessandra [Ali] Valcarcel</title>
+    <link>/software/</link>
+    <description>Recent content in Softwares on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
     
-	<atom:link href="/about/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/software/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>About Me</title>
-      <link>/about/</link>
+      <title>Software</title>
+      <link>/software/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>/about/</guid>
-      <description>I&amp;rsquo;m currently a third-year PhD student in Biostatistics in the Department of Biostatistics, Epidemiology, and Informatics at the University of Pennsylvania. I am an active researcher in the PennSIVE working group under the mentorship of Russell [Taki] Shinohara. Primarily, my research interests lie in the development of statistical methods for analyzing neuroimaging data sets with the goal of understanding disease processes in the brain. Currently, my projects involve the analysis of multi-sequence structural MRI for the study of multiple sclerosis.</description>
+      <guid>/software/</guid>
+      <description>MIMoSA 
+The mimosa R package is now live on Neuroconductor. This package allows you to implement the MIMoSA method discussed in our paper to automatically segment white matter lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data. You can access the page directly here.</description>
     </item>
     
     <item>
       <title></title>
-      <link>/about/</link>
+      <link>/software/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>/software/</guid>
       <description>code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
     </item>
     
