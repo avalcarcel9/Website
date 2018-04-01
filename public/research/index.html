@@ -14,11 +14,8 @@
 
 <title>Alessandra [Ali] Valcarcel</title>
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.36" />
 
-
-  <link href="/research/index.xml" rel="alternate" type="application/rss+xml" title="Alessandra [Ali] Valcarcel" />
-  <link href="/research/index.xml" rel="feed" type="application/rss+xml" title="Alessandra [Ali] Valcarcel" />
 
 
 
@@ -47,36 +44,64 @@
 <div class="container">
 
 
-<section id="list-pane" class="row list">
-  <ul >
+<header class="row text-left title">
+  <h1 class="title">Research</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
     
-    <li class="list-entry">
-      <a class="list-entry-link" href="/research/">Research</a>
-      <p class="meta">
-         OCT 2, 2016 
-        <span class="category">
-        
-        
-        
-        —
-        
-        
-        <a class="category" href="/categories/articles">ARTICLES</a>
-        
-        
-        
-        </span>
-      </p>
-      <p class="excerpt">
-      
-      </p>
-    </li>
-    
-  </ul>
+
+<p>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</p>
+
+<p>I have previously applied statistical methods to functional neuroimaging data to quantify the pain network in the brain. Additionally, I worked in statistical genetics both in GWAS studies as well as gene based testing methods and pathway based testing methods.</p>
+
+<p>Below are a few images stemming from my recent work:</p>
+
+<h3 id="automatic-lesion-segmentation">Automatic Lesion Segmentation</h3>
+
+<p>Multiple sclerosis is an inflammatory disease of the brain and spinal cord characterized by demyelinating white matter referred to as white matter lesions. The number and volume of lesions are essential for evaluating disease-modifying therapies and monitoring disease activity. The current gold standard approach for lesion classification is the manual segmentation by a radiologist or other imaging scientist. Unfortunately, these methods are prone to a large amount of intra- and inter- observer variability. Automated segmentation reduces cost, variability, and time but remains challenging. The majority of statistical techniques for the automated segmentation of WML are based on a single imaging modality, recent advances have used multimodal techniques for identifying WML. This motivated me to develop MIMoSA a machine learning algorithm which leverages features that capture not only the mean structure within an image but also the covariance structure between complementary MRI contrasts.</p>
+
+<p><center><img src="/img/lesionseg.png" alt="picture" /></center></p>
+
+<p>Our paper on this topic is available through the Journal of Neuroimaging <a href="http://onlinelibrary.wiley.com/doi/10.1111/jon.12506/full">here</a>. Our methods are implemented as an R package <code>mimosa</code>, hosted on Neuroconductor and GitHub. You can download it <a href="https://neuroconductor.org/package/details/mimosa">here</a>. For the most recent version, check out my GitHub repo <a href="https://github.com/avalcarcel9/mimosa">here</a>.</p>
+
+<p><br></p>
+
+<h3 id="game-of-thrones">Game of Thrones</h3>
+
+<p><strong>Warning: The content below contains spoilers for Game of Thrones and some foul language.</strong></p>
+
+<p>I am currently working on a project to analyze the Game of Thrones TV scripts. This is still a work in progress but to get an idea I&rsquo;ve included a graphic below.</p>
+
+<p><center><img src="/img/GoT_freq.png" alt="picture" /></center></p>
+
+<p>From the graphic, you can see that Tyrion Lannister has the most lines which is not a surpise. A somewhat more surpising result though, is that Eddard Stark is a top speaking character yet he died in season 1.</p>
+
+<p><center><img src="/img/GoT_sent.png" alt="picture" /></center></p>
+
+<p>This graphic include the most frequent words that appear in the Game of Thrones scripts and breaks them into positive and negative sentiment. Unsurprisingly, the most frequent negative words used include kill, death, and words stemming from these but in different tenses. On the other hand, honor, protect, and free are some of the most commonly used positive words.</p>
+
+<p><br></p>
+
+<p>Check back later for a more detailed summary.</p>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
 </section>
 
 
+
+
 <section id="menu-pane" class="row menu text-center">
+  
+  
+  
+  
   
   <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
 </section>
@@ -117,4 +142,5 @@ ga('send', 'pageview');
 <script src="js/main.js"></script>
 </body>
 </html>
+
 
