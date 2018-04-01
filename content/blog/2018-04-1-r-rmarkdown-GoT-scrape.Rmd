@@ -1,0 +1,11 @@
+---
+title: "Scraping Game of Thrones Data"
+author: "Alessandra Valcarcel"
+date: 2018-04-01T21:13:14-05:00
+categories: ["Data Scraping"]
+tags: ["Game of Thrones (GoT)", "Data Scraping"]
+output: html_document
+---
+
+  
+In this post, I am going to cover the basics to creating a website using `blogdown` and Hugo. We will create and deploy a template website as well as cover some basics about changing content. You should be extremely comfortable coding in R, writing in R Markdown, and have a working knowledge of GitHub. You should have R, R Studio, R Markdown all installed on your computer and an account on GitHub before we start.
