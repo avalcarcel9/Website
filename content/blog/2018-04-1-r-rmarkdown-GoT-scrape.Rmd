@@ -13,13 +13,15 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 __WARNING: This post contains spoilers for Game of Thrones and some foul language reproduced from the show script__
 
-April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April...2019.
+April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April...2019 bypassing a season in 2018.
 
 <center><img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme"></center>
 
-As a loyal fan I'm determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will not cover the basics of scraping but rather provide some code to scrape the material. Up until a few weeks ago, I myself didn't know what web scraping was so if you weren't aware web scraping it is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the [R environment](https://www.r-project.org/).
+As a loyal fan I'm determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will not cover the basics of scraping but rather provide some code to scrape the material. I'll be using the data obtained using this code in future blog posts and wanted to provide a way for any user to reproduce my analysis. Up until a few weeks ago, I myself didn't know what web scraping was so if you weren't aware web scraping it is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the [R environment](https://www.r-project.org/).
 
 Shall we begin?
+
+All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you'll be saving and loading data.
 
 ## Scraping GoT Scripts
 
@@ -61,9 +63,9 @@ install.packages('geniusr')
 devtools::install_github('ewenme/geniusr')
 ```
 
-Recently, I've had Amy Winehouses's Back to Black album on repeat so to show a simple example I'll use this artist and album to show a quick demo of a few `geniusr` functions. If you want to explore the website I will be scraping you can start [here](https://genius.com/albums/Amy-winehouse/). 
+Recently, I've had Amy Winehouse's Back to Black album on repeat so to show a simple example I'll use this artist and album to show a quick demo of a few `geniusr` functions. If you want to explore the website I will be scraping here you can start [here](https://genius.com/albums/Amy-winehouse/). 
 
-_Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don't have to constantly be pulling the data_
+_Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don't have to constantly be pulling the data._
 
 ```{r}
 library(geniusr)
@@ -83,6 +85,7 @@ Genius was originally set up to host lyrics of songs as well as artist and album
 library(rvest)
 library(xml2)
 library(dplyr)
+library(geniusr)
 
 # Obtain meta data from a URL
 info_from_url = function(url) {
@@ -146,7 +149,7 @@ scrape_full_scripts <- function(song_lyrics_url, access_token = genius_token()){
 }
 ```
 
-Now let's scrape the scripts and then save them so I don't need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.
+Now let's scrape the scripts and then save them so you don't need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.
 
 ```{r, eval = FALSE}
 # Obtain all the scripts
@@ -239,6 +242,7 @@ library(dplyr)
 url = "http://awoiaf.westeros.org/index.php/List_of_characters"
 wiki_characters = scrape_characters(url)
 
+# Change filepath to match where you'd like to save the data
 save(wiki_characters, file = "/Users/alval/Box/Coursework/IndStudy/Data/wiki_characters.RData")
 
 head(wiki_characters)
@@ -247,6 +251,7 @@ head(wiki_characters)
 url = 'https://www.hbo.com/game-of-thrones/cast-and-crew'
 hbo_characters = scrape_HBO_characters(url)
 
+# Change filepath to match where you'd like to save the data
 save(hbo_characters, file = "/Users/alval/Box/Coursework/IndStudy/Data/hbo_characters.RData")
 
 head(hbo_characters)
@@ -272,7 +277,7 @@ The scraping approach here is a little unorthodox due to the website source cont
 
 To scrape the character deaths and at what time in a particular season and episode they die I use the website ["https://deathtimeline.com/"]("https://deathtimeline.com/"). This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape. I first clicked on all seasons of the show. I then right-click inspected the page and copied the full html. At this point I copy and pasted the text into a text editor saving it as frozen_death_times.html. I then created a function that reads in this html page and begins to clean for the information I want.
 
-From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to specifically describe who killed that person. The bias of this data is mostly that is taken from ["https://deathtimeline.com/"]("https://deathtimeline.com/") and relies on their information. From that data I can only collect that they deamed as major and minor. Below is a function to scrape this content for information about a characters death. 
+From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to specifically describe who killed that person. The bias of this data is mostly that is taken from ["https://deathtimeline.com/"]("https://deathtimeline.com/") and relies on their information. From that data I can only collect that they deemed as major and minor. Below is a function to scrape this content for information about a characters death. 
 
 ```{r scrape_deaths}
 library(xml2)
