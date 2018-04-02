@@ -338,7 +338,7 @@ get_death_times <- function(filename){
       return(NULL)
     }
     death$season = title[1]
-    death$epsiode = title[2]
+    death$episode = title[2]
     death
   }, titles, deaths, SIMPLIFY = FALSE)
   
