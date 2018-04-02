@@ -14,7 +14,7 @@ output: html_document
 <center>
 <img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme">
 </center>
-<p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, we will cover the basics of scraping the GoT material and generally web scraping. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping is simply extracting data from websites. Essentially, we can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
+<p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will cover the basics of scraping the GoT material and generally web scraping. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
 <p>Shall we begin?</p>
 <div id="scraping-got-scripts" class="section level2">
 <h2>Scraping GoT Scripts</h2>
@@ -24,7 +24,7 @@ output: html_document
 <li>These scripts contain the speaker information which I’ll need later for my eventual analysis</li>
 </ol>
 <p>To use the <code>geniusr</code> package you must have an API. Go <a href="https://genius.com/signup_or_login">here</a> to create an account or login and obtain an API. For more information on the API creation you can look at the genius documentation <a href="https://docs.genius.com/#/getting-started-h1">here</a>.</p>
-<p>Once you’ve created an account and obtained an API they’ll assign you a token. Be sure to copy the token. With the token copied we can add it to the R environment with some code.</p>
+<p>Once you’ve created an account and obtained an API they’ll assign you a token. Be sure to copy the token. With the token copied I can add it to the R environment with some code.</p>
 <p>Running the following code will open your .Renviron</p>
 <pre class="r"><code>user_renviron = path.expand(file.path(&quot;~&quot;, &quot;.Renviron&quot;))
 if(!file.exists(user_renviron)) # check to see if the file already exists
@@ -34,19 +34,16 @@ file.edit(user_renviron) # open with another text editor if this fails</code></p
 <pre class="r"><code>GENIUS_API_TOKEN=&quot;your-token-goes-here&quot;</code></pre>
 <p>If done properly then this code will return your API token.</p>
 <pre class="r"><code>Sys.getenv(&quot;GENIUS_API_TOKEN&quot;)</code></pre>
-<p>Now we can install and load <code>geniusr</code> to scrape some data. You can find more information about the <code>geniusr</code> package through <a href="https://cran.r-project.org/web/packages/geniusr/index.html">CRAN</a> or the package maintainers <a href="https://github.com/ewenme/geniusr">GitHub</a>.</p>
+<p>Now I can install and load <code>geniusr</code> to scrape some data. You can find more information about the <code>geniusr</code> package through <a href="https://cran.r-project.org/web/packages/geniusr/index.html">CRAN</a> or the package maintainers <a href="https://github.com/ewenme/geniusr">GitHub</a>.</p>
 <pre class="r"><code># Install the stable version from CRAN
 install.packages(&#39;geniusr&#39;)
 # Install the developers version from GitHub directly
 devtools::install_github(&#39;ewenme/geniusr&#39;)</code></pre>
 <pre class="r"><code>library(geniusr)</code></pre>
-<pre><code>## Warning: package &#39;geniusr&#39; was built under R version 3.4.3</code></pre>
-<p>Recently, I’ve had Amy Winehouses’s Back to Black album on repeat so to show a simple example I’ll use this artist and album to show a quick demo of a few <code>geniusr</code> functions. If you want to explore the website we will be scraping you can start <a href="https://genius.com/albums/Amy-winehouse/">here</a>.</p>
+<p>Recently, I’ve had Amy Winehouses’s Back to Black album on repeat so to show a simple example I’ll use this artist and album to show a quick demo of a few <code>geniusr</code> functions. If you want to explore the website I will be scraping you can start <a href="https://genius.com/albums/Amy-winehouse/">here</a>.</p>
 <p><em>Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don’t have to constantly be pulling the data</em></p>
 <pre class="r"><code># Search for Amy Winehouse
 geniusr::search_artist(&quot;Amy Winehouse&quot;)</code></pre>
-<pre><code>## Warning in strptime(x, fmt, tz = &quot;GMT&quot;): unknown timezone &#39;zone/tz/2018c.
-## 1.0/zoneinfo/America/New_York&#39;</code></pre>
 <pre><code>## # A tibble: 1 x 3
 ##   artist_id artist_name   artist_url                              
 ##       &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                                   
@@ -106,19 +103,11 @@ geniusr::scrape_lyrics_url(&quot;https://genius.com/Amy-winehouse-rehab-lyrics&q
 ## 10 I didn&#39;t get a lot in … https://genius.com/Amy-w… Rehab     Amy Wineho…
 ## # ... with 23 more rows</code></pre>
 <p>Genius was originally set up to host lyrics of songs as well as artist and album information. Now they host TV show and movie scripts as well. The GoT scripts can be accessed <a href="https://genius.com/artists/Game-of-thrones">here</a>. Notice, the seasons are recorded as an “album” on the site and within each album the script for an episode is characterized as a song. To scrape every episode from every season, I created three functions. The first is <code>info_from_url</code> which will return some of the meta information from a URL. The second is <code>album_id_from_url</code> will use the meta information from <code>info_from_url</code> to extract the album_id (season ID) needed for <code>geniusr</code> to scrape the song_id (episode_id) in a season using <code>geniusr::scrape_tracklist</code>. The third <code>scrape_GoT</code> then wraps <code>geniusr::scrape_lyrics_id</code> to download the scripts for each episode across all seasons. Below though, you’ll notice there are four functions. The last function is adapted from the <code>geniusr</code> function <code>scrape_lyrics_url</code>. There is a single line commented out as it caused the scraping to only extract parts of some episodes.</p>
-<pre class="r"><code>library(rvest)</code></pre>
-<pre><code>## Loading required package: xml2</code></pre>
-<pre class="r"><code>library(xml2)
-library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code># Obtain meta data from a URL
+<pre class="r"><code>library(rvest)
+library(xml2)
+library(dplyr)
+
+# Obtain meta data from a URL
 info_from_url = function(url) {
   doc = xml2::read_html(url)
   content = rvest::html_nodes(doc, 
@@ -178,7 +167,7 @@ scrape_full_scripts &lt;- function(song_lyrics_url, access_token = genius_token(
     lyrics$artist_name &lt;- artist
     return(tibble::as_tibble(lyrics))
 }</code></pre>
-<p>Now let’s scrape the scripts and then save them so we don’t need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.</p>
+<p>Now let’s scrape the scripts and then save them so I don’t need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.</p>
 <pre class="r"><code># Obtain all the scripts
 geniusr_scripts = scrape_GoT(base_url = &quot;https://genius.com/albums/Game-of-thrones&quot;, season = 7)
 
@@ -206,4 +195,196 @@ save(geniusr_scripts, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/gen
 ## 4        10.0 Season 6 Scripts QYBU… https://genius… The Wind… Game of Th…
 ## 5        10.0 Season 6 Scripts ALL:… https://genius… The Wind… Game of Th…
 ## 6        10.0 Season 6 Scripts THEO… https://genius… The Wind… Game of Th…</code></pre>
+<p>Again, I scrape the website once and save the results as an R object so I do not get blocked for scraping too much from genius.</p>
+<p>I now have every episode script and can do some analysis later!</p>
+</div>
+<div id="scrape-character-names" class="section level2">
+<h2>Scrape Character Names</h2>
+<p>To scrape the character names I use <a href="%22http://awoiaf.westeros.org/index.php/List_of_characters%22">“http://awoiaf.westeros.org/index.php/List_of_characters”</a>. This website contains all characters in GoT.</p>
+<p>I created a scraping function to pull the characters from the website and clean the data into a tibble. I’ll save the character vector so scraping only has to be done once. This list includes over 2000 characters. Many of these characters on this website contain the same first names. This is going to make data cleaning later more difficult. Due to this, I will additionally scrape <a href="https://www.hbo.com/game-of-thrones/cast-and-crew">HBO’s</a> main character list. I created two functions to help us do this <code>scrape_characters</code> and <code>scrape_HBO_characters</code> which both scrape each respective website for the character list.</p>
+<pre class="r"><code># Scrape all the character names
+scrape_characters &lt;- function(url){
+  doc = xml2::read_html(url)
+  content = rvest::html_nodes(doc, 
+                       xpath = &quot;//li&quot;)
+  content = trimws(rvest::html_text(content))
+  content = as.data.frame(content) 
+  names(content) = &quot;raw&quot;
+  content = content %&gt;%
+    dplyr::mutate(names = str_split(raw, &quot;,&quot;, simplify = TRUE)[,1],
+                  names = str_replace(names, &quot;//.&quot;, &quot;&quot;),
+                  description = str_split(raw, &quot;,&quot;, simplify = TRUE)[,2])
+}
+
+# Scrape HBO main character list
+scrape_HBO_characters &lt;- function(url){
+  # HBO xpath to character names
+  xpath = as.character(&#39;//*[contains(concat( &quot; &quot;, @class, &quot; &quot; ), concat( &quot; &quot;, &quot;components/ThumbnailWithText--primaryText&quot;, &quot; &quot; ))]&#39;)
+  
+  # OBtain Character Names
+  characters = xml2::read_html(url) %&gt;%
+    rvest::html_nodes(xpath = xpath) %&gt;%
+    rvest::html_text()
+  
+  # Clean Character Names
+  characters = as.data.frame(characters)
+  names(characters) = &#39;scraped_name&#39;
+  
+  characters = characters %&gt;%
+    dplyr::mutate(scraped_name = stringr::str_trim(scraped_name, side = &quot;both&quot;),
+                  scraped_name = stringr::str_replace_all(scraped_name, &quot;\\(&quot;, &quot;&quot;),
+                  scraped_name = stringr::str_replace_all(scraped_name, &quot;\\)&quot;, &quot;&quot;),
+                  scraped_name = stringr::str_replace_all(scraped_name, &quot;Maester&quot;, &quot;&quot;),
+                  scraped_name = stringr::str_trim(scraped_name, side = &quot;both&quot;),
+                  first_name = stringr::str_trim(stringr::str_split_fixed(scraped_name, &quot; &quot;, n = 2)[,1], side = &quot;both&quot;),
+                  last_name = stringr::str_trim(stringr::str_split_fixed(scraped_name, &quot; &quot;, n = 2)[,2], side = &quot;both&quot;),
+                  nickname = stringr::str_trim(stringr::str_split(last_name, &quot;\\?&quot;, simplify = TRUE)[,2], side = &quot;both&quot;),
+                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, &quot;\\?[a-zA-Z]+\\?&quot;, &quot;&quot;), side = &quot;both&quot;),
+                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, &quot;\\?[a-zA-Z]+ [a-zA-Z]+\\?&quot;, &quot;&quot;), side = &quot;both&quot;),
+                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, &quot;\\?&quot;, &quot;\\&#39;&quot;), side = &quot;both&quot;),
+                  joined_name = paste0(first_name, &quot; &quot;, last_name, &quot;|&quot;, nickname, &quot;|&quot;, first_name),
+                  joined_name = stringr::str_replace(joined_name, &quot;\\|\\|&quot;, &quot;\\|&quot;),
+                  full_name = stringr::str_trim(paste0(first_name, &quot; &quot;,last_name), side = &quot;both&quot;))
+  
+  return(characters)
+}</code></pre>
+<p>Now I can apply these functions to scrape and save the character data.</p>
+<pre class="r"><code>library(xml2)
+library(rvest)
+library(stringr)
+library(dplyr)
+
+# Scrape wiki characters and save
+url = &quot;http://awoiaf.westeros.org/index.php/List_of_characters&quot;
+wiki_characters = scrape_characters(url)
+
+save(wiki_characters, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/wiki_characters.RData&quot;)
+
+head(wiki_characters)
+
+# Scrape HBO characters and save
+url = &#39;https://www.hbo.com/game-of-thrones/cast-and-crew&#39;
+hbo_characters = scrape_HBO_characters(url)
+
+save(hbo_characters, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/hbo_characters.RData&quot;)
+
+head(hbo_characters)</code></pre>
+<pre><code>##                                                                                                      raw
+## 1                                         Abelar Hightower, challenger at the tourney at Ashford Meadow.
+## 2                                                                                       Addam, a knight.
+## 3                             Addam Frey, a knight at the Whitewalls tourney, cousin to Lady Butterwell.
+## 4                          Addam Marbrand, a knight in the service of House Lannister. Heir to Ashemark.
+## 5 Addam Osgrey, son of Eustace Osgrey, slain on the Redgrass Field during the First Blackfyre Rebellion.
+## 6                                         Addam Velaryon, a dragonrider during the Dance of the Dragons.
+##              names
+## 1 Abelar Hightower
+## 2            Addam
+## 3       Addam Frey
+## 4   Addam Marbrand
+## 5     Addam Osgrey
+## 6   Addam Velaryon
+##                                                      description
+## 1                   challenger at the tourney at Ashford Meadow.
+## 2                                                      a knight.
+## 3                             a knight at the Whitewalls tourney
+## 4  a knight in the service of House Lannister. Heir to Ashemark.
+## 5                                          son of Eustace Osgrey
+## 6                 a dragonrider during the Dance of the Dragons.</code></pre>
+<pre><code>##         scraped_name first_name last_name nickname             joined_name
+## 1 Eddard ?Ned? Stark     Eddard     Stark      Ned Eddard Stark|Ned|Eddard
+## 2   Robert Baratheon     Robert Baratheon          Robert Baratheon|Robert
+## 3   Tyrion Lannister     Tyrion Lannister          Tyrion Lannister|Tyrion
+## 4   Cersei Lannister     Cersei Lannister          Cersei Lannister|Cersei
+## 5      Catelyn Stark    Catelyn     Stark            Catelyn Stark|Catelyn
+## 6    Jaime Lannister      Jaime Lannister            Jaime Lannister|Jaime
+##          full_name
+## 1     Eddard Stark
+## 2 Robert Baratheon
+## 3 Tyrion Lannister
+## 4 Cersei Lannister
+## 5    Catelyn Stark
+## 6  Jaime Lannister</code></pre>
+<p>The <code>wiki_characters</code> contains a lot of information about character names, nicknames, and even description and will be useful later as a reference. The <code>hbo_characters</code> object contains information only pertaining to the main characters on the show. I’ll be using this information later to clean the script data.</p>
+</div>
+<div id="scrape-character-death-timeline" class="section level2">
+<h2>Scrape Character Death Timeline</h2>
+<p>The scraping approach here is a little unorthodox due to the website source containing dynamic content.</p>
+<p>To scrape the character deaths and at what time in a particular season and episode they die I use the website <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a>. This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape. I first clicked on all seasons of the show. I then right-click inspected the page and copied the full html. At this point I copy and pasted the text into a text editor saving it as frozen_death_times.html. I then created a function that reads in this html page and begins to clean for the information I want.</p>
+<p>From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to specifically describe who killed that person. The bias of this data is mostly that is taken from <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a> and relies on their information. From that data I can only collect that they deamed as major and minor.</p>
+<pre class="r"><code>library(xml2)
+library(rvest)
+library(stringr)
+library(dplyr)
+
+filename = &quot;/Users/alval/Box/Coursework/IndStudy/Data/frozen_death_times.html&quot;
+
+get_death_times &lt;- function(filename){
+
+  # Obtain Season, Episode, Character, and Time from various nodes
+  doc = xml2::read_html(filename)
+  nodes = rvest::html_nodes(doc, &quot;#main-list&quot;)
+  nodes = rvest::html_nodes(nodes, &quot;li&quot;)
+  seasons = rvest::html_nodes(nodes, &quot;.season-title&quot;)
+  eps = rvest::html_nodes(nodes, &quot;.episode-container&quot;)
+  ep = eps[[1]]
+  
+  # Let&#39;s obtain the season and episode information from eps
+  get_episode_info = function(ep) {
+    titles = rvest::html_nodes(ep, &quot;.episode-title&quot;)
+    titles = rvest::html_text(titles)
+    ep_info = c(stringr::str_extract(titles, &quot;Season [:digit:]+&quot;),
+                stringr::str_extract(titles, &quot;Episode [:digit:]+&quot;))
+    return(ep_info)
+    # titles = xml2::as_list(titles)[[1]]
+    # spans = titles[names(titles) == &quot;span&quot;]
+    # spans = lapply(spans, unlist)
+    # spans = lapply(spans, function(x) x[ x != &quot;[ comment ]&quot;])
+    # spans = sapply(spans, paste, collapse = &quot;&quot;)
+    # spans
+  }
+  
+  # Now let&#39;s obtain charachter death information
+  get_episode_deaths = function(ep) {
+    titles = rvest::html_nodes(ep, &quot;.death-container &quot;)
+    times = rvest::html_nodes(titles, &quot;.bubble &quot;)
+    times = rvest::html_text(times)
+    titles = rvest::html_nodes(titles, &quot;.death-inner&quot;)
+    deaths = rvest::html_nodes(titles, &quot;.death-right&quot;)
+    who = rvest::html_text(rvest::html_nodes(deaths, &quot;h3&quot;))
+    how = rvest::html_text(rvest::html_nodes(deaths, &quot;h4&quot;))
+    df = data_frame(who = who, how = how, times = times)
+    df
+  }
+  
+  titles = lapply(eps, get_episode_info)
+  deaths = lapply(eps, get_episode_deaths)
+  
+  # Bind the two lists so that I have season and episode info
+  ## For no deaths in an episode return NULL
+  df = mapply(function(title, death) {
+    if (nrow(death) == 0) {
+      # death = data_frame(who = NA, how = NA, times = NA)
+      return(NULL)
+    }
+    death$season = title[1]
+    death$epsiode = title[2]
+    death
+  }, titles, deaths, SIMPLIFY = FALSE)
+  
+  # Create a dataframe
+  df = bind_rows(df)
+  # Add a column of specific how/who killed
+  df = df %&gt;% mutate(
+    who = stringr::str_to_title(who),
+    how = stringr::str_to_lower(how),
+    specific_how = stringr::str_split(how, &quot;by&quot;, simplify = TRUE)[,2],
+    specific_how = stringr::str_to_title(str_trim(specific_how)))
+  
+  return(df)
+}
+
+
+cleaned_death = get_death_times(filename = filename)
+
+head(cleaned_death)</code></pre>
 </div>

@@ -7,13 +7,17 @@ tags: ["Game of Thrones (GoT)", "Data Scraping"]
 output: html_document
 ---
 
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
 __WARNING: This post contains spoilers for Game of Thrones and some foul language reproduced from the show script__
 
 April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April...2019.
 
 <center><img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme"></center>
 
-As a loyal fan I'm determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, we will cover the basics of scraping the GoT material and generally web scraping. Up until a few weeks ago, I myself didn't know what web scraping was so if you weren't aware web scraping is simply extracting data from websites. Essentially, we can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the [R environment](https://www.r-project.org/).
+As a loyal fan I'm determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will cover the basics of scraping the GoT material and generally web scraping. Up until a few weeks ago, I myself didn't know what web scraping was so if you weren't aware web scraping is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the [R environment](https://www.r-project.org/).
 
 Shall we begin?
 
@@ -26,7 +30,7 @@ I want to eventually do some analysis on the GoT scripts. Since HBO does not pro
 
 To use the `geniusr` package you must have an API. Go [here](https://genius.com/signup_or_login) to create an account or login and obtain an API. For more information on the API creation you can look at the genius documentation [here](https://docs.genius.com/#/getting-started-h1).
 
-Once you've created an account and obtained an API they'll assign you a token. Be sure to copy the token. With the token copied we can add it to the R environment with some code.
+Once you've created an account and obtained an API they'll assign you a token. Be sure to copy the token. With the token copied I can add it to the R environment with some code.
 
 Running the following code will open your .Renviron
 
@@ -48,7 +52,7 @@ If done properly then this code will return your API token.
 ```{r, eval = FALSE}
 Sys.getenv("GENIUS_API_TOKEN")
 ```
-Now we can install and load `geniusr` to scrape some data. You can find more information about the `geniusr` package through [CRAN](https://cran.r-project.org/web/packages/geniusr/index.html) or the package maintainers [GitHub](https://github.com/ewenme/geniusr).
+Now I can install and load `geniusr` to scrape some data. You can find more information about the `geniusr` package through [CRAN](https://cran.r-project.org/web/packages/geniusr/index.html) or the package maintainers [GitHub](https://github.com/ewenme/geniusr).
 
 ```{r, eval = FALSE}
 # Install the stable version from CRAN
@@ -61,7 +65,7 @@ devtools::install_github('ewenme/geniusr')
 library(geniusr)
 ```
 
-Recently, I've had Amy Winehouses's Back to Black album on repeat so to show a simple example I'll use this artist and album to show a quick demo of a few `geniusr` functions. If you want to explore the website we will be scraping you can start [here](https://genius.com/albums/Amy-winehouse/). 
+Recently, I've had Amy Winehouses's Back to Black album on repeat so to show a simple example I'll use this artist and album to show a quick demo of a few `geniusr` functions. If you want to explore the website I will be scraping you can start [here](https://genius.com/albums/Amy-winehouse/). 
 
 _Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don't have to constantly be pulling the data_
 
@@ -145,7 +149,7 @@ scrape_full_scripts <- function(song_lyrics_url, access_token = genius_token()){
 }
 ```
 
-Now let's scrape the scripts and then save them so we don't need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.
+Now let's scrape the scripts and then save them so I don't need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.
 
 ```{r, eval = FALSE}
 # Obtain all the scripts
@@ -167,7 +171,198 @@ head(geniusr_scripts)
 tail(geniusr_scripts)
 ```
 
+Again, I scrape the website once and save the results as an R object so I do not get blocked for scraping too much from genius.
 
+I now have every episode script and can do some analysis later!
+
+## Scrape Character Names
+
+To scrape the character names I use ["http://awoiaf.westeros.org/index.php/List_of_characters"]("http://awoiaf.westeros.org/index.php/List_of_characters"). This website contains all characters in GoT.
+
+I created a scraping function to pull the characters from the website and clean the data into a tibble. I'll save the character vector so scraping only has to be done once. This list includes over 2000 characters. Many of these characters on this website contain the same first names. This is going to make data cleaning later more difficult. Due to this, I will additionally scrape [HBO's](https://www.hbo.com/game-of-thrones/cast-and-crew) main character list. I created two functions to help us do this `scrape_characters` and `scrape_HBO_characters` which both scrape each respective website for the character list.
+
+```{r}
+# Scrape all the character names
+scrape_characters <- function(url){
+  doc = xml2::read_html(url)
+  content = rvest::html_nodes(doc, 
+                       xpath = "//li")
+  content = trimws(rvest::html_text(content))
+  content = as.data.frame(content) 
+  names(content) = "raw"
+  content = content %>%
+    dplyr::mutate(names = str_split(raw, ",", simplify = TRUE)[,1],
+                  names = str_replace(names, "//.", ""),
+                  description = str_split(raw, ",", simplify = TRUE)[,2])
+}
+
+# Scrape HBO main character list
+scrape_HBO_characters <- function(url){
+  # HBO xpath to character names
+  xpath = as.character('//*[contains(concat( " ", @class, " " ), concat( " ", "components/ThumbnailWithText--primaryText", " " ))]')
+  
+  # OBtain Character Names
+  characters = xml2::read_html(url) %>%
+    rvest::html_nodes(xpath = xpath) %>%
+    rvest::html_text()
+  
+  # Clean Character Names
+  characters = as.data.frame(characters)
+  names(characters) = 'scraped_name'
+  
+  characters = characters %>%
+    dplyr::mutate(scraped_name = stringr::str_trim(scraped_name, side = "both"),
+                  scraped_name = stringr::str_replace_all(scraped_name, "\\(", ""),
+                  scraped_name = stringr::str_replace_all(scraped_name, "\\)", ""),
+                  scraped_name = stringr::str_replace_all(scraped_name, "Maester", ""),
+                  scraped_name = stringr::str_trim(scraped_name, side = "both"),
+                  first_name = stringr::str_trim(stringr::str_split_fixed(scraped_name, " ", n = 2)[,1], side = "both"),
+                  last_name = stringr::str_trim(stringr::str_split_fixed(scraped_name, " ", n = 2)[,2], side = "both"),
+                  nickname = stringr::str_trim(stringr::str_split(last_name, "\\?", simplify = TRUE)[,2], side = "both"),
+                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, "\\?[a-zA-Z]+\\?", ""), side = "both"),
+                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, "\\?[a-zA-Z]+ [a-zA-Z]+\\?", ""), side = "both"),
+                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, "\\?", "\\'"), side = "both"),
+                  joined_name = paste0(first_name, " ", last_name, "|", nickname, "|", first_name),
+                  joined_name = stringr::str_replace(joined_name, "\\|\\|", "\\|"),
+                  full_name = stringr::str_trim(paste0(first_name, " ",last_name), side = "both"))
+  
+  return(characters)
+}
+```
+
+Now I can apply these functions to scrape and save the character data.
+
+```{r scrape_characters, eval = FALSE}
+library(xml2)
+library(rvest)
+library(stringr)
+library(dplyr)
+
+# Scrape wiki characters and save
+url = "http://awoiaf.westeros.org/index.php/List_of_characters"
+wiki_characters = scrape_characters(url)
+
+save(wiki_characters, file = "/Users/alval/Box/Coursework/IndStudy/Data/wiki_characters.RData")
+
+head(wiki_characters)
+
+# Scrape HBO characters and save
+url = 'https://www.hbo.com/game-of-thrones/cast-and-crew'
+hbo_characters = scrape_HBO_characters(url)
+
+save(hbo_characters, file = "/Users/alval/Box/Coursework/IndStudy/Data/hbo_characters.RData")
+
+head(hbo_characters)
+```
+
+```{r echo = FALSE}
+#Wiki Characters
+load("/Users/alval/Box/Coursework/IndStudy/Data/wiki_characters.RData")
+# Visualize the data with eval = TRUE so user can see
+head(wiki_characters)
+
+# HBO characters
+load("/Users/alval/Box/Coursework/IndStudy/Data/hbo_characters.RData")
+# Visualize the data with eval = TRUE so user can see
+head(hbo_characters)
+```
+
+The `wiki_characters` contains a lot of information about character names, nicknames, and even description and will be useful later as a reference. The `hbo_characters` object contains information only pertaining to the main characters on the show. I'll be using this information later to clean the script data.
+
+## Scrape Character Death Timeline
+
+The scraping approach here is a little unorthodox due to the website source containing dynamic content.
+
+To scrape the character deaths and at what time in a particular season and episode they die I use the website ["https://deathtimeline.com/"]("https://deathtimeline.com/"). This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape. I first clicked on all seasons of the show. I then right-click inspected the page and copied the full html. At this point I copy and pasted the text into a text editor saving it as frozen_death_times.html. I then created a function that reads in this html page and begins to clean for the information I want.
+
+From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to specifically describe who killed that person. The bias of this data is mostly that is taken from ["https://deathtimeline.com/"]("https://deathtimeline.com/") and relies on their information. From that data I can only collect that they deamed as major and minor. Below is a function to scrape this content for information about a characters death. 
+
+```{r scrape_deaths}
+library(xml2)
+library(rvest)
+library(stringr)
+library(dplyr)
+
+filename = "/Users/alval/Box/Coursework/IndStudy/Data/frozen_death_times.html"
+
+get_death_times <- function(filename){
+
+  # Obtain Season, Episode, Character, and Time from various nodes
+  doc = xml2::read_html(filename)
+  nodes = rvest::html_nodes(doc, "#main-list")
+  nodes = rvest::html_nodes(nodes, "li")
+  seasons = rvest::html_nodes(nodes, ".season-title")
+  eps = rvest::html_nodes(nodes, ".episode-container")
+  ep = eps[[1]]
+  
+  # Let's obtain the season and episode information from eps
+  get_episode_info = function(ep) {
+    titles = rvest::html_nodes(ep, ".episode-title")
+    titles = rvest::html_text(titles)
+    ep_info = c(stringr::str_extract(titles, "Season [:digit:]+"),
+                stringr::str_extract(titles, "Episode [:digit:]+"))
+    return(ep_info)
+    # titles = xml2::as_list(titles)[[1]]
+    # spans = titles[names(titles) == "span"]
+    # spans = lapply(spans, unlist)
+    # spans = lapply(spans, function(x) x[ x != "[ comment ]"])
+    # spans = sapply(spans, paste, collapse = "")
+    # spans
+  }
+  
+  # Now let's obtain charachter death information
+  get_episode_deaths = function(ep) {
+    titles = rvest::html_nodes(ep, ".death-container ")
+    times = rvest::html_nodes(titles, ".bubble ")
+    times = rvest::html_text(times)
+    titles = rvest::html_nodes(titles, ".death-inner")
+    deaths = rvest::html_nodes(titles, ".death-right")
+    who = rvest::html_text(rvest::html_nodes(deaths, "h3"))
+    how = rvest::html_text(rvest::html_nodes(deaths, "h4"))
+    df = data_frame(who = who, how = how, times = times)
+    df
+  }
+  
+  titles = lapply(eps, get_episode_info)
+  deaths = lapply(eps, get_episode_deaths)
+  
+  # Bind the two lists so that I have season and episode info
+  ## For no deaths in an episode return NULL
+  df = mapply(function(title, death) {
+    if (nrow(death) == 0) {
+      # death = data_frame(who = NA, how = NA, times = NA)
+      return(NULL)
+    }
+    death$season = title[1]
+    death$epsiode = title[2]
+    death
+  }, titles, deaths, SIMPLIFY = FALSE)
+  
+  # Create a dataframe
+  df = bind_rows(df)
+  # Add a column of specific how/who killed
+  df = df %>% mutate(
+    who = stringr::str_to_title(who),
+    how = stringr::str_to_lower(how),
+    specific_how = stringr::str_split(how, "by", simplify = TRUE)[,2],
+    specific_how = stringr::str_to_title(str_trim(specific_how)))
+  
+  return(df)
+}
+
+
+death_times = get_death_times(filename = filename)
+
+head(death_times)
+
+save(death_times, file = "/Users/alval/Box/Coursework/IndStudy/Data/death_times.RData")
+```
+
+```{r, echo = FALSE}
+load("/Users/alval/Box/Coursework/IndStudy/Data/death_times.RData")
+
+head(death_times)
+```
 
 
 
