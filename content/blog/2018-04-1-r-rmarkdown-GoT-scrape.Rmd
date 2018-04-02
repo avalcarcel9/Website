@@ -7,9 +7,168 @@ tags: ["Game of Thrones (GoT)", "Data Scraping"]
 output: html_document
 ---
 
-April may as well be Game of Thrones month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April...2019.
+__WARNING: This post contains spoilers for Game of Thrones and some foul language reproduced from the show script__
+
+April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April...2019.
+
+<center><img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme"></center>
+
+As a loyal fan I'm determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, we will cover the basics of scraping the GoT material and generally web scraping. Up until a few weeks ago, I myself didn't know what web scraping was so if you weren't aware web scraping is simply extracting data from websites. Essentially, we can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the [R environment](https://www.r-project.org/).
+
+Shall we begin?
+
+## Scraping GoT Scripts
+
+I want to eventually do some analysis on the GoT scripts. Since HBO does not provide these scripts, I'm going to rely on [www.genius.com](www.genius.com). I chose this website for two main reasons:
+
+1. An R package `genius` already exists with functions to easily scrape the data
+2. These scripts contain the speaker information which I'll need later for my eventual analysis
+
+To use the `geniusr` package you must have an API. Go [here](https://genius.com/signup_or_login) to create an account or login and obtain an API. For more information on the API creation you can look at the genius documentation [here](https://docs.genius.com/#/getting-started-h1).
+
+Once you've created an account and obtained an API they'll assign you a token. Be sure to copy the token. With the token copied we can add it to the R environment with some code.
+
+Running the following code will open your .Renviron
+
+```{r, eval = FALSE}
+user_renviron = path.expand(file.path("~", ".Renviron"))
+if(!file.exists(user_renviron)) # check to see if the file already exists
+  file.create(user_renviron)
+file.edit(user_renviron) # open with another text editor if this fails
+```
+
+Once this file is open paste the following into the script:
+
+```{r, eval = FALSE}
+GENIUS_API_TOKEN="your-token-goes-here"
+```
+
+If done properly then this code will return your API token.
+
+```{r, eval = FALSE}
+Sys.getenv("GENIUS_API_TOKEN")
+```
+Now we can install and load `geniusr` to scrape some data. You can find more information about the `geniusr` package through [CRAN](https://cran.r-project.org/web/packages/geniusr/index.html) or the package maintainers [GitHub](https://github.com/ewenme/geniusr).
+
+```{r, eval = FALSE}
+# Install the stable version from CRAN
+install.packages('geniusr')
+# Install the developers version from GitHub directly
+devtools::install_github('ewenme/geniusr')
+```
+
+```{r}
+library(geniusr)
+```
+
+Recently, I've had Amy Winehouses's Back to Black album on repeat so to show a simple example I'll use this artist and album to show a quick demo of a few `geniusr` functions. If you want to explore the website we will be scraping you can start [here](https://genius.com/albums/Amy-winehouse/). 
+
+_Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don't have to constantly be pulling the data_
+
+```{r}
+# Search for Amy Winehouse
+geniusr::search_artist("Amy Winehouse")
+# Use artist_id to obtain song_id
+geniusr::get_artist_songs(artist_id = 1525)
+# Scrape lyrics using an ID
+geniusr::scrape_lyrics_id(song_id = 247618)
+# Get song lyrics to Rehab using the URL directly
+geniusr::scrape_lyrics_url("https://genius.com/Amy-winehouse-rehab-lyrics")
+```
+
+Genius was originally set up to host lyrics of songs as well as artist and album information. Now they host TV show and movie scripts as well. The GoT scripts can be accessed [here](https://genius.com/artists/Game-of-thrones). Notice, the seasons are recorded as an "album" on the site and within each album the script for an episode is characterized as a song. To scrape every episode from every season, I created three functions. The first is `info_from_url` which will return some of the meta information from a URL. The second is `album_id_from_url` will use the meta information from `info_from_url` to extract the album_id (season ID) needed for `geniusr` to scrape the song_id (episode_id) in a season using `geniusr::scrape_tracklist`. The third `scrape_GoT` then wraps `geniusr::scrape_lyrics_id` to download the scripts for each episode across all seasons. Below though, you'll notice there are four functions. The last function is adapted from the `geniusr` function `scrape_lyrics_url`. There is a single line commented out as it caused the scraping to only extract parts of some episodes.
+
+```{r}
+library(rvest)
+library(xml2)
+library(dplyr)
+
+# Obtain meta data from a URL
+info_from_url = function(url) {
+  doc = xml2::read_html(url)
+  content = rvest::html_nodes(doc, 
+                       xpath = "//meta")
+  content = rvest::html_attr(content, "content")
+  # content = content[grepl("^\\{", content)]
+  # Select objects that start (^) with { 
+  content = content[stringr::str_detect(content, pattern = "^\\{")]
+  cr = fromJSON(content)
+  a_id = switch(cr$page_type,
+                album = cr$album$id,
+                song = cr$song$album$id
+  )
+  cr$aid = a_id
+  cr
+}
+
+# Obtain album_id from a URL
+album_id_from_url <- function(url) {
+  cr = info_from_url(url)
+  cr$aid
+}
+
+# Scrape all episodes across season of GoT
+scrape_GoT <- function(base_url, seasons){
+  all_urls = file.path(base_url,
+                       paste0("Season-", 1:seasons, "-scripts"))
+  episode_info = as.data.frame(sapply(all_urls, album_id_from_url)) %>%
+    rowwise() %>%
+    do(geniusr::scrape_tracklist(.)) %>%
+    mutate(song_lyrics_url = toString(song_lyrics_url)) %>%
+    group_by(song_number, album_name) %>%
+    do(scrape_full_scripts(.$song_lyrics_url)) %>%
+    ungroup()
+  return(episode_info)
+}
+
+# scrape_lyrics_url adapted code
+scrape_full_scripts <- function(song_lyrics_url, access_token = genius_token()){
+    session <- suppressWarnings(rvest::html(song_lyrics_url))
+    song <- rvest::html_nodes(session, ".header_with_cover_art-primary_info-title") %>% 
+      rvest::html_text()
+    artist <- rvest::html_nodes(session, ".header_with_cover_art-primary_info-primary_artist") %>% 
+      rvest::html_text()
+    lyrics <- rvest::html_nodes(session, ".lyrics p")
+    xml2::xml_find_all(lyrics, ".//br") %>% xml2::xml_add_sibling("p", 
+                                                                  "\n")
+    xml2::xml_find_all(lyrics, ".//br") %>% xml2::xml_remove()
+    lyrics <- rvest::html_text(lyrics)
+    #lyrics <- lyrics[1]
+    lyrics <- unlist(stringr::str_split(lyrics, pattern = "\n"))
+    lyrics <- lyrics[lyrics != ""]
+    lyrics <- lyrics[!stringr::str_detect(lyrics, pattern = "\\[|\\]")]
+    lyrics <- tibble::tibble(line = lyrics)
+    lyrics$song_lyrics_url <- song_lyrics_url
+    lyrics$song_name <- song
+    lyrics$artist_name <- artist
+    return(tibble::as_tibble(lyrics))
+}
+```
+
+Now let's scrape the scripts and then save them so we don't need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.
+
+```{r, eval = FALSE}
+# Obtain all the scripts
+geniusr_scripts = scrape_GoT(base_url = "https://genius.com/albums/Game-of-thrones", season = 7)
+
+# Visualize the data
+head(geniusr_scripts)
+tail(geniusr_scripts)
+
+# Save data - Change filepath to match where you'd like to save the data
+save(geniusr_scripts, file = "/Users/alval/Box/Coursework/IndStudy/Data/geniusr_scripts.RData")
+```
+
+
+```{r show_script_data, echo = FALSE}
+load("/Users/alval/Box/Coursework/IndStudy/Data/geniusr_scripts.RData")
+# Visualize the data with eval = TRUE so user can see
+head(geniusr_scripts)
+tail(geniusr_scripts)
+```
 
 
 
-<center><img src="https://me.me/i/2019-watch-the-throne-give-me-something-for-the-pain-20494104"></center>
+
+
 

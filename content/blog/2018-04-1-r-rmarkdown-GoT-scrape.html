@@ -9,7 +9,201 @@ output: html_document
 
 
 
-<p>April may as well be Game of Thrones month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April…2019.</p>
+<p><strong>WARNING: This post contains spoilers for Game of Thrones and some foul language reproduced from the show script</strong></p>
+<p>April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April…2019.</p>
 <center>
-<img src="https://me.me/i/2019-watch-the-throne-give-me-something-for-the-pain-20494104">
+<img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme">
 </center>
+<p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, we will cover the basics of scraping the GoT material and generally web scraping. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping is simply extracting data from websites. Essentially, we can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
+<p>Shall we begin?</p>
+<div id="scraping-got-scripts" class="section level2">
+<h2>Scraping GoT Scripts</h2>
+<p>I want to eventually do some analysis on the GoT scripts. Since HBO does not provide these scripts, I’m going to rely on <a href="www.genius.com" class="uri">www.genius.com</a>. I chose this website for two main reasons:</p>
+<ol style="list-style-type: decimal">
+<li>An R package <code>genius</code> already exists with functions to easily scrape the data</li>
+<li>These scripts contain the speaker information which I’ll need later for my eventual analysis</li>
+</ol>
+<p>To use the <code>geniusr</code> package you must have an API. Go <a href="https://genius.com/signup_or_login">here</a> to create an account or login and obtain an API. For more information on the API creation you can look at the genius documentation <a href="https://docs.genius.com/#/getting-started-h1">here</a>.</p>
+<p>Once you’ve created an account and obtained an API they’ll assign you a token. Be sure to copy the token. With the token copied we can add it to the R environment with some code.</p>
+<p>Running the following code will open your .Renviron</p>
+<pre class="r"><code>user_renviron = path.expand(file.path(&quot;~&quot;, &quot;.Renviron&quot;))
+if(!file.exists(user_renviron)) # check to see if the file already exists
+  file.create(user_renviron)
+file.edit(user_renviron) # open with another text editor if this fails</code></pre>
+<p>Once this file is open paste the following into the script:</p>
+<pre class="r"><code>GENIUS_API_TOKEN=&quot;your-token-goes-here&quot;</code></pre>
+<p>If done properly then this code will return your API token.</p>
+<pre class="r"><code>Sys.getenv(&quot;GENIUS_API_TOKEN&quot;)</code></pre>
+<p>Now we can install and load <code>geniusr</code> to scrape some data. You can find more information about the <code>geniusr</code> package through <a href="https://cran.r-project.org/web/packages/geniusr/index.html">CRAN</a> or the package maintainers <a href="https://github.com/ewenme/geniusr">GitHub</a>.</p>
+<pre class="r"><code># Install the stable version from CRAN
+install.packages(&#39;geniusr&#39;)
+# Install the developers version from GitHub directly
+devtools::install_github(&#39;ewenme/geniusr&#39;)</code></pre>
+<pre class="r"><code>library(geniusr)</code></pre>
+<pre><code>## Warning: package &#39;geniusr&#39; was built under R version 3.4.3</code></pre>
+<p>Recently, I’ve had Amy Winehouses’s Back to Black album on repeat so to show a simple example I’ll use this artist and album to show a quick demo of a few <code>geniusr</code> functions. If you want to explore the website we will be scraping you can start <a href="https://genius.com/albums/Amy-winehouse/">here</a>.</p>
+<p><em>Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don’t have to constantly be pulling the data</em></p>
+<pre class="r"><code># Search for Amy Winehouse
+geniusr::search_artist(&quot;Amy Winehouse&quot;)</code></pre>
+<pre><code>## Warning in strptime(x, fmt, tz = &quot;GMT&quot;): unknown timezone &#39;zone/tz/2018c.
+## 1.0/zoneinfo/America/New_York&#39;</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   artist_id artist_name   artist_url                              
+##       &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                                   
+## 1      1525 Amy Winehouse https://genius.com/artists/Amy-winehouse</code></pre>
+<pre class="r"><code># Use artist_id to obtain song_id
+geniusr::get_artist_songs(artist_id = 1525)</code></pre>
+<pre><code>## # A tibble: 133 x 7
+##    song_id song_name     song_lyrics_url        annotation_count artist_id
+##      &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                             &lt;int&gt;     &lt;int&gt;
+##  1  247618 Addicted      https://genius.com/Am…               10      1525
+##  2  435850 Alcoholic Lo… https://genius.com/Am…               12      1525
+##  3  800473 Amy Amy Amy   https://genius.com/Am…                1      1525
+##  4  328608 Amy Amy Amy … https://genius.com/Am…                0      1525
+##  5  328740 A Song for Y… https://genius.com/Am…                1      1525
+##  6   52836 Back to Black https://genius.com/Am…               14      1525
+##  7 3053819 Back To Blac… https://genius.com/Am…                0      1525
+##  8 2442037 Back To Blac… https://genius.com/Am…                0      1525
+##  9 1955611 Back To Blac… https://genius.com/Am…                1      1525
+## 10 3592764 Back To Blac… https://genius.com/Am…                0      1525
+## # ... with 123 more rows, and 2 more variables: artist_name &lt;chr&gt;,
+## #   artist_url &lt;chr&gt;</code></pre>
+<pre class="r"><code># Scrape lyrics using an ID
+geniusr::scrape_lyrics_id(song_id = 247618)</code></pre>
+<pre><code>## # A tibble: 16 x 5
+##    line                           song_id song_name artist_id artist_name 
+##    &lt;chr&gt;                            &lt;int&gt; &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;       
+##  1 Tell your boyfriend next time…  247618 Addicted       1525 Amy Winehou…
+##  2 To buy his own weed and don&#39;t…  247618 Addicted       1525 Amy Winehou…
+##  3 I wouldn&#39;t care if bre would …  247618 Addicted       1525 Amy Winehou…
+##  4 I&#39;d rather him leave you then…  247618 Addicted       1525 Amy Winehou…
+##  5 When you smoke all my weed man  247618 Addicted       1525 Amy Winehou…
+##  6 You got to call the green man   247618 Addicted       1525 Amy Winehou…
+##  7 So I can get mine and you get…  247618 Addicted       1525 Amy Winehou…
+##  8 Once is enough to make me att…  247618 Addicted       1525 Amy Winehou…
+##  9 So bring me a bag and your ma…  247618 Addicted       1525 Amy Winehou…
+## 10 I&#39;ll check him at the door ma…  247618 Addicted       1525 Amy Winehou…
+## 11 I&#39;m tighter than airport secu…  247618 Addicted       1525 Amy Winehou…
+## 12 I&#39;m my own man so when will y…  247618 Addicted       1525 Amy Winehou…
+## 13 That you got a man but I got …  247618 Addicted       1525 Amy Winehou…
+## 14 Don&#39;t make no difference if I…  247618 Addicted       1525 Amy Winehou…
+## 15 I&#39;d rather have myself and sm…  247618 Addicted       1525 Amy Winehou…
+## 16 It&#39;s got me addicted, does mo…  247618 Addicted       1525 Amy Winehou…</code></pre>
+<pre class="r"><code># Get song lyrics to Rehab using the URL directly
+geniusr::scrape_lyrics_url(&quot;https://genius.com/Amy-winehouse-rehab-lyrics&quot;)</code></pre>
+<pre><code>## # A tibble: 33 x 4
+##    line                    song_lyrics_url           song_name artist_name
+##    &lt;chr&gt;                   &lt;chr&gt;                     &lt;chr&gt;     &lt;chr&gt;      
+##  1 They tried to make me … https://genius.com/Amy-w… Rehab     Amy Wineho…
+##  2 Yes I&#39;ve been black bu… https://genius.com/Amy-w… Rehab     Amy Wineho…
+##  3 I ain&#39;t got the time a… https://genius.com/Amy-w… Rehab     Amy Wineho…
+##  4 He&#39;s tried to make me … https://genius.com/Amy-w… Rehab     Amy Wineho…
+##  5 I&#39;d rather be at home … https://genius.com/Amy-w… Rehab     Amy Wineho…
+##  6 I ain&#39;t got seventy da… https://genius.com/Amy-w… Rehab     Amy Wineho…
+##  7 Cause there&#39;s nothing   https://genius.com/Amy-w… Rehab     Amy Wineho…
+##  8 There&#39;s nothing you ca… https://genius.com/Amy-w… Rehab     Amy Wineho…
+##  9 That I can&#39;t learn fro… https://genius.com/Amy-w… Rehab     Amy Wineho…
+## 10 I didn&#39;t get a lot in … https://genius.com/Amy-w… Rehab     Amy Wineho…
+## # ... with 23 more rows</code></pre>
+<p>Genius was originally set up to host lyrics of songs as well as artist and album information. Now they host TV show and movie scripts as well. The GoT scripts can be accessed <a href="https://genius.com/artists/Game-of-thrones">here</a>. Notice, the seasons are recorded as an “album” on the site and within each album the script for an episode is characterized as a song. To scrape every episode from every season, I created three functions. The first is <code>info_from_url</code> which will return some of the meta information from a URL. The second is <code>album_id_from_url</code> will use the meta information from <code>info_from_url</code> to extract the album_id (season ID) needed for <code>geniusr</code> to scrape the song_id (episode_id) in a season using <code>geniusr::scrape_tracklist</code>. The third <code>scrape_GoT</code> then wraps <code>geniusr::scrape_lyrics_id</code> to download the scripts for each episode across all seasons. Below though, you’ll notice there are four functions. The last function is adapted from the <code>geniusr</code> function <code>scrape_lyrics_url</code>. There is a single line commented out as it caused the scraping to only extract parts of some episodes.</p>
+<pre class="r"><code>library(rvest)</code></pre>
+<pre><code>## Loading required package: xml2</code></pre>
+<pre class="r"><code>library(xml2)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code># Obtain meta data from a URL
+info_from_url = function(url) {
+  doc = xml2::read_html(url)
+  content = rvest::html_nodes(doc, 
+                       xpath = &quot;//meta&quot;)
+  content = rvest::html_attr(content, &quot;content&quot;)
+  # content = content[grepl(&quot;^\\{&quot;, content)]
+  # Select objects that start (^) with { 
+  content = content[stringr::str_detect(content, pattern = &quot;^\\{&quot;)]
+  cr = fromJSON(content)
+  a_id = switch(cr$page_type,
+                album = cr$album$id,
+                song = cr$song$album$id
+  )
+  cr$aid = a_id
+  cr
+}
+
+# Obtain album_id from a URL
+album_id_from_url &lt;- function(url) {
+  cr = info_from_url(url)
+  cr$aid
+}
+
+# Scrape all episodes across season of GoT
+scrape_GoT &lt;- function(base_url, seasons){
+  all_urls = file.path(base_url,
+                       paste0(&quot;Season-&quot;, 1:seasons, &quot;-scripts&quot;))
+  episode_info = as.data.frame(sapply(all_urls, album_id_from_url)) %&gt;%
+    rowwise() %&gt;%
+    do(geniusr::scrape_tracklist(.)) %&gt;%
+    mutate(song_lyrics_url = toString(song_lyrics_url)) %&gt;%
+    group_by(song_number, album_name) %&gt;%
+    do(scrape_full_scripts(.$song_lyrics_url)) %&gt;%
+    ungroup()
+  return(episode_info)
+}
+
+# scrape_lyrics_url adapted code
+scrape_full_scripts &lt;- function(song_lyrics_url, access_token = genius_token()){
+    session &lt;- suppressWarnings(rvest::html(song_lyrics_url))
+    song &lt;- rvest::html_nodes(session, &quot;.header_with_cover_art-primary_info-title&quot;) %&gt;% 
+      rvest::html_text()
+    artist &lt;- rvest::html_nodes(session, &quot;.header_with_cover_art-primary_info-primary_artist&quot;) %&gt;% 
+      rvest::html_text()
+    lyrics &lt;- rvest::html_nodes(session, &quot;.lyrics p&quot;)
+    xml2::xml_find_all(lyrics, &quot;.//br&quot;) %&gt;% xml2::xml_add_sibling(&quot;p&quot;, 
+                                                                  &quot;\n&quot;)
+    xml2::xml_find_all(lyrics, &quot;.//br&quot;) %&gt;% xml2::xml_remove()
+    lyrics &lt;- rvest::html_text(lyrics)
+    #lyrics &lt;- lyrics[1]
+    lyrics &lt;- unlist(stringr::str_split(lyrics, pattern = &quot;\n&quot;))
+    lyrics &lt;- lyrics[lyrics != &quot;&quot;]
+    lyrics &lt;- lyrics[!stringr::str_detect(lyrics, pattern = &quot;\\[|\\]&quot;)]
+    lyrics &lt;- tibble::tibble(line = lyrics)
+    lyrics$song_lyrics_url &lt;- song_lyrics_url
+    lyrics$song_name &lt;- song
+    lyrics$artist_name &lt;- artist
+    return(tibble::as_tibble(lyrics))
+}</code></pre>
+<p>Now let’s scrape the scripts and then save them so we don’t need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.</p>
+<pre class="r"><code># Obtain all the scripts
+geniusr_scripts = scrape_GoT(base_url = &quot;https://genius.com/albums/Game-of-thrones&quot;, season = 7)
+
+# Visualize the data
+head(geniusr_scripts)
+tail(geniusr_scripts)
+
+# Save data - Change filepath to match where you&#39;d like to save the data
+save(geniusr_scripts, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/geniusr_scripts.RData&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   song_number album_name       line  song_lyrics_url song_name artist_name
+##         &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;      
+## 1        1.00 Season 1 Scripts WAYM… https://genius… Winter i… Game of Th…
+## 2        1.00 Season 1 Scripts WILL… https://genius… Winter i… Game of Th…
+## 3        1.00 Season 1 Scripts WAYM… https://genius… Winter i… Game of Th…
+## 4        1.00 Season 1 Scripts WILL… https://genius… Winter i… Game of Th…
+## 5        1.00 Season 1 Scripts GARE… https://genius… Winter i… Game of Th…
+## 6        1.00 Season 1 Scripts ROYC… https://genius… Winter i… Game of Th…</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   song_number album_name       line  song_lyrics_url song_name artist_name
+##         &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;      
+## 1        10.0 Season 6 Scripts CERS… https://genius… The Wind… Game of Th…
+## 2        10.0 Season 6 Scripts QYBU… https://genius… The Wind… Game of Th…
+## 3        10.0 Season 6 Scripts QYBU… https://genius… The Wind… Game of Th…
+## 4        10.0 Season 6 Scripts QYBU… https://genius… The Wind… Game of Th…
+## 5        10.0 Season 6 Scripts ALL:… https://genius… The Wind… Game of Th…
+## 6        10.0 Season 6 Scripts THEO… https://genius… The Wind… Game of Th…</code></pre>
+</div>
