@@ -23,7 +23,7 @@ Shall we begin?
 
 <center><img HEIGHT="350" src="/img/shallwebegin.png" alt="Late Season Meme"></center>
 
-If you would like the markdown document used to render this page, you can download it from my . All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you'll be saving and loading data.
+All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you'll be saving and loading data.
 
 ## Scraping GoT Scripts
 
