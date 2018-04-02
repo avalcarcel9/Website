@@ -23,18 +23,18 @@ Shall we begin?
 
 <center><img HEIGHT="350" src="/img/shallwebegin.png" alt="Late Season Meme"></center>
 
-All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you'll be saving and loading data.
+If you would like the markdown document used to render this page, you can download it from my . All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you'll be saving and loading data.
 
 ## Scraping GoT Scripts
 
 I want to eventually do some analysis on the GoT scripts. Since HBO does not provide these scripts, I'm going to rely on [www.genius.com](www.genius.com). I chose this website for two main reasons:
 
-1. An R package `genius` already exists with functions to easily scrape the data
+1. An R package `geniusr` already exists with functions to easily scrape the data
 2. These scripts contain the speaker information which I'll need later for my eventual analysis
 
 To use the `geniusr` package you must have an API token. Go [here](https://genius.com/signup_or_login) to create an account or login and obtain an API token. For more information on the API creation you can look at the genius documentation [here](https://docs.genius.com/#/getting-started-h1).
 
-Once you've created an account and obtained an API they'll assign you a token. Be sure to copy the token. With the token copied I can add it to the R environment with some code.
+Once you've created an account and obtained an API they'll assign you a token. Be sure to copy the token. With the token copied you can add it to the R environment with some code.
 
 Running the following code will open your .Renviron
 
@@ -56,7 +56,7 @@ If done properly then this code will return your API token.
 ```{r, eval = FALSE}
 Sys.getenv("GENIUS_API_TOKEN")
 ```
-Now I can install and load `geniusr` to scrape some data. You can find more information about the `geniusr` package through [CRAN](https://cran.r-project.org/web/packages/geniusr/index.html) or the package maintainers [GitHub](https://github.com/ewenme/geniusr).
+Now you can install and load `geniusr` to scrape some data. You can find more information about the `geniusr` package through [CRAN](https://cran.r-project.org/web/packages/geniusr/index.html) or the package maintainers [GitHub](https://github.com/ewenme/geniusr).
 
 ```{r, eval = FALSE}
 # Install the stable version from CRAN
@@ -81,7 +81,7 @@ geniusr::scrape_lyrics_id(song_id = 247618)
 geniusr::scrape_lyrics_url("https://genius.com/Amy-winehouse-rehab-lyrics")
 ```
 
-Genius was originally set up to host lyrics of songs as well as artist and album information. Now they host TV show and movie scripts as well. The GoT scripts can be accessed [here](https://genius.com/artists/Game-of-thrones). Notice, the seasons are recorded as an "album" on the site and within each album the script for an episode is characterized as a song. To scrape every episode from every season, I created three functions. The first is `info_from_url` which will return some of the meta information from a URL. The second is `album_id_from_url` will use the meta information from `info_from_url` to extract the album_id (season ID) needed for `geniusr` to scrape the song_id (episode_id) in a season using `geniusr::scrape_tracklist`. The third `scrape_GoT` then wraps `geniusr::scrape_lyrics_id` to download the scripts for each episode across all seasons. Below though, you'll notice there are four functions. The last function is adapted from the `geniusr` function `scrape_lyrics_url`. There is a single line commented out as it caused the scraping to only extract parts of some episodes.
+Genius was originally set up to host lyrics of songs as well as artist and album information. Now they host TV show and movie scripts as well. The GoT scripts can be accessed [here](https://genius.com/artists/Game-of-thrones). Notice, the seasons are recorded as an "album" on the site and within each album the script for an episode is characterized as a song. To scrape every episode from every season, I created three functions. The first is `info_from_url` which will return some of the meta information from a URL. The second is `album_id_from_url` will use the meta information from `info_from_url` to extract the album_id (season ID) needed for `geniusr` to scrape the song_id (episode ID) in a season using `geniusr::scrape_tracklist`. The third `scrape_GoT` then wraps `geniusr::scrape_lyrics_id` to download the scripts for each episode across all seasons. Below though, you'll notice there are four functions. The last function is adapted from the `geniusr` function `scrape_lyrics_url`. There is a single line commented out as it caused the scraping to only extract parts of some episodes.
 
 ```{r}
 library(rvest)
@@ -151,7 +151,7 @@ scrape_full_scripts <- function(song_lyrics_url, access_token = genius_token()){
 }
 ```
 
-Now let's scrape the scripts and then save them so you don't need to continuously ping the genius server. Be sure to change the directory of the file when you run this code.
+Now let's scrape the scripts and then save them so you don't need to continuously ping the genius server. Be sure to change the directory in `save()` when you run this code.
 
 ```{r, eval = FALSE}
 # Obtain all the scripts
@@ -173,15 +173,15 @@ head(geniusr_scripts)
 tail(geniusr_scripts)
 ```
 
-Again, I scrape the website once and save the results as an R object so I do not get blocked for scraping too much from genius.
+Again, I scrape the website once and save the results as an R object so I do not get blocked for scraping too much from genius. After I've saved the file then whenever I want to start working with the data I simply load my scraped file rather than re-scrape from the internet.
 
-I now have every episode script and can do some analysis later!
+We now have every episode script with season indicators!
 
 ## Scrape Character Names
 
-To scrape the character names I use ["http://awoiaf.westeros.org/index.php/List_of_characters"]("http://awoiaf.westeros.org/index.php/List_of_characters"). This website contains all characters in GoT.
+To scrape the character names I used ["http://awoiaf.westeros.org/index.php/List_of_characters"]("http://awoiaf.westeros.org/index.php/List_of_characters"). This website contains all characters in GoT (book and show). The character list will be used as a reference for data cleaning which is to come in future blog posts.
 
-I created a scraping function to pull the characters from the website and clean the data into a tibble. I'll save the character vector so scraping only has to be done once. This list includes over 2000 characters. Many of these characters on this website contain the same first names. This is going to make data cleaning later more difficult. Due to this, I will additionally scrape [HBO's](https://www.hbo.com/game-of-thrones/cast-and-crew) main character list. I created two functions to help us do this `scrape_characters` and `scrape_HBO_characters` which both scrape each respective website for the character list.
+I created a scraping function to pull the characters from the website and clean the data into a tibble. I'll save the character vector so scraping only has to be done once. This list includes over 2000 characters. Many of these characters on this website contain the same first names. This is going to make data cleaning later more difficult. Due to this, we will additionally scrape [HBO's](https://www.hbo.com/game-of-thrones/cast-and-crew) main character list. I created two functions to help us do this `scrape_characters` and `scrape_HBO_characters` which both scrape each respective website for the character list.
 
 ```{r}
 # Scrape all the character names
@@ -232,7 +232,7 @@ scrape_HBO_characters <- function(url){
 }
 ```
 
-Now I can apply these functions to scrape and save the character data.
+Now we can apply these functions to scrape and save the character data.
 
 ```{r scrape_characters, eval = FALSE}
 library(xml2)
@@ -277,9 +277,9 @@ The `wiki_characters` contains a lot of information about character names, nickn
 
 The scraping approach here is a little unorthodox due to the website source containing dynamic content.
 
-To scrape the character deaths and at what time in a particular season and episode they die I use the website ["https://deathtimeline.com/"]("https://deathtimeline.com/"). This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape. I first clicked on all seasons of the show. I then right-click inspected the page and copied the full html. At this point I copy and pasted the text into a text editor saving it as frozen_death_times.html. I then created a function that reads in this html page and begins to clean for the information I want.
+To scrape the character deaths and at what time in a particular season and episode they die I use the website ["https://deathtimeline.com/"]("https://deathtimeline.com/"). This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape. I first clicked on all seasons of the show. I then right-click inspected the page and copied the full html. At this point I copy and pasted the text into a text editor saving it as frozen_death_times.html. I then created a function that reads in this html page and begins to clean it for the information I want.
 
-From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to specifically describe who killed that person. The bias of this data is mostly that is taken from ["https://deathtimeline.com/"]("https://deathtimeline.com/") and relies on their information. From that data I can only collect that they deemed as major and minor. Below is a function to scrape this content for information about a characters death. 
+From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to describe who killed that person. There is some bias to this data. Mostly the bias is that it is taken from ["https://deathtimeline.com/"]("https://deathtimeline.com/") and relies on their information. From that data I can only collect that they deemed as major and minor. Below is a function to scrape this content for information about a characters death. 
 
 ```{r scrape_deaths}
 library(xml2)
@@ -367,13 +367,10 @@ load("/Users/alval/Box/Coursework/IndStudy/Data/death_times.RData")
 
 head(death_times)
 ```
+## Biases
+
+There are some biases introduced that are immediatly obvious. First, we scrape the GoT scripts from [www.genius.com](www.genius.com) and not every episode was annotated. Therefore, there are a few episodes that we will be missing in our analysis later. Most of season 2 and 3 were not available when I wrote this post. I'll continually check if someone annotates and update this blog post and future analysis if they appear. Second, the content on this site is supplied by users and is not verified by HBO. The content does contain some typo's and may not exactly match the true script. Third, the character vector scraped from ["http://awoiaf.westeros.org/index.php/List_of_characters"](http://awoiaf.westeros.org/index.php/List_of_characters) is similarly a fan generated page and is susceptible to inaccurate information.
 
 ## Future Work
 
 In my next blog post, I'll be covering how to clean this data using `dplyr` and `tidyr` tools. While `geniusr` and my functions to scrape character data returned dataframes that are relatively clean, before I analyze I will need to extract more information and format the data more specifically.
-
-
-
-
-
-
