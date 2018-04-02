@@ -21,6 +21,8 @@ As a loyal fan I'm determined to not let my April 2018 be any different and am d
 
 Shall we begin?
 
+<center><img HEIGHT="350" src="/img/shallwebegin.png" alt="Late Season Meme"></center>
+
 All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you'll be saving and loading data.
 
 ## Scraping GoT Scripts
@@ -365,6 +367,11 @@ load("/Users/alval/Box/Coursework/IndStudy/Data/death_times.RData")
 
 head(death_times)
 ```
+
+## Future Work
+
+In my next blog post, I'll be covering how to clean this data using `dplyr` and `tidyr` tools. While `geniusr` and my functions to scrape character data returned dataframes that are relatively clean, before I analyze I will need to extract more information and format the data more specifically.
+
 
 
 

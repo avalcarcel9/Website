@@ -75,6 +75,9 @@
 </center>
 <p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will not cover the basics of scraping but rather provide some code to scrape the material. I’ll be using the data obtained using this code in future blog posts and wanted to provide a way for any user to reproduce my analysis. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping it is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
 <p>Shall we begin?</p>
+<center>
+<img HEIGHT="350" src="/img/shallwebegin.png" alt="Late Season Meme">
+</center>
 <p>All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you’ll be saving and loading data.</p>
 <div id="scraping-got-scripts" class="section level2">
 <h2>Scraping GoT Scripts</h2>
@@ -469,6 +472,10 @@ head(death_times)</code></pre>
 ## 4 Jon Arryn    poisoned by lysa       18:34 Season 1 Episode… Lysa        
 ## 5 Assassin     killed by bran&#39;s wolf  31:27 Season 1 Episode… Bran&#39;s Wolf 
 ## 6 Mycah        killed by the hound    4:37  Season 1 Episode… The Hound</code></pre>
+</div>
+<div id="future-work" class="section level2">
+<h2>Future Work</h2>
+<p>In my next blog post, I’ll be covering how to clean this data using <code>dplyr</code> and <code>tidyr</code> tools. While <code>geniusr</code> and my functions to scrape character data returned dataframes that are relatively clean, before I analyze I will need to extract more information and format the data more specifically.</p>
 </div>
 
   </div>
