@@ -14,7 +14,7 @@ output: html_document
 <center>
 <img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme">
 </center>
-<p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will cover the basics of scraping the GoT material and generally web scraping. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
+<p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will not cover the basics of scraping but rather provide some code to obtain the GoT material. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
 <p>Shall we begin?</p>
 <div id="scraping-got-scripts" class="section level2">
 <h2>Scraping GoT Scripts</h2>
@@ -23,7 +23,7 @@ output: html_document
 <li>An R package <code>genius</code> already exists with functions to easily scrape the data</li>
 <li>These scripts contain the speaker information which I’ll need later for my eventual analysis</li>
 </ol>
-<p>To use the <code>geniusr</code> package you must have an API. Go <a href="https://genius.com/signup_or_login">here</a> to create an account or login and obtain an API. For more information on the API creation you can look at the genius documentation <a href="https://docs.genius.com/#/getting-started-h1">here</a>.</p>
+<p>To use the <code>geniusr</code> package you must have an API token. Go <a href="https://genius.com/signup_or_login">here</a> to create an account or login and obtain an API token. For more information on the API creation you can look at the genius documentation <a href="https://docs.genius.com/#/getting-started-h1">here</a>.</p>
 <p>Once you’ve created an account and obtained an API they’ll assign you a token. Be sure to copy the token. With the token copied I can add it to the R environment with some code.</p>
 <p>Running the following code will open your .Renviron</p>
 <pre class="r"><code>user_renviron = path.expand(file.path(&quot;~&quot;, &quot;.Renviron&quot;))
@@ -39,10 +39,10 @@ file.edit(user_renviron) # open with another text editor if this fails</code></p
 install.packages(&#39;geniusr&#39;)
 # Install the developers version from GitHub directly
 devtools::install_github(&#39;ewenme/geniusr&#39;)</code></pre>
-<pre class="r"><code>library(geniusr)</code></pre>
 <p>Recently, I’ve had Amy Winehouses’s Back to Black album on repeat so to show a simple example I’ll use this artist and album to show a quick demo of a few <code>geniusr</code> functions. If you want to explore the website I will be scraping you can start <a href="https://genius.com/albums/Amy-winehouse/">here</a>.</p>
 <p><em>Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don’t have to constantly be pulling the data</em></p>
-<pre class="r"><code># Search for Amy Winehouse
+<pre class="r"><code>library(geniusr)
+# Search for Amy Winehouse
 geniusr::search_artist(&quot;Amy Winehouse&quot;)</code></pre>
 <pre><code>## # A tibble: 1 x 3
 ##   artist_id artist_name   artist_url                              
@@ -310,7 +310,7 @@ head(hbo_characters)</code></pre>
 <h2>Scrape Character Death Timeline</h2>
 <p>The scraping approach here is a little unorthodox due to the website source containing dynamic content.</p>
 <p>To scrape the character deaths and at what time in a particular season and episode they die I use the website <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a>. This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape. I first clicked on all seasons of the show. I then right-click inspected the page and copied the full html. At this point I copy and pasted the text into a text editor saving it as frozen_death_times.html. I then created a function that reads in this html page and begins to clean for the information I want.</p>
-<p>From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to specifically describe who killed that person. The bias of this data is mostly that is taken from <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a> and relies on their information. From that data I can only collect that they deamed as major and minor.</p>
+<p>From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to specifically describe who killed that person. The bias of this data is mostly that is taken from <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a> and relies on their information. From that data I can only collect that they deamed as major and minor. Below is a function to scrape this content for information about a characters death.</p>
 <pre class="r"><code>library(xml2)
 library(rvest)
 library(stringr)
@@ -384,7 +384,26 @@ get_death_times &lt;- function(filename){
 }
 
 
-cleaned_death = get_death_times(filename = filename)
+death_times = get_death_times(filename = filename)
 
-head(cleaned_death)</code></pre>
+head(death_times)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   who          how                    times season   epsiode  specific_how
+##   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       
+## 1 Waymar Royce killed by white walker 5:52  Season 1 Episode… White Walker
+## 2 Gared        killed by white walker 6:58  Season 1 Episode… White Walker
+## 3 Will         executed by ned stark  13:44 Season 1 Episode… Ned Stark   
+## 4 Jon Arryn    poisoned by lysa       18:34 Season 1 Episode… Lysa        
+## 5 Assassin     killed by bran&#39;s wolf  31:27 Season 1 Episode… Bran&#39;s Wolf 
+## 6 Mycah        killed by the hound    4:37  Season 1 Episode… The Hound</code></pre>
+<pre class="r"><code>save(death_times, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/death_times.RData&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   who          how                    times season   epsiode  specific_how
+##   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       
+## 1 Waymar Royce killed by white walker 5:52  Season 1 Episode… White Walker
+## 2 Gared        killed by white walker 6:58  Season 1 Episode… White Walker
+## 3 Will         executed by ned stark  13:44 Season 1 Episode… Ned Stark   
+## 4 Jon Arryn    poisoned by lysa       18:34 Season 1 Episode… Lysa        
+## 5 Assassin     killed by bran&#39;s wolf  31:27 Season 1 Episode… Bran&#39;s Wolf 
+## 6 Mycah        killed by the hound    4:37  Season 1 Episode… The Hound</code></pre>
 </div>

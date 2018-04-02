@@ -17,7 +17,7 @@ April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerl
 
 <center><img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme"></center>
 
-As a loyal fan I'm determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will cover the basics of scraping the GoT material and generally web scraping. Up until a few weeks ago, I myself didn't know what web scraping was so if you weren't aware web scraping is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the [R environment](https://www.r-project.org/).
+As a loyal fan I'm determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will not cover the basics of scraping but rather provide some code to scrape the material. Up until a few weeks ago, I myself didn't know what web scraping was so if you weren't aware web scraping it is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the [R environment](https://www.r-project.org/).
 
 Shall we begin?
 
@@ -28,7 +28,7 @@ I want to eventually do some analysis on the GoT scripts. Since HBO does not pro
 1. An R package `genius` already exists with functions to easily scrape the data
 2. These scripts contain the speaker information which I'll need later for my eventual analysis
 
-To use the `geniusr` package you must have an API. Go [here](https://genius.com/signup_or_login) to create an account or login and obtain an API. For more information on the API creation you can look at the genius documentation [here](https://docs.genius.com/#/getting-started-h1).
+To use the `geniusr` package you must have an API token. Go [here](https://genius.com/signup_or_login) to create an account or login and obtain an API token. For more information on the API creation you can look at the genius documentation [here](https://docs.genius.com/#/getting-started-h1).
 
 Once you've created an account and obtained an API they'll assign you a token. Be sure to copy the token. With the token copied I can add it to the R environment with some code.
 
@@ -61,15 +61,12 @@ install.packages('geniusr')
 devtools::install_github('ewenme/geniusr')
 ```
 
-```{r}
-library(geniusr)
-```
-
 Recently, I've had Amy Winehouses's Back to Black album on repeat so to show a simple example I'll use this artist and album to show a quick demo of a few `geniusr` functions. If you want to explore the website I will be scraping you can start [here](https://genius.com/albums/Amy-winehouse/). 
 
 _Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don't have to constantly be pulling the data_
 
 ```{r}
+library(geniusr)
 # Search for Amy Winehouse
 geniusr::search_artist("Amy Winehouse")
 # Use artist_id to obtain song_id
@@ -363,6 +360,7 @@ load("/Users/alval/Box/Coursework/IndStudy/Data/death_times.RData")
 
 head(death_times)
 ```
+
 
 
 
