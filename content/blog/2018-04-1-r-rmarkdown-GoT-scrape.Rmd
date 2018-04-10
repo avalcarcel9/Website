@@ -177,6 +177,72 @@ Again, I scrape the website once and save the results as an R object so I do not
 
 We now have every episode script with season indicators!
 
+## Scrape Episode Lengths
+
+To add temporal information to the season and episode, I need each episode length. This scraping process will be very similar to the scripts above. We will use an R package `omdbapi` which is borrowing information from IMDB. Similar to `geniusr` you need to create an account at [http://www.omdbapi.com/](http://www.omdbapi.com/). After creating an account you can obtain and API token. Follow the steps in __Scraping GoT Scripts__ section and put the API token in your .Renviron as `OMDB_API_KEY="your_key_goes_here"`. Be sure to activate this key or the `omdbapi` package won't work.
+
+```{r, eval = FALSE}
+# Install omdbapi
+devtools::install_github("hrbrmstr/omdbapi")
+```
+
+The package developer has a lot of documentation on their GitHub [https://github.com/hrbrmstr/omdbapi](https://github.com/hrbrmstr/omdbapi) if you'd like to explore the package more. Conveniently, they have an example that obtains specific Game of Thrones data.
+
+```{r, eval = FALSE}
+library(omdbapi)
+library(dplyr)
+
+# Example from github
+imdb_data = find_by_title("Game of Thrones", type="series", season=1, episode=1)
+
+# Remove first row to create an empty tibble
+imdb_data = imdb_data %>% 
+  dplyr::slice(-1)
+
+# imdb_data = tibble()
+# get each episode
+# Seaon 1
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=1, episode=i))
+}
+
+# Season 2
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=2, episode=i))
+}
+
+# Season 3
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=3, episode=i))
+}
+
+# Season 4
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=4, episode=i))
+}
+
+# Season 5
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=5, episode=i))
+}
+
+# Season 6
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=6, episode=i))
+}
+
+# Season 7
+for(i in 1:7){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=7, episode=i))
+}
+
+save(imdb_data, file = '/Users/alval/Box/Coursework/IndStudy/Data/imdb_data.RData')
+```
+
+Normally, I would create a nested for loop but the `omdbapi` package gives errors when data is scraped too quickly so instead I just created individual for loops for each season and waited a minute before running each one. There are some ways to make R pause inside of the loop but for simplicity I've done it this way.
+
+This returns a lot of data from IMDB. While I only need the episode length (`runtime`) I'm not going to remove any column as it may be interesting to use some of this data later.
+
 ## Scrape Character Names
 
 To scrape the character names I used ["http://awoiaf.westeros.org/index.php/List_of_characters"]("http://awoiaf.westeros.org/index.php/List_of_characters"). This website contains all characters in GoT (book and show). The character list will be used as a reference for data cleaning which is to come in future blog posts.
