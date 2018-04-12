@@ -421,7 +421,12 @@ get_death_times <- function(filename){
     who = stringr::str_to_title(who),
     how = stringr::str_to_lower(how),
     specific_how = stringr::str_split(how, "by", simplify = TRUE)[,2],
-    specific_how = stringr::str_to_title(str_trim(specific_how)))
+    specific_how = stringr::str_to_title(str_trim(specific_how)),
+    length_string = stringr::str_length(times),
+    times = if_else(length_string == 4, 
+                    paste0("00:0", times),
+                    paste0("00:", times)),
+    times = lubridate::hms(times))
   
   return(df)
 }
@@ -473,7 +478,7 @@ get_time.com_deaths <- function(){
     dplyr::mutate(value = stringr::str_split(value, ": ", simplify = TRUE)[,2],
                   value = stringr::str_trim(value, side = "both"),
                   specific_how = stringr::str_split(value, "by", simplify = TRUE)[,2],
-                  specific_how = stringr::str_trim(value, side = both)) %>%
+                  specific_how = stringr::str_trim(value, side = "both")) %>%
     dplyr::select(how=value,
                   specific_how)
   
@@ -495,7 +500,7 @@ get_time.com_deaths <- function(){
 time.com_death_data = get_time.com_deaths()
 head(time.com_death_data)
 
-save(time.com_death_data, file = "/Users/alval/Box/Coursework/IndStudy/Data/time.come_death_data.RData")
+save(time.com_death_data, file = "/Users/alval/Box/Coursework/IndStudy/Data/time.com_death_data.RData")
 ```
 
 ```{r,echo = FALSE}
