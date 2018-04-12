@@ -438,38 +438,60 @@ Notice that season 7 data is not available using this source. Instead, I will sc
 ](http://time.com/3924852/every-game-of-thrones-death/
 ). I am going to scrape the full data just as a reference.
 
-```{r}
+```{r, eval = FALSE}
 # Load Packages
 library(xml2)
 library(rvest)
 library(dplyr)
 library(stringr)
 
-# Obtain who died first
-who = xml2::read_html('http://time.com/3924852/every-game-of-thrones-death/') %>% 
-  rvest::html_nodes('.headline') %>% 
-  rvest::html_text() %>% 
-  stringr::str_extract("[a-zA-Z]+ [a-zA-Z]+|[a-zA-Z]+") %>% 
-  dplyr::as_tibble() %>% 
-  dplyr::slice(-1) %>% 
-  dplyr::select(who=value)
+get_time.com_deaths <- function(){
   
-how = xml2::read_html('http://time.com/3924852/every-game-of-thrones-death/') %>% 
-  rvest::html_nodes('p') %>% 
-  rvest::html_text() %>% 
-  dplyr::as_tibble() %>% 
-  dplyr::mutate(loc_how = str_detect(value, "Mean")) %>% 
-  dplyr::filter(loc_how == TRUE) %>%
-  dplyr::mutate(value = stringr::str_split(value, ": ", simplify = TRUE)[,2],
-                specific_how = stringr::str_split(value, "by", simplify = TRUE)[,2]) %>%
-  dplyr::select(how=value,
-                specific_how)
-
-## Need to extract, season, episdoe,
-
+  # Obtain who died first
+  who = xml2::read_html('http://time.com/3924852/every-game-of-thrones-death/') %>% 
+    rvest::html_nodes('.headline') %>% 
+    rvest::html_text() %>% 
+    stringr::str_extract("[a-zA-Z]+ [a-zA-Z]+|[a-zA-Z]+") %>% 
+    dplyr::as_tibble() %>% 
+    dplyr::slice(-1) %>% 
+    dplyr::select(who=value)
   
+  # Obtain how they died
+  how = xml2::read_html('http://time.com/3924852/every-game-of-thrones-death/') %>% 
+    rvest::html_nodes('p') %>% 
+    rvest::html_text() %>% 
+    dplyr::as_tibble() %>% 
+    dplyr::mutate(loc_how = str_detect(value, "Mean")) %>% 
+    dplyr::filter(loc_how == TRUE) %>%
+    dplyr::mutate(value = stringr::str_split(value, ": ", simplify = TRUE)[,2],
+                  specific_how = stringr::str_split(value, "by", simplify = TRUE)[,2]) %>%
+    dplyr::select(how=value,
+                  specific_how)
   
+  # Obtain season and episode that they die
+  time = xml2::read_html('http://time.com/3924852/every-game-of-thrones-death/') %>% 
+    rvest::html_nodes('p') %>% 
+    rvest::html_text() %>% 
+    dplyr::as_tibble() %>% 
+    dplyr::mutate(loc_time = str_detect(value, "Time")) %>% 
+    dplyr::filter(loc_time == TRUE) %>%
+    dplyr::mutate(times = NA,
+                  season = as.numeric(stringr::str_extract_all(value, "[0-9]+", simplify = TRUE)[,1]),
+                  episode = as.numeric(stringr::str_extract_all(value, "[0-9]+", simplify = TRUE)[,2])) %>%
+    dplyr::select(season, episode)
+  
+  return(dplyr::bind_cols(who, time, how))
+}
 
+time.com_death_data = get_time.com_deaths()
+head(time.com_death_data)
+
+save(time.com_death_data, file = "/Users/alval/Box/Coursework/IndStudy/Data/time.come_death_data.RData")
+```
+
+```{r,echo = FALSE}
+load("/Users/alval/Box/Coursework/IndStudy/Data/time.come_death_data.RData")
+head(time.com_death_data)
 ```
 
 ## Biases
