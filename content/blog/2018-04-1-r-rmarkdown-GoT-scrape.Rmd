@@ -369,8 +369,14 @@ get_death_times <- function(filename){
   get_episode_info = function(ep) {
     titles = rvest::html_nodes(ep, ".episode-title")
     titles = rvest::html_text(titles)
-    ep_info = c(stringr::str_extract(titles, "Season [:digit:]+"),
-                stringr::str_extract(titles, "Episode [:digit:]+"))
+    ep_info = dplyr::tibble(season = stringr::str_extract(titles, "Season [:digit:]+"),
+                     episode = stringr::str_extract(titles, "Episode [:digit:]+"))
+    
+    # make season and episode numeric
+    ep_info = ep_info %>% 
+      mutate(season = as.numeric(stringr::str_extract(season, "[0-9]+")),
+             episode = as.numeric(stringr::str_extract(episode, "[0-9]+")))
+    
     return(ep_info)
     # titles = xml2::as_list(titles)[[1]]
     # spans = titles[names(titles) == "span"]
@@ -403,8 +409,8 @@ get_death_times <- function(filename){
       # death = data_frame(who = NA, how = NA, times = NA)
       return(NULL)
     }
-    death$season = title[1]
-    death$episode = title[2]
+    death$season = title$season[1]
+    death$episode = title$episode[1]
     death
   }, titles, deaths, SIMPLIFY = FALSE)
   
@@ -454,6 +460,7 @@ get_time.com_deaths <- function(){
     stringr::str_extract("[a-zA-Z]+ [a-zA-Z]+|[a-zA-Z]+") %>% 
     dplyr::as_tibble() %>% 
     dplyr::slice(-1) %>% 
+    dplyr::mutate(value = stringr::str_trim(value, side = "both")) %>% 
     dplyr::select(who=value)
   
   # Obtain how they died
@@ -464,7 +471,9 @@ get_time.com_deaths <- function(){
     dplyr::mutate(loc_how = str_detect(value, "Mean")) %>% 
     dplyr::filter(loc_how == TRUE) %>%
     dplyr::mutate(value = stringr::str_split(value, ": ", simplify = TRUE)[,2],
-                  specific_how = stringr::str_split(value, "by", simplify = TRUE)[,2]) %>%
+                  value = stringr::str_trim(value, side = "both"),
+                  specific_how = stringr::str_split(value, "by", simplify = TRUE)[,2],
+                  specific_how = stringr::str_trim(value, side = both)) %>%
     dplyr::select(how=value,
                   specific_how)
   
@@ -478,7 +487,7 @@ get_time.com_deaths <- function(){
     dplyr::mutate(times = NA,
                   season = as.numeric(stringr::str_extract_all(value, "[0-9]+", simplify = TRUE)[,1]),
                   episode = as.numeric(stringr::str_extract_all(value, "[0-9]+", simplify = TRUE)[,2])) %>%
-    dplyr::select(season, episode)
+    dplyr::select(season, episode, times)
   
   return(dplyr::bind_cols(who, time, how))
 }
