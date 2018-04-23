@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Articles on Alessandra [Ali] Valcarcel</title>
-    <link>/categories/articles/</link>
+    <link>https://www.alessandravalcarcel.com/categories/articles/</link>
     <description>Recent content in Articles on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
     
-	<atom:link href="/categories/articles/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.alessandravalcarcel.com/categories/articles/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>/cv/</link>
+      <link>https://www.alessandravalcarcel.com/cv/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>/cv/</guid>
+      <guid>https://www.alessandravalcarcel.com/cv/</guid>
       <description>Alessandra [Ali] Valcarcel Born in Miami, FL Lives in Philadelphia, PA Education:
 Ph.D. Biostatistics (anticipated 2020)
 University of Pennsylvania
@@ -31,19 +31,19 @@ Select Publications:
     
     <item>
       <title>Research</title>
-      <link>/research/</link>
+      <link>https://www.alessandravalcarcel.com/research/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>/research/</guid>
+      <guid>https://www.alessandravalcarcel.com/research/</guid>
       <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</description>
     </item>
     
     <item>
       <title>Software</title>
-      <link>/software/</link>
+      <link>https://www.alessandravalcarcel.com/software/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>/software/</guid>
+      <guid>https://www.alessandravalcarcel.com/software/</guid>
       <description>MIMoSA 
 The mimosa R package is now live on Neuroconductor. This package allows you to implement the MIMoSA method discussed in our paper to automatically segment white matter lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data. You can access the page directly here.</description>
     </item>

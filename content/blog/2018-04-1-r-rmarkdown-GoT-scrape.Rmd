@@ -259,7 +259,7 @@ save(time.com_death_data, file = "/Users/alval/Box/Coursework/IndStudy/Data/time
 ```
 
 ```{r, echo = FALSE}
-load("/Users/alval/Box/Coursework/IndStudy/Data/time.come_death_data.RData")
+load("/Users/alval/Box/Coursework/IndStudy/Data/time.com_death_data.RData")
 head(time.com_death_data)
 ```
 

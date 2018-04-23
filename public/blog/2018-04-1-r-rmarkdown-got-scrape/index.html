@@ -10,7 +10,7 @@
 <meta name="description" content="Personal website">
 <meta name="keywords" content="student,statistics,biostatistics,Penn">
 
-<base href="/">
+<base href="https://www.alessandravalcarcel.com/">
 
 <title>Alessandra [Ali] Valcarcel</title>
 
@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://www.alessandravalcarcel.com/css/main.css">
 
 
 
@@ -73,7 +73,7 @@
 <center>
 <img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme">
 </center>
-<p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will not cover the basics of scraping but rather provide some code to scrape the material. I’ll be using the data obtained using this code in future blog posts and wanted to provide a way for any user to reproduce my analysis. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping it is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
+<p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will not cover the basics of scraping but rather provide some resources to scrape the material. I’ll be using the data obtained using this code in future blog posts and wanted to provide a way for any user to reproduce my analysis. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping it is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
 <p>Shall we begin?</p>
 <center>
 <img HEIGHT="350" src="/img/shallwebegin.png" alt="Late Season Meme">
@@ -165,72 +165,9 @@ geniusr::scrape_lyrics_url(&quot;https://genius.com/Amy-winehouse-rehab-lyrics&q
 ##  9 That I can&#39;t learn fro… https://genius.com/Amy-w… Rehab     Amy Wineho…
 ## 10 I didn&#39;t get a lot in … https://genius.com/Amy-w… Rehab     Amy Wineho…
 ## # ... with 23 more rows</code></pre>
-<p>Genius was originally set up to host lyrics of songs as well as artist and album information. Now they host TV show and movie scripts as well. The GoT scripts can be accessed <a href="https://genius.com/artists/Game-of-thrones">here</a>. Notice, the seasons are recorded as an “album” on the site and within each album the script for an episode is characterized as a song. To scrape every episode from every season, I created three functions. The first is <code>info_from_url</code> which will return some of the meta information from a URL. The second is <code>album_id_from_url</code> will use the meta information from <code>info_from_url</code> to extract the album_id (season ID) needed for <code>geniusr</code> to scrape the song_id (episode ID) in a season using <code>geniusr::scrape_tracklist</code>. The third <code>scrape_GoT</code> then wraps <code>geniusr::scrape_lyrics_id</code> to download the scripts for each episode across all seasons. Below though, you’ll notice there are four functions. The last function is adapted from the <code>geniusr</code> function <code>scrape_lyrics_url</code>. There is a single line commented out as it caused the scraping to only extract parts of some episodes.</p>
-<pre class="r"><code>library(rvest)
-library(xml2)
-library(dplyr)
-library(geniusr)
-
-# Obtain meta data from a URL
-info_from_url = function(url) {
-  doc = xml2::read_html(url)
-  content = rvest::html_nodes(doc, 
-                       xpath = &quot;//meta&quot;)
-  content = rvest::html_attr(content, &quot;content&quot;)
-  # content = content[grepl(&quot;^\\{&quot;, content)]
-  # Select objects that start (^) with { 
-  content = content[stringr::str_detect(content, pattern = &quot;^\\{&quot;)]
-  cr = fromJSON(content)
-  a_id = switch(cr$page_type,
-                album = cr$album$id,
-                song = cr$song$album$id
-  )
-  cr$aid = a_id
-  cr
-}
-
-# Obtain album_id from a URL
-album_id_from_url &lt;- function(url) {
-  cr = info_from_url(url)
-  cr$aid
-}
-
-# Scrape all episodes across season of GoT
-scrape_GoT &lt;- function(base_url, seasons){
-  all_urls = file.path(base_url,
-                       paste0(&quot;Season-&quot;, 1:seasons, &quot;-scripts&quot;))
-  episode_info = as.data.frame(sapply(all_urls, album_id_from_url)) %&gt;%
-    rowwise() %&gt;%
-    do(geniusr::scrape_tracklist(.)) %&gt;%
-    mutate(song_lyrics_url = toString(song_lyrics_url)) %&gt;%
-    group_by(song_number, album_name) %&gt;%
-    do(scrape_full_scripts(.$song_lyrics_url)) %&gt;%
-    ungroup()
-  return(episode_info)
-}
-
-# scrape_lyrics_url adapted code
-scrape_full_scripts &lt;- function(song_lyrics_url, access_token = genius_token()){
-    session &lt;- suppressWarnings(rvest::html(song_lyrics_url))
-    song &lt;- rvest::html_nodes(session, &quot;.header_with_cover_art-primary_info-title&quot;) %&gt;% 
-      rvest::html_text()
-    artist &lt;- rvest::html_nodes(session, &quot;.header_with_cover_art-primary_info-primary_artist&quot;) %&gt;% 
-      rvest::html_text()
-    lyrics &lt;- rvest::html_nodes(session, &quot;.lyrics p&quot;)
-    xml2::xml_find_all(lyrics, &quot;.//br&quot;) %&gt;% xml2::xml_add_sibling(&quot;p&quot;, 
-                                                                  &quot;\n&quot;)
-    xml2::xml_find_all(lyrics, &quot;.//br&quot;) %&gt;% xml2::xml_remove()
-    lyrics &lt;- rvest::html_text(lyrics)
-    #lyrics &lt;- lyrics[1]
-    lyrics &lt;- unlist(stringr::str_split(lyrics, pattern = &quot;\n&quot;))
-    lyrics &lt;- lyrics[lyrics != &quot;&quot;]
-    lyrics &lt;- lyrics[!stringr::str_detect(lyrics, pattern = &quot;\\[|\\]&quot;)]
-    lyrics &lt;- tibble::tibble(line = lyrics)
-    lyrics$song_lyrics_url &lt;- song_lyrics_url
-    lyrics$song_name &lt;- song
-    lyrics$artist_name &lt;- artist
-    return(tibble::as_tibble(lyrics))
-}</code></pre>
+<p>Genius was originally set up to host lyrics of songs as well as artist and album information. Now they host TV show and movie scripts as well. The GoT scripts can be accessed <a href="https://genius.com/artists/Game-of-thrones">here</a>. Notice, the seasons are recorded as an “album” on the site and within each album the script for an episode is characterized as a song. To scrape Game of Thrones data, I created an R package that wraps <code>geniusr</code> or does the scraping within the function. You can find out more about the package on my <a href="https://github.com/avalcarcel9/GoT">GitHub</a>. To download the development version from my GitHub run:</p>
+<pre class="r"><code>devtools::install_github(&quot;avalcarcel9/GoT&quot;)</code></pre>
+<pre class="r"><code>library(GoT)</code></pre>
 <p>Now let’s scrape the scripts and then save them so you don’t need to continuously ping the genius server. Be sure to change the directory in <code>save()</code> when you run this code.</p>
 <pre class="r"><code># Obtain all the scripts
 geniusr_scripts = scrape_GoT(base_url = &quot;https://genius.com/albums/Game-of-thrones&quot;, season = 7)
@@ -262,65 +199,71 @@ save(geniusr_scripts, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/gen
 <p>Again, I scrape the website once and save the results as an R object so I do not get blocked for scraping too much from genius. After I’ve saved the file then whenever I want to start working with the data I simply load my scraped file rather than re-scrape from the internet.</p>
 <p>We now have every episode script with season indicators!</p>
 </div>
+<div id="scrape-episode-lengths" class="section level2">
+<h2>Scrape Episode Lengths</h2>
+<p>To add temporal information to the season and episode, I need each episode length. This scraping process will be very similar to the scripts above. We will use an R package <code>omdbapi</code> which is borrowing information from IMDB. Similar to <code>geniusr</code> you need to create an account at <a href="http://www.omdbapi.com/" class="uri">http://www.omdbapi.com/</a>. After creating an account you can obtain and API token. Follow the steps in <strong>Scraping GoT Scripts</strong> section and put the API token in your .Renviron as <code>OMDB_API_KEY=&quot;your_key_goes_here&quot;</code>. Be sure to activate this key or the <code>omdbapi</code> package won’t work.</p>
+<pre class="r"><code># Install omdbapi
+devtools::install_github(&quot;hrbrmstr/omdbapi&quot;)</code></pre>
+<p>The package developer has a lot of documentation on their GitHub <a href="https://github.com/hrbrmstr/omdbapi" class="uri">https://github.com/hrbrmstr/omdbapi</a> if you’d like to explore the package more. Conveniently, they have an example that obtains specific Game of Thrones data.</p>
+<pre class="r"><code>library(omdbapi)
+library(dplyr)
+
+# Example from github
+imdb_data = find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=1, episode=1)
+
+# Remove first row to create an empty tibble
+imdb_data = imdb_data %&gt;% 
+  dplyr::slice(-1)
+
+# imdb_data = tibble()
+# get each episode
+# Seaon 1
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=1, episode=i))
+}
+
+# Season 2
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=2, episode=i))
+}
+
+# Season 3
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=3, episode=i))
+}
+
+# Season 4
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=4, episode=i))
+}
+
+# Season 5
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=5, episode=i))
+}
+
+# Season 6
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=6, episode=i))
+}
+
+# Season 7
+for(i in 1:7){
+  imdb_data = dplyr::bind_rows(imdb_data, find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=7, episode=i))
+}
+
+save(imdb_data, file = &#39;/Users/alval/Box/Coursework/IndStudy/Data/imdb_data.RData&#39;)</code></pre>
+<p>Normally, I would create a nested for loop but the <code>omdbapi</code> package gives errors when data is scraped too quickly so instead I just created individual for loops for each season and waited a minute before running each one. There are some ways to make R pause inside of the loop but for simplicity I’ve done it this way.</p>
+<p>This returns a lot of data from IMDB. While I only need the episode length (<code>runtime</code>) I’m not going to remove any column as it may be interesting to use some of this data later.</p>
+</div>
 <div id="scrape-character-names" class="section level2">
 <h2>Scrape Character Names</h2>
 <p>To scrape the character names I used <a href="%22http://awoiaf.westeros.org/index.php/List_of_characters%22">“http://awoiaf.westeros.org/index.php/List_of_characters”</a>. This website contains all characters in GoT (book and show). The character list will be used as a reference for data cleaning which is to come in future blog posts.</p>
-<p>I created a scraping function to pull the characters from the website and clean the data into a tibble. I’ll save the character vector so scraping only has to be done once. This list includes over 2000 characters. Many of these characters on this website contain the same first names. This is going to make data cleaning later more difficult. Due to this, we will additionally scrape <a href="https://www.hbo.com/game-of-thrones/cast-and-crew">HBO’s</a> main character list. I created two functions to help us do this <code>scrape_characters</code> and <code>scrape_HBO_characters</code> which both scrape each respective website for the character list.</p>
-<pre class="r"><code># Scrape all the character names
-scrape_characters &lt;- function(url){
-  doc = xml2::read_html(url)
-  content = rvest::html_nodes(doc, 
-                       xpath = &quot;//li&quot;)
-  content = trimws(rvest::html_text(content))
-  content = as.data.frame(content) 
-  names(content) = &quot;raw&quot;
-  content = content %&gt;%
-    dplyr::mutate(names = str_split(raw, &quot;,&quot;, simplify = TRUE)[,1],
-                  names = str_replace(names, &quot;//.&quot;, &quot;&quot;),
-                  description = str_split(raw, &quot;,&quot;, simplify = TRUE)[,2])
-}
-
-# Scrape HBO main character list
-scrape_HBO_characters &lt;- function(url){
-  # HBO xpath to character names
-  xpath = as.character(&#39;//*[contains(concat( &quot; &quot;, @class, &quot; &quot; ), concat( &quot; &quot;, &quot;components/ThumbnailWithText--primaryText&quot;, &quot; &quot; ))]&#39;)
-  
-  # OBtain Character Names
-  characters = xml2::read_html(url) %&gt;%
-    rvest::html_nodes(xpath = xpath) %&gt;%
-    rvest::html_text()
-  
-  # Clean Character Names
-  characters = as.data.frame(characters)
-  names(characters) = &#39;scraped_name&#39;
-  
-  characters = characters %&gt;%
-    dplyr::mutate(scraped_name = stringr::str_trim(scraped_name, side = &quot;both&quot;),
-                  scraped_name = stringr::str_replace_all(scraped_name, &quot;\\(&quot;, &quot;&quot;),
-                  scraped_name = stringr::str_replace_all(scraped_name, &quot;\\)&quot;, &quot;&quot;),
-                  scraped_name = stringr::str_replace_all(scraped_name, &quot;Maester&quot;, &quot;&quot;),
-                  scraped_name = stringr::str_trim(scraped_name, side = &quot;both&quot;),
-                  first_name = stringr::str_trim(stringr::str_split_fixed(scraped_name, &quot; &quot;, n = 2)[,1], side = &quot;both&quot;),
-                  last_name = stringr::str_trim(stringr::str_split_fixed(scraped_name, &quot; &quot;, n = 2)[,2], side = &quot;both&quot;),
-                  nickname = stringr::str_trim(stringr::str_split(last_name, &quot;\\?&quot;, simplify = TRUE)[,2], side = &quot;both&quot;),
-                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, &quot;\\?[a-zA-Z]+\\?&quot;, &quot;&quot;), side = &quot;both&quot;),
-                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, &quot;\\?[a-zA-Z]+ [a-zA-Z]+\\?&quot;, &quot;&quot;), side = &quot;both&quot;),
-                  last_name = stringr::str_trim(stringr::str_replace_all(last_name, &quot;\\?&quot;, &quot;\\&#39;&quot;), side = &quot;both&quot;),
-                  joined_name = paste0(first_name, &quot; &quot;, last_name, &quot;|&quot;, nickname, &quot;|&quot;, first_name),
-                  joined_name = stringr::str_replace(joined_name, &quot;\\|\\|&quot;, &quot;\\|&quot;),
-                  full_name = stringr::str_trim(paste0(first_name, &quot; &quot;,last_name), side = &quot;both&quot;))
-  
-  return(characters)
-}</code></pre>
+<p>I created a scraping function to pull the characters from the website and clean the data into a tibble. I’ll save the character vector so scraping only has to be done once. This list includes over 2000 characters. Many of these characters on this website contain the same first names. This is going to make data cleaning later more difficult. Due to this, we will additionally scrape <a href="https://www.hbo.com/game-of-thrones/cast-and-crew">HBO’s</a> main character list. I created two functions in the <code>GoT</code> package to help us do this <code>GoT::scrape_characters</code> and <code>GoT::scrape_HBO_characters</code> which both scrape each respective website for the character list.</p>
 <p>Now we can apply these functions to scrape and save the character data.</p>
-<pre class="r"><code>library(xml2)
-library(rvest)
-library(stringr)
-library(dplyr)
-
-# Scrape wiki characters and save
+<pre class="r"><code># Scrape wiki characters and save
 url = &quot;http://awoiaf.westeros.org/index.php/List_of_characters&quot;
-wiki_characters = scrape_characters(url)
+wiki_characters = GoT::scrape_characters(url)
 
 # Change filepath to match where you&#39;d like to save the data
 save(wiki_characters, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/wiki_characters.RData&quot;)
@@ -329,7 +272,7 @@ head(wiki_characters)
 
 # Scrape HBO characters and save
 url = &#39;https://www.hbo.com/game-of-thrones/cast-and-crew&#39;
-hbo_characters = scrape_HBO_characters(url)
+hbo_characters = GoT::scrape_HBO_characters(url)
 
 # Change filepath to match where you&#39;d like to save the data
 save(hbo_characters, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/hbo_characters.RData&quot;)
@@ -374,104 +317,44 @@ head(hbo_characters)</code></pre>
 </div>
 <div id="scrape-character-death-timeline" class="section level2">
 <h2>Scrape Character Death Timeline</h2>
-<p>The scraping approach here is a little unorthodox due to the website source containing dynamic content.</p>
-<p>To scrape the character deaths and at what time in a particular season and episode they die I use the website <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a>. This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape. I first clicked on all seasons of the show. I then right-click inspected the page and copied the full html. At this point I copy and pasted the text into a text editor saving it as frozen_death_times.html. I then created a function that reads in this html page and begins to clean it for the information I want.</p>
-<p>From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to describe who killed that person. There is some bias to this data. Mostly the bias is that it is taken from <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a> and relies on their information. From that data I can only collect that they deemed as major and minor. Below is a function to scrape this content for information about a characters death.</p>
-<pre class="r"><code>library(xml2)
-library(rvest)
-library(stringr)
-library(dplyr)
-
-filename = &quot;/Users/alval/Box/Coursework/IndStudy/Data/frozen_death_times.html&quot;
-
-get_death_times &lt;- function(filename){
-
-  # Obtain Season, Episode, Character, and Time from various nodes
-  doc = xml2::read_html(filename)
-  nodes = rvest::html_nodes(doc, &quot;#main-list&quot;)
-  nodes = rvest::html_nodes(nodes, &quot;li&quot;)
-  seasons = rvest::html_nodes(nodes, &quot;.season-title&quot;)
-  eps = rvest::html_nodes(nodes, &quot;.episode-container&quot;)
-  ep = eps[[1]]
-  
-  # Let&#39;s obtain the season and episode information from eps
-  get_episode_info = function(ep) {
-    titles = rvest::html_nodes(ep, &quot;.episode-title&quot;)
-    titles = rvest::html_text(titles)
-    ep_info = c(stringr::str_extract(titles, &quot;Season [:digit:]+&quot;),
-                stringr::str_extract(titles, &quot;Episode [:digit:]+&quot;))
-    return(ep_info)
-    # titles = xml2::as_list(titles)[[1]]
-    # spans = titles[names(titles) == &quot;span&quot;]
-    # spans = lapply(spans, unlist)
-    # spans = lapply(spans, function(x) x[ x != &quot;[ comment ]&quot;])
-    # spans = sapply(spans, paste, collapse = &quot;&quot;)
-    # spans
-  }
-  
-  # Now let&#39;s obtain charachter death information
-  get_episode_deaths = function(ep) {
-    titles = rvest::html_nodes(ep, &quot;.death-container &quot;)
-    times = rvest::html_nodes(titles, &quot;.bubble &quot;)
-    times = rvest::html_text(times)
-    titles = rvest::html_nodes(titles, &quot;.death-inner&quot;)
-    deaths = rvest::html_nodes(titles, &quot;.death-right&quot;)
-    who = rvest::html_text(rvest::html_nodes(deaths, &quot;h3&quot;))
-    how = rvest::html_text(rvest::html_nodes(deaths, &quot;h4&quot;))
-    df = data_frame(who = who, how = how, times = times)
-    df
-  }
-  
-  titles = lapply(eps, get_episode_info)
-  deaths = lapply(eps, get_episode_deaths)
-  
-  # Bind the two lists so that I have season and episode info
-  ## For no deaths in an episode return NULL
-  df = mapply(function(title, death) {
-    if (nrow(death) == 0) {
-      # death = data_frame(who = NA, how = NA, times = NA)
-      return(NULL)
-    }
-    death$season = title[1]
-    death$epsiode = title[2]
-    death
-  }, titles, deaths, SIMPLIFY = FALSE)
-  
-  # Create a dataframe
-  df = bind_rows(df)
-  # Add a column of specific how/who killed
-  df = df %&gt;% mutate(
-    who = stringr::str_to_title(who),
-    how = stringr::str_to_lower(how),
-    specific_how = stringr::str_split(how, &quot;by&quot;, simplify = TRUE)[,2],
-    specific_how = stringr::str_to_title(str_trim(specific_how)))
-  
-  return(df)
-}
-
-
-death_times = get_death_times(filename = filename)
+<p>To scrape the character deaths and at what time in a particular season and episode they die I use the website <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a>. This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape.</p>
+<p>From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to describe who killed that person. There is some bias to this data. Mostly the bias is that it is taken from <a href="https://deathtimeline.com/" class="uri">https://deathtimeline.com/</a> and relies on their information. From that data I can only collect that they deemed as major and minor. Again, we will use a function in the <code>GoT</code> package.</p>
+<pre class="r"><code>death_times = GoT::get_death_times()
 
 head(death_times)</code></pre>
 <pre><code>## # A tibble: 6 x 6
-##   who          how                    times season   epsiode  specific_how
-##   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       
-## 1 Waymar Royce killed by white walker 5:52  Season 1 Episode… White Walker
-## 2 Gared        killed by white walker 6:58  Season 1 Episode… White Walker
-## 3 Will         executed by ned stark  13:44 Season 1 Episode… Ned Stark   
-## 4 Jon Arryn    poisoned by lysa       18:34 Season 1 Episode… Lysa        
-## 5 Assassin     killed by bran&#39;s wolf  31:27 Season 1 Episode… Bran&#39;s Wolf 
-## 6 Mycah        killed by the hound    4:37  Season 1 Episode… The Hound</code></pre>
+##   who          how                    times    season episode specific_how
+##   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       
+## 1 Waymar Royce killed by white walker 00:05:52   1.00    1.00 White Walker
+## 2 Gared        killed by white walker 00:06:58   1.00    1.00 White Walker
+## 3 Will         executed by ned stark  00:13:44   1.00    1.00 Ned Stark   
+## 4 Jon Arryn    poisoned by lysa       00:18:34   1.00    1.00 Lysa        
+## 5 Assassin     killed by bran&#39;s wolf  00:31:27   1.00    2.00 Bran&#39;s Wolf 
+## 6 Mycah        killed by the hound    00:04:37   1.00    2.00 The Hound</code></pre>
 <pre class="r"><code>save(death_times, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/death_times.RData&quot;)</code></pre>
 <pre><code>## # A tibble: 6 x 6
-##   who          how                    times season   epsiode  specific_how
-##   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       
-## 1 Waymar Royce killed by white walker 5:52  Season 1 Episode… White Walker
-## 2 Gared        killed by white walker 6:58  Season 1 Episode… White Walker
-## 3 Will         executed by ned stark  13:44 Season 1 Episode… Ned Stark   
-## 4 Jon Arryn    poisoned by lysa       18:34 Season 1 Episode… Lysa        
-## 5 Assassin     killed by bran&#39;s wolf  31:27 Season 1 Episode… Bran&#39;s Wolf 
-## 6 Mycah        killed by the hound    4:37  Season 1 Episode… The Hound</code></pre>
+##   who          how                    times    season episode specific_how
+##   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       
+## 1 Waymar Royce killed by white walker 00:05:52   1.00    1.00 White Walker
+## 2 Gared        killed by white walker 00:06:58   1.00    1.00 White Walker
+## 3 Will         executed by ned stark  00:13:44   1.00    1.00 Ned Stark   
+## 4 Jon Arryn    poisoned by lysa       00:18:34   1.00    1.00 Lysa        
+## 5 Assassin     killed by bran&#39;s wolf  00:31:27   1.00    2.00 Bran&#39;s Wolf 
+## 6 Mycah        killed by the hound    00:04:37   1.00    2.00 The Hound</code></pre>
+<p>Notice that season 7 data is not available using this source. Instead, I will scrape this data from <a href="http://time.com/3924852/every-game-of-thrones-death/" class="uri">http://time.com/3924852/every-game-of-thrones-death/</a>. I am going to scrape the full data just as a reference.</p>
+<pre class="r"><code>time.com_death_data = GoT::get_time.com_deaths(url = &#39;http://time.com/3924852/every-game-of-thrones-death/&#39;)
+head(time.com_death_data)
+
+save(time.com_death_data, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/time.com_death_data.RData&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   who               season episode times how           specific_how       
+##   &lt;chr&gt;              &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;         &lt;chr&gt;              
+## 1 Will                1.00    1.00 NA    Beheaded for… Beheaded for deser…
+## 2 Jon Arryn           1.00    1.00 NA    Poisoned by … Poisoned by Lysa A…
+## 3 Jory Cassel         1.00    5.00 NA    Stabbed by J… Stabbed by Jaime L…
+## 4 Viserys Targaryen   1.00    6.00 NA    Khal Drogo p… Khal Drogo pours m…
+## 5 Benjen Stark        1.00    7.00 NA    Killed by Wh… Killed by White Wa…
+## 6 Robert Baratheon    1.00    7.00 NA    Mortally wou… Mortally wounded b…</code></pre>
 </div>
 <div id="biases" class="section level2">
 <h2>Biases</h2>
@@ -515,14 +398,14 @@ head(death_times)</code></pre>
 <section id="menu-pane" class="row menu text-center">
   
   
-  <span><a class="menu-item" href="/blog/2018-03-15-r-rmarkdown-blogdown-basics/">&lt; prev | </a></span>
+  <span><a class="menu-item" href="https://www.alessandravalcarcel.com/blog/2018-03-15-r-rmarkdown-blogdown-basics/">&lt; prev | </a></span>
   
   
   <span><a class="menu-item" href="/blog">blog</a></span>
   
   
   
-  <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
+  <h4 class="text-center"><a class="menu-item" href="https://www.alessandravalcarcel.com/">home</a></h4>
 </section>
 
 
