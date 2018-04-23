@@ -356,7 +356,7 @@ library(dplyr)
 filename = "/Users/alval/Box/Coursework/IndStudy/Data/frozen_death_times.html"
 
 get_death_times <- function(filename){
-
+  
   # Obtain Season, Episode, Character, and Time from various nodes
   doc = xml2::read_html(filename)
   nodes = rvest::html_nodes(doc, "#main-list")
@@ -370,7 +370,7 @@ get_death_times <- function(filename){
     titles = rvest::html_nodes(ep, ".episode-title")
     titles = rvest::html_text(titles)
     ep_info = dplyr::tibble(season = stringr::str_extract(titles, "Season [:digit:]+"),
-                     episode = stringr::str_extract(titles, "Episode [:digit:]+"))
+                            episode = stringr::str_extract(titles, "Episode [:digit:]+"))
     
     # make season and episode numeric
     ep_info = ep_info %>% 
@@ -426,11 +426,11 @@ get_death_times <- function(filename){
     times = if_else(length_string == 4, 
                     paste0("00:0", times),
                     paste0("00:", times)),
-    times = lubridate::hms(times))
+    times = lubridate::hms(times)) %>% 
+    select(-length_string)
   
   return(df)
 }
-
 
 death_times = get_death_times(filename = filename)
 
