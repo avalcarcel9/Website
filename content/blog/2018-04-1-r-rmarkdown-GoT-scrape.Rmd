@@ -134,7 +134,7 @@ library(omdbapi)
 library(dplyr)
 
 # Example from github
-imdb_data = find_by_title("Game of Thrones", type="series", season=1, episode=1)
+imdb_data = omdbapi::find_by_title("Game of Thrones", type="series", season=1, episode=1)
 
 # Remove first row to create an empty tibble
 imdb_data = imdb_data %>% 
@@ -144,37 +144,37 @@ imdb_data = imdb_data %>%
 # get each episode
 # Seaon 1
 for(i in 1:10){
-  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=1, episode=i))
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=1, episode=i))
 }
 
 # Season 2
 for(i in 1:10){
-  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=2, episode=i))
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=2, episode=i))
 }
 
 # Season 3
 for(i in 1:10){
-  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=3, episode=i))
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=3, episode=i))
 }
 
 # Season 4
 for(i in 1:10){
-  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=4, episode=i))
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=4, episode=i))
 }
 
 # Season 5
 for(i in 1:10){
-  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=5, episode=i))
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=5, episode=i))
 }
 
 # Season 6
 for(i in 1:10){
-  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=6, episode=i))
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=6, episode=i))
 }
 
 # Season 7
 for(i in 1:7){
-  imdb_data = dplyr::bind_rows(imdb_data, find_by_title("Game of Thrones", type="series", season=7, episode=i))
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=7, episode=i))
 }
 
 save(imdb_data, file = '/Users/alval/Box/Coursework/IndStudy/Data/imdb_data.RData')
