@@ -198,6 +198,18 @@ save(geniusr_scripts, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/gen
 ## 6        10.0 Season 6 Scripts THEO… https://genius… The Wind… Game of Th…</code></pre>
 <p>Again, I scrape the website once and save the results as an R object so I do not get blocked for scraping too much from genius. After I’ve saved the file then whenever I want to start working with the data I simply load my scraped file rather than re-scrape from the internet.</p>
 <p>We now have every episode script with season indicators!</p>
+<p>The <code>GoT</code> package also comes with a simple function to clean the <a href="www.genius.com" class="uri">www.genius.com</a> scripts. It extracts the speaker information, tries to clean the speaking character name, adds actions in a column if indicated, and removes some of the narration.</p>
+<pre class="r"><code>clean_data = GoT::cleanGoT(geniusr_scripts)
+head(clean_data)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   episode season line               speaker  action orig_line             
+##     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                 
+## 1    1.00   1.00 What d’you expect… Waymar … &quot;&quot;     WAYMAR ROYCE: What d’…
+## 2    1.00   1.00 I’ve never seen w… Will     &quot;&quot;     WILL: I’ve never seen…
+## 3    1.00   1.00 How close did you… Waymar … &quot;&quot;     WAYMAR ROYCE: How clo…
+## 4    1.00   1.00 Close as any man … Will     &quot;&quot;     WILL: Close as any ma…
+## 5    1.00   1.00 We should head ba… Gared    &quot;&quot;     GARED: We should head…
+## 6    1.00   1.00 Do the dead frigh… Royce    &quot;&quot;     ROYCE: Do the dead fr…</code></pre>
 </div>
 <div id="scrape-episode-lengths" class="section level2">
 <h2>Scrape Episode Lengths</h2>
@@ -215,45 +227,51 @@ imdb_data = omdbapi::find_by_title(&quot;Game of Thrones&quot;, type=&quot;serie
 imdb_data = imdb_data %&gt;% 
   dplyr::slice(-1)
 
-# imdb_data = tibble()
-# get each episode
+# Get each episode
 # Seaon 1
 for(i in 1:10){
   imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=1, episode=i))
+  Sys.sleep(90)
 }
-
+Sys.sleep(120)
 # Season 2
 for(i in 1:10){
   imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=2, episode=i))
+  Sys.sleep(90)
 }
-
+Sys.sleep(120)
 # Season 3
 for(i in 1:10){
   imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=3, episode=i))
+  Sys.sleep(90)
 }
-
+Sys.sleep(120)
 # Season 4
 for(i in 1:10){
   imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=4, episode=i))
+  Sys.sleep(90)
 }
-
+Sys.sleep(120)
 # Season 5
 for(i in 1:10){
   imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=5, episode=i))
+  Sys.sleep(90)
 }
-
+Sys.sleep(120)
 # Season 6
 for(i in 1:10){
   imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=6, episode=i))
+  Sys.sleep(90)
 }
-
+Sys.sleep(120)
 # Season 7
 for(i in 1:7){
   imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title(&quot;Game of Thrones&quot;, type=&quot;series&quot;, season=7, episode=i))
+  Sys.sleep(90)
 }
 
-save(imdb_data, file = &#39;/Users/alval/Box/Coursework/IndStudy/Data/imdb_data.RData&#39;)</code></pre>
-<p>Normally, I would create a nested for loop but the <code>omdbapi</code> package gives errors when data is scraped too quickly so instead I just created individual for loops for each season and waited a minute before running each one. There are some ways to make R pause inside of the loop but for simplicity I’ve done it this way.</p>
+save(imdb_data, file = &#39;Users/alval/Box/Coursework/IndStudy/Data/imdb_data.RData&#39;)</code></pre>
+<p>Normally, I would create a nested for loop but the <code>omdbapi</code> package gives errors when data is scraped too quickly so instead I just created individual for loops for each season and waited a minute before running each one.</p>
 <p>This returns a lot of data from IMDB. While I only need the episode length (<code>runtime</code>) I’m not going to remove any column as it may be interesting to use some of this data later.</p>
 </div>
 <div id="scrape-character-names" class="section level2">
