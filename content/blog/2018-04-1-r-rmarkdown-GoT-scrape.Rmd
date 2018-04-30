@@ -23,7 +23,7 @@ Shall we begin?
 
 <center><img HEIGHT="350" src="/img/shallwebegin.png" alt="Late Season Meme"></center>
 
-All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you'll be saving and loading data. Use the button below to download code to scrape and clean all the data I will be using.
+All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you'll be saving and loading data. Use the button below to download code to scrape and clean all the data I will be using. Code provided in the download is more thorough than that used in the tutorial.
 
 <center><a href="GoTScrapeAndCleaning.Rmd" download=""><button>Download Code</button></a></center>
 
