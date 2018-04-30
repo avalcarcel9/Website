@@ -19,7 +19,12 @@ output: html_document
 <center>
 <img HEIGHT="350" src="/img/shallwebegin.png" alt="Late Season Meme">
 </center>
-<p>All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you’ll be saving and loading data.</p>
+<p>All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you’ll be saving and loading data. Use the button below to download the data and clean it.</p>
+<a href="GoTScrapeAndCleaning.Rmd" download="">
+<button>
+Download Code
+</button>
+<p></a></p>
 <div id="scraping-got-scripts" class="section level2">
 <h2>Scraping GoT Scripts</h2>
 <p>I want to eventually do some analysis on the GoT scripts. Since HBO does not provide these scripts, I’m going to rely on <a href="www.genius.com" class="uri">www.genius.com</a>. I chose this website for two main reasons:</p>
@@ -71,7 +76,7 @@ geniusr::get_artist_songs(artist_id = 1525)</code></pre>
 ## #   artist_url &lt;chr&gt;</code></pre>
 <pre class="r"><code># Scrape lyrics using an ID
 geniusr::scrape_lyrics_id(song_id = 247618)</code></pre>
-<pre><code>## # A tibble: 16 x 5
+<pre><code>## # A tibble: 18 x 5
 ##    line                           song_id song_name artist_id artist_name 
 ##    &lt;chr&gt;                            &lt;int&gt; &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;       
 ##  1 Tell your boyfriend next time…  247618 Addicted       1525 Amy Winehou…
@@ -89,7 +94,9 @@ geniusr::scrape_lyrics_id(song_id = 247618)</code></pre>
 ## 13 That you got a man but I got …  247618 Addicted       1525 Amy Winehou…
 ## 14 Don&#39;t make no difference if I…  247618 Addicted       1525 Amy Winehou…
 ## 15 I&#39;d rather have myself and sm…  247618 Addicted       1525 Amy Winehou…
-## 16 It&#39;s got me addicted, does mo…  247618 Addicted       1525 Amy Winehou…</code></pre>
+## 16 It&#39;s got me addicted, does mo…  247618 Addicted       1525 Amy Winehou…
+## 17 Yeah I can get mine and you g…  247618 Addicted       1525 Amy Winehou…
+## 18 Yeah I can get mine and you g…  247618 Addicted       1525 Amy Winehou…</code></pre>
 <pre class="r"><code># Get song lyrics to Rehab using the URL directly
 geniusr::scrape_lyrics_url(&quot;https://genius.com/Amy-winehouse-rehab-lyrics&quot;)</code></pre>
 <pre><code>## # A tibble: 33 x 4

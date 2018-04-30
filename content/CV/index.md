@@ -64,7 +64,7 @@ __Programming:__
 
 Expert: R  
 Some experience: SAS, bash scripting, Python, MATLAB, Stata  
-Other tools: git, LaTeX, Office Suite, R Markdown  
+Other tools: git, LaTeX, Office Suite, RMarkdown  
 
 ***
 

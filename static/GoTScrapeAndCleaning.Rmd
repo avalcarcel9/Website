@@ -1,0 +1,895 @@
+---
+title: "Game of Thrones Scraping and Data Clean"
+author: "Alessandra Valcarcel"
+date: "April 26, 2018"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+Before running this code. Make sure you read my blog post about the installation and simple use of the `GoT` package. You will need to have some API's set up in your R profile. You can find my blog post [here](http://www.alessandravalcarcel.com/blog/2018-04-1-r-rmarkdown-got-scrape/) and the package documentation on my [GitHub](https://github.com/avalcarcel9/GoT). You'll only need to read the README.
+
+To run this code with minimal changes please save this file in a directory. The changes you make may come in the cleaning section where your scraped data may be different than the data I scraped and cleaned. You can name the parent directory anything you'd like. Inside of this directory, please create another directory called `Data`. We will be scraping data from the internet (once) and saving this data in the `Data` directory. Similarly, we will clean this data for future analyses and save the cleaned data.
+
+## Code Source
+
+The code for this project is available using the `GoT` package on my [GitHub](https://github.com/avalcarcel9/GoT). For this analysis we will rely on the following packages:
+
+__Packages__
+
+```{r}
+library(GoT)
+library(omdbapi)
+library(dplyr)
+library(stringr)
+library(rapportools)
+library(lubridate)
+library(ggplot2)
+```
+
+## Data Scrape
+
+1. Clean Scripts
+
+The first thing we must do is scrape the internet for the GoT scripts.
+
+```{r scrape_scripts, eval = FALSE}
+# Obtain all available scripts from www.genius.com
+geniusr_scripts = GoT::scrape_GoT(base_url = "https://genius.com/albums/Game-of-thrones", season = 7)
+
+# Save data
+save(geniusr_scripts, file = "Data/geniusr_scripts.RData")
+```
+
+You should only run the code above once to scrape the data. Rather than continuously scrape the data to load it into R, I've saved the `geniusr_scripts` into the `Data` directory that you should have made. From here, if we need it again we can just load this object into R.
+
+```{r show_scripts}
+load("Data/geniusr_scripts.RData")
+# Visualize the data with eval = TRUE so user can see
+head(geniusr_scripts)
+tail(geniusr_scripts)
+```
+
+We scrape the website once and save the results as an R object so we do not get blocked for scraping too much from genius.
+
+2. Scrape Episode Length
+
+Here we are scraping the episode lengths and some other IMDB information about each episode.
+
+```{r imbd_scrape, eval = FALSE}
+# Example from github
+imdb_data = omdbapi::find_by_title("Game of Thrones", type="series", season=1, episode=1)
+
+# Remove first row to create an empty tibble
+imdb_data = imdb_data %>% 
+  dplyr::slice(-1)
+
+# Get each episode
+# Seaon 1
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=1, episode=i))
+  Sys.sleep(90)
+}
+Sys.sleep(120)
+# Season 2
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=2, episode=i))
+  Sys.sleep(90)
+}
+Sys.sleep(120)
+# Season 3
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=3, episode=i))
+  Sys.sleep(90)
+}
+Sys.sleep(120)
+# Season 4
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=4, episode=i))
+  Sys.sleep(90)
+}
+Sys.sleep(120)
+# Season 5
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=5, episode=i))
+  Sys.sleep(90)
+}
+Sys.sleep(120)
+# Season 6
+for(i in 1:10){
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=6, episode=i))
+  Sys.sleep(90)
+}
+Sys.sleep(120)
+# Season 7
+for(i in 1:7){
+  imdb_data = dplyr::bind_rows(imdb_data, omdbapi::find_by_title("Game of Thrones", type="series", season=7, episode=i))
+  Sys.sleep(90)
+}
+
+save(imdb_data, file = 'Data/imdb_data.RData')
+```
+
+Now that the data is saved, we can load it into memory from the saved version.
+
+```{r load_imdb}
+# Load in the data
+load('Data/imdb_data.RData')
+
+# View data
+head(imdb_data)
+tail(imdb_data)
+```
+
+3. Scrape Character Names
+
+Let's scrape a list of character names from [http://awoiaf.westeros.org/index.php/List_of_characters](http://awoiaf.westeros.org/index.php/List_of_characters) and [https://www.hbo.com/game-of-thrones/cast-and-crew](https://www.hbo.com/game-of-thrones/cast-and-crew).
+
+```{r scrape_characters, eval = FALSE}
+# Scrape wiki characters and save
+url = "http://awoiaf.westeros.org/index.php/List_of_characters"
+wiki_characters = GoT::scrape_characters(url)
+
+save(wiki_characters, file = "Data/wiki_characters.RData")
+
+# Scrape HBO characters and save
+url = 'https://www.hbo.com/game-of-thrones/cast-and-crew'
+hbo_characters = GoT::scrape_HBO_characters(url)
+
+save(hbo_characters, file = "Data/hbo_characters.RData")
+```
+
+Again, we only want to run the code above once. After saving the scraped data, you should load the saved data into memory rather than re-scrape.
+
+```{r load_characters}
+#Wiki Characters
+load("Data/wiki_characters.RData")
+# Visualize the data with eval = TRUE so user can see
+head(wiki_characters)
+
+# HBO characters
+load("Data/hbo_characters.RData")
+# Visualize the data with eval = TRUE so user can see
+head(hbo_characters)
+```
+
+4. Scrape Character Death Timeline
+
+Scraping character [death times](https://deathtimeline.com/) is really simple.
+
+```{r obtain_death_times, eval = FALSE}
+# Obtain death times
+death_times = GoT::get_death_times()
+
+# Save death times
+save(death_times, file = 'Data/death_times.RData')
+```
+
+Load and visualize the data.
+
+```{r load_death_times}
+# Load death_times
+load('Data/death_times.RData')
+
+# Visualize
+head(death_times)
+tail(death_times)
+```
+
+Notice that season 7 data is not available using this source. Instead, I will scrape this data from [http://time.com/3924852/every-game-of-thrones-death/](http://time.com/3924852/every-game-of-thrones-death/). I am going to scrape the full data just as a reference.
+
+
+```{r, time_deaths, eval = FALSE}
+# Scrape time.com death data
+time.com_death_data = GoT::get_time.com_deaths(url = 'http://time.com/3924852/every-game-of-thrones-death/')
+
+# save the file
+save(time.com_death_data, file = "Data/time.com_death_data.RData")
+```
+
+Now let's take a look:
+
+```{r load_time_deaths}
+# Load the file
+load("Data/time.com_death_data.RData")
+
+# Visualize
+head(time.com_death_data)
+tail(time.com_death_data)
+```
+
+Notice that these data do not have the specific death times. The variable is currently NA as this data wasn't on the website. We'll address this later in the code.
+
+## Data Clean
+
+The `GoT::cleanGoT()` function cleans the data somewhat but not completely. At this point, there doesn't seem to be any patterns I can take advantage to clean so I will go through manually to fix. I took this project on in order to learn how to scrape data, use `tidyr`, `dplyr`, and `stringr`. As such, the code provided is not necessarily the best or cleanest but it gets the job done. Of course, after cleaning I understood some of the patterns of the messiness and could have come up with a much better approach but English hindsight is 20/20 right?
+
+Let's load all the data into memory before cleaning.
+
+```{r}
+load('Data/geniusr_scripts.RData')
+load('Data/imdb_data.RData')
+load('Data/wiki_characters.RData')
+load('Data/hbo_characters.RData')
+load('Data/death_times.RData')
+load("Data/time.com_death_data.RData")
+```
+
+1. Scrape Scripts
+
+```{r}
+## SEASON 1
+clean_data1 = subset(geniusr_scripts, album_name == "Season 1 Scripts")
+# subset to just season 1
+clean_data1 = cleanGoT(clean_data1)
+## Season 1 Cleaning
+if(any(rapportools::is.empty(clean_data1$line))==TRUE){
+  loc = which(rapportools::is.empty(clean_data1$line) == TRUE)
+  temp = clean_data1[loc,] %>%
+    mutate(line = str_extract(str_split(orig_line, ":", simplify = TRUE)[,2], "\\).*\\("), 
+           line = str_replace_all(line, "\\(", ""),
+           line = str_replace_all(line, "\\)", ""))
+  clean_data1[loc,] = temp
+}
+if(any(rapportools::is.empty(clean_data1$speaker))==TRUE){
+  loc = which(rapportools::is.empty(clean_data1$speaker) == TRUE)
+  temp = clean_data1[loc,]
+  temp$speaker[which(temp$episode==9)] = "Walder Frey"
+  temp$speaker[which(temp$episode==10)] = c("Jon Snow", "Daenerys")
+  clean_data1[loc,] = temp
+}
+if(any(startsWith(clean_data1$line, ",")) | any(startsWith(clean_data1$line, "-"))){
+  loc = which(startsWith(clean_data1$line, ","))
+  clean_data1 = clean_data1[-loc,]
+  loc = which(startsWith(clean_data1$line, "-"))
+  clean_data1 = clean_data1[-loc,]
+}
+if(any(nchar(clean_data1$speaker) > 22)){
+  clean_data1 = clean_data1[-which(nchar(clean_data1$speaker) > 21 & str_detect(clean_data1$orig_line, ":") == 'FALSE'),]
+}
+
+## SEASON 2
+clean_data2 = subset(geniusr_scripts, album_name == "Season 2 Scripts")
+# subset to just season 2
+clean_data2 = cleanGoT(clean_data2)
+## Season 2 Cleaning
+if(any(clean_data2$speaker == 'Cut To')){
+  clean_data2 = clean_data2[-which(clean_data2$speaker == 'Cut To'),]
+}
+
+## SEASON 3
+clean_data3 = subset(geniusr_scripts, album_name == "Season 3 Scripts")
+# subset to just season 3
+clean_data3 = cleanGoT(clean_data3)
+
+## SEASON 4
+clean_data4 = subset(geniusr_scripts, album_name == "Season 4 Scripts")
+# subset to just season 4
+clean_data4 = cleanGoT(clean_data4)
+if(any(clean_data4$speaker == "") | any(clean_data4$speaker == "- ")){
+  loc = which(clean_data4$speaker == "")
+  clean_data4 = clean_data4[-loc,]
+  loc = which(clean_data4$speaker == "- ")
+  clean_data4 = clean_data4[-loc,]
+}
+if(any(clean_data4$speaker == 'Cut To')){
+  clean_data4 = clean_data4[-which(clean_data4$speaker == 'Cut To'),]
+}
+if(any(clean_data4$line == '')){
+  clean_data4 = clean_data4[-which(clean_data4$line == ''),]
+}
+if(any(startsWith(clean_data4$speaker, "-") == TRUE)){
+  loc = which(startsWith(clean_data4$speaker, '-') == TRUE)
+  temp = clean_data4[loc,]
+  temp$orig_line = str_split(temp$orig_line, "-", simplify = TRUE)[,3]
+  temp$speaker = str_split(temp$orig_line, ":", simplify = TRUE)[,1]
+  temp$line = str_split(temp$orig_line, ":", simplify = TRUE)[,2]
+  clean_data4[loc,] = temp
+}
+
+## SEASON 5
+clean_data5 = subset(geniusr_scripts, album_name == "Season 5 Scripts")
+# subset to just season 5
+clean_data5 = cleanGoT(clean_data5)
+if(any(clean_data5$speaker == 'Cut To')){
+  clean_data5 = clean_data5[-which(clean_data5$speaker == 'Cut To'),]
+}
+## SEASON 6
+clean_data6 = subset(geniusr_scripts, album_name == "Season 6 Scripts")
+# subset to just season 6
+clean_data6 = cleanGoT(clean_data6)
+if(any(clean_data6$speaker == 'Cut To')){
+  clean_data6 = clean_data6[-which(clean_data6$speaker == 'Cut To'),]
+}
+
+## SEASON 7
+clean_data7 = subset(geniusr_scripts, album_name == "Season 7 Scripts")
+# subset to just season 7
+clean_data7 = cleanGoT(clean_data7)
+if(any(clean_data7$speaker == 'Cut To')){
+  clean_data7 = clean_data7[-which(clean_data7$speaker == 'Cut To'),]
+}
+if(any(nchar(clean_data7$speaker) > 22)){
+  clean_data7 = clean_data7[-which(nchar(clean_data7$speaker) > 21),]
+}
+
+clean_data = dplyr::bind_rows(clean_data1, 
+                              clean_data2, 
+                              clean_data3, 
+                              clean_data4, 
+                              clean_data5, 
+                              clean_data6, 
+                              clean_data7)
+
+# Delete some error rows
+clean_data = clean_data[-which(clean_data$speaker == 'Remember This'),]
+clean_data = clean_data[-which(clean_data$line == 'Sansa and Littlefingers'),]
+clean_data = clean_data[-which(clean_data$speaker == 'Tell Me Something'),]
+clean_data = clean_data[-which(clean_data$speaker == 'The Others At The Table'),]
+clean_data = clean_data[-which(clean_data$speaker == "The Bastard's Been Meddling Where He Shouldn\'t."),]
+```
+
+2. Clean Episode Length
+
+The IMDB data is already very clean because it was obtained from a database essentially. The only thing we have to do is convert the episode time from a string to time using `lubridate`.
+
+```{r}
+# Exctract run time and convert to lubridate minutes seconds
+imdb_data_clean = imdb_data %>% 
+  mutate(Runtime = paste0(stringr::str_extract(Runtime, "[0-9]+"), ":00"),
+         Runtime = lubridate::ms(Runtime))
+
+save(imdb_data_clean, file = 'Data/imdb_data_clean.RData')
+```
+
+3. Clean Character Names
+
+The data, since contributed by many people, does not have the speaker denoted in a systematic way. To further clean, we will use the character vector scraped from the internet to replace the character names with their full name.
+
+```{r}
+# Clean some HBO characters more carefully
+hbo_characters = hbo_characters %>%
+  mutate(joined_name = stringr::str_replace(joined_name, "Eddard Stark\\|Ned\\|Eddard", "Eddard Stark|Ned Stark|Edd Stark|Ned|Eddard"),
+         joined_name = stringr::str_replace(joined_name, "Grand Pycelle\\|Grand", "Grand Maester Pycelle|Maester Pycelle|Grand Pycelle|Pycelle"),
+         joined_name = stringr::str_replace(joined_name, "Petyr Baelish\\|Littlefinger\\|Petyr", "Petyr Baelish|Littlefinger|Petyr|Baelish"),
+         joined_name = stringr::str_replace(joined_name, "Grey Worm\\|Grey", "Grey Worm"), 
+         joined_name = stringr::str_replace(joined_name, "Samwell Tarly\\|Samwell", "Samwell Tarly\\|Samwell|Sam"), 
+         joined_name = stringr::str_replace(joined_name, "Cersei Lannister\\|Cersei", "Cersei Lannister|Cersei Baratheon|Cersai|Cersei"),
+         joined_name = stringr::str_replace(joined_name, "Aemon \\|Aemon", "Maester Aemon|Aemon"),
+         joined_name = stringr::str_replace(joined_name, "Luwin \\|Luwin", "Maester Luwin|Luwin"),
+         joined_name = stringr::str_replace(joined_name, "Varys \\|Varys", "Lord Varys|Varys"),
+         joined_name = stringr::str_replace(joined_name, "Khal Drogo\\|Khal", "Khal Drogo"),
+         full_name = stringr::str_replace(full_name, "Aemon", "Maester Aemon"),
+         full_name = stringr::str_replace(full_name, "Luwin", "Maester Luwin"),
+         full_name = stringr::str_replace(full_name, "Grand Pycelle", "Maester Pycelle"))
+
+# Replace HBO major characters based on cleaning
+for(i in 1:dim(hbo_characters)[1]){
+  temp_character = hbo_characters[i,]
+  clean_data = clean_data %>%
+    mutate(speaker = stringr::str_replace_all(speaker, temp_character$joined_name, temp_character$full_name),
+           speaker = stringr::str_trim(speaker, side = "both"))
+}
+
+# Some second stage cleaning for characters not included in the HBO cast
+clean_data = clean_data %>%
+  dplyr::mutate(speaker = stringr::str_replace(speaker, " Stormborn", ""),
+                speaker = str_replace(speaker, "Walder Freyy Frey|Walder Frey|Walder", "Walder Frey"),
+                speaker = str_replace(speaker, "Dolourous Edd|Edd", "Dolourous Edd"),
+                speaker = str_replace(speaker, "Dolourous Eddard", "Eddard"),
+                speaker = str_replace(speaker, "Young Lyanna", "Lyanna Stark"),
+                speaker = str_replace(speaker, "Khal Drogo Moro|Moro", "Khal Moro"),
+                speaker = str_replace(speaker, "Lord Mormont", "Jeor Mormont"),
+                speaker = str_replace(speaker, "Dickon Tarly|Dickon", "Dickon Tarly"),
+                speaker = stringr::str_replace(speaker, "Daenarys Targaryen|Daenarys", "Daenerys Targaryen"),
+                speaker = stringr::str_replace(speaker, "Starkn ", ""),
+                speaker = stringr::str_replace(speaker, "Royce", "Waymar Royce"),
+                speaker = stringr::str_replace(speaker, "Waymar Waymar", "Waymar"),
+                speaker = stringr::str_replace(speaker, "Yohn Waymar Royce|Yohn", "Yohn Royce"),
+                speaker = stringr::str_replace(speaker, "Young Eddard Stark", "Eddard Stark"),
+                speaker = stringr::str_replace(speaker, "Rodrick Cassel|Rodrik Cassal|Rodrick", "Rodrik Cassel"), 
+                speaker = stringr::str_replace(speaker, "Lady Crane Walda|Walda Bolton|Walda", "Walda Bolton"),
+                speaker = stringr::str_replace(speaker, "Lady Crane Olenna Tyrell", "Olenna Tyrell"),
+                speaker = stringr::str_replace(speaker, "Lady Cranec Rane", "Lady Crane"),
+                speaker = stringr::str_replace(speaker, "Septa Mordane|Mordane", "Septa Mordane"), 
+                speaker = stringr::str_replace(speaker, "King Joffrey Baratheon", "Joffrey Baratheon"),
+                speaker = stringr::str_replace(speaker, "High Priestess Sparrow Septon|High Priestess Sparrow|Sparrow", "High Sparrow"),
+                speaker = stringr::str_replace(speaker, "Bran Starkd", "Brand"), 
+                speaker = stringr::str_replace(speaker, "Grand Maester Pyrcelle", "Maester Pycelle"),
+                speaker = stringr::str_replace(speaker, "Lord Karstark|Rickard Karstark|Rickard|Karstark", "Rickard Karstark"),
+                speaker = stringr::str_replace(speaker, "Old Nan|Nan", "Old Nan"),
+                speaker = stringr::str_replace(speaker, "Blackfish", "Brynden Tully"),
+                speaker = stringr::str_replace(speaker, "Young Benjen", "Benjen"),
+                speaker = stringr::str_replace(speaker, "Jon Snowos Bracken", "Jonos Bracken"),
+                speaker = stringr::str_replace(speaker, "Young Hodor", "Hodor"), 
+                speaker = stringr::str_replace(speaker, "Maester Pycelle|Maester Pycell", "Maester Pycelle"),
+                speaker = stringr::str_replace(speaker, "Ser Alliser Thorne", "Alliser Thorne"), 
+                speaker = stringr::str_replace(speaker, "Ramsay Bolton|Ramsay Snow|Ramsey|Ramsay", "Ramsay Bolton"), 
+                speaker = stringr::str_replace(speaker, "Young Lyanna Stark", "Lyanna Stark"),
+                speaker = stringr::str_replace(speaker, "Alliser Thorne Throne|Allister", "Alliser Thorne"),
+                speaker = stringr::str_replace(speaker, "Red Priestess|Red Priest|Melisdandre", "Melisandre"),
+                speaker = stringr::str_replace(speaker, "Septon", "High Sparrow"),
+                speaker = stringr::str_replace(speaker, "Dolourous Eddark Stark|Dolorous Dolourous Edd", "Dolourous Edd"),
+                speaker = stringr::str_replace(speaker, "Master", "Maester"),
+                speaker = stringr::str_replace(speaker, "Both Jon Snow And Samwell Tarly", "Jon Snow & Samwell Tarly"),
+                speaker = stringr::str_replace(speaker, "Daerneys|Danerys|Deanerys Targarian", "Daenarys Targaryen"),
+                speaker = stringr::str_replace(speaker, "Eddard Stark & Alys", "Eddard Stark & Alys Karstark"),
+                speaker = stringr::str_replace(speaker, "Edmure & Roslin", "Edmure Tully & Roslin Tully"),
+                speaker = stringr::str_replace(speaker, "Greyworm", "Grey Worm"),
+                speaker = stringr::str_replace(speaker, "Jamie Lannister", "Jaime Lannister"),
+                speaker = stringr::str_replace(speaker, "Jon Snow/Robb Stark", "Jon Snow & Robb Stark"),
+                speaker = stringr::str_replace(speaker, "Jorah Mormont|Jora", "Jora Mormont"),
+                speaker = stringr::str_replace(speaker, "Little Samwell", "Samwell"),
+                speaker = stringr::str_replace(speaker, "Lyanna Stark Mormont|Lyanna Mormont|Lyanna", "Lyanna Mormont"),
+                speaker = stringr::str_replace(speaker, "Oleanna", "Olenna Tyrell"),
+                speaker = stringr::str_replace(speaker, "Rhakaro", "Rhakharo"),
+                speaker = stringr::str_replace(speaker, "Roslin Tully|Roslin", "Roslin Tully"),
+                speaker = stringr::str_replace(speaker, "Young Rodrik|Ser Rodrik|Cassel", "Rodrik Cassel"),
+                speaker = stringr::str_replace(speaker, "Young Rodrik|Ser Rodrik", "Rodrik Cassel"),
+                speaker = stringr::str_replace(speaker, "Samwell Tarlye|Samwell Tarlymy|Samwell Tarlywel Tarly", "Samwell Tarly"),
+                speaker = stringr::str_replace(speaker, "Samwell Tarly, Pyp, And Grenn", "Samwell Tarly & Pyp & Grenn"),
+                speaker = stringr::str_replace(speaker, "Barriston", "Barristan Selmy"),
+                speaker = stringr::str_replace(speaker, "Daenarys Targaryen", "Daenerys Targaryen"),
+                speaker = stringr::str_replace(speaker, "Dario|Darrio", "Daario Naharis"),
+                speaker = stringr::str_replace(speaker, "Edmure Tully|Edmure", "Edmure Tully"),
+                speaker = stringr::str_replace(speaker, "Elaria|Ellia", "Ellaria Sand"),
+                speaker = stringr::str_replace(speaker, "Hizdahr Zo Loraq|Hizdahr", "Hizdahr Zo Loraq"),
+                speaker = stringr::str_replace(speaker, "Illyrio Mopatis|Illyrio", "Illyrio Mopatis"),
+                speaker = stringr::str_replace(speaker, "Janos Slynt|Janos", "Janos Slynt"),
+                speaker = stringr::str_replace(speaker, "Jory Rodrik Cassel", "Jory Cassel"),
+                speaker = stringr::str_replace(speaker, "Kevan Lannister|Kevan", "Kevan Lannister"),
+                speaker = stringr::str_replace(speaker, "Khal Khal", "Khal"),
+                speaker = stringr::str_replace(speaker, "Lollys Stokeworth|Lollys", "Lollys Stokeworth"),
+                speaker = stringr::str_replace(speaker, "Lollys Stokeworth|Lollys", "Lollys Stokeworth"),
+                speaker = stringr::str_replace(speaker, "Lommy Greenhands|Lommy", "Lommy Greenhands"),
+                speaker = stringr::str_replace(speaker, "Lyanna Mormont Stark", "Lyanna Stark"),
+                speaker = stringr::str_replace(speaker, "Mace Tyrell|Mace", "Mace Tyrell"),
+                speaker = stringr::str_replace(speaker, "Meryn Trant|Meryn", "Maryn Trant"),
+                speaker = stringr::str_replace(speaker, "Mosador", "Mossador"),
+                speaker = stringr::str_replace(speaker, "Othell Yarwick", "Othell Yarwyck"),
+                speaker = stringr::str_replace(speaker, "Walder Freyy Frey", "Walder Frey"),
+                speaker = stringr::str_replace(speaker, "Ser Dontos", "Dontos Hollard"),
+                speaker = stringr::str_replace(speaker, "Ser Vardis", "Vardis Egen"),
+                speaker = stringr::str_replace(speaker, "Roz", "Ros"),
+                speaker = stringr::str_replace(speaker, "Rodrik Rodrik", "Rodrik"),
+                speaker = stringr::str_replace(speaker, "Robett Glover|Robett|Glover", "Robett Glover"),
+                speaker = stringr::str_replace(speaker, "Qyburns", "Qyburn"),
+                speaker = stringr::str_replace(speaker, "Pypar|Pyp", "Pypar"),
+                speaker = stringr::str_replace(speaker, "Areo", "Areo Hotah"),
+                speaker = stringr::str_replace(speaker, "Jora", "Jorah"),
+                speaker = stringr::str_replace(speaker, "Nights Watch Ray|Brother Ray|Brother Rays|Rays", "Ray"),
+                speaker = stringr::str_trim(speaker, side = 'both'),
+                speaker = stringr::str_replace(speaker, "Night’s", "Night"),
+                speaker = stringr::str_replace(speaker, "Nights Watch Ray|Night Watch Ray", "Ray"))
+## Some lines contain multiple characters speaking
+## Here we will expand so every character has one unique line
+multiple_speakers = clean_data[stringr::str_detect(clean_data$speaker, "&"),]
+all_speakers = as.data.frame(stringr::str_split(multiple_speakers$speaker, "&", simplify = TRUE))
+all_speakers = apply(all_speakers, 2, as.character)
+
+binded_speakers = tibble()
+for(i in 1:dim(all_speakers)[2]){
+  temp_speakers = all_speakers[,i]
+  temp_data = multiple_speakers
+  temp_data$speaker = temp_speakers
+  binded_speakers = dplyr::bind_rows(binded_speakers, temp_data)
+}
+
+binded_speakers = binded_speakers[stringr::str_detect(binded_speakers$speaker, ""),]
+
+clean_data = clean_data[which(stringr::str_detect(clean_data$speaker, " & |&")==FALSE),]
+clean_data = dplyr::bind_rows(clean_data, binded_speakers)
+
+# Filter data so that a speaker must have more than 3 lines
+clean_data = clean_data %>% 
+  mutate(speaker = stringr::str_trim(speaker, side = 'both'))
+
+speaking_characters = clean_data %>% 
+  select(speaker) %>%
+  distinct(speaker) %>% 
+  arrange(speaker)
+```
+
+Here we will obtain the names of characters spoken by other characters. To be a spoken character you must be a speaking characters. So any characters that does not speak at all in the series are excluded from this analysis. At the end of cleaning the speaker in the last section we obtained a `speaking_characters` vector which includes all the character names of speaking characters. We will manipulate this vector into a dataframe similar to the hbo_characters so that we can search the line for a character's name.
+
+```{r}
+# Create a joined name to search in the string
+# Adapt some charactrers string based on their nicknames
+speaking_characters = speaking_characters %>% 
+  mutate(first_name = stringr::str_split(speaker, " ", simplify = TRUE)[,1],
+         joined_name = ifelse(stringr::str_split(speaker, " ", simplify = TRUE)[,2] == "", 
+                              first_name, 
+                              paste0(speaker, "|", first_name)),
+         joined_name = stringr::str_replace(joined_name, "\\|Black", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Brother", ""),
+         joined_name = stringr::str_replace(joined_name, "Brynden Tully\\|Brynden", "Brynden Tully|Brynden|Blackfish"),
+         joined_name = stringr::str_replace(joined_name, "Catelyn Stark\\|Catelyn", "Catelyn Stark|Catelyn|Cat"),
+         joined_name = stringr::str_replace(joined_name, "Cersei Lannister\\|Cersei", "Cersei Lannister|Cersei Baratheon|Cersei|Cersai"),
+         joined_name = stringr::str_replace(joined_name, "Daenerys Targaryen\\|Daenerys", "Mother of Dragons|Daenerys Targaryen|Deanerys Targarian|Daenarys|Daerneys|Danerys|Dany"),
+         joined_name = stringr::str_replace(joined_name, "Eddard Stark\\|Eddard", "Eddard Stark|Ned Stark|Edd Stark|Ned|Eddard"),
+         joined_name = stringr::str_replace(joined_name, "Gregor Clegane\\|Gregor", "The Mountain|Gregor Clegane\\|Gregor"),
+         joined_name = stringr::str_replace(joined_name, "\\|Grey", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Guard", ""),
+         joined_name = stringr::str_replace(joined_name, "High Sparrow\\|High", "High Sparrow|High Septon"),
+         joined_name = stringr::str_replace(joined_name, "Jaime Lannister\\|Jaime", "King Slayer|Jaime Lannister|Jaime|Jamie"),
+         joined_name = stringr::str_replace(joined_name, "Jon Snow\\|Jon", "Bastard of Winterfell|Jon Snow|Jon"), 
+         joined_name = stringr::str_replace(joined_name, "Jorah Mormont\\|Jorah", "Jorah Mormont|Jorah|Jora"),
+         joined_name = stringr::str_replace(joined_name, "Khal Drogo\\|Khal", "Khal Drogo|Drogo"),
+         joined_name = stringr::str_replace(joined_name, "Khal Moro\\|Khal", "Khal Moro|Moro"),
+         joined_name = stringr::str_replace(joined_name, "\\|King's", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Kings", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Lady", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Lord", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Lyanna", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Maester", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Man", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Mance Rayder\\|ce", "Mance Rayder|Mance"),
+         joined_name = stringr::str_replace(joined_name, "Melisandre", "Red Woman|Red Priestess|Melisandre"),
+         joined_name = stringr::str_replace(joined_name, "Petyr Baelish\\|Petyr", "Littlefinger|Petyr Baelish|Petyr|Baelish"),
+         joined_name = stringr::str_replace(joined_name, "Samwell Tarly\\|Samwell", "Samwell Tarly|Samwell|Sam"),
+         joined_name = stringr::str_replace(joined_name, "Sandor Clegane\\|Sandor", "Sandor Clegane|Sandor|Hound"),
+         joined_name = stringr::str_replace(joined_name, "\\|Septa", ""),
+         joined_name = stringr::str_replace(joined_name, "\\|Thin", ""), 
+         joined_name = stringr::str_replace(joined_name, "\\|Wine", ""),
+         joined_name = stringr::str_replace(joined_name, "White Rat\\|White", "White Rat"))
+```
+
+The following plots help you quality control the data. The plots below should only contain names of reasonable speaking characters. For example, "Knight 1" or "Jon Snow" is fine but "Jon Snow is dead." is not a speaking character. These types of things need to be removed or adjusted before continuing.
+
+```{r}
+# Summary of characters/data
+clean_data %>% 
+  group_by(speaker) %>% 
+  count(speaker) %>% 
+  ungroup() %>% 
+  summarize(max_n = max(n), 
+            mean_n = mean(n),
+            sd_n = sd(n),
+            min_n = min(n),
+            median_n = median(n))
+
+# Generate counts for each character
+counts = clean_data %>%
+  group_by(speaker) %>%
+  count(speaker, sort = TRUE) %>%
+  ungroup() %>%
+  mutate(speaker = factor(speaker, levels = speaker))
+
+counts %>%
+  filter(n > 50) %>%
+  ggplot(aes(speaker, n)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Number of Lines") +
+  xlab("Speaker")
+
+counts %>%
+  filter(between(n, 10, 50)) %>%
+  mutate(speaker = factor(speaker, levels = speaker)) %>%
+  ggplot(aes(speaker, n)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Number of Lines") +
+  xlab("Speaker")
+
+counts %>%
+  filter(between(n, 5, 9)) %>%
+  mutate(speaker = factor(speaker, levels = speaker)) %>%
+  ggplot(aes(speaker, n)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Number of Lines") +
+  xlab("Speaker")
+
+counts %>%
+  filter(between(n, 3, 4)) %>%
+  mutate(speaker = factor(speaker, levels = speaker)) %>%
+  ggplot(aes(speaker, n)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Number of Lines") +
+  xlab("Speaker")
+
+counts %>%
+  filter(between(n, 1, 2)) %>%
+  mutate(speaker = factor(speaker, levels = speaker)) %>%
+  ggplot(aes(speaker, n)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Number of Lines") +
+  xlab("Speaker")
+```
+
+```{r}
+# get rid of rows that will be problematic in searching lines
+speaking_characters = speaking_characters %>% 
+    filter(speaker != 'A Voice',
+           speaker != 'All',
+           speaker != 'All Three',
+           speaker != 'Assassin',
+           speaker != 'Attendant',
+           speaker != 'Blacksmith',
+           speaker != 'Blonde Prostitute',
+           speaker != 'Bloodrider',
+           speaker != 'Bloodrider #1',
+           speaker != 'Bloodrider #2',
+           speaker != 'Bloodrider #3',
+           speaker != 'Bloodrider #4',
+           speaker != 'Bolton Bannerman', 
+           speaker != 'Bolton Officer',
+           speaker != 'Brothel Keeper',
+           speaker != 'Bystanders',
+           speaker != 'Captain',
+           speaker != 'Child Of The Forest',
+           speaker != 'Crowd',
+           speaker != 'Daughter',
+           speaker != 'Dothraki #1',
+           speaker != 'Dothraki Man',
+           speaker != 'Dothraki Matron',
+           speaker != 'Dothraki Woman',
+           speaker != 'Everyone',
+           speaker != "Fellow Night's Watch Rays",
+           speaker != 'Frey Guard',
+           speaker != 'Girl',
+           speaker != 'Gold Cloak',
+           speaker != 'Guard',
+           speaker != 'Guard 1',
+           speaker != 'Guard 2',
+           speaker != 'Guard Captain',
+           speaker != 'Handmaiden',
+           speaker != 'Head',
+           speaker != 'Head Prostitute',
+           speaker != 'Hooded Figure',
+           speaker != 'Hunters',
+           speaker != 'Khal #1',
+           speaker != 'Khal #2',
+           speaker != 'Khal #3',
+           speaker != 'Khal #4',
+           speaker != "King's Landing Page",
+           speaker != "King's Landing Baker",
+           speaker != "King’s Landing Guard",
+           speaker != "King's Soldier",
+           speaker != 'Kings Guard',
+           speaker != 'Knight',
+           speaker != 'Knight 1',
+           speaker != 'Knight 2',
+           speaker != 'Knight 3',
+           speaker != 'Knight 4',
+           speaker != 'Knight 5',
+           speaker != 'Knight of House Bracken',
+           speaker != 'Knight of House Whent',
+           speaker != 'Lannister Scout',
+           speaker != 'Lannister Soldier',
+           speaker != 'Leader',
+           speaker != 'Leaf',
+           speaker != 'Listeners',
+           speaker != 'Little Bird',
+           speaker != 'Lord',
+           speaker != 'Maester',
+           speaker != 'Maester 1',
+           speaker != 'Maester 2',
+           speaker != 'Maester Of Arms',
+           speaker != 'Maid',
+           speaker != 'Male Voice #1',
+           speaker != 'Male Voice #2',
+           speaker != 'Man #1',
+           speaker != 'Man #2',
+           speaker != 'Man #3',
+           speaker != 'Man 1',
+           speaker != 'Man 2',
+           speaker != 'Man 3',
+           speaker != 'Man 4',
+           speaker != 'Men',
+           speaker != 'Merchant',
+           speaker != 'Merry',
+           speaker != 'Messenger',
+           speaker != 'Militant',
+           speaker != 'Mistress',
+           speaker != 'Night Watch Stable Boy',
+           speaker != 'Night Watchman',
+           speaker != 'Night Watchman #1',
+           speaker != 'Night Watchman #2',
+           speaker != 'Night Watcher #1',
+           speaker != 'Night Watcher #2',
+           speaker != 'Night Watchmen #1',
+           speaker != 'Old Man',
+           speaker != 'Owner',
+           speaker != 'Pig Farmer',
+           speaker != 'Priest',
+           speaker != 'Priestess',
+           speaker != 'Prostitute',
+           speaker != 'Quick',
+           speaker != 'Rider',
+           speaker != 'Septa',
+           speaker != 'Rider',
+           speaker != 'Several Stark Bannermen',
+           speaker != 'Shadow Tower Ray',
+           speaker != 'Shouting',
+           speaker != 'Slave Owner',
+           speaker != 'Slaver',
+           speaker != 'Soldier',
+           speaker != 'Soldier 1',
+           speaker != 'Soldier 2',
+           speaker != 'Squire',
+           speaker != 'Stable Boy',
+           speaker != 'Stark Bannermen',
+           speaker != 'Stark Guard',
+           speaker != 'Steward',
+           speaker != 'Steward Of House Stark',
+           speaker != 'Storyteller',
+           speaker != 'Street Urchin',
+           speaker != 'Strong',
+           speaker != 'Survivor',
+           speaker != 'The Group',
+           speaker != 'Thin Man',
+           speaker != 'Tribesmen Of The Vale',
+           speaker != 'Unidentified Night Watchers',
+           speaker != 'Unsullied 1',
+           speaker != 'Vale Knight',
+           speaker != 'Voice',
+           speaker != 'Voices Outside',
+           speaker != 'Waitress',
+           speaker != 'Watchman',
+           speaker != 'White',
+           speaker != 'Wife #1',
+           speaker != 'Wife #2',
+           speaker != 'Wife#1',
+           speaker != 'Wildling',
+           speaker != 'Wildling 1',
+           speaker != 'Wildling 2',
+           speaker != 'Wine Merchant',
+           speaker != 'Woman 2',
+           speaker != 'Young Man',
+           speaker != 'Young Man #2')
+           
+all_characters_str = tibble::tibble()
+for(i in 1:dim(speaking_characters)[1]){
+  temp_name = speaking_characters$joined_name[i]
+  all_characters_str = paste0(all_characters_str, temp_name, "|")
+}
+# Obtain spoken names
+all_characters_str = stringr::str_sub(all_characters_str, 1, nchar(all_characters_str)-1)
+spoken = as.data.frame(stringr::str_extract_all(clean_data$line, all_characters_str, simplify = TRUE))
+colnames(spoken) = paste0("name", 1:dim(spoken)[2])
+speaking_characters$speaker = as.character(speaking_characters$speaker)
+
+# Clean spoken names
+for(i in 1:dim(speaking_characters)){
+  temp_character = speaking_characters[i,]
+  for(j in 1:dim(spoken)[2]){
+    name_j = spoken[,j]
+    spoken[,j] = str_replace(name_j, temp_character$joined_name, temp_character$speaker)
+  } 
+}
+
+# Get rid of Jon Arryn spoken being interpreted as Jon Snow
+spoken$name1[which(str_detect(clean_data$line, "Jon Arryn") == TRUE & spoken$name1 == 'Jon Snow')] = ""
+spoken$name2[which(str_detect(clean_data$line, "Jon Arryn") == TRUE & spoken$name2 == 'Jon Snow')] = ""
+spoken$name3[which(str_detect(clean_data$line, "Jon Arryn") == TRUE & spoken$name3 == 'Jon Snow')] = ""
+
+# Generate a single vector of spoken names
+single_spoken_str = numeric()
+for(i in 1:dim(spoken)[1]){
+  temp_spoken = spoken[i,]
+  single_spoken_str[i] = apply(temp_spoken, 1, paste, collapse = ", ")
+}
+single_spoken_str = str_replace(single_spoken_str, ", , , , , , , " , "")
+single_spoken_str = str_replace(single_spoken_str, ", , , , , , " , "")
+single_spoken_str = str_replace(single_spoken_str, ", , , , , " , "")
+single_spoken_str = str_replace(single_spoken_str, ", , , , " , "")
+single_spoken_str = str_replace(single_spoken_str, ", , , " , "")
+single_spoken_str = str_replace(single_spoken_str, ", , " , "")
+
+names(single_spoken_str) = 'all_names_spoken'
+
+clean_data = bind_cols(clean_data, as.data.frame(spoken), as.data.frame(single_spoken_str))
+
+clean_data = clean_data %>%
+  mutate(speaker = stringr::str_trim(speaker, side = "both"))
+
+save(speaking_characters, file = 'Data/speaking_characters.RData')
+
+save(clean_data, file = 'Data/clean_data.RData')
+```
+
+4. Clean Character Death Timeline
+
+I manually watched season 7 and recorded the death times of the characters to add for the analysis.
+
+```{r}
+# Filter to season 7
+season_7_deaths = time.com_death_data %>% 
+  dplyr::filter(season == 7)
+
+# Manually add death times for season 7 deaths
+season_7_deaths$times[which(season_7_deaths$who == "Nymeria Sand")] = "00:52:15"
+season_7_deaths$times[which(season_7_deaths$who == "Obara Sand")] = "00:51:20"
+season_7_deaths$times[which(season_7_deaths$who == "Tyene Sand")] = "00:25:22"
+season_7_deaths$times[which(season_7_deaths$who == "Olenna Tyrell")] = "01:02:08"
+season_7_deaths$times[which(season_7_deaths$who == "Randyll Tarly")] = "00:07:45"
+season_7_deaths$times[which(season_7_deaths$who == "Dickon Tarly")] = "00:07:45"
+season_7_deaths$times[which(season_7_deaths$who == "Thoros of")] = "00:25:03"
+season_7_deaths$times[which(season_7_deaths$who == "Petyr")] = "00:50:08"
+
+# Replace season 7 deaths in time.com_death_data
+time.com_death_data[which(time.com_death_data$season == 7),] = season_7_deaths
+
+# Add Viserion's death to season 7 -- dragon death but very emotional
+time.com_death_data = dplyr::add_row(time.com_death_data,
+                                     who = "Viserion", 
+                                     season = 7, 
+                                     episode = 6, 
+                                     times = "00:50:13", 
+                                     how =  "shot by the Knight King", 
+                                     specific_how = "Knight King")
+
+##########
+# Clean who and specific how column
+##########
+
+death_times_clean = death_times
+
+# Replace who characters in death_times 
+for(i in 1:dim(speaking_characters)[1]){
+  temp_character = speaking_characters %>% 
+    slice(i)
+  death_times_clean = death_times_clean %>%
+    mutate(who = stringr::str_replace_all(who, temp_character$joined_name, temp_character$speaker),
+           who = stringr::str_trim(who, side = "both"),
+           specific_how = stringr::str_replace(specific_how, temp_character$joined_name, temp_character$speaker),
+           specific_how = stringr::str_trim(specific_how, side = "both"))
+}
+
+death_times_clean = death_times_clean %>%
+  mutate(who = stringr::str_replace(who, 'Jon Snow Arryn', 'Jon Snow'),
+         who = stringr::str_replace(who, 'Old Nan Man', 'Old Man'),
+         who = stringr::str_replace(who, 'Old Nan Woman', 'Old Woman'),
+         who = stringr::str_replace(who, 'Jon Snow Umber', 'Jon Umber'),
+         who = stringr::str_replace(who, 'Grand Maester Pycelle', 'Maester Pycelle'),
+         who = stringr::str_replace(who, 'Walder Frey Rivers', 'Walder Rivers'),
+         specific_how = stringr::str_replace(specific_how, 'White Rat Walker', 'White Walker'),
+         specific_how = stringr::str_replace(specific_how, 'The Sandor Clegane', 'Sandor Clegane'),
+         specific_how = stringr::str_replace(specific_how, 'The Mountain', 'Gregor Clegane'),
+         specific_how = stringr::str_replace(specific_how, 'Jaime Lannister Lannister', 'Jaime Lannister'),
+         specific_how = stringr::str_replace(specific_how, 'Rob Stark', 'Robb Stark'),
+         specific_how = stringr::str_replace(specific_how, 'Daenerys', 'Daenerys Targaryen'),
+         specific_how = stringr::str_replace(specific_how, 'Brienne of Tarth Of Tarth', 'Brienne Of Tarth'),
+         specific_how = stringr::str_replace(specific_how, 'Wildfire Explosion', 'Wildfire'),
+         specific_how = stringr::str_replace(specific_how, 'Daenerys\' Dragons', 'Dragon'),
+         specific_how = stringr::str_replace(specific_how, 'Bolton Snow', 'Bolton'),
+         specific_how = stringr::str_replace(specific_how, 'Walder Frey Rivers', 'Walder Rivers'),
+         specific_how = stringr::str_replace(specific_how, 'The Sandor Clegane', 'Sandor Clegane'),
+         specific_how = stringr::str_replace(specific_how, 'Wight', 'White Walker'),
+         specific_how = stringr::str_replace(specific_how, 'Sand Snakes', 'Sand'),
+         specific_how = stringr::str_replace(specific_how, 'A Pack Of Child-Wights', 'White Walker'),
+         specific_how = stringr::str_replace(specific_how, 'His Own Dogs', 'Sansa Stark'),
+         specific_how = stringr::str_replace(specific_how, 'Juming Out A Window', 'Suicide'),
+         specific_how = stringr::str_replace(specific_how, 'Stark Star', 'Stark'))
+
+# Add season 7 deaths from other dataset
+death_times_clean = dplyr::bind_rows(death_times_clean, time.com_death_data[which(time.com_death_data$season == 7),])
+# Lubridate times
+death_times_clean = death_times_clean %>% 
+  mutate(times = lubridate::hms(times))
+# Save file
+save(death_times_clean, 
+     file = "Data/death_times_clean.RData")
+  
+# time.com_death_data columns look clean
+time.com_death_data_clean = time.com_death_data
+save(time.com_death_data_clean, 
+     file = "Data/time.com_death_data_clean.RData")
+```
+
+
+
+
+
+
+
+
+
