@@ -63,8 +63,8 @@ University of Pennsylvania
 __Programming:__
 
 Expert: R  
-Some experience: SAS, bash scripting, Python, MATLAB, Stata  
-Other tools: git, LaTeX, Office Suite, RMarkdown  
+Some experience: SAS, bash scripting, Python, MATLAB, Stata, HTML  
+Other tools: GitHub, LaTeX, Office Suite, RMarkdown  
 
 ***
 
