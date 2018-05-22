@@ -100,7 +100,7 @@ Other tools: GitHub, LaTeX, Office Suite, RMarkdown
          <br>
          <br>
          <br>
-        <a href="CV--2018.pdf" download=""><button>Download CV</button></a>
+        <a href="CV -- 2018.pdf" download=""><button>Download CV</button></a>
          <br>
          <br>
          <br>
