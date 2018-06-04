@@ -6,10 +6,21 @@
     <description>Recent content on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 01 Apr 2018 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 04 Jun 2018 21:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SMI R-Hack-A-Pack: Package creation - From functions to a (GitHub) package</title>
+      <link>/blog/2018-06-04-rpackage/</link>
+      <pubDate>Mon, 04 Jun 2018 21:13:14 -0500</pubDate>
+      
+      <guid>/blog/2018-06-04-rpackage/</guid>
+      <description>Download my slides for SMI 2018 R-Hack-A-Pack. I covered Package creation: From function to a GitHub Package.
+  Download Slides    For the .Rmd you can download here.
+  Download .Rmd    </description>
+    </item>
     
     <item>
       <title>Scraping Game of Thrones Data</title>

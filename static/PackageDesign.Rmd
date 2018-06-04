@@ -1,0 +1,150 @@
+---
+title: "Package creation: From function to a (GitHub) package"
+author: Alessandra Valcarcel
+email: alval@pennmedicine.upenn.edu
+date: June 5, 2018
+output:
+  ioslides_presentation:
+    logo: pennmedicine.png
+    css: customize.css
+---
+
+## Package Structure
+
+<center><img src="structure.png" alt="Structure" style="width:90%"></center>
+
+## Shameless Plug
+
+- `aliviateR` is a package to make your package
+- Warning: Still in development stages
+- `aliviateR::alval_flow()` does most of the dirty work
+- [GitHub Repo](https://github.com/avalcarcel9/aliviateR)
+- [Vignette](https://github.com/avalcarcel9/aliviateR/blob/master/vignettes/vignette.Rmd)
+- [Reference Material on usethis](https://www.tidyverse.org/articles/2017/11/usethis-1.0.0/)
+
+## Create The Structure
+
+- Kristin covered a bit of the point and click package creation
+- We can also use the `usethis` package to create the package using code
+
+```{r, eval = FALSE}
+# install.packages('usethis')
+library(usethis)
+```
+
+```{r, eval = FALSE}
+usethis::create_package(path = '/Users/alval/Desktop/mypkg')
+```
+
+- This will automatically create the man, DESCRIPTION, .Rproj, NAMESPACE, and R objects while opening a new RStudio session
+
+## Host on GitHub {.smaller}
+
+- You can create the GitHub repo online before making the package and clone locally
+
+```{bash, eval = FALSE}
+cd '/path/to/package'
+git clone https://github.com/your_username/your_package_name.git
+```
+
+- You can also set up GitHub through R
+- For this to work, you’ll need to set a GITHUB_PAT environment variable in your ~/.Renviron. Follow [Jenny Bryan’s instructions](http://happygitwithr.com/github-pat.html#step-by-step) or this [R Blog](https://www.r-bloggers.com/rstudio-and-github/), and use `usethis::edit_r_environ()` to easily access the right file for editing
+
+```{r, eval = FALSE}
+# Make sure your working directory is set to the package
+usethis::use_git(message = "my first commit")
+cred = git2r::cred_ssh_key(publickey = "/Users/alval/.ssh/id_rsa.pub",
+                           privatekey = "/Users/alval/.ssh/id_rsa")
+usethis::use_github(credentials = cred)
+```
+
+## DESCRIPTION Basic {.smaller}
+
+Package: mypkg  
+Version: 0.0.0.9000  
+Title: What the Package Does (One Line, Title Case)  
+Description: What the package does (one paragraph).  
+Authors@R: person("First", "Last", , "first.last@example.com", c("aut", "cre"))  
+License: What license it uses  
+Encoding: UTF-8  
+LazyData: true  
+ByteCompile: true  
+URL: https://github.com/avalcarcel9/mypkg  
+BugReports: https://github.com/avalcarcel9/mypkg/issues  
+
+- I always copy and paste a previous packages DESCRIPTION and edit. If you don't have a previous option then find someone's on GitHub.
+
+## Dependencies
+
+- To declare that your project has some dependencies, use `usethis::use_package()`:
+
+```{r, eval = FALSE}
+usethis::use_package("ggplot2", type = "Imports")
+usethis::use_package("knitr", type = "suggests")
+```
+
+- You'll now see ggplot was added to Imports and knitr was added to Suggests section
+- You may want to manually add version numbers to dependencies
+- All packages you depend on should be up to date with the most recent version to avoid errors and warnings
+
+```{r, eval = FALSE}
+sessionInfo()
+```
+
+## Documentation {.smaller}
+
+- `use_roxygen_md()` sets up roxygen2 and enables markdown mode so you can use markdown in your roxygen2 comment blocks
+- `use_package_doc()` creates a skeleton documentation file for the complete package, taking the advantage of the latest roxygen2 features to minimize duplication between the DESCRIPTION and the documentation
+`use_readme_rmd()` creates a README.Rmd to describe what your package does and why people should care about it
+`use_readme_md()` creates a README.md to describe what your package does and why people should care about it
+- `use_news_md()` creates a basic NEWS.md for you to record changes
+- `use_vignette("vignette-name")` configures the DESCRIPTION and creates a .Rmd template in vignettes/
+
+## Badges {.smaller}
+
+- You can find a complete list of badges [here](https://shields.io/)
+- `usethis` provides some functions to create the badge code you'll add to the README
+
+```{r, eval = FALSE}
+usethis::use_badge("travis", 
+                   href = "https://img.shields.io/travis/USER/REPO.svg", 
+                   src = "https://shields.io/")
+usethis::use_cran_badge()
+```
+
+- The package `badgecreatr` is also very useful
+- This [package](https://github.com/RMHogervorst/badgecreatr) is still developmental so use with caution
+
+```{r, eval = FALSE}
+# devtools::install_github("rmhogervorst/badgecreatr")
+library(badgecreatr)
+badgecreatr::badge_travis(ghaccount = "avalcarcel9", ghrepo = "mypkg")
+badgecreatr::badge_codecov(ghaccount = "avalcarcel9", ghrepo = "mypkg")
+badgecreatr::badge_cran(packagename = "mypkg")
+badgecreatr::badge_packageversion(chunk = TRUE)
+```
+
+## Build and Check
+
+- You can use `devtools` to do this with R code
+
+```{r, eval = FALSE}
+# install.packages('devtools')
+devtools::build(pkg = "mypkg", vignettes = TRUE)
+devtools::check(pkg = "mypkg")
+```
+
+- You can also use the point and click menu options if you're inside of your .Rproj
+
+<center><img src="build.png" alt="Build" style="width:70%"></center>
+
+## Comments? Questions? Concerns?
+
+Thank you for listening!
+
+
+
+
+
+
+

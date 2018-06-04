@@ -1,0 +1,16 @@
+---
+title: "SMI R-Hack-A-Pack: Package creation - From functions to a (GitHub) package"
+author: "Alessandra Valcarcel"
+date: 2018-06-04T21:13:14-05:00
+categories: ["R Package Creation"]
+tags: ["R Package", "usethis"]
+output: html_document
+---
+
+Download my slides for [SMI 2018](https://smi2018.netlify.com/) R-Hack-A-Pack. I covered Package creation: From function to a GitHub Package.
+
+<center><a href="PackageDesign.html" download=""><button>Download Slides</button></a></center>
+
+For the .Rmd you can download here.
+
+<center><a href="PackageDesign.Rmd" download=""><button>Download .Rmd</button></a></center>
