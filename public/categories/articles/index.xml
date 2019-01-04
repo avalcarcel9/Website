@@ -25,8 +25,8 @@ University of Pennsylvania
 B.A. Biology and Statistics (Honors) (2015)
 University of Connecticut
 Select Publications:
-2018 - Journal of Neuroimaging. &amp;ldquo;MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions.&amp;rdquo;
-2017 - Frontiers in Genetics. &amp;ldquo;Illustrating, Quantifying and Correcting for Bias in Post-hoc Analysis of Gene-Based Rare Variant Tests of Association.</description>
+2018 - Neuroimage: Clinical. &amp;ldquo;A dual modeling approach to automatic segmentation of cerebral T2 hyperintensities and T1 black holes in multiple sclerosis.&amp;rdquo;
+2018 - Journal of Neuroimaging. &amp;ldquo;MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions.</description>
     </item>
     
     <item>
@@ -45,7 +45,7 @@ Select Publications:
       
       <guid>/software/</guid>
       <description>MIMoSA 
-The mimosa R package is now live on Neuroconductor. This package allows you to implement the MIMoSA method discussed in our paper to automatically segment white matter lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data. You can access the page directly here.</description>
+The mimosa R package is now live on Neuroconductor with the development version on GitHub. This package allows you to implement the MIMoSA method discussed in our original paper and follow up paper to automatically segment white matter both T2 hyperintense lesions and T1 hypointense lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data.</description>
     </item>
     
   </channel>

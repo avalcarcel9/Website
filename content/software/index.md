@@ -15,7 +15,7 @@ showpagemeta = false
 
 <a href="https://github.com/avalcarcel9/mimosa/blob/master/vignettes/mimosa_git.md"><img src="/img/sticker.png" height="192" alt="mimosa logo" align="right" /></a>
 
-The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/). This package allows you to implement the MIMoSA method discussed in our [paper](http://onlinelibrary.wiley.com/doi/10.1111/jon.12506/full) to automatically segment white matter lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data. You can access the page directly [here](https://neuroconductor.org/package/details/mimosa). For the most up to date version please see my GitHub [here](https://github.com/avalcarcel9/mimosa).
+The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/package/details/mimosa) with the development version on [GitHub](https://github.com/avalcarcel9/mimosa). This package allows you to implement the MIMoSA method discussed in our [original paper](http://onlinelibrary.wiley.com/doi/10.1111/jon.12506/full) and [follow up paper](https://www.sciencedirect.com/science/article/pii/S2213158218303231?via%3Dihub) to automatically segment white matter both T2 hyperintense lesions and T1 hypointense lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data.
 
 To download from Neuroconductor run the following code:
 
@@ -34,7 +34,7 @@ neuro_install(mimosa,
 To download from GitHub run the following code:
 
 ```{r}
-install.packages("devtools")
+# install.packages("devtools")
 devtools::install_github("avalcarcel9/mimosa")
 ```
 
@@ -53,7 +53,7 @@ devtools::install_github("avalcarcel9/GoT")
 
 ### R Flow
 
-`aliviateR` is an R package I've built to help automate my R workflow. It has functions that help to automate building R packages. Additionally, it has some functions to help create a tibble of filepaths organized by subject ID. This is really useful if you have data from each subject in separate objects and are loading multiple. This package is a work in progress and is only available as a development version. For documentation see the package [GitHub](https://github.com/avalcarcel9/aliviateR) and [readme](https://github.com/avalcarcel9/aliviateR/blob/master/README.Rmd).
+`aliviateR` is an R package I've built to help automate my R workflow. It has functions that help to automate building R packages. Additionally, it has some functions to calculate the Sørensen–Dice coefficient, help create a tibble of filepaths organized by subject ID, load all R objects in a folder organizing in a clean tibble format. While this package was created by me for me it can if you make R packages frequently or use similar data it may serve you as well. This package will forever be a work in progress but is available as a development version. For documentation see the package [GitHub](https://github.com/avalcarcel9/aliviateR) and [readme](https://github.com/avalcarcel9/aliviateR/blob/master/README.Rmd).
 
 To download run the following code:
 

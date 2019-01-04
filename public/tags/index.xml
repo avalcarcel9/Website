@@ -21,24 +21,6 @@
     </item>
     
     <item>
-      <title>Aviato</title>
-      <link>/tags/aviato/</link>
-      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
-      
-      <guid>/tags/aviato/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bachman</title>
-      <link>/tags/bachman/</link>
-      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
-      
-      <guid>/tags/bachman/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Blogdown</title>
       <link>/tags/blogdown/</link>
       <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
@@ -53,6 +35,15 @@
       <pubDate>Sun, 01 Apr 2018 21:13:14 -0500</pubDate>
       
       <guid>/tags/data-scraping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Game of Thrones</title>
+      <link>/tags/game-of-thrones/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/tags/game-of-thrones/</guid>
       <description></description>
     </item>
     
@@ -93,6 +84,15 @@
     </item>
     
     <item>
+      <title>Multiple Sclerosis</title>
+      <link>/tags/multiple-sclerosis/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/tags/multiple-sclerosis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Neuroconductor</title>
       <link>/tags/neuroconductor/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
@@ -102,20 +102,20 @@
     </item>
     
     <item>
-      <title>Pied Piper</title>
-      <link>/tags/pied-piper/</link>
-      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
-      
-      <guid>/tags/pied-piper/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>R Package</title>
       <link>/tags/r-package/</link>
       <pubDate>Mon, 04 Jun 2018 21:13:14 -0500</pubDate>
       
       <guid>/tags/r-package/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Research</title>
+      <link>/tags/research/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/tags/research/</guid>
       <description></description>
     </item>
     

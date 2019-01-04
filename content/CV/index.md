@@ -35,6 +35,8 @@ University of Connecticut
 
 __Select Publications:__
 
+2018 - Neuroimage: Clinical. "A dual modeling approach to automatic segmentation of cerebral T2 hyperintensities and T1 black holes in multiple sclerosis."
+
 2018 - Journal of Neuroimaging. "MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions."
 
 2017 - Frontiers in Genetics. "Illustrating, Quantifying and Correcting for Bias in Post-hoc Analysis of Gene-Based Rare Variant Tests of Association."
@@ -52,7 +54,7 @@ __Experience:__
 Graduate Student _(2015 - present)_  
 University of Pennsylvania
 
-Teaching Assistant _(2016 - 2017)_  
+Teaching Assistant _(2016 - 2018)_  
 University of Pennsylvania
 
 Educational Fellowship Recipient _(2015 - 2017)_  
@@ -100,7 +102,7 @@ Other tools: GitHub, LaTeX, Office Suite, RMarkdown
          <br>
          <br>
          <br>
-        <a href="CV -- 2018.pdf" download=""><button>Download CV</button></a>
+        <a href="CV -- 2019.pdf" download=""><button>Download CV</button></a>
          <br>
          <br>
          <br>

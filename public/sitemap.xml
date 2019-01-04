@@ -62,18 +62,6 @@
   </url>
   
   <url>
-    <loc>/tags/aviato/</loc>
-    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/bachman/</loc>
-    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/blogdown/</loc>
     <lastmod>2018-03-15T21:13:14-05:00</lastmod>
     <priority>0</priority>
@@ -110,6 +98,12 @@
   </url>
   
   <url>
+    <loc>/tags/game-of-thrones/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/game-of-thrones-got/</loc>
     <lastmod>2018-04-01T21:13:14-05:00</lastmod>
     <priority>0</priority>
@@ -134,13 +128,13 @@
   </url>
   
   <url>
-    <loc>/tags/neuroconductor/</loc>
+    <loc>/tags/multiple-sclerosis/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/pied-piper/</loc>
+    <loc>/tags/neuroconductor/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
@@ -154,6 +148,12 @@
   <url>
     <loc>/categories/r-package-creation/</loc>
     <lastmod>2018-06-04T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/research/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   

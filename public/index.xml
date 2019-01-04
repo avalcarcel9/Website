@@ -56,8 +56,8 @@ University of Pennsylvania
 B.A. Biology and Statistics (Honors) (2015)
 University of Connecticut
 Select Publications:
-2018 - Journal of Neuroimaging. &amp;ldquo;MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions.&amp;rdquo;
-2017 - Frontiers in Genetics. &amp;ldquo;Illustrating, Quantifying and Correcting for Bias in Post-hoc Analysis of Gene-Based Rare Variant Tests of Association.</description>
+2018 - Neuroimage: Clinical. &amp;ldquo;A dual modeling approach to automatic segmentation of cerebral T2 hyperintensities and T1 black holes in multiple sclerosis.&amp;rdquo;
+2018 - Journal of Neuroimaging. &amp;ldquo;MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions.</description>
     </item>
     
     <item>
@@ -66,7 +66,13 @@ Select Publications:
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/about/</guid>
-      <description>I&amp;rsquo;m currently a third-year PhD student in Biostatistics in the Department of Biostatistics, Epidemiology, and Informatics at the University of Pennsylvania. I am an active researcher in the PennSIVE working group under the mentorship of Russell [Taki] Shinohara. Primarily, my research interests lie in the development of statistical methods for analyzing neuroimaging data sets with the goal of understanding disease processes in the brain. Currently, my projects involve the analysis of multi-sequence structural MRI for the study of multiple sclerosis.</description>
+      <description>&amp;lt;!DOCTYPE html&amp;gt;    body {margin:0;}
+ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333; position: fixed; top: 0; width: 100%; }
+li { float: left; }
+li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; }
+li a:hover:not(.active) { background-color: #111; }
+.active { background-color: #4CAF50; }   
+ Home News Contact About  Fixed Top Navigation Bar Scroll this page to see the effect The navigation bar will stay at the top of the page while scrolling Some text some text some text some text.</description>
     </item>
     
     <item>
@@ -85,7 +91,7 @@ Select Publications:
       
       <guid>/software/</guid>
       <description>MIMoSA 
-The mimosa R package is now live on Neuroconductor. This package allows you to implement the MIMoSA method discussed in our paper to automatically segment white matter lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data. You can access the page directly here.</description>
+The mimosa R package is now live on Neuroconductor with the development version on GitHub. This package allows you to implement the MIMoSA method discussed in our original paper and follow up paper to automatically segment white matter both T2 hyperintense lesions and T1 hypointense lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data.</description>
     </item>
     
   </channel>
