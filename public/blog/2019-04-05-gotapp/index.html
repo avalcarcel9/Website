@@ -1,17 +1,74 @@
----
-title: "A Maester-Level Network Analysis of Game of Thrones"
-author: "Alessandra Valcarcel"
-date: 2019-4-05T21:13:14-05:00
-categories: ["Game of Thrones"]
-tags: ["Game of Thrones", "Network Analysis", "Shiny App"]
-output: 
-  bookdown::html_document2:
-    number_sections: false
----
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Personal website">
+<meta name="keywords" content="student,statistics,biostatistics,Penn">
+
+<base href="/">
+
+<title>Alessandra [Ali] Valcarcel</title>
+
+<meta name="generator" content="Hugo 0.36" />
 
 
 
-<p><strong>Warning: This post contains spoilers for Game of Thrones seasons 1-7.</strong></p>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-US">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">A Maester-Level Network Analysis of Game of Thrones</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        PUBLISHED ON APR 5, 2019 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/game-of-thrones">GAME OF THRONES</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p><strong>Warning: This post contains spoilers for Game of Thrones seasons 1-7.</strong></p>
 <p>Like <a href="https://www.nytimes.com/2017/08/28/arts/television/game-of-thrones-finale-sets-ratings-record.html">16.5+ million</a> people across the globe, I anxiously await the return of the eighth and final season of Game of Thrones (GoT) on April, 14, 2019. After a two year hiatus, I wanted to refresh my memory on the plot lines across seasons 1 through 7 before HBO wraps up the conflict.</p>
 <p>In preparation, I decided to evaluate the statistical networks between characters across seasons 1 through 7 to consider how the network of characters has changed over time. Last year, I spent the spring <a href="https://en.wikipedia.org/wiki/Data_scraping">scraping</a> the <a href="https://genius.com/artists/Game-of-thrones">scripts</a> from the internet and building a GoT statistical network. I assigned a numeric value to quantify connections among characters by how often a character speaking mentions another characters name. For example, if the lines read:</p>
 <p>Petyr Baelish (Littlefinger): “…you might have been my child but we don’t live in that world. You’re more beautiful than she ever was.”<br />
@@ -211,3 +268,87 @@ Figure 14: Episode networks are presented across all seasons. The networks are c
 <p>First and foremost thank you George R.R. Martin for imagining and sharing Game of Thrones with the world. Thank you HBO for transforming the text to live action. <a href="https://johnmuschelli.com/">John Muschelli</a> was invaluable to this project and helped me scrape and analyze these data. This project would also not be possible without Taki Shinohara giving me the space and freedom to pursue this project independent of my other work related research and duties. My sister Cristina Valcarcel graciously helped me edit the work.</p>
 <p>The views expressed in this post are solely those of the author.</p>
 </div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      TAGS:
+      
+      
+      <a class="meta" href="/tags/game-of-thrones">GAME OF THRONES</a>, 
+      
+      <a class="meta" href="/tags/network-analysis">NETWORK ANALYSIS</a>, 
+      
+      <a class="meta" href="/tags/shiny-app">SHINY APP</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/blog/2018-06-04-rpackage/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2018. Alessandra [Ali] Valcarcel.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-115574303-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
