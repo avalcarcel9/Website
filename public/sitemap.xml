@@ -38,6 +38,10 @@
   </url>
   
   <url>
+    <loc>/blog/2019-01-03-gotapp/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
@@ -104,6 +108,11 @@
   </url>
   
   <url>
+    <loc>/categories/game-of-thrones/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/game-of-thrones-got/</loc>
     <lastmod>2018-04-01T21:13:14-05:00</lastmod>
     <priority>0</priority>
@@ -134,6 +143,11 @@
   </url>
   
   <url>
+    <loc>/tags/network-analysis/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/neuroconductor/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
@@ -154,6 +168,11 @@
   <url>
     <loc>/tags/research/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/shiny-app/</loc>
     <priority>0</priority>
   </url>
   

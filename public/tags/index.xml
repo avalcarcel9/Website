@@ -93,6 +93,15 @@
     </item>
     
     <item>
+      <title>Network Analysis</title>
+      <link>/tags/network-analysis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/network-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Neuroconductor</title>
       <link>/tags/neuroconductor/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
@@ -116,6 +125,15 @@
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/tags/research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shiny App</title>
+      <link>/tags/shiny-app/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shiny-app/</guid>
       <description></description>
     </item>
     

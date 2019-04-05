@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Game of Thrones on Alessandra [Ali] Valcarcel</title>
+    <link>/categories/game-of-thrones/</link>
+    <description>Recent content in Game of Thrones on Alessandra [Ali] Valcarcel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	<atom:link href="/categories/game-of-thrones/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Maester-Level Network Analysis of Game of Thrones</title>
+      <link>/blog/2019-01-03-gotapp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019-01-03-gotapp/</guid>
+      <description>Warning: This post contains spoilers for Game of Thrones seasons 1-7.
+Like 16.5+ million people across the globe, I anxiously await the return of the eighth and final season of Game of Thrones (GoT) on April, 14, 2019. After a two year hiatus, I wanted to refresh my memory on the plot lines across seasons 1 through 7 before HBO wraps up the conflict.
+In preparation, I decided to evaluate the statistical networks between characters across seasons 1 through 7 to consider how the network of characters has changed over time.</description>
+    </item>
+    
+  </channel>
+</rss>
