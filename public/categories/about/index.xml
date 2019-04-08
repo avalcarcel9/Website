@@ -17,13 +17,7 @@
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/about/</guid>
-      <description>&amp;lt;!DOCTYPE html&amp;gt;    body {margin:0;}
-ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333; position: fixed; top: 0; width: 100%; }
-li { float: left; }
-li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; }
-li a:hover:not(.active) { background-color: #111; }
-.active { background-color: #4CAF50; }   
- Home News Contact About  Fixed Top Navigation Bar Scroll this page to see the effect The navigation bar will stay at the top of the page while scrolling Some text some text some text some text.</description>
+      <description>I&amp;rsquo;m currently a fourth-year doctoral student studying Biostatistics in the Department of Biostatistics, Epidemiology, and Informatics at the University of Pennsylvania. I am an active researcher in the PennSIVE working group under the mentorship of Russell [Taki] Shinohara. Primarily, my research interests lie in the development of statistical methods for analyzing neuroimaging data sets with the goal of understanding disease processes in the brain. Currently, my projects involve the analysis of multi-sequence structural MRI for the study of multiple sclerosis.</description>
     </item>
     
   </channel>
