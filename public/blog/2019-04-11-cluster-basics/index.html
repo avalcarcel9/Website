@@ -68,7 +68,617 @@
 </section>
 <section id="content-pane" class="row">
   <div class="col-md-12 text-justify content">
-    <p>test</p>
+    <div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>I’ve worked on imaging data for about 4 years now. Imaging data is too large to run analyses on a personal computer so when I began working in the field I was forced to learn how to use the <a href="https://www.med.upenn.edu/hpc/">Penn Medicine Academic Computing Services High-Performance Computing Cluster (Penn HPC)</a>. I love coding but this was a whole new language and way to think about coding and the learning curve was steep. I luckily have both an advisor and a network of mentors that are computing savvy and I was able to pick up bits and pieces of efficient ways to use the cluster. I decided to compile my knowledge into one reference, this blog post, so that I not only have everything in one place but others can learn how to utilize the cluster.</p>
+<center>
+<iframe src="https://giphy.com/embed/MCZ39lz83o5lC" width="480" height="257" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/MCZ39lz83o5lC">via GIPHY</a>
+</p>
+</center>
+<p>Remember, the cluster is a resource that all of the <a href="https://www.med.upenn.edu/">Perelman School of Medicine</a> has access to. Unlike a personal computer, if you use the cluster irresponsibly or incorrectly thousands of jobs and people could be affected. Be diligent and educate yourself before using the cluster to avoid accidentally hogging or breaking things for everyone. Also, be like your kindergarten self and remember that sharing is caring. Of course, there are a number of checks and balances to avoid a single user from taking everything but mis-use can and mistakes may still occur.</p>
+<p>The Penn HPC, or cluster as I’ll refer to it, is available to faculty, staff, and students at the University of Pennsylvania. The Penn HPC can be used for computation, high-performance storage, and long-term archiving of large data sets. The is made up of IBM hardware and LSF platform job scheduling system. This is just the type of cluster software we use. The other common platform is SGE. These are similar to saying Mac versus Windows for personal machines. They do the same things but require different languages and formats.</p>
+<p>More specifics about the cluster are provided in <strong>section <a href="#cluster-specs"><strong>??</strong></a></strong>. A good start to learn more and troubleshoot issues is simply to Google “array jobs lsf”, “batch jobs lsf”, “interactive jobs lsf”, “jobs LSF cluster”. IBM has a number of resources but I like to start <a href="https://www.ibm.com/support/knowledgecenter/en/SSWRJV_10.1.0/lsf_welcome/lsf_kc_get_started.html">here</a>. You can navigate from that page to find details on more specific processes.</p>
+<p>This post focuses on using the Penn HPC specifically for biostatistics related work. Since we use an LSF machine the content <em>may</em> be useful for others using the same platform. This post is designed for beginner to intermediate users. You should already have an account and know how to get onto and off of the cluster.</p>
+<p>I am by no means a computer scientist or computing expert. I’m just a really passionate biostatistics student that loves efficient computing. For advanced topics and resources you should always contact PMACS IT.</p>
+<p><strong>Warning</strong>: I use exclusively MacOS and Unix operating systems (OS) so commands shown will specifically work on these OS. Windows should be equivalent, similar, or exist. The cluster is a Unix based machine so these will work on the cluster.</p>
+</div>
+<div id="command-line" class="section level1">
+<h1>Command Line</h1>
+<p>The command line is a text interface for a computer. You can use command line on your computer and on the cluster. The command line passes on certain commands to the computer’s OS. To use the cluster, you should be familiar with command line both on your machine and on the cluster since you will request nodes and submit jobs through the command line.</p>
+<p>The most important commands, in my opinion, are shown below:</p>
+<ol style="list-style-type: decimal">
+<li><code>cd</code> - Change directory</li>
+<li><code>ls</code> - List files in the current directory</li>
+<li><code>pwd</code> - Show current working directory</li>
+<li><code>mv</code> - Move files/folders</li>
+<li><code>cp</code> - Copy files/folders</li>
+<li><code>man</code> - Show manual for a command</li>
+<li><code>mkdir</code> - Create a directory</li>
+<li><code>rmdir</code> - Remove an empty directory</li>
+<li><code>rm</code> - Remove files</li>
+<li><code>clear</code> - Clears the screen/command board</li>
+<li><code>*pattern*</code> - Uses all files with the pattern indicated</li>
+<li><code>touch</code> - Create an empty file</li>
+</ol>
+<p><strong>Warning</strong>: Be very careful using the rm command. Using the rm command can wipe out entire directories full of files. Be careful using it. For example, <code>rm -rf/</code> means remove (rm) - recursive (r) force (f) home (/). That is, the rm -rf/ command will delete every folder, file, and directory within your OS. It is the equivalent of wiping your entire hard drive clean.</p>
+<p>A few basic examples are shown below.</p>
+<p>Change the working directory to ‘/Users/alval/Box’:</p>
+<p>See what working directory you are currently in:</p>
+<pre><code>## /Users/alval/Box/Professional/Website/content/blog</code></pre>
+<p>Even though I changed the working directory to ‘/Users/alval/Box’ in the previous set of code the current directory is different. This is because I am using RMarkdown and in every code chunk it resets the working directory to the one the document sits in. This is why I have to include full file paths below even when I change working directories.</p>
+<p>List the objects in the current working directory:</p>
+<pre><code>## 2018-03-15-r-rmarkdown-blogdown-basics.Rmd
+## 2018-03-15-r-rmarkdown-blogdown-basics.html
+## 2018-04-1-r-rmarkdown-GoT-scrape.Rmd
+## 2018-04-1-r-rmarkdown-GoT-scrape.html
+## 2018-06-04-RPackage.Rmd
+## 2018-06-04-RPackage.html
+## 2019-04-05-GoTApp.Rmd
+## 2019-04-05-GoTApp.html
+## 2019-04-11-cluster-basics.Rmd
+## 2019-04-11-cluster-basics.html</code></pre>
+<p>Make a directory ‘test’ inside of ‘Box’ then list the objects in ‘Box’:</p>
+<pre><code>## Coursework
+## Grants
+## Lab_rotation_Ali
+## Notebook.docx
+## PhD Dissertation Archives
+## Professional
+## Random
+## Research
+## Teaching
+## rpackages
+## test
+## ~$tebook.docx</code></pre>
+<p>notice that ‘test’ is now a folder in ‘Box’.</p>
+<p>Move the test directory to ‘/Users/alval/Box/Research’ and list the objects in ‘Research’:</p>
+<pre><code>## Candidacy
+## Fall 2015 Rotation (OptInOut)
+## GoT_shiny
+## GoTorig
+## MIMoSA Spring 2016 Rotation and Masters Thesis
+## MIMoSA_T1
+## MIMoSA_T2
+## MIMoSA_package
+## PlotCode
+## Summer 2016 Rotation
+## Vignettes
+## adapt
+## cluster
+## imco
+## imco_app
+## tapas
+## test
+## tpot</code></pre>
+<p>notice test is now in ‘Research’. Because we moved the object rather than copy (<code>cp</code>) the original will no longer be in ‘Box’. Below I list the objects in ‘/Users/alval/Box’ to show ‘test’ is no longer there.</p>
+<pre><code>## Coursework
+## Grants
+## Lab_rotation_Ali
+## Notebook.docx
+## PhD Dissertation Archives
+## Professional
+## Random
+## Research
+## Teaching
+## rpackages
+## ~$tebook.docx</code></pre>
+<p>The code below changes the working directory to ‘/Users/alval/Box/Research/test’ then creates three empty text files (‘file1.txt’, ‘file2.txt’, ‘dummy.txt’), and then lists the objects in ‘test’:</p>
+<pre><code>## dummy.txt
+## file1.txt
+## file2.txt</code></pre>
+<p>Notice ‘file1.txt’, ‘file2.txt’, ‘dummy.txt’ are now listed.</p>
+<p>Remove the files with ‘file’ in their name and then list the remaining objects in ‘test’:</p>
+<pre><code>## dummy.txt</code></pre>
+<p>notice ‘file1.txt’ and ‘file2.txt’ were removed but ‘dummy.txt’ remains. This is because only objects with ‘file’ are removed.</p>
+<p>Now we set the working directory back to ‘Research’ and remove the ‘test’ directory:</p>
+<pre><code>## Candidacy
+## Fall 2015 Rotation (OptInOut)
+## GoT_shiny
+## GoTorig
+## MIMoSA Spring 2016 Rotation and Masters Thesis
+## MIMoSA_T1
+## MIMoSA_T2
+## MIMoSA_package
+## PlotCode
+## Summer 2016 Rotation
+## Vignettes
+## adapt
+## cluster
+## imco
+## imco_app
+## tapas
+## tpot</code></pre>
+<p>notice that test is no longer in Research since it has been deleted.</p>
+<p>For more information here is a very basic <a href="https://www.youtube.com/watch?v=5XgBd6rjuDQ">youtube video</a></p>
+<p>At the minimum you’ll need to be comfortable with the command line to get onto the cluster, submit jobs, and check job status.</p>
+</div>
+<div id="definitions-and-vocab" class="section level1">
+<h1>Definitions and Vocab</h1>
+<p>Most of this info was taken from IBM <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_foundations/lsf_introduction_to.html">here</a> and the reamining content was taken from Microsoft <a href="https://blogs.technet.microsoft.com/windowshpc/2008/04/14/how-that-nodesocketcore-thing-works/">here</a>.</p>
+<div id="grid-versus-cluster" class="section level2">
+<h2>Grid Versus Cluster</h2>
+<p><strong>Grid computing</strong> is the segregation of resources across multiple sites in order to solve a problem that can’t be solved by using the processing of a single computer.</p>
+<p><strong>Cluster computing</strong> uses several nodes that are made to run as a single entity.</p>
+<p><strong>Cloud computing</strong> is a new computing paradigm which provides a large pool of dynamic, scalable, and virtual resources to run processes. Think <a href="https://aws.amazon.com/">Amazon Web Services</a></p>
+<p><strong>Grid computing</strong> is sometimes distinguished from conventional high-performance computing systems such as <strong>cluster computing</strong> in that grid computers have each node set to perform a different task/application.</p>
+<p>While our resources used to housed in different buildings, meeting the locational definition of a grid, it now sits in a single building, meeting the criteria for a cluster.</p>
+<p>If you want to read more, the content was mostly taken from <a href="https://www.wikipedia.org/">Wikipedia</a> and a really nice article in the International Journal of Advanced Research in Computer and Communication Engineering. The links are below:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Grid_computing">Grid Definitions on Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_cluster">Cluster Definitions on Wikipedia</a></li>
+<li><a href="https://pdfs.semanticscholar.org/5e6e/9b4b7f4d986bc9f1246198c50c8d43d2d695.pdf">Article discussing the subtle differences between Cloud Computing, Grid Computing, and Cluster Computing</a>.</li>
+</ul>
+<p>Personally, I often talk about the Penn HPC as a cluster, others use grid. To be honest for our purposes the language of how we speak of the Penn HPC doesn’t really matter much. The take home is that you will hear the Penn HPC referred to as a grid or cluster and it means the same machine for us.</p>
+</div>
+<div id="host" class="section level2">
+<h2>Host</h2>
+<p>Hosts on your cluster perform different functions.</p>
+<ul>
+<li><p><strong>Master host</strong>: A server host that acts as the overall coordinator for the cluster, doing all job scheduling and dispatch.</p></li>
+<li><p><strong>Server host</strong>: A host that submits and runs jobs.</p></li>
+<li><p><strong>Client host</strong>: A host that only submits jobs and tasks.</p></li>
+<li><p><strong>Execution host</strong>: A host that runs jobs and tasks.</p></li>
+<li><p><strong>Submission host</strong>: A host from which jobs and tasks are submitted.</p></li>
+</ul>
+<p>Typically, we only interact with <strong>server</strong>, <strong>client</strong>, <strong>execution</strong>, and <strong>submission</strong> hosts. The <strong>master</strong> host is working in the background after we submit jobs. In our department, we most commonly refer to all of these generically as <strong>host</strong> and don’t clarify which type of <strong>host</strong>. It can get confusing so for this document I’ll try to always clarify.</p>
+<p>If you simply <code>ssh</code> onto the CCEB cluster you are put onto a <strong>submission host</strong>. No jobs can be run on this host directly but are submit and sent to run on other <strong>execution hosts</strong>. If you are part of different clusters or queues, for example Taki or <a href="https://www.med.upenn.edu/pennsive/personnel.html">PennSIVE’s</a> group, then they use a <strong>server host</strong>, takim, so when you <code>ssh</code> onto the cluster your jobs are submit from there but can also be run on content on takim. Once you submit a job from these hosts, you tasks are run on <strong>execution hosts</strong>.</p>
+<div id="nodes-sockets-and-cores" class="section level3">
+<h3>Nodes, Sockets, and Cores</h3>
+<p>A <strong>node</strong> (a.k.a. host, machine, computer) refers to an entire compute node. Each node contains 1 or more sockets. Notice, this is synonymous with host/machine.</p>
+<p>A <strong>socket</strong> (a.k.a. numa node) refers to collection of cores with a direct pipe to memory. Each socket contains 1 or more cores. Note that this does not necessarily refer to a physical socket, but rather to the memory architecture of the machine, which will depend on your chip vendor. I pretty much never think about this level or use this language.</p>
+<p>A <strong>core</strong> (a.k.a. processor, cpu, cpu core, logical processor) refers to a single processing unit capable of performing computations. A <strong>core</strong> is the smallest unit of allocation available in high performance computing.</p>
+<p>When you <code>bsub</code> an interactive session with 1 core requested by definition you are using 1 core on 1 node or host. When you submit a normal job you can request multiple cores and unless specified they may be across multiple hosts/machines.</p>
+</div>
+</div>
+<div id="job" class="section level2">
+<h2>Job</h2>
+<p>A <strong>job</strong> is the unit of work that is running on the cluster. A <strong>job</strong> is a command that is submitted for execution. The <strong>master host</strong> schedules, controls, and tracks the job according to configured policies. <strong>Jobs</strong> can be complex problems, simulation scenarios, extensive calculations, or anything that needs compute power.</p>
+<p>This can get confusing because we refer to the entire thing running as a batch or array job (i.e. all 1000 of your simulations running) and we refer to each 1000 iterations as single jobs. If you ever get confused just ask someone to clarify.</p>
+<p>When you submit a <strong>job</strong> it goes into a <strong>job slot</strong> or a bucket from which a single unit of work is assigned on the grid system.</p>
+<p>Hosts can be configured with multiple <strong>job slots</strong> and you can dispatch jobs from queues until all the <strong>job slots</strong> are filled. You can correlate <strong>job slots</strong> with the total number of CPUs in the cluster.</p>
+<p>Each job is assigned a number. You can use this number to check on the memory of your job, kill or stop your job, or include when emailing issues to PMACs.</p>
+</div>
+<div id="queue" class="section level2">
+<h2>Queue</h2>
+<p>A <strong>queue</strong> is a cluster-wide container for jobs. All jobs wait in queues until they are scheduled and dispatched to hosts.</p>
+<p><strong>Queues</strong> do not correspond to individual hosts; each queue can use all <strong>server hosts</strong> on the cluster, or a configured subset of the <strong>server hosts</strong>. When you submit a job to a <strong>queue</strong>, you do not need to specify an <strong>execution host</strong>. The <strong>master host</strong> dispatches the job to the best available <strong>execution host</strong> on the cluster to run that job. You can specify an <strong>execution host</strong> if you want though but this only useful for quality control.</p>
+<p>Queues implement different job scheduling and control policies.</p>
+</div>
+<div id="layout" class="section level2">
+<h2>“Layout”</h2>
+<div class="figure" style="text-align: center"><span id="fig:clusthardware"></span>
+<img src="cluster_hardware/cluster_hardware.png" alt="Pictoral representation of the hardware and layout of the grid. This graphic is not the accurate physical layout but simply provided as an example." width="100%" />
+<p class="caption">
+Figure 1: Pictoral representation of the hardware and layout of the grid. This graphic is not the accurate physical layout but simply provided as an example.
+</p>
+</div>
+<ul>
+<li>The <strong>server host</strong> also has nodes but you should not compute on this host because if a <strong>server host</strong> crashes all dependent <strong>execute hosts</strong> and screw everyone. For example, we can compute on takim but it is dangerous. When you ssh using scisub you are put on a <strong>submission host</strong> so it cannot run jobs on itself but rather submits jobs to run on <strong>execution hosts</strong>.</li>
+</ul>
+</div>
+</div>
+<div id="cluster-specs" class="section level1">
+<h1>PMACS High Performance Computing (HPC) Grids</h1>
+<p>These specifications were true as of Fall 2017.</p>
+<p>The CCEB HPC Statistical Grid has been run and supported over the past 15+ years by PMACS. The CCEB HPC is an LSF (“LSF”, short for load sharing facility) software. LSF is an <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4/product_welcome_platform_lsf.html">IBM platform</a>.</p>
+<ul>
+<li><p>This is industry-leading enterprise-class software that distributes work across existing heterogeneous IT resources to create a shared, scalable, and fault-tolerant infrastructure, that delivers faster, more reliable workload performance and reduces cost.</p></li>
+<li><p>LSF balances load, allocates resources, and provides access to those resources.</p></li>
+</ul>
+<p>This Statistical HPC is composed of a total of 352 available cores (32 Matlab; 16 SAS; 8 Stata; 360 unrestricted R and 212 priority restricted R).</p>
+<p>The current setup defaults to assigning one core for each job submitted to the HPC Grid, although proper set-up and usage of Matlab pools and R parallel packages will allow up to 12 cores to be used concurrently for a job.</p>
+<p>Any one user may only use up to 50 cores (e.g., 50 1-core jobs) running R concurrently on the grid (less for Matlab &amp; SAS).</p>
+<p>Queues consist of:</p>
+<ul>
+<li><p>R / all Queue: Nine IBM x3650 hosts, running Red Hat Linux OS, consisting of Intel Xeon CPU E5-2660 v3 at 2.6GHz (40 cores) and 128GB RAM.</p></li>
+<li><p>Matlab Queue: One Dell R810 host, running Red Hat Linux OS, consisting of Intel Xeon CPU E7-4860 at 2.26GHz (32 cores) and 512GB RAM.</p></li>
+<li><p>SAS Queue: Two IBM H22 hosts, running Red Hat Linux OS, consisting of two quad-core 2.4GHz processors and 12GB RAM per machine.</p></li>
+<li><p>Stata Queue: One IBM H22 hosts, running Red Hat Linux OS, consisting of two quad-core 2.4GHz processors and 12GB RAM.</p></li>
+</ul>
+<p>Use of this cluster is free to faculty, students, and post-doctoral fellows in the Division of Biostatistics. A very rough picture representation of the grid is provided in <strong>Figure <a href="#fig:clusthardware">1</a></strong>. It provides a general description based on the Penn HPC.</p>
+</div>
+<div id="session-types" class="section level1">
+<h1>Session Types</h1>
+<p>There are two types of sessions you can request when working on the cluster. An <strong>interactive session</strong> or a <strong>normal session</strong>. I will talk more specifically about these in <strong>sections <a href="#interactive-sessions"><strong>??</strong></a></strong> and
+<strong><a href="#normal-sessions"><strong>??</strong></a></strong>.</p>
+<p>Broadly, an interactive session allow you to work on the cluster in an interactive way. Once you request an interactive session, you can run code interactively and dynamically similar to how you work on your local machine. This is most useful for when you are writing the code for the first time or are de-bugging problematic code since you can play in real time.</p>
+<p>On the other hand, a normal session submits an array or batch job to run. These jobs are include a computer program or set of programs processed in batch mode. Normal sessions or batch jobs run several jobs, the number is specified by the user, simultaneously. This is most useful when you need to run the same script of code multiple times, like in a simulation.</p>
+<p>Both session types can be used to run code in parallel. In general, interactive jobs should be run when writing and de-bugging code while batch jobs should be run when actually implementing all iterations of fully developed code. The <strong>master host</strong> monitors and tracks all tasks or job submit in a batch job. It won’t run the next iteration until the machine can handle it in terms of memory and node availability. An interactive job does not have this over-sight so it is much easier to crash your job and possibly others.</p>
+<p>After you have ssh’ed onto the cluster, you will run a <code>bsub</code> command to open an interactive session and run your code dynamically or a normal session to run batch jobs.</p>
+</div>
+<div id="parallelize-code" class="section level1">
+<h1>Parallelize Code</h1>
+<p>The language for our cluster will be based on an LSF Unix system. There are other high computing cluster systems and the language you use to submit and execute jobs is different.</p>
+<p>Generally, you can find more information about working with and controlling jobs <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_welcome.html?origURL=SSETD4_9.1.2">here</a> from IBM. The documentation for <code>bsub</code> and all potential options is provided by IBM <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_welcome.html?origURL=SSETD4_9.1.2">here</a>.</p>
+<p>When in doubt email PMACs and they’ll help you or at least point you in the right direction. I normally try to figure it out, run a few options, get stuck, email PMACs, look it up, test it out, and repeat depending on if the suggestion works or not.</p>
+<!--## Sample Code
+Sample code used below is available to download as a zipped file here BUTTON
+call it code
+
+
+I've provided a folder called code that has R code (`normal_example.R`) and shell script (`normal_example_shell.sh`). The `normal_example.R` is the same example as in the interactive session but just set up to run as a normal batch job. I've put these on the cluster in the path `/project/taki3/amv/cluster/code`.
+-->
+<div id="interactive-sessions" class="section level2">
+<h2>Interactive Sessions</h2>
+<p>An <strong>interactive session</strong> requests appropriate system parameters based on your <code>bsub</code> and runs the job on the loaded host interactively.</p>
+<p>Interactive sessions are really great for quality control and de-bugging code. This could be with code that you plan to run on the cluster or code that ran on the cluster as a normal job but with some problems. The interactive queue cannot control/allocate as well as a normal job though.</p>
+<p>You should <strong>NEVER</strong> be running code/full jobs in an interactive session. Keep it to quality control and de-bugging.</p>
+<p>The simplest <code>bsub</code> command gives you one core on one host/node. Of course, there are additional options to request more than one node.</p>
+<div id="interactive-bsub-options" class="section level3">
+<h3>Interactive <code>bsub</code> Options</h3>
+<p>The <code>bsub</code> for an interactive session is as follows:</p>
+<p>Some common additions include:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>-n #</code> - to request multiple cores</p></li>
+<li><p><code>-R "span[hosts=1]"</code> - to request that the number of cores you are requesting be on the same execution host.</p></li>
+<li><p><code>-R "rusage[mem=####]"</code> - to request the amount of memory required for your job to run. You job will not run until this amount of memory is available and once running you will retain/reserve the memory. Note, memory is in megabytes.</p></li>
+</ol>
+<p><strong>Warning</strong>: Only request the amount of memory you think your job requires or else other users will not have it available to them! Remember, sharing is caring! <strong>Section <a href="#quality-control"><strong>??</strong></a></strong> shows some tips on quality controlling and detecting the amount of memory your jobs are using to input an educated amount.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><code>-m "machinename"</code> - to request a specific <strong>execution host</strong> by name.</li>
+</ol>
+<ul>
+<li>This option is only useful when you are quality controlling your job or testing cluster performance because you think another user is over-loading.</li>
+<li>This can conflict with the normal queue, or <strong>master host</strong>, and mess up allocation of jobs so only do this with a near empty machine.</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li><code>-M ####</code> - kills the job if it exceeds the #### memory amount you allotted.</li>
+</ol>
+<p>You don’t necessarily need to use these all together. I commonly use the last set of code and fill in the options. Order doesn’t always matter but with a few (like -m “machinename”) it does. If the <code>bsub</code> errors first try re-arranging the arguments more logically or looking up an example online.</p>
+<p>The <code>rusage[mem=####]</code> and <code>-M #####</code> are good cluster etiquette so that your job doesn’t take all the memory on a host and crash or slow the entire host. You should try to always use at least the <code>-M ####</code> so that you don’t accidentally crash something.</p>
+<p>Again, interactive sessions should be avoided unless writing or quality controlling your code. Full jobs should always be sent through the normal queue. Ideally every user would have dedicated resources available on demand and scalable to process their task as near to realtime as possible. But that costs a lot of money so instead we share.</p>
+<p>For a more rigorous full list of <code>bsub</code> commands and their usage see the IBM documentation <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_welcome.html?origURL=SSETD4_9.1.2">here</a></p>
+</div>
+<div id="interactive-session-sample-code" class="section level3">
+<h3>Interactive Session Sample Code</h3>
+<p>The grid is a Unix based machine so the easiest way to parallelize is by using <code>parallel::mclapply()</code> in R. This is a nice overview of <a href="https://www.hpc.dtu.dk/?page_id=2723">HPC computing in R</a> it does not exactly align with what I showed here but provides nice descriptions.</p>
+<p>On the cluster in R, <code>detectCores()</code> does not work. Other package variants also do not work. They will simply tell you the number of cores available to use on your execution host not the number you requested in your <code>bsub</code>. Instead, if you want to automatically detect cores based on the number you requested after you <code>bsub</code> use <code>Sys.getenv('LSB_DJOB_NUMPROC')</code> in R. This will return a character object with the number of cores you are currently hosting.</p>
+<p>I’ll show an example that will run an <code>mclapply</code> statement on 8 cores. I have to request 8 cores using my bsub command. Once you ssh onto takim/scisub run the following:</p>
+<ul>
+<li>You MUST ALWAYS specify <code>mc.cores</code>! Do not use the default <code>NULL</code> on the cluster.</li>
+<li>It is good practice to save anything you need within each iteration in case the code fails somewhere. Then you don’t need to re-run everything all over again. Delete it when you’re done if you’re tight on memory.
+<ul>
+<li>I like <code>saveRDS()</code> because it is really fast.</li>
+<li>I prefer .rds over .RData because you can rename an .rds object when you load it into R whereas .RData objects are loaded with their previous name. You have to remember what they were named locally in R.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="normal-sessions" class="section level2">
+<h2>Normal Sessions</h2>
+<p>A normal job is no different than literally waiting in a queue. You submit your job to run. The <strong>master host</strong> assesses your job request based on machines, memory, cores, etc. and it is sent to run, pend, or killed. The benefit of this approach is that the cluster can self-manage the resources and jobs submit. It is possible that some of your jobs will be run while others pend.</p>
+<p>Full jobs should always be submit to the normal queue. It is slightly more cumbersome to de-bug though so spend time checking your code thoroughly before hand.</p>
+<div id="normal-job-setup" class="section level3">
+<h3>Normal Job Setup</h3>
+<p>A normal session, is more slightly more annoying to setup than an interactive session. You will need to put your code on the cluster, I use <a href="https://fetchsoftworks.com/">fetch</a> a file transfer client free for students, to do this. Then you’ll need your <code>bsub</code>. With a normal session and batch jobs it is common to put a number of the unchanged portions of the <code>bsub</code> into a shell script. A shell script, or .sh file, is a place to store commonly used <code>bsub</code> options so you don’t have to put them in the <code>bsub</code> command.</p>
+<p>Examples of each of these are given in <strong>Section <a href="#normal-job-sample-code"><strong>??</strong></a></strong>.</p>
+<p>Your <code>bsub</code> will tell the cluster to run the shell script which will contain a reference to the code.</p>
+</div>
+<div id="normal-bsub-options" class="section level3">
+<h3>Normal <code>bsub</code> Options</h3>
+<p>Many of the normal submission options are the same as an interactive session but I’ll show them again here.</p>
+<p>The most basic <code>bsub</code> to submit a normal job is as follows:</p>
+<ul>
+<li>This submit a job with the name jobname</li>
+<li>n jobs are to be run</li>
+<li>The output .txt is in /project/taki3/amv/cluster/code. This will contain any information about the LSF job or R output.</li>
+<li>This does not specify how many jobs to run simultaneously so the cluster will allocate based on how free it is.
+<ul>
+<li>In a normal/batch session, we are limited to a total of 50 cores running simultaneously so keep that in mind when submitting jobs. The host won’t give you more than that even if you specify more.</li>
+</ul></li>
+</ul>
+<p>Some common additions include:</p>
+<ol style="list-style-type: decimal">
+<li>-n # - to request multiple cores for each job</li>
+</ol>
+<ul>
+<li>If you have another layer of parallelization inside your R script you need to specify the requested cores here and the <code>mc.cores</code> inside the R function.</li>
+<li>Again, <code>-n #</code> cannot exceed 50.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>-R “span[hosts=1]” - to request that total number of cores you are requesting be all on the same host. This is only true for a single job in the batch not across all batches.</p></li>
+<li><p>-R “rusage[mem=####]” - to request the amount of memory required for your job to run. You job will not run until this amount of memory is available and once running you will retain/reserve the memory. Note, memory is in megabytes.</p></li>
+</ol>
+<ul>
+<li>Only request the amount of memory you think your job requires or else other users will not have it available to them! I will show in <strong>Section <a href="#quality-control"><strong>??</strong></a></strong> how to quality control and detect the amount of memory your jobs are using to input an educated amount.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li><p>-m “machinename” - to request a specific host by name.</p></li>
+<li><p>-M #### - to kill the job if it exceeds the #### memory amount.</p></li>
+<li><p>“jobname[1-n]%N” - specifies the number of jobs to run at the same time</p></li>
+</ol>
+<ul>
+<li>The 50 core limit still applies here so <code>-n #</code> * <code>%</code> cannot exceed 50.</li>
+<li>This will specify that N jobs run simultaneously and each job requires <code>-n #</code> cores. Do your math to be sure you don’t use more than 50.</li>
+</ul>
+</div>
+<div id="normal-job-sample-code" class="section level3">
+<h3>Normal Job Sample Code</h3>
+<p>Inside of a normal job script you can have the same function with different parameters or different functions all together. For example you can write a function togenerate data and then a separate function to analyze the data.</p>
+<p>These examples are really basic and provide a simple example in order to help you better understand the <code>bsub</code>. You’ll need to file transfer the code to the cluster before running. I put the <code>code</code> directory in <code>/project/taki3/amv/cluster/</code><!--Section \@ref(sample code download section) provides all the sample code.--></p>
+<div id="example-1" class="section level4">
+<h4>Example 1</h4>
+<p>This example runs the code provided in “normal_example.R” as 100 separate jobs. After ssh’ing onto takim/scisub run the following:</p>
+<ul>
+<li>I am not running another layer of parallelization inside of the code so no need to request multiple cores</li>
+<li>Jobs are not dependent so I do not request the job to span only 1 host</li>
+<li>I do not request a specific machine</li>
+<li>I do set the code to run as 100 jobs to with 20 running at a time and specify the memory usage and kill</li>
+</ul>
+<p>On your own take a look at the example_output.txtso you familiarize with the format and what it looks like. <!-- I included the output files in the code available in @ref()--> The output.txt continues on when you keep submitting by default and does not write over the previous version. If your job failed and you re-ran it and it succeeded you will see the failure at the top of the document but if you scroll down you’ll see the later submission success. I like to keep this to compare information but if you prefer you can write over it or delete it.</p>
+</div>
+<div id="example-2" class="section level4">
+<h4>Example 2</h4>
+<p>This example will run the “normal_example2.R” code. This example calls a single <code>mclapply</code> to run in as a single normal batch job on 8 cores. After ssh’ing onto takim/scisub run the following:</p>
+<ul>
+<li>Only 1 job is submit because the R script runs the 1000 iterations on 8 cores</li>
+<li>Because the single job requires 8 cores you have to request -n 8 cores in the <code>bsub</code></li>
+</ul>
+</div>
+<div id="comparison-of-examples" class="section level4">
+<h4>Comparison of Examples</h4>
+<p><strong>Example (example-1)</strong> is the best way to parallelize majority of the time. You can make __ Example (example-1)__ more complicated and break up jobs to work in parallel inside of your batch job if you need more cores for each job. <strong>Example (example-1)</strong> avoids some of the memory issues you can run into when using <strong>Example (example-2)</strong>. You can also control the number of jobs and cores running at the same time somewhat easier.</p>
+<p>For simulations where you are changing parameters <strong>Example (example-1)</strong> still works. You could put mclapply statements with lots of parameters set in your R code and call seeds using the <code>as.numeric(Sys.getenv("LSB_JOBINDEX"))</code> all to be sent as a batch job.</p>
+<p>I pick <strong>Example (example-2)</strong> over <strong>Example (example-1)</strong> when I need to submit lots of jobs (i.e. more than 5000) since this could over-whelm the cluster or when I really need a large amount of cores to be working on a single common task. This is common in big data imaging/genetics but less common for other statistical fields with “small” data.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="quality-control" class="section level1">
+<h1>Quality Control</h1>
+<div id="lsb-commands" class="section level2">
+<h2>LSB Commands</h2>
+<p>To check all the hosts, host status (ok/closed), total cores on a host, number of running jobs on a host, suspended/pending jobs on a host, ssh onto the cluster and run:</p>
+<p>This gives a very global view of how full/active the cluster is.</p>
+<div class="figure" style="text-align: center"><span id="fig:bhosts"></span>
+<img src="bhosts.png" alt="Screenshot of bhosts command. More machines are availabe than are shown but got cutoff in the screenshot. Not all of these machines are open or available to us. Start paying attention to what machines you get put on when you bsub." width="70%" />
+<p class="caption">
+Figure 2: Screenshot of bhosts command. More machines are availabe than are shown but got cutoff in the screenshot. Not all of these machines are open or available to us. Start paying attention to what machines you get put on when you bsub.
+</p>
+</div>
+<p>To check what jobs you have in the queue pending and running run:</p>
+<p>This will remind you if you’ve accidentally left any screens open and let you know the status of your jobs</p>
+<div class="figure" style="text-align: center"><span id="fig:bjobs"></span>
+<img src="bjobs.png" alt="Screenshot bjobs." width="70%" />
+<p class="caption">
+Figure 3: Screenshot bjobs.
+</p>
+</div>
+<p>To see what is going on all together on the cluster or the just the scisub hosted jobs try the following:</p>
+<p>To check the memory on a machine <code>bsub</code> onto the specific machine and then run <code>top</code>:</p>
+<div class="figure" style="text-align: center"><span id="fig:top"></span>
+<img src="top.png" alt="Screenshot of top command." width="70%" />
+<p class="caption">
+Figure 4: Screenshot of top command.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:topout"></span>
+<img src="top_out.png" alt="Screenshot of top output." width="70%" />
+<p class="caption">
+Figure 5: Screenshot of top output.
+</p>
+</div>
+<p>With this output you want to be paying very close attention to %MEM and how many jobs you have running. You never want your %MEM * Jobs on host to be getting close to %100 or you’ll run out of memory. You can use <code>bjobs</code> in conjunction with <code>top</code> to check that you or other users aren’t running out of memory.</p>
+<p>Remember <code>man</code> then the command name shows you the documentation for commands. The commands presented above do have other useful options that you may want to look into.</p>
+</div>
+</div>
+<div id="pearls-of-wisdom" class="section level1">
+<h1>Pearls of Wisdom</h1>
+<p>If you are alarmed by the speed of your code or the cluster here is generally my thought process for quality control.</p>
+<ol style="list-style-type: decimal">
+<li>Check the -o .txt file from the job submission.
+<ul>
+<li>Did the job complete successfully? If not, what is the LSF error? LSF failures are normally caused by your bsub command, the shell being incorrect, or high volume on the cluster causing memory issues.</li>
+<li>Check the Resource usage summary section for memory and run time summaries. Are these high or normal?</li>
+<li>Check for R code errors</li>
+</ul></li>
+</ol>
+<p><strong>Helpful hint</strong>: use the <code>message()</code> and <code>paste0()</code> R functions inside your code. These will help you send yourself messages that appear in the output.txt. They help you figure out what your code is and when de-bugging can help you figure out what runs and what errors.</p>
+<p>After trying the above and failing to detect or fix the error open an interactive session on a machine with few users:</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Check the R code actually runs</li>
+<li>Check the R code for bugs that would slow things down or use a lot of memory. You can run your code with <code>top</code> side by side to see if a single step causes some major increase in memory.</li>
+<li>Once your code runs in an interactive session with no obvious bugs then time it in an interactive session. If you’re submitting a huge batch job just time a single job or iteration so you can roughly multiply to get an estimate of the full run time. Compare this time with the -o .txt time.</li>
+</ol>
+<p>If your code runs fast in an interactive session but slow as a batch then email PMACs because another user is probably mis-using the cluster.</p>
+<p>Don’t just email PMACs blindly. Double check that everything you’re running is not the cause of the issue or with specifically what about your job is failing. It will help them help us.</p>
+</div>
+<div id="cool-tools" class="section level1">
+<h1>Cool Tools</h1>
+<div id="aliases" class="section level2">
+<h2>Aliases</h2>
+<p>Bash aliases allow you to set a shortcut command for a longer command. These shortcuts are for bash script (command line) functions. For example, you could set the command <code>cc</code> to be a shortcut for the <code>clear</code> command.</p>
+<p>Aliases are defined in your .bash_profile, .bashrc file, or .bash_aliases (typically in your user home directory) files.</p>
+<p>The “.” in front of these files means they are hidden. A hidden directory or file is an object that does not display by default with filesystem utitlities. For example, if you manually or through the command line typed <code>ls</code> in the location of a hidden object it will not be listed in the output. If you need to find or change these hidden files Google instructions based on your OS.</p>
+<p>A bash alias has the following general structure:</p>
+<p><code>alias [alias_name]="[command_to_alias]"</code></p>
+<div id="create-an-alias" class="section level3">
+<h3>Create an Alias</h3>
+<p>A new alias always starts on a new line with the <code>alias</code> keyword. You define the shortcut command you want to use with the alias name, followed by an equal sign. In quotes, you type the full command you want to run.</p>
+<p>My favorite alias is replacing <code>bsub -Is -q cceb_interactive -R span[hosts=1] "bash"</code> with something shorter. Let’s replace it with <code>cceb_int</code> using the command line. After ssh’ing onto the cluster run the following:</p>
+<div class="figure" style="text-align: center"><span id="fig:aliases"></span>
+<img src="create_alias.png" alt="Screenshot of creating an alias through the command line." width="70%" />
+<p class="caption">
+Figure 6: Screenshot of creating an alias through the command line.
+</p>
+</div>
+<p><strong>Notice</strong> I did this on the <code>takim</code> host. You should do it on your <code>scisub</code> host. <strong>Figure <a href="#fig:aliases">6</a></strong> shows the terminal window for creating and sourcing a new alias.</p>
+<ul>
+<li>You can also create, edit, or remove an alias through the command line or by opening up the .bash_aliases with a text-editor and manually inserting it.</li>
+<li>I do this using emacs, a text-editor on the local machine, or <a href="https://fetchsoftworks.com/">fetch</a>, a file transfer client that allows you to edit through the client.</li>
+</ul>
+</div>
+</div>
+<div id="nickname-connections-and-bypass-passwords" class="section level2">
+<h2>Nickname Connections and Bypass Passwords</h2>
+<p>I use <code>takim</code> to <code>ssh</code> onto the cluster and it puts me directly onto the takim host, or your scisub host. See <strong>Figure <a href="#fig:takim">7</a></strong> for the output.</p>
+<div class="figure" style="text-align: center"><span id="fig:takim"></span>
+<img src="takim.png" alt="My `takim` alias and avoiding password input to ssh onto the cluster." width="70%" />
+<p class="caption">
+Figure 7: My <code>takim</code> alias and avoiding password input to ssh onto the cluster.
+</p>
+</div>
+<p>When you <code>ssh</code> on you have to enter your full ssh command and then the password you set up with the cluster. <strong>Figure <a href="#fig:password">8</a></strong> shows the terminal window after running this.</p>
+<div class="figure" style="text-align: center"><span id="fig:password"></span>
+<img src="password.png" alt="Example of full ssh with password to get onto the cluster." width="70%" />
+<p class="caption">
+Figure 8: Example of full ssh with password to get onto the cluster.
+</p>
+</div>
+<p>In order to bypass the password and create a shortcut we need to create an ssh key. To check if you’ve done this before or have existing keys run the following:</p>
+<pre><code>## #.bash_profile#
+## alval@takim
+## id_rsa
+## id_rsa.pub
+## known_hosts</code></pre>
+<p>You should see this in <strong>Figure <a href="#fig:norsa">9</a></strong> if you’ve never done this before:</p>
+<div class="figure" style="text-align: center"><span id="fig:norsa"></span>
+<img src="no_rsa_id.png" alt="Example of a `.ssh` folder with no keys." width="70%" />
+<p class="caption">
+Figure 9: Example of a <code>.ssh</code> folder with no keys.
+</p>
+</div>
+<p>If you’ve done this before you’ll see this in <strong>Figure <a href="#fig:rsaid">10</a></strong>:</p>
+<div class="figure" style="text-align: center"><span id="fig:rsaid"></span>
+<img src="rsa_id.png" alt="Example of a `.ssh` folder with keys." width="70%" />
+<p class="caption">
+Figure 10: Example of a <code>.ssh</code> folder with keys.
+</p>
+</div>
+<p>To generate the rsa key pair run the following inside your <code>/Users/username/.ssh</code> folder:</p>
+<p>You’ll see this in <strong>Figure <a href="#fig:keygen">11</a></strong>:</p>
+<div class="figure" style="text-align: center"><span id="fig:keygen"></span>
+<img src="keygen.png" alt="Generating a key pair." width="70%" />
+<p class="caption">
+Figure 11: Generating a key pair.
+</p>
+</div>
+<p>If you’ve done this before and are re-doing it will ask you if you want to overwrite the file</p>
+<p>Now run this command replacing the alval with your Penn key and the <span class="citation">@takim</span> with your host (i.e. <span class="citation">@scisub</span>…). This copies the key you just generated onto the your cluster account securely.</p>
+<p><strong>Figure <a href="#fig:copykey">12</a></strong> shows the output after running the <code>scp</code> command:</p>
+<div class="figure" style="text-align: center"><span id="fig:copykey"></span>
+<img src="copykey.png" alt="Copy key to cluster." width="70%" />
+<p class="caption">
+Figure 12: Copy key to cluster.
+</p>
+</div>
+<p>Just enter your password. Now log onto the cluster and go to the .ssh directory.</p>
+<p>We need to copy the key you generated onto the cluster so run the following on the cluster as a host:</p>
+<p>Lastly get off the cluster by running:</p>
+<p>For these 3 commands you should see the following in <strong>Figure <a href="#fig:catkey">13</a></strong>:</p>
+<div class="figure" style="text-align: center"><span id="fig:catkey"></span>
+<img src="catkey.png" alt="Put key on the cluster." width="70%" />
+<p class="caption">
+Figure 13: Put key on the cluster.
+</p>
+</div>
+<p>On your local machine go to your user directory (/Users/alval). One step before the .ssh folder so if you’re in the same terminal just <code>cd ..</code> or <code>cd /Users/alval</code></p>
+<pre><code>## Applications
+## Box
+## Creative Cloud Files
+## Desktop
+## Documents
+## Downloads
+## Library
+## Movies
+## Music
+## Pictures
+## Public
+## Zotero
+## iCloud Drive (Archive)
+## mipav
+## static</code></pre>
+<p>Now we will create a new alias for the shortcut to get onto the cluster. If you already have aliases set up on your local machine run the following to edit:</p>
+<p>To exit the emacs session hit cntrl+x then cntrl+c and answer the prompts.</p>
+<p>Source the .bash_profile and then you’re good to go.</p>
+<div class="figure" style="text-align: center"><span id="fig:sourceold"></span>
+<img src="source.png" alt="Source your new alias." width="70%" />
+<p class="caption">
+Figure 14: Source your new alias.
+</p>
+</div>
+<p><strong>Figure <a href="#fig:sourceold">14</a></strong> shows the terminal window after sourcing the .bash_profile.</p>
+<p>Now <code>takim</code> will put me on the cluster.</p>
+<p>If you’ve never set up a profile or aliases run the following:</p>
+<div class="figure" style="text-align: center"><span id="fig:nwprof"></span>
+<img src="emacs.png" alt="Create a new profile and a local alias." width="70%" />
+<p class="caption">
+Figure 15: Create a new profile and a local alias.
+</p>
+</div>
+<p><strong>Figure <a href="#fig:nwprof">15</a></strong> shows the terminal window running <code>emacs -nw .bash_profile</code>.</p>
+<p>This command automatically opens emacs:</p>
+<div class="figure" style="text-align: center"><span id="fig:emacs"></span>
+<img src="empty_emacs.png" alt="Create a local alias." width="70%" />
+<p class="caption">
+Figure 16: Create a local alias.
+</p>
+</div>
+<p><strong>Figure <a href="#fig:emacs">16</a></strong> shows what emacs looks like when it opens.</p>
+<p>Type <code>alias your_alias="ssh alval@takim"</code> into the emacs session.</p>
+<div class="figure" style="text-align: center"><span id="fig:alias"></span>
+<img src="alias.png" alt="Create a local alias." width="70%" />
+<p class="caption">
+Figure 17: Create a local alias.
+</p>
+</div>
+<p><strong>Figure <a href="#fig:alias">17</a></strong> shows creating the alias in emacs.</p>
+<p>To exit the emacs session hit cntrl+x then cntrl+c and answer the prompts.</p>
+<div class="figure" style="text-align: center"><span id="fig:closeemacs"></span>
+<img src="exit_alias.png" alt="Close emacs session." width="70%" />
+<p class="caption">
+Figure 18: Close emacs session.
+</p>
+</div>
+<p><strong>Figure <a href="#fig:closeemacs">18</a></strong> shows closing emacs.</p>
+<p>Source the .bash_profile and then you’re good to go.</p>
+<div class="figure" style="text-align: center"><span id="fig:source"></span>
+<img src="source.png" alt="Create a local alias." width="70%" />
+<p class="caption">
+Figure 19: Create a local alias.
+</p>
+</div>
+<p><strong>Figure <a href="#fig:source">19</a></strong> shows the source command in terminal. Now <code>takim</code> will put me on the cluster.</p>
+<div id="screen" class="section level3">
+<h3>Screen</h3>
+<p>You can set up a screen so that if the VPN or internet on your computer is halted the job will continue working on the cluster. To do so from takim/scisub type <code>screen</code>. Then <code>bsub</code> onto a host. If you exit terminal or the connection is dropped your job will stay running. This is especially nice for interactive sessions. To resume your job again on takim/scisub type <code>screen -r</code>. If you have multiple screens open you’ll have to provide the number.</p>
+<p>On takim/scisub to start a screen just type:</p>
+<p>After you type <code>screen</code> you’ll see the following:</p>
+<div class="figure" style="text-align: center"><span id="fig:screen"></span>
+<img src="screen.png" alt="Screenshot to show the `screen` command" width="70%" />
+<p class="caption">
+Figure 20: Screenshot to show the <code>screen</code> command
+</p>
+</div>
+<p>From there you can <code>bsub</code> onto a host:</p>
+<div class="figure" style="text-align: center"><span id="fig:afterscreen"></span>
+<img src="afterscreen.png" alt="Screenshot to show after you screen what appears." width="70%" />
+<p class="caption">
+Figure 21: Screenshot to show after you screen what appears.
+</p>
+</div>
+<p>To exit screen just type exit until you are off the hosts:</p>
+<div class="figure" style="text-align: center"><span id="fig:exitscreen"></span>
+<img src="exitscreen.png" alt="Screenshot of exiting a screen." width="70%" />
+<p class="caption">
+Figure 22: Screenshot of exiting a screen.
+</p>
+</div>
+<p>To resume a screen type:</p>
+<p>If you have multiple screens open you need to specify which job to resume. A picture is shown below:</p>
+<div class="figure" style="text-align: center"><span id="fig:screenr"></span>
+<img src="screenr.png" alt="Screenshot of resuming a screen when multiple are open." width="70%" />
+<p class="caption">
+Figure 23: Screenshot of resuming a screen when multiple are open.
+</p>
+</div>
+<p>Sometimes the screen thinks it is still attached (open) but it you’ve closed it. To fix this you can just type <code>screen -r -d</code> if only one screen was open or the screen number after if multiple are open.</p>
+</div>
+</div>
+</div>
 
   </div>
 </section>
