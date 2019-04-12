@@ -2,7 +2,7 @@
 title: "Make a Personal Website with blogdown"
 author: "Alessandra Valcarcel"
 date: 2018-03-15T21:13:14-05:00
-categories: ["blogdown"]
+categories: ["Computing"]
 tags: ["blogdown", "Hugo", "website"]
 output: html_document
 ---

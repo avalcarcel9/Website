@@ -1,0 +1,14 @@
+---
+title: "Using the CCEB High Performance Computing Cluster"
+author: "Alessandra Valcarcel"
+date: 2019-04-11T21:13:14-05:00
+categories: ["Computing"]
+tags: ["Cluster", "LSF", "IBM", "R", "CCEB", "HPC"]
+output:
+  bookdown::html_document2:
+     df_print: paged
+     toc: true
+     toc_float: true
+draft: true
+---
+test

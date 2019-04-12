@@ -2,7 +2,7 @@
 title: "Make a Personal Website with blogdown"
 author: "Alessandra Valcarcel"
 date: 2018-03-15T21:13:14-05:00
-categories: ["blogdown"]
+categories: ["Computing"]
 tags: ["blogdown", "Hugo", "website"]
 output: html_document
 ---
@@ -44,12 +44,10 @@ output: html_document
 <li>Finalize all the content you will be including and pay attention to what characteristics you will need in a Hugo template. For example, do you need a picture on the home page? Do you want more of a blog style website or a personal website?</li>
 </ol></li>
 <li>Deploy the template and customize your website
-<ol style="list-style-type: lower-alpha">
-<li>After figuring out what you like and generating some content find a <a href="https://themes.gohugo.io/">Hugo theme</a> that matches what you want and need. The less you have to change about the template the easier the process. Customizing the template may require a basic knowledge of html, css, and java so choose your template wisely.</li>
-<li>Deploy the theme using Netlify. For this step, don’t change anything about the theme template simply get the website direcotry locally, on GitHub, and deployed using Netlify.</li>
-<li>At this point, you are ready to start making some changes. Start by making your large obvious changes. These may include adding some of your content, changing some images, adapting some of the layout. If this proves difficult you should consider another theme. I personally went through about 5 themes before settling in on my current theme.</li>
-<li>After playing with, pick your favorite and begin moving your content over from 1.</li>
-</ol></li>
+a. After figuring out what you like and generating some content find a <a href="https://themes.gohugo.io/">Hugo theme</a> that matches what you want and need. The less you have to change about the template the easier the process. Customizing the template may require a basic knowledge of html, css, and java so choose your template wisely.
+b. Deploy the theme using Netlify. For this step, don’t change anything about the theme template simply get the website direcotry locally, on GitHub, and deployed using Netlify.
+c. At this point, you are ready to start making some changes. Start by making your large obvious changes. These may include adding some of your content, changing some images, adapting some of the layout. If this proves difficult you should consider another theme. I personally went through about 5 themes before settling in on my current theme.
+d. After playing with, pick your favorite and begin moving your content over from 1.</li>
 <li>Finalize content and go live!</li>
 </ol>
 <p>If some of this doesn’t make sense now, come back to this list after reading the blog post. Some of this can be done in parallel. What you really want to avoid is coding something new while adding new content since de-bugging involves two events to back track here. For example, if you are adding an image to a content page while playing with some of the parameters you won’t know which is to blame if the website doesn’t configure properly. It took me about 1 day to create the content I wanted on my site and about 3 days to create and customize the physical site using <code>blogdown</code> and some light html coding.</p>
@@ -124,9 +122,9 @@ Unpacking objects: 100% (3/3), done.</code></pre>
 <p>This will automatically start copying the default theme into your website directory. A .Rmd file typically opens up in R but you can exit out of it. If you need to force view the website type the following:</p>
 <pre class="r"><code>blogdown::serve_site()</code></pre>
 <p>If you don’t like the theme you picked, it is best to completely delete all the files inside of the Sample_Website directory except the .Rproj and then type <code>blogdown::new_site(theme = 'new_theme')</code>. This is why you want to play with the website and be very careful editing content before finalizing a theme. Without thinking you could lose lots of your hard work.</p>
-<p>Delete all the files in your repository except the .Rproj and let’s create a new website with the “calintat/minimal” theme. You can browse all the themes on <a href="https://themes.gohugo.io/" class="uri">https://themes.gohugo.io/</a>.</p>
+<p>Delete all the files in your repository except the .Rproj and let’s create a new website with the “calintat/minimal” theme. You can browse all the themes on <a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a>.</p>
 <pre class="r"><code>blogdown::new_site(theme = &#39;calintat/minimal&#39;)</code></pre>
-<p>Notice we did not have to follow the instructions in the README.md on <a href="https://github.com/calintat/minimal" class="uri">https://github.com/calintat/minimal</a> by going through <code>blogdown</code>. That being said, sometimes there is useful information about customizing content in the README.md so I still suggest you look through it.</p>
+<p>Notice we did not have to follow the instructions in the README.md on <a href="https://github.com/calintat/minimal">https://github.com/calintat/minimal</a> by going through <code>blogdown</code>. That being said, sometimes there is useful information about customizing content in the README.md so I still suggest you look through it.</p>
 <p>I am going to reiterate that the less you want to change about a theme the easier your job. Spend a lot of time picking a theme you think is beautiful and simple to adapt. I’ll note, it <em>can</em> be very challenging to switch themes and move content once you have gone live since not all themes are built the same way. If for some reason you want to change themes later do so with caution. I suggest saving your material in another folder on your computer and then starting fresh and just manually moving content over with your new template.</p>
 </div>
 <div id="adapting-content" class="section level2">
@@ -147,7 +145,7 @@ Unpacking objects: 100% (3/3), done.</code></pre>
 </div>
 <div id="push-changes-to-git" class="section level2">
 <h2>5. Push Changes to Git</h2>
-<p>There are two approaches to sending your changes to GitHub. The first is for beginners that aren’t familiar with GitHub. The second is for users that feel more comfortable with GitHub. For any issues related to GitHub <a href="www.google.com" class="uri">www.google.com</a> is your best friend.</p>
+<p>There are two approaches to sending your changes to GitHub. The first is for beginners that aren’t familiar with GitHub. The second is for users that feel more comfortable with GitHub. For any issues related to GitHub <a href="www.google.com">www.google.com</a> is your best friend.</p>
 <ol style="list-style-type: decimal">
 <li>R Studio</li>
 </ol>
@@ -172,7 +170,7 @@ git push</code></pre>
 <h2>6. Deploy Using Netlify</h2>
 <p>At this point, we haven’t actually gone live with our website. We are going to use Netlify to host our website. There are other options but I’m not going to discuss them since I find Netlify to be the easiest to work with. See <a href="https://bookdown.org/yihui/blogdown/deployment.html">this page</a> for more info on Netlify and other hosting possibilities.</p>
 <p>Let’s deploy!</p>
-<p>Go to <a href="https://www.netlify.com/" class="uri">https://www.netlify.com/</a> and “Sign Up”. Use your GitHub info to create an account.</p>
+<p>Go to <a href="https://www.netlify.com/">https://www.netlify.com/</a> and “Sign Up”. Use your GitHub info to create an account.</p>
 <center>
 <img HEIGHT="450" src="/img/netlify.png" alt="New Repository">
 </center>
