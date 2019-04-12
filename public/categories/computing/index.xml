@@ -6,19 +6,10 @@
     <description>Recent content in Computing on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 11 Apr 2019 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 15 Mar 2018 21:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/categories/computing/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Using the CCEB High Performance Computing Cluster</title>
-      <link>/blog/2019-04-11-cluster-basics/</link>
-      <pubDate>Thu, 11 Apr 2019 21:13:14 -0500</pubDate>
-      
-      <guid>/blog/2019-04-11-cluster-basics/</guid>
-      <description>Introduction I’ve worked on imaging data for about 4 years now. Imaging data is too large to run analyses on a personal computer so when I began working in the field I was forced to learn how to use the Penn Medicine Academic Computing Services High-Performance Computing Cluster (Penn HPC). I love coding but this was a whole new language and way to think about coding and the learning curve was steep.</description>
-    </item>
     
     <item>
       <title>Make a Personal Website with blogdown</title>
