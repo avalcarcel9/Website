@@ -1,0 +1,94 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Command Line"
+author: "Alessandra Valcarcel"
+date: 2019-04-13T21:05:01-06:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This is the second blog post in a series of articles about using the CCEB cluster. An overview of the series is available <a href="www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/">here</a>. This post focuses on basics of command line.</p>
+</div>
+<div id="folder-versus-directory" class="section level1">
+<h1>Folder Versus Directory</h1>
+<p>Most people use the terms <strong>folder</strong> and <strong>directory</strong> interchangeably. From a programmers point of view though there is a slight distinction. A <strong>directory</strong> is file organization system while a <strong>folder</strong> is the graphical user interface that is used to represent a directory. For example, on both Mac and Windows operating systems the visual representation of a directory that most users interact with is a folder.</p>
+<p><img src="img/commandline/folder.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>When working through the command line, there is not a visual interface and the user manually codes functions and paths rather than navigating through directories. In this case, you are working with directories. Since we are discussing the command line in this post, I’ll use the terminology directory rather than folder but in reality both are commonly accepted terms.</p>
+</div>
+<div id="command-line" class="section level1">
+<h1>Command Line</h1>
+<p>The command line is a text interface to pass certain functions to the computer’s operating system. Nowadays, users rarely use the command line and instead interact with the computer using a graphical interface and menu-driven interactions or commands. Anything that can be done with the typical point and click graphical interface has a manual function that can be passed through the command line to execute the same task. The command line can be intimidating at first especially for users that are used to doing everything with a graphical interface but it is not different than any other programming language. There is a learning curve but luckily the command line is a very intuitive language.</p>
+<p>You can use command line on your computer and on the cluster. As a Mac user, the Terminal app comes standard and can be used to pass the commands. I’ve been using Mac for 10+ years so I’ve actually never used the command line on a Windows. If you’re a Windows users you should Google the Terminal equivalent for your PC.</p>
+<p>To use the cluster, you’ll need to be somewhat familiar with command line both on your machine and on the cluster. The command line is how you will request nodes and submit jobs. The cluster is a Unix machine so file paths should use ‘/’.</p>
+</div>
+<div id="useful-commands" class="section level1">
+<h1>Useful Commands</h1>
+<p>The most important commands, in my opinion, are shown below:</p>
+<ol style="list-style-type: decimal">
+<li><code>cd</code> is used to change the current working directory. You can use .. to move back a directory. Adding backslashes will move you back multiple directories (i.e. ../..).</li>
+<li><code>ls</code> lists computer files in a directory.</li>
+<li><code>pwd</code> reports the full path name to the current working directory.</li>
+<li><code>mv</code> moves files or directories from one location to another.</li>
+<li><code>cp</code> copies files or directories from one location to another.</li>
+<li><code>man</code> summons the manual for almost all command line commands.</li>
+<li><code>mkdir</code> creates a directory.</li>
+<li><code>rmdir</code> removes a directory.</li>
+<li><code>rm</code> removes files or a directory.</li>
+<li><code>clear</code> clears the screen/command board in Terminal.</li>
+<li><code>*pattern*</code> uses all files with the pattern indicated in the command applied.</li>
+<li><code>touch</code> creates an empty text file.</li>
+</ol>
+<p><strong>Warning</strong>: Be very careful using the rm command. Using the rm command can wipe out entire directories full of files. For example, <code>rm -rf/</code> remove (rm) - recursive (r) force (f) home (/). That is, the <code>rm -rf/</code> command will delete every directory, file, and sub-directory within your operating system. It is the equivalent of wiping your entire hard drive clean. The cluster will not let you remove directories that you do not have permissions for. For example, I cannot wipe out another students dissertation directory because I do not have permissions to their directory.</p>
+</div>
+<div id="examples" class="section level1">
+<h1>Examples</h1>
+<p>See what working directory you’re currently in:</p>
+<p>Change the working directory from the current ‘/Users/alval’ to ‘/Users/alval/Box’:</p>
+<p>See what working directory you are currently in:</p>
+<p>List the objects in the current working directory:</p>
+<p>Make a directory ‘test’ inside of ‘Box’ then list the objects in ‘Box’:</p>
+<p>notice that ‘test’ is now a directory in ‘Box’.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="img/commandline/examples_chunk1.png" alt="Terminal window after running the previous 6 commands." width="80%" />
+<p class="caption">
+Figure 1: Terminal window after running the previous 6 commands.
+</p>
+</div>
+<p>Move the ‘test’ directory to ‘/Users/alval/Box/Teaching’ then list the objects in the ‘Box’ and ‘Teaching’ directories:</p>
+<p>notice ‘test’ is no longer in ‘Box’ and has been moved to ‘Teaching’. Because we moved the object rather than copy (<code>cp</code>) the original will no longer be in ‘Box’.</p>
+<p>Let’s change the working directory to ‘test’ and list the files:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="img/commandline/examples_chunk2.png" alt="Terminal window after running the previous 5 commands." width="80%" />
+<p class="caption">
+Figure 2: Terminal window after running the previous 5 commands.
+</p>
+</div>
+<p>Notice the ‘test’ directory is empty so nothing is returned.</p>
+<p>The next set of code creates three empty text files (‘file1.txt’, ‘file2.txt’, ‘dummy.txt’), and then lists the newly created objects in ‘test’:</p>
+<p>Notice ‘file1.txt’, ‘file2.txt’, ‘dummy.txt’ are now listed as files in ‘test’.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="img/commandline/examples_chunk3.png" alt="Terminal window after running the previous 4 commands." width="80%" />
+<p class="caption">
+Figure 3: Terminal window after running the previous 4 commands.
+</p>
+</div>
+<p>Remove the files with ‘file’ in their name and then list the remaining objects in ‘test’:</p>
+<p>notice in the next screenshot that ‘file1.txt’ and ‘file2.txt’ were removed but ‘dummy.txt’ remains. This is because only objects with ‘file’ are removed.</p>
+<p>Now we set the working directory back to ‘Teaching’ and remove the ‘test’ directory:</p>
+<p>notice that ‘test’ is no longer in ‘Teaching’ since it was deleted.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="img/commandline/examples_chunk4.png" alt="Terminal window after running the previous 5 commands." width="80%" />
+<p class="caption">
+Figure 4: Terminal window after running the previous 5 commands.
+</p>
+</div>
+<p>For more information here is a very basic <a href="https://www.youtube.com/watch?v=5XgBd6rjuDQ">youtube video</a>.</p>
+<p>The commands and examples provided here just scratch the surface of what the command line can do. The command line is a computing language so you can write functions and loops or download packages. For example, though <a href="www.github.com">GitHub</a> now has a visual studio I personally prefer to use the command line functionality. I find it faster to execute and easier to manage. Like any language, the more you use it the more comfortable you’ll get. It amazes me how much time I save myself organizing files and directories using the command line rather than the graphical folder interface.</p>
+<p>At the minimum you’ll need to be comfortable with the command line to get onto the cluster, move around directories, submit jobs, and check jobs.</p>
+</div>

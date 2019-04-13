@@ -1,0 +1,167 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Command Line"
+author: "Alessandra Valcarcel"
+date: 2019-04-13T21:05:01-06:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(out.width = '80%',
+                      fig.align = 'center', 
+                      echo=FALSE, 
+                      warning=FALSE, 
+                      message=FALSE)
+```
+
+# Introduction
+
+This is the second blog post in a series of articles about using the CCEB cluster. An overview of the series is available [here](www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/). This post focuses on basics of command line.
+
+# Folder Versus Directory
+
+Most people use the terms __folder__ and __directory__ interchangeably. From a programmers point of view though there is a slight distinction. A __directory__ is file organization system while a __folder__ is the graphical user interface that is used to represent a directory. For example, on both Mac and Windows operating systems the visual representation of a directory that most users interact with is a folder.
+
+```{r}
+knitr::include_graphics('img/commandline/folder.png')
+```
+
+When working through the command line, there is not a visual interface and the user manually codes functions and paths rather than navigating through directories. In this case, you are working with directories. Since we are discussing the command line in this post, I'll use the terminology directory rather than folder but in reality both are commonly accepted terms.
+
+# Command Line
+
+The command line is a text interface to pass certain functions to the computer's operating system. Nowadays, users rarely use the command line and instead interact with the computer using a graphical interface and menu-driven interactions or commands. Anything that can be done with the typical point and click graphical interface has a manual function that can be passed through the command line to execute the same task. The command line can be intimidating at first especially for users that are used to doing everything with a graphical interface but it is not different than any other programming language. There is a learning curve but luckily the command line is a very intuitive language. 
+
+You can use command line on your computer and on the cluster. As a Mac user, the Terminal app comes standard and can be used to pass the commands. I've been using Mac for 10+ years so I've actually never used the command line on a Windows. If you're a Windows users you should Google the Terminal equivalent for your PC. 
+
+To use the cluster, you'll need to be somewhat familiar with command line both on your machine and on the cluster. The command line is how you will request nodes and submit jobs. The cluster is a Unix machine so file paths should use '/'.
+
+# Useful Commands
+
+The most important commands, in my opinion, are shown below:
+
+1. `cd` is used to change the current working directory. You can use .. to move back a directory. Adding backslashes will move you back multiple directories (i.e. ../..).
+2. `ls` lists computer files in a directory.
+3. `pwd` reports the full path name to the current working directory.
+4. `mv` moves files or directories from one location to another.
+5. `cp` copies files or directories from one location to another.
+6. `man` summons the manual for almost all command line commands.
+7. `mkdir` creates a directory.
+8. `rmdir` removes a directory.
+9. `rm` removes files or a directory.
+10. `clear` clears the screen/command board in Terminal.
+11. `*pattern*` uses all files with the pattern indicated in the command applied.
+12. `touch` creates an empty text file.
+
+__Warning__: Be very careful using the rm command. Using the rm command can wipe out entire directories full of files. For example, `rm -rf/` remove (rm) - recursive (r) force (f) home (/). That is, the `rm -rf/` command will delete every directory, file, and sub-directory within your operating system. It is the equivalent of wiping your entire hard drive clean. The cluster will not let you remove directories that you do not have permissions for. For example, I cannot wipe out another students dissertation directory because I do not have permissions to their directory.
+
+# Examples
+
+See what working directory you're currently in:
+
+```{bash, eval = FALSE}
+pwd
+```
+
+Change the working directory from the current '/Users/alval' to '/Users/alval/Box':
+
+```{bash, eval = FALSE}
+cd /Users/alval/Box
+```
+
+See what working directory you are currently in:
+
+```{bash, eval = FALSE}
+pwd
+```
+
+List the objects in the current working directory:
+
+```{bash, eval = FALSE}
+ls
+```
+
+Make a directory 'test' inside of 'Box' then list the objects in 'Box':
+
+```{bash, eval = FALSE}
+mkdir test
+ls
+```
+
+notice that 'test' is now a directory in 'Box'.
+
+```{r, fig.cap = "Terminal window after running the previous 6 commands."}
+knitr::include_graphics('img/commandline/examples_chunk1.png')
+```
+
+Move the 'test' directory to '/Users/alval/Box/Teaching' then list the objects in the 'Box' and 'Teaching' directories:
+
+```{bash, eval = FALSE}
+mv test Teaching/test
+ls
+ls Teaching
+```
+
+notice 'test' is no longer in 'Box' and has been moved to 'Teaching'. Because we moved the object rather than copy (`cp`) the original will no longer be in 'Box'. 
+
+Let's change the working directory to 'test' and list the files:
+
+```{bash, eval = FALSE}
+cd Teaching/test
+ls
+```
+
+```{r, fig.cap = "Terminal window after running the previous 5 commands."}
+knitr::include_graphics('img/commandline/examples_chunk2.png')
+```
+
+Notice the 'test' directory is empty so nothing is returned.
+
+The next set of code creates three empty text files ('file1.txt', 'file2.txt', 'dummy.txt'), and then lists the newly created objects in 'test':
+
+```{bash, eval = FALSE}
+touch file1.txt
+touch file2.txt
+touch dummy.txt
+ls
+```
+
+Notice 'file1.txt', 'file2.txt', 'dummy.txt' are now listed as files in 'test'.
+
+```{r, fig.cap = "Terminal window after running the previous 4 commands."}
+knitr::include_graphics('img/commandline/examples_chunk3.png')
+```
+
+Remove the files with 'file' in their name and then list the remaining objects in 'test':
+
+```{bash, eval = FALSE}
+rm *file*
+ls
+```
+
+notice in the next screenshot that 'file1.txt' and 'file2.txt' were removed but 'dummy.txt' remains. This is because only objects with 'file' are removed.
+
+Now we set the working directory back to 'Teaching' and remove the 'test' directory:
+
+```{bash, eval = FALSE}
+cd ..
+rm -R test
+ls
+```
+
+notice that 'test' is no longer in 'Teaching' since it was deleted.
+
+```{r, fig.cap = "Terminal window after running the previous 5 commands."}
+knitr::include_graphics('img/commandline/examples_chunk4.png')
+```
+
+For more information here is a very basic [youtube video](https://www.youtube.com/watch?v=5XgBd6rjuDQ).
+
+The commands and examples provided here just scratch the surface of what the command line can do. The command line is a computing language so you can write functions and loops or download packages. For example, though [GitHub](www.github.com) now has a visual studio I personally prefer to use the command line functionality. I find it faster to execute and easier to manage. Like any language, the more you use it the more comfortable you'll get. It amazes me how much time I save myself organizing files and directories using the command line rather than the graphical folder interface.
+
+At the minimum you'll need to be comfortable with the command line to get onto the cluster, move around directories, submit jobs, and check jobs.
+
+

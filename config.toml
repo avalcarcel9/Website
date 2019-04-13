@@ -22,7 +22,7 @@ enableRobotsTXT = true
 [params]
 author = "Alessandra [Ali] Valcarcel"
 intro = "PhD Candidate"
-description = "Studying biostatistics at the University of Pennsylvania under Dr. Russell [Taki] Shinohara."
+description = "Studying biostatistics at the University of Pennsylvania under Drs. Kristin Linn and Russell [Taki] Shinohara."
 authorimage = "main.jpg"
 dateformat = "Jan 2, 2006"
 
