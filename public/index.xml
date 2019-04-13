@@ -6,10 +6,20 @@
     <description>Recent content on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 05 Apr 2019 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 13 Apr 2019 21:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using the CCEB High Performance Computing Cluster: Introduction</title>
+      <link>/blog/2019-04-13-clusterintro/</link>
+      <pubDate>Sat, 13 Apr 2019 21:13:14 -0500</pubDate>
+      
+      <guid>/blog/2019-04-13-clusterintro/</guid>
+      <description>Introduction I’ve decided to dedicate the next few blog posts to using the Penn Medicine Academic Computing Services High-Performance Computing Cluster. I’ll loosely refer to the Penn HPC simply as the cluster, the CCEB cluster, the PMACs HPC, and the Penn HPC throughout this series of blog posts. These posts are intended for both beginners and advanced users and will include information about:
+Basics in command line Definitions and vocabulary Logging onto the cluster PMACS high performance computing (HPC) grid specifications Session types Parallelizing code Quality controlling your jobs Bash aliases  This series is designed by a student for students specifically in biostatistics.</description>
+    </item>
     
     <item>
       <title>A Maester-Level Network Analysis of Game of Thrones</title>

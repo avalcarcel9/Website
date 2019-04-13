@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/2019-04-13-clusterintro/</loc>
+    <lastmod>2019-04-13T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/2019-04-05-gotapp/</loc>
     <lastmod>2019-04-05T21:13:14-05:00</lastmod>
   </url>
@@ -56,7 +61,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-04-05T21:13:14-05:00</lastmod>
+    <lastmod>2019-04-13T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -74,7 +79,7 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-04-05T21:13:14-05:00</lastmod>
+    <lastmod>2019-04-13T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -85,8 +90,20 @@
   </url>
   
   <url>
+    <loc>/tags/cceb/</loc>
+    <lastmod>2019-04-13T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/cluster/</loc>
+    <lastmod>2019-04-13T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/computing/</loc>
-    <lastmod>2018-03-15T21:13:14-05:00</lastmod>
+    <lastmod>2019-04-13T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -129,6 +146,18 @@
   <url>
     <loc>/tags/hugo/</loc>
     <lastmod>2018-03-15T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/ibm/</loc>
+    <lastmod>2019-04-13T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/lsf/</loc>
+    <lastmod>2019-04-13T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   

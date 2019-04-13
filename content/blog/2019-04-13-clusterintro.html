@@ -1,0 +1,49 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Introduction"
+author: "Alessandra Valcarcel"
+date: 2019-04-13T21:13:14-05:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>I’ve decided to dedicate the next few blog posts to using the <a href="https://www.med.upenn.edu/hpc/">Penn Medicine Academic Computing Services High-Performance Computing Cluster</a>. I’ll loosely refer to the Penn HPC simply as the cluster, the CCEB cluster, the PMACs HPC, and the Penn HPC throughout this series of blog posts. These posts are intended for both beginners and advanced users and will include information about:</p>
+<ol style="list-style-type: decimal">
+<li>Basics in command line</li>
+<li>Definitions and vocabulary</li>
+<li>Logging onto the cluster</li>
+<li>PMACS high performance computing (HPC) grid specifications</li>
+<li>Session types</li>
+<li>Parallelizing code</li>
+<li>Quality controlling your jobs</li>
+<li>Bash aliases</li>
+</ol>
+<p>This series is designed by a student for students specifically in biostatistics. All code and examples will use R or the command line. After I’ve writtin and posted each subject area, I’ll link the topics above to their respective posts online.</p>
+</div>
+<div id="about-me" class="section level1">
+<h1>About Me</h1>
+<p>I’ve worked on imaging data for about 4 years now. Imaging data is too large to run analyses locally on a personal computer so when I began working in the field I was forced to learn how to use the <a href="https://www.med.upenn.edu/hpc/">Penn Medicine Academic Computing Services High-Performance Computing Cluster (Penn HPC)</a>. I love coding but this was a whole new language and way to think about coding. The learning curve was steep and I got easily frustrated. I luckily have advisors and a network of mentors that are computing savvy so I was able to pick up bits and pieces of efficient ways to use the cluster from everyone I’ve worked with over the past few years. I decided to compile my knowledge into one reference, this series of blog posts, so that I not only have everything in one place but others can learn how to utilize the cluster.</p>
+<center>
+<iframe src="https://giphy.com/embed/MCZ39lz83o5lC" width="480" height="257" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/MCZ39lz83o5lC">via GIPHY</a>
+</p>
+</center>
+<p>Remember, the cluster is a resource that all of the <a href="https://www.med.upenn.edu/">Perelman School of Medicine</a> has access to. A portion of this larger cluster is reserved for CCEB use. Unlike a personal computer, if you use the cluster irresponsibly or incorrectly thousands of jobs and people could be affected. Be diligent and educate yourself before using the cluster to avoid accidentally hogging or breaking things for everyone. Also, be like your kindergarten self and remember that sharing is caring. Of course, there are a number of checks and balances to avoid a single user hogging everything or taking down the whole HPC but mis-use and mistakes may still occur.</p>
+<p>I am by no means a computer scientist or computing expert. I’m just a really passionate biostatistics student that loves efficient computing. For advanced topics and resources you should always contact PMACS IT.</p>
+</div>
+<div id="penn-medicine-academic-computing-services-high-performance-computing-cluster-overview" class="section level1">
+<h1>Penn Medicine Academic Computing Services High-Performance Computing Cluster Overview</h1>
+<p>The Penn HPC is available to faculty, staff, and students at the University of Pennsylvania. The Penn HPC can be used for computation, high-performance storage, and long-term archiving of large data sets. The is made up of IBM hardware and uses an LSF platform job scheduling system. This is just the type of cluster software we use. The other common platform is SGE. These are similar to comparing Mac versus Windows operating systems for personal machines. They do the same things but require different languages and formats.</p>
+<p>More specifics about the cluster will be discussed in a future post. A good start to learn more and troubleshoot issues is always to Google “array jobs lsf”, “batch jobs LSF”, “interactive jobs LSF”, “jobs LSF cluster”. IBM has a number of resources but I like to start <a href="https://www.ibm.com/support/knowledgecenter/en/SSWRJV_10.1.0/lsf_welcome/lsf_kc_get_started.html">here</a>. You can navigate from that page to find details on more specific processes.</p>
+<p>This series of posts is intended specifically for use of the CCEB cluster but much of the content will be applicable to any LSF running platforms. The posts will begin with beginner content and move onto advanced topics. You should have a cluster account before moving forward with these posts.</p>
+<p><br></p>
+<p><strong>Warning</strong>: I use exclusively MacOS and Unix operating systems (OS) so commands shown will specifically work on these OS. Windows should be equivalent, similar, or exist. The cluster is a Unix based machine so these will work on the cluster.</p>
+</div>

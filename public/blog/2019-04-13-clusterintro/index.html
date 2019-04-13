@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Personal website">
+<meta name="keywords" content="student,statistics,biostatistics,Penn">
+
+<base href="/">
+
+<title>Alessandra [Ali] Valcarcel</title>
+
+<meta name="generator" content="Hugo 0.36" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-US">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Using the CCEB High Performance Computing Cluster: Introduction</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        PUBLISHED ON APR 13, 2019 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/computing">COMPUTING</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>I’ve decided to dedicate the next few blog posts to using the <a href="https://www.med.upenn.edu/hpc/">Penn Medicine Academic Computing Services High-Performance Computing Cluster</a>. I’ll loosely refer to the Penn HPC simply as the cluster, the CCEB cluster, the PMACs HPC, and the Penn HPC throughout this series of blog posts. These posts are intended for both beginners and advanced users and will include information about:</p>
+<ol style="list-style-type: decimal">
+<li>Basics in command line</li>
+<li>Definitions and vocabulary</li>
+<li>Logging onto the cluster</li>
+<li>PMACS high performance computing (HPC) grid specifications</li>
+<li>Session types</li>
+<li>Parallelizing code</li>
+<li>Quality controlling your jobs</li>
+<li>Bash aliases</li>
+</ol>
+<p>This series is designed by a student for students specifically in biostatistics. All code and examples will use R or the command line. After I’ve writtin and posted each subject area, I’ll link the topics above to their respective posts online.</p>
+</div>
+<div id="about-me" class="section level1">
+<h1>About Me</h1>
+<p>I’ve worked on imaging data for about 4 years now. Imaging data is too large to run analyses locally on a personal computer so when I began working in the field I was forced to learn how to use the <a href="https://www.med.upenn.edu/hpc/">Penn Medicine Academic Computing Services High-Performance Computing Cluster (Penn HPC)</a>. I love coding but this was a whole new language and way to think about coding. The learning curve was steep and I got easily frustrated. I luckily have advisors and a network of mentors that are computing savvy so I was able to pick up bits and pieces of efficient ways to use the cluster from everyone I’ve worked with over the past few years. I decided to compile my knowledge into one reference, this series of blog posts, so that I not only have everything in one place but others can learn how to utilize the cluster.</p>
+<center>
+<iframe src="https://giphy.com/embed/MCZ39lz83o5lC" width="480" height="257" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/MCZ39lz83o5lC">via GIPHY</a>
+</p>
+</center>
+<p>Remember, the cluster is a resource that all of the <a href="https://www.med.upenn.edu/">Perelman School of Medicine</a> has access to. A portion of this larger cluster is reserved for CCEB use. Unlike a personal computer, if you use the cluster irresponsibly or incorrectly thousands of jobs and people could be affected. Be diligent and educate yourself before using the cluster to avoid accidentally hogging or breaking things for everyone. Also, be like your kindergarten self and remember that sharing is caring. Of course, there are a number of checks and balances to avoid a single user hogging everything or taking down the whole HPC but mis-use and mistakes may still occur.</p>
+<p>I am by no means a computer scientist or computing expert. I’m just a really passionate biostatistics student that loves efficient computing. For advanced topics and resources you should always contact PMACS IT.</p>
+</div>
+<div id="penn-medicine-academic-computing-services-high-performance-computing-cluster-overview" class="section level1">
+<h1>Penn Medicine Academic Computing Services High-Performance Computing Cluster Overview</h1>
+<p>The Penn HPC is available to faculty, staff, and students at the University of Pennsylvania. The Penn HPC can be used for computation, high-performance storage, and long-term archiving of large data sets. The is made up of IBM hardware and uses an LSF platform job scheduling system. This is just the type of cluster software we use. The other common platform is SGE. These are similar to comparing Mac versus Windows operating systems for personal machines. They do the same things but require different languages and formats.</p>
+<p>More specifics about the cluster will be discussed in a future post. A good start to learn more and troubleshoot issues is always to Google “array jobs lsf”, “batch jobs LSF”, “interactive jobs LSF”, “jobs LSF cluster”. IBM has a number of resources but I like to start <a href="https://www.ibm.com/support/knowledgecenter/en/SSWRJV_10.1.0/lsf_welcome/lsf_kc_get_started.html">here</a>. You can navigate from that page to find details on more specific processes.</p>
+<p>This series of posts is intended specifically for use of the CCEB cluster but much of the content will be applicable to any LSF running platforms. The posts will begin with beginner content and move onto advanced topics. You should have a cluster account before moving forward with these posts.</p>
+<p><br></p>
+<p><strong>Warning</strong>: I use exclusively MacOS and Unix operating systems (OS) so commands shown will specifically work on these OS. Windows should be equivalent, similar, or exist. The cluster is a Unix based machine so these will work on the cluster.</p>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      TAGS:
+      
+      
+      <a class="meta" href="/tags/cceb">CCEB</a>, 
+      
+      <a class="meta" href="/tags/cluster">CLUSTER</a>, 
+      
+      <a class="meta" href="/tags/ibm">IBM</a>, 
+      
+      <a class="meta" href="/tags/lsf">LSF</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/blog/2019-04-05-gotapp/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2018. Alessandra [Ali] Valcarcel.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-115574303-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
