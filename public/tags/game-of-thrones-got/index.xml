@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Game of Thrones Got on Alessandra [Ali] Valcarcel</title>
-    <link>https://www.alessandravalcarcel.com/tags/game-of-thrones-got/</link>
+    <link>/tags/game-of-thrones-got/</link>
     <description>Recent content in Game of Thrones Got on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 01 Apr 2018 21:13:14 -0500</lastBuildDate>
     
-	<atom:link href="https://www.alessandravalcarcel.com/tags/game-of-thrones-got/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/game-of-thrones-got/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Scraping Game of Thrones Data</title>
-      <link>https://www.alessandravalcarcel.com/blog/2018-04-1-r-rmarkdown-got-scrape/</link>
+      <link>/blog/2018-04-1-r-rmarkdown-got-scrape/</link>
       <pubDate>Sun, 01 Apr 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/blog/2018-04-1-r-rmarkdown-got-scrape/</guid>
+      <guid>/blog/2018-04-1-r-rmarkdown-got-scrape/</guid>
       <description>WARNING: This post contains spoilers for Game of Thrones and some foul language reproduced from the show script
 April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April…2019 bypassing a season in 2018.
   As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT.</description>

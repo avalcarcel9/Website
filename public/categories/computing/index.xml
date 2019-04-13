@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Computing on Alessandra [Ali] Valcarcel</title>
-    <link>https://www.alessandravalcarcel.com/categories/computing/</link>
+    <link>/categories/computing/</link>
     <description>Recent content in Computing on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Thu, 15 Mar 2018 21:13:14 -0500</lastBuildDate>
     
-	<atom:link href="https://www.alessandravalcarcel.com/categories/computing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/computing/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Make a Personal Website with blogdown</title>
-      <link>https://www.alessandravalcarcel.com/blog/2018-03-15-r-rmarkdown-blogdown-basics/</link>
+      <link>/blog/2018-03-15-r-rmarkdown-blogdown-basics/</link>
       <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/blog/2018-03-15-r-rmarkdown-blogdown-basics/</guid>
+      <guid>/blog/2018-03-15-r-rmarkdown-blogdown-basics/</guid>
       <description>In this post, I am going to cover the basics to creating a website using blogdown and Hugo. We will create and deploy a template website as well as cover some basics about changing content. You should be extremely comfortable coding in R, writing in R Markdown, and have a working knowledge of GitHub. You should have R, R Studio, R Markdown all installed on your computer and an account on GitHub before we start.</description>
     </item>
     

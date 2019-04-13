@@ -2,66 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Alessandra [Ali] Valcarcel</title>
-    <link>https://www.alessandravalcarcel.com/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
     
-	<atom:link href="https://www.alessandravalcarcel.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>https://www.alessandravalcarcel.com/categories/about/</link>
+      <link>/categories/about/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/categories/about/</guid>
+      <guid>/categories/about/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Articles</title>
-      <link>https://www.alessandravalcarcel.com/categories/articles/</link>
+      <link>/categories/articles/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/categories/articles/</guid>
+      <guid>/categories/articles/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Computing</title>
-      <link>https://www.alessandravalcarcel.com/categories/computing/</link>
+      <link>/categories/computing/</link>
       <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/categories/computing/</guid>
+      <guid>/categories/computing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Scraping</title>
-      <link>https://www.alessandravalcarcel.com/categories/data-scraping/</link>
+      <link>/categories/data-scraping/</link>
       <pubDate>Sun, 01 Apr 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/categories/data-scraping/</guid>
+      <guid>/categories/data-scraping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Game of Thrones</title>
-      <link>https://www.alessandravalcarcel.com/categories/game-of-thrones/</link>
+      <link>/categories/game-of-thrones/</link>
       <pubDate>Fri, 05 Apr 2019 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/categories/game-of-thrones/</guid>
+      <guid>/categories/game-of-thrones/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Package Creation</title>
-      <link>https://www.alessandravalcarcel.com/categories/r-package-creation/</link>
+      <link>/categories/r-package-creation/</link>
       <pubDate>Mon, 04 Jun 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/categories/r-package-creation/</guid>
+      <guid>/categories/r-package-creation/</guid>
       <description></description>
     </item>
     
