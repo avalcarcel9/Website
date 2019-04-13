@@ -100,7 +100,7 @@ We will create a new repository (repo). To do this, log in to GitHub and in the 
 
 This will bring up a dialogue box. In this dialogue box, be sure to check to initialize with a README but don’t add .gitignore. We are going to use [Netlify](https://www.netlify.com/) to host so name the repository whatever you want. If you want to use another hosting site, the name of the repository might matter.
 
-<center><img HEIGHT="450" src="/img/new_repo.png" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/new_repo.png" alt="New Repository"></center>
 
 ## 2. Clone your Repository
 
@@ -126,11 +126,11 @@ When you go to your home page in GitHub you should now see this new repository.
 
 In R go to `File > New Project > Existing Directory`. 
 
-<center><img HEIGHT="450" src="/img/existing.png" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/existing.png" alt="New Repository"></center>
 
 Now click on `Browse` and select the directory where you just cloned the git repository and finish by clicking `Create`. This will restart R.
 
-<center><img HEIGHT="450" src="/img/createproj.png" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/createproj.png" alt="New Repository"></center>
 
 When working on your website you should open the project or just be sure to set the working directory to the local GitHub hosted folder using `setwd()`.
 
@@ -188,7 +188,7 @@ There are two approaches to sending your changes to GitHub. The first is for beg
 
 Go to `Tools > Version Control > Commit`. This will bring up this window
 
-<center><img HEIGHT="450" src="/img/Rcommit.png" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/Rcommit.png" alt="New Repository"></center>
 
 The "Commit message" is blank by default and you should type in your message. Try to actually track the changes you have made. Click `Commit`. Then click `Push`. You must push both `Commit` and `Push`! Make sure messages returned don't indicate any error then your changes should be visible on GitHub.
 
@@ -217,13 +217,13 @@ Let's deploy!
 
 Go to [https://www.netlify.com/](https://www.netlify.com/) and "Sign Up". Use your GitHub info to create an account.
 
-<center><img HEIGHT="450" src="/img/netlify.png" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/netlify.png" alt="New Repository"></center>
 
 Just agree to what you need to (if you are comfortable with the agreements) and you now have a Netlify account. Click on "New site from Git > Continuous Deployment: GitHub".
 
 Netlify allows you to select from your existing GitHub repositories. Choose the repository you’ve been working from. This should bring you to this page:
 
-<center><img HEIGHT="450" src="/img/deploy.png" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/deploy.png" alt="New Repository"></center>
 
 The "Publish directory" is blank by default. Change it to public then "Deploy Site". The page that follows will give you information about your site such as the domain. Copy the domain into your URL window and notice it will take you to your new website. The website you see here should be the same as when you used `blogdown::serve_site()`. The content on the site updates automatically when you push changes to GitHub. That is, all you need to do is push your changes to GitHub and the website will automatically update. After this initial setup, you shouldn't need to visit Netlify.
 
@@ -233,12 +233,12 @@ Netlify generated a URL or domain for your website. You can adapt this slightly 
 
 Log in or create an account and purchase a domain. For the domain of interest, go to "Configure DNS" and scroll down to the "Custom resource records". 
 
-<center><img HEIGHT="450" src="/img/google.png" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/google.png" alt="New Repository"></center>
 
 Be sure that your settings match those listed here except alessandravalcarcel.netlify.com should be your Netlify generated domain. Now to connect it to Netlify, go to your Netlify home page. Click on the domain you would like to customize, then click on "Settings" and scroll down to "Domains".
 
-<center><img HEIGHT="450" src="/img/domains.png" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/domains.png" alt="New Repository"></center>
 
 Add your custom domain here. The new domain can take up to 24 hours to work.
 
-<center><img HEIGHT="450" src="/img/meme.jpeg" alt="New Repository"></center>
+<center><img HEIGHT="450" src="/img/blogdown_site/meme.jpeg" alt="New Repository"></center>

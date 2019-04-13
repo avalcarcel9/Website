@@ -13,9 +13,9 @@ showpagemeta = false
 
 ### MIMoSA
 
-<a href="https://github.com/avalcarcel9/mimosa/blob/master/vignettes/mimosa_git.md"><img src="/img/sticker.png" height="192" alt="mimosa logo" align="right" /></a>
+<a href="https://github.com/avalcarcel9/mimosa/blob/master/vignettes/mimosa_git.md"><img src="/img/software/mimosa_sticker.png" height="192" alt="mimosa logo" align="right" /></a>
 
-The `mimosa` R package is now live on [Neuroconductor](https://neuroconductor.org/package/details/mimosa) with the development version on [GitHub](https://github.com/avalcarcel9/mimosa). This package allows you to implement the MIMoSA method discussed in our [original paper](http://onlinelibrary.wiley.com/doi/10.1111/jon.12506/full) and [follow up paper](https://www.sciencedirect.com/science/article/pii/S2213158218303231?via%3Dihub) to automatically segment white matter both T2 hyperintense lesions and T1 hypointense lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data.
+The R package `mimosa` is now live on [Neuroconductor](https://neuroconductor.org/package/details/mimosa) with the development version on [GitHub](https://github.com/avalcarcel9/mimosa). This package allows you to implement the MIMoSA method discussed in our [original paper](http://onlinelibrary.wiley.com/doi/10.1111/jon.12506/full) and [follow up paper](https://www.sciencedirect.com/science/article/pii/S2213158218303231?via%3Dihub) to automatically segment white matter both T2 hyperintense lesions and T1 hypointense lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data.
 
 To download from Neuroconductor run the following code:
 
@@ -61,6 +61,22 @@ To download run the following code:
 # install.packages("devtools")
 devtools::install_github("avalcarcel9/aliviateR")
 ```
+
+### TAPAS
+
+<a href="https://github.com/avalcarcel9/tapas/blob/master/vignettes/tapas-vignette.md"><img src="/img/software/rtapas_sticker.png" height="192" alt="rtapas logo" align="right" /></a>
+
+The R package `rtapas` is now live on [GitHub](https://github.com/avalcarcel9/rtapas) as a development version. This package allows you to implement the TAPAS method. We are working to get the package on Neuroconductor.
+
+To download from GitHub run the following code:
+
+```{r}
+# install.packages("devtools")
+devtools::install_github("avalcarcel9/rtapas")
+```
+
+You can find documentation and a tutorial provided on my GitHub [here](https://github.com/avalcarcel9/rtapas/blob/master/vignettes/tapas-vignette.md).
+
 
 <br>
 

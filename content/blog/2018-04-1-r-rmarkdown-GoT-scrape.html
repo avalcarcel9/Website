@@ -12,24 +12,20 @@ output: html_document
 <p><strong>WARNING: This post contains spoilers for Game of Thrones and some foul language reproduced from the show script</strong></p>
 <p>April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April…2019 bypassing a season in 2018.</p>
 <center>
-<img HEIGHT="350" src="/img/GoT2019.png" alt="Late Season Meme">
+<img HEIGHT="350" src="/img/got_package/GoT2019.png" alt="Late Season Meme">
 </center>
 <p>As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT. The project will involve some analysis of GoT data available on the internet such as scripts, HBO main characters lists, and some other character lists. In this specific post, I will not cover the basics of scraping but rather provide some resources to scrape the material. I’ll be using the data obtained using this code in future blog posts and wanted to provide a way for any user to reproduce my analysis. Up until a few weeks ago, I myself didn’t know what web scraping was so if you weren’t aware web scraping it is simply extracting data from websites. Essentially, I can pull the html source code used to generate and host the website and then harvest or extract the information to be used as data. All the data scraping and analysis will be done in the <a href="https://www.r-project.org/">R environment</a>.</p>
 <p>Shall we begin?</p>
 <center>
-<img HEIGHT="350" src="/img/shallwebegin.png" alt="Late Season Meme">
+<img HEIGHT="350" src="/img/got_package/shallwebegin.png" alt="Late Season Meme">
 </center>
 <p>All of the code provided below uses the filepaths specific to my computer. To reproduce just be sure to change these filepaths to match that of your computer and where you’ll be saving and loading data. Use the button below to download code to scrape and clean all the data I will be using. Code provided in the download is more thorough than that used in the tutorial.</p>
 <center>
-<a href="GoTScrapeAndCleaning.Rmd" download="">
-<button>
-Download Code
-</button>
-</a>
+<a href="GoTScrapeAndCleaning.Rmd" download=""><button>Download Code</button></a>
 </center>
 <div id="scraping-got-scripts" class="section level2">
 <h2>Scraping GoT Scripts</h2>
-<p>I want to eventually do some analysis on the GoT scripts. Since HBO does not provide these scripts, I’m going to rely on <a href="www.genius.com" class="uri">www.genius.com</a>. I chose this website for two main reasons:</p>
+<p>I want to eventually do some analysis on the GoT scripts. Since HBO does not provide these scripts, I’m going to rely on <a href="www.genius.com">www.genius.com</a>. I chose this website for two main reasons:</p>
 <ol style="list-style-type: decimal">
 <li>An R package <code>geniusr</code> already exists with functions to easily scrape the data</li>
 <li>These scripts contain the speaker information which I’ll need later for my eventual analysis</li>
@@ -54,67 +50,13 @@ devtools::install_github(&#39;ewenme/geniusr&#39;)</code></pre>
 <p><em>Warning: Before running any of the functions below be aware that you are pinging the genius server every time you request data. If done quickly or too often it can trigger the server to set up security measures and block your IP from using the site. It is always best to ping the server once and then save the data so that you don’t have to constantly be pulling the data.</em></p>
 <pre class="r"><code>library(geniusr)
 # Search for Amy Winehouse
-geniusr::search_artist(&quot;Amy Winehouse&quot;)</code></pre>
-<pre><code>## # A tibble: 1 x 3
-##   artist_id artist_name   artist_url                              
-##       &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                                   
-## 1      1525 Amy Winehouse https://genius.com/artists/Amy-winehouse</code></pre>
-<pre class="r"><code># Use artist_id to obtain song_id
-geniusr::get_artist_songs(artist_id = 1525)</code></pre>
-<pre><code>## # A tibble: 133 x 7
-##    song_id song_name     song_lyrics_url        annotation_count artist_id
-##      &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                             &lt;int&gt;     &lt;int&gt;
-##  1  247618 Addicted      https://genius.com/Am…               10      1525
-##  2  435850 Alcoholic Lo… https://genius.com/Am…               12      1525
-##  3  800473 Amy Amy Amy   https://genius.com/Am…                1      1525
-##  4  328608 Amy Amy Amy … https://genius.com/Am…                0      1525
-##  5  328740 A Song for Y… https://genius.com/Am…                1      1525
-##  6   52836 Back to Black https://genius.com/Am…               14      1525
-##  7 3053819 Back To Blac… https://genius.com/Am…                0      1525
-##  8 2442037 Back To Blac… https://genius.com/Am…                0      1525
-##  9 1955611 Back To Blac… https://genius.com/Am…                1      1525
-## 10 3592764 Back To Blac… https://genius.com/Am…                0      1525
-## # ... with 123 more rows, and 2 more variables: artist_name &lt;chr&gt;,
-## #   artist_url &lt;chr&gt;</code></pre>
-<pre class="r"><code># Scrape lyrics using an ID
-geniusr::scrape_lyrics_id(song_id = 247618)</code></pre>
-<pre><code>## # A tibble: 18 x 5
-##    line                           song_id song_name artist_id artist_name 
-##    &lt;chr&gt;                            &lt;int&gt; &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;       
-##  1 Tell your boyfriend next time…  247618 Addicted       1525 Amy Winehou…
-##  2 To buy his own weed and don&#39;t…  247618 Addicted       1525 Amy Winehou…
-##  3 I wouldn&#39;t care if bre would …  247618 Addicted       1525 Amy Winehou…
-##  4 I&#39;d rather him leave you then…  247618 Addicted       1525 Amy Winehou…
-##  5 When you smoke all my weed man  247618 Addicted       1525 Amy Winehou…
-##  6 You got to call the green man   247618 Addicted       1525 Amy Winehou…
-##  7 So I can get mine and you get…  247618 Addicted       1525 Amy Winehou…
-##  8 Once is enough to make me att…  247618 Addicted       1525 Amy Winehou…
-##  9 So bring me a bag and your ma…  247618 Addicted       1525 Amy Winehou…
-## 10 I&#39;ll check him at the door ma…  247618 Addicted       1525 Amy Winehou…
-## 11 I&#39;m tighter than airport secu…  247618 Addicted       1525 Amy Winehou…
-## 12 I&#39;m my own man so when will y…  247618 Addicted       1525 Amy Winehou…
-## 13 That you got a man but I got …  247618 Addicted       1525 Amy Winehou…
-## 14 Don&#39;t make no difference if I…  247618 Addicted       1525 Amy Winehou…
-## 15 I&#39;d rather have myself and sm…  247618 Addicted       1525 Amy Winehou…
-## 16 It&#39;s got me addicted, does mo…  247618 Addicted       1525 Amy Winehou…
-## 17 Yeah I can get mine and you g…  247618 Addicted       1525 Amy Winehou…
-## 18 Yeah I can get mine and you g…  247618 Addicted       1525 Amy Winehou…</code></pre>
-<pre class="r"><code># Get song lyrics to Rehab using the URL directly
+geniusr::search_artist(&quot;Amy Winehouse&quot;)
+# Use artist_id to obtain song_id
+geniusr::get_artist_songs(artist_id = 1525)
+# Scrape lyrics using an ID
+geniusr::scrape_lyrics_id(song_id = 247618)
+# Get song lyrics to Rehab using the URL directly
 geniusr::scrape_lyrics_url(&quot;https://genius.com/Amy-winehouse-rehab-lyrics&quot;)</code></pre>
-<pre><code>## # A tibble: 33 x 4
-##    line                    song_lyrics_url           song_name artist_name
-##    &lt;chr&gt;                   &lt;chr&gt;                     &lt;chr&gt;     &lt;chr&gt;      
-##  1 They tried to make me … https://genius.com/Amy-w… Rehab     Amy Wineho…
-##  2 Yes I&#39;ve been black bu… https://genius.com/Amy-w… Rehab     Amy Wineho…
-##  3 I ain&#39;t got the time a… https://genius.com/Amy-w… Rehab     Amy Wineho…
-##  4 He&#39;s tried to make me … https://genius.com/Amy-w… Rehab     Amy Wineho…
-##  5 I&#39;d rather be at home … https://genius.com/Amy-w… Rehab     Amy Wineho…
-##  6 I ain&#39;t got seventy da… https://genius.com/Amy-w… Rehab     Amy Wineho…
-##  7 Cause there&#39;s nothing   https://genius.com/Amy-w… Rehab     Amy Wineho…
-##  8 There&#39;s nothing you ca… https://genius.com/Amy-w… Rehab     Amy Wineho…
-##  9 That I can&#39;t learn fro… https://genius.com/Amy-w… Rehab     Amy Wineho…
-## 10 I didn&#39;t get a lot in … https://genius.com/Amy-w… Rehab     Amy Wineho…
-## # ... with 23 more rows</code></pre>
 <p>Genius was originally set up to host lyrics of songs as well as artist and album information. Now they host TV show and movie scripts as well. The GoT scripts can be accessed <a href="https://genius.com/artists/Game-of-thrones">here</a>. Notice, the seasons are recorded as an “album” on the site and within each album the script for an episode is characterized as a song. To scrape Game of Thrones data, I created an R package that wraps <code>geniusr</code> or does the scraping within the function. You can find out more about the package on my <a href="https://github.com/avalcarcel9/GoT">GitHub</a>. To download the development version from my GitHub run:</p>
 <pre class="r"><code>devtools::install_github(&quot;avalcarcel9/GoT&quot;)</code></pre>
 <pre class="r"><code>library(GoT)</code></pre>
@@ -129,44 +71,116 @@ tail(geniusr_scripts)
 # Save data - Change filepath to match where you&#39;d like to save the data
 save(geniusr_scripts, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/geniusr_scripts.RData&quot;)</code></pre>
 <pre><code>## # A tibble: 6 x 6
-##   song_number album_name       line  song_lyrics_url song_name artist_name
-##         &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;      
-## 1        1.00 Season 1 Scripts WAYM… https://genius… Winter i… Game of Th…
-## 2        1.00 Season 1 Scripts WILL… https://genius… Winter i… Game of Th…
-## 3        1.00 Season 1 Scripts WAYM… https://genius… Winter i… Game of Th…
-## 4        1.00 Season 1 Scripts WILL… https://genius… Winter i… Game of Th…
-## 5        1.00 Season 1 Scripts GARE… https://genius… Winter i… Game of Th…
-## 6        1.00 Season 1 Scripts ROYC… https://genius… Winter i… Game of Th…</code></pre>
+##   song_number album_name      
+##         &lt;dbl&gt; &lt;chr&gt;           
+## 1           1 Season 1 Scripts
+## 2           1 Season 1 Scripts
+## 3           1 Season 1 Scripts
+## 4           1 Season 1 Scripts
+## 5           1 Season 1 Scripts
+## 6           1 Season 1 Scripts
+##   line                                                                     
+##   &lt;chr&gt;                                                                    
+## 1 WAYMAR ROYCE: What d’you expect? They’re savages. One lot steals a goat …
+## 2 WILL: I’ve never seen wildlings do a thing like this. I’ve never seen a …
+## 3 WAYMAR ROYCE: How close did you get?                                     
+## 4 WILL: Close as any man would.                                            
+## 5 GARED: We should head back to the wall.                                  
+## 6 ROYCE: Do the dead frighten you?                                         
+##   song_lyrics_url                                              
+##   &lt;chr&gt;                                                        
+## 1 https://genius.com/Game-of-thrones-winter-is-coming-annotated
+## 2 https://genius.com/Game-of-thrones-winter-is-coming-annotated
+## 3 https://genius.com/Game-of-thrones-winter-is-coming-annotated
+## 4 https://genius.com/Game-of-thrones-winter-is-coming-annotated
+## 5 https://genius.com/Game-of-thrones-winter-is-coming-annotated
+## 6 https://genius.com/Game-of-thrones-winter-is-coming-annotated
+##   song_name        artist_name    
+##   &lt;chr&gt;            &lt;chr&gt;          
+## 1 Winter is Coming Game of Thrones
+## 2 Winter is Coming Game of Thrones
+## 3 Winter is Coming Game of Thrones
+## 4 Winter is Coming Game of Thrones
+## 5 Winter is Coming Game of Thrones
+## 6 Winter is Coming Game of Thrones</code></pre>
 <pre><code>## # A tibble: 6 x 6
-##   song_number album_name       line  song_lyrics_url song_name artist_name
-##         &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;      
-## 1        10.0 Season 6 Scripts CERS… https://genius… The Wind… Game of Th…
-## 2        10.0 Season 6 Scripts QYBU… https://genius… The Wind… Game of Th…
-## 3        10.0 Season 6 Scripts QYBU… https://genius… The Wind… Game of Th…
-## 4        10.0 Season 6 Scripts QYBU… https://genius… The Wind… Game of Th…
-## 5        10.0 Season 6 Scripts ALL:… https://genius… The Wind… Game of Th…
-## 6        10.0 Season 6 Scripts THEO… https://genius… The Wind… Game of Th…</code></pre>
+##   song_number album_name      
+##         &lt;dbl&gt; &lt;chr&gt;           
+## 1          10 Season 6 Scripts
+## 2          10 Season 6 Scripts
+## 3          10 Season 6 Scripts
+## 4          10 Season 6 Scripts
+## 5          10 Season 6 Scripts
+## 6          10 Season 6 Scripts
+##   line                                                                     
+##   &lt;chr&gt;                                                                    
+## 1 CERSEI enters, escorted by GREGOR and the Kingsguard. The room is full o…
+## 2 QYBURN: I now proclaim Cersei of the House Lannister First of Her Name, …
+## 3 QYBURN places the crown on CERSEI’s head. CERSEI sits in the Iron Throne…
+## 4 QYBURN: Long may she reign.                                              
+## 5 ALL: Long may she reign.                                                 
+## 6 THEON and YARA are standing on their ship. They look out at the sea. A v…
+##   song_lyrics_url                                                        
+##   &lt;chr&gt;                                                                  
+## 1 https://genius.com/Game-of-thrones-the-winds-of-winter-script-annotated
+## 2 https://genius.com/Game-of-thrones-the-winds-of-winter-script-annotated
+## 3 https://genius.com/Game-of-thrones-the-winds-of-winter-script-annotated
+## 4 https://genius.com/Game-of-thrones-the-winds-of-winter-script-annotated
+## 5 https://genius.com/Game-of-thrones-the-winds-of-winter-script-annotated
+## 6 https://genius.com/Game-of-thrones-the-winds-of-winter-script-annotated
+##   song_name                    artist_name    
+##   &lt;chr&gt;                        &lt;chr&gt;          
+## 1 The Winds of Winter (Script) Game of Thrones
+## 2 The Winds of Winter (Script) Game of Thrones
+## 3 The Winds of Winter (Script) Game of Thrones
+## 4 The Winds of Winter (Script) Game of Thrones
+## 5 The Winds of Winter (Script) Game of Thrones
+## 6 The Winds of Winter (Script) Game of Thrones</code></pre>
 <p>Again, I scrape the website once and save the results as an R object so I do not get blocked for scraping too much from genius. After I’ve saved the file then whenever I want to start working with the data I simply load my scraped file rather than re-scrape from the internet.</p>
 <p>We now have every episode script with season indicators!</p>
-<p>The <code>GoT</code> package also comes with a simple function to clean the <a href="www.genius.com" class="uri">www.genius.com</a> scripts. It extracts the speaker information, tries to clean the speaking character name, adds actions in a column if indicated, and removes some of the narration.</p>
+<p>The <code>GoT</code> package also comes with a simple function to clean the <a href="www.genius.com">www.genius.com</a> scripts. It extracts the speaker information, tries to clean the speaking character name, adds actions in a column if indicated, and removes some of the narration.</p>
 <pre class="r"><code>clean_data = GoT::cleanGoT(geniusr_scripts)
 head(clean_data)</code></pre>
 <pre><code>## # A tibble: 6 x 6
-##   episode season line               speaker  action orig_line             
-##     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                 
-## 1    1.00   1.00 What d’you expect… Waymar … &quot;&quot;     WAYMAR ROYCE: What d’…
-## 2    1.00   1.00 I’ve never seen w… Will     &quot;&quot;     WILL: I’ve never seen…
-## 3    1.00   1.00 How close did you… Waymar … &quot;&quot;     WAYMAR ROYCE: How clo…
-## 4    1.00   1.00 Close as any man … Will     &quot;&quot;     WILL: Close as any ma…
-## 5    1.00   1.00 We should head ba… Gared    &quot;&quot;     GARED: We should head…
-## 6    1.00   1.00 Do the dead frigh… Royce    &quot;&quot;     ROYCE: Do the dead fr…</code></pre>
+##   episode season
+##     &lt;dbl&gt;  &lt;dbl&gt;
+## 1       1      1
+## 2       1      1
+## 3       1      1
+## 4       1      1
+## 5       1      1
+## 6       1      1
+##   line                                                                     
+##   &lt;chr&gt;                                                                    
+## 1 What d’you expect? They’re savages. One lot steals a goat from another l…
+## 2 I’ve never seen wildlings do a thing like this. I’ve never seen a thing …
+## 3 How close did you get?                                                   
+## 4 Close as any man would.                                                  
+## 5 We should head back to the wall.                                         
+## 6 Do the dead frighten you?                                                
+##   speaker      action
+##   &lt;chr&gt;        &lt;chr&gt; 
+## 1 Waymar Royce &quot;&quot;    
+## 2 Will         &quot;&quot;    
+## 3 Waymar Royce &quot;&quot;    
+## 4 Will         &quot;&quot;    
+## 5 Gared        &quot;&quot;    
+## 6 Royce        &quot;&quot;    
+##   orig_line                                                                
+##   &lt;chr&gt;                                                                    
+## 1 WAYMAR ROYCE: What d’you expect? They’re savages. One lot steals a goat …
+## 2 WILL: I’ve never seen wildlings do a thing like this. I’ve never seen a …
+## 3 WAYMAR ROYCE: How close did you get?                                     
+## 4 WILL: Close as any man would.                                            
+## 5 GARED: We should head back to the wall.                                  
+## 6 ROYCE: Do the dead frighten you?</code></pre>
 </div>
 <div id="scrape-episode-lengths" class="section level2">
 <h2>Scrape Episode Lengths</h2>
-<p>To add temporal information to the season and episode, I need each episode length. This scraping process will be very similar to the scripts above. We will use an R package <code>omdbapi</code> which is borrowing information from IMDB. Similar to <code>geniusr</code> you need to create an account at <a href="http://www.omdbapi.com/" class="uri">http://www.omdbapi.com/</a>. After creating an account you can obtain and API token. Follow the steps in <strong>Scraping GoT Scripts</strong> section and put the API token in your .Renviron as <code>OMDB_API_KEY=&quot;your_key_goes_here&quot;</code>. Be sure to activate this key or the <code>omdbapi</code> package won’t work.</p>
+<p>To add temporal information to the season and episode, I need each episode length. This scraping process will be very similar to the scripts above. We will use an R package <code>omdbapi</code> which is borrowing information from IMDB. Similar to <code>geniusr</code> you need to create an account at <a href="http://www.omdbapi.com/">http://www.omdbapi.com/</a>. After creating an account you can obtain and API token. Follow the steps in <strong>Scraping GoT Scripts</strong> section and put the API token in your .Renviron as <code>OMDB_API_KEY="your_key_goes_here"</code>. Be sure to activate this key or the <code>omdbapi</code> package won’t work.</p>
 <pre class="r"><code># Install omdbapi
 devtools::install_github(&quot;hrbrmstr/omdbapi&quot;)</code></pre>
-<p>The package developer has a lot of documentation on their GitHub <a href="https://github.com/hrbrmstr/omdbapi" class="uri">https://github.com/hrbrmstr/omdbapi</a> if you’d like to explore the package more. Conveniently, they have an example that obtains specific Game of Thrones data.</p>
+<p>The package developer has a lot of documentation on their GitHub <a href="https://github.com/hrbrmstr/omdbapi">https://github.com/hrbrmstr/omdbapi</a> if you’d like to explore the package more. Conveniently, they have an example that obtains specific Game of Thrones data.</p>
 <pre class="r"><code>library(omdbapi)
 library(dplyr)
 
@@ -286,47 +300,63 @@ head(hbo_characters)</code></pre>
 <div id="scrape-character-death-timeline" class="section level2">
 <h2>Scrape Character Death Timeline</h2>
 <p>To scrape the character deaths and at what time in a particular season and episode they die I use the website <a href="%22https://deathtimeline.com/%22">“https://deathtimeline.com/”</a>. This website contains dynamic content that allows the user to interact with and needs some extra TLC to scrape.</p>
-<p>From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to describe who killed that person. There is some bias to this data. Mostly the bias is that it is taken from <a href="https://deathtimeline.com/" class="uri">https://deathtimeline.com/</a> and relies on their information. From that data I can only collect that they deemed as major and minor. Again, we will use a function in the <code>GoT</code> package.</p>
+<p>From this, I obtain who is killed, how they were killed, the time they were killed, season, episode, and specifically how they were killed. The specific kill is to describe who killed that person. There is some bias to this data. Mostly the bias is that it is taken from <a href="https://deathtimeline.com/">https://deathtimeline.com/</a> and relies on their information. From that data I can only collect that they deemed as major and minor. Again, we will use a function in the <code>GoT</code> package.</p>
 <pre class="r"><code>death_times = GoT::get_death_times()
 
 head(death_times)</code></pre>
 <pre><code>## # A tibble: 6 x 6
 ##   who          how                    times    season episode specific_how
 ##   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       
-## 1 Waymar Royce killed by white walker 00:05:52   1.00    1.00 White Walker
-## 2 Gared        killed by white walker 00:06:58   1.00    1.00 White Walker
-## 3 Will         executed by ned stark  00:13:44   1.00    1.00 Ned Stark   
-## 4 Jon Arryn    poisoned by lysa       00:18:34   1.00    1.00 Lysa        
-## 5 Assassin     killed by bran&#39;s wolf  00:31:27   1.00    2.00 Bran&#39;s Wolf 
-## 6 Mycah        killed by the hound    00:04:37   1.00    2.00 The Hound</code></pre>
+## 1 Waymar Royce killed by white walker 00:05:52      1       1 White Walker
+## 2 Gared        killed by white walker 00:06:58      1       1 White Walker
+## 3 Will         executed by ned stark  00:13:44      1       1 Ned Stark   
+## 4 Jon Arryn    poisoned by lysa       00:18:34      1       1 Lysa        
+## 5 Assassin     killed by bran&#39;s wolf  00:31:27      1       2 Bran&#39;s Wolf 
+## 6 Mycah        killed by the hound    00:04:37      1       2 The Hound</code></pre>
 <pre class="r"><code>save(death_times, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/death_times.RData&quot;)</code></pre>
 <pre><code>## # A tibble: 6 x 6
 ##   who          how                    times    season episode specific_how
 ##   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       
-## 1 Waymar Royce killed by white walker 00:05:52   1.00    1.00 White Walker
-## 2 Gared        killed by white walker 00:06:58   1.00    1.00 White Walker
-## 3 Will         executed by ned stark  00:13:44   1.00    1.00 Ned Stark   
-## 4 Jon Arryn    poisoned by lysa       00:18:34   1.00    1.00 Lysa        
-## 5 Assassin     killed by bran&#39;s wolf  00:31:27   1.00    2.00 Bran&#39;s Wolf 
-## 6 Mycah        killed by the hound    00:04:37   1.00    2.00 The Hound</code></pre>
-<p>Notice that season 7 data is not available using this source. Instead, I will scrape this data from <a href="http://time.com/3924852/every-game-of-thrones-death/" class="uri">http://time.com/3924852/every-game-of-thrones-death/</a>. I am going to scrape the full data just as a reference.</p>
+## 1 Waymar Royce killed by white walker 00:05:52      1       1 White Walker
+## 2 Gared        killed by white walker 00:06:58      1       1 White Walker
+## 3 Will         executed by ned stark  00:13:44      1       1 Ned Stark   
+## 4 Jon Arryn    poisoned by lysa       00:18:34      1       1 Lysa        
+## 5 Assassin     killed by bran&#39;s wolf  00:31:27      1       2 Bran&#39;s Wolf 
+## 6 Mycah        killed by the hound    00:04:37      1       2 The Hound</code></pre>
+<p>Notice that season 7 data is not available using this source. Instead, I will scrape this data from <a href="http://time.com/3924852/every-game-of-thrones-death/">http://time.com/3924852/every-game-of-thrones-death/</a>. I am going to scrape the full data just as a reference.</p>
 <pre class="r"><code>time.com_death_data = GoT::get_time.com_deaths(url = &#39;http://time.com/3924852/every-game-of-thrones-death/&#39;)
 head(time.com_death_data)
 
 save(time.com_death_data, file = &quot;/Users/alval/Box/Coursework/IndStudy/Data/time.com_death_data.RData&quot;)</code></pre>
 <pre><code>## # A tibble: 6 x 6
-##   who               season episode times how           specific_how       
-##   &lt;chr&gt;              &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;         &lt;chr&gt;              
-## 1 Will                1.00    1.00 NA    Beheaded for… Beheaded for deser…
-## 2 Jon Arryn           1.00    1.00 NA    Poisoned by … Poisoned by Lysa A…
-## 3 Jory Cassel         1.00    5.00 NA    Stabbed by J… Stabbed by Jaime L…
-## 4 Viserys Targaryen   1.00    6.00 NA    Khal Drogo p… Khal Drogo pours m…
-## 5 Benjen Stark        1.00    7.00 NA    Killed by Wh… Killed by White Wa…
-## 6 Robert Baratheon    1.00    7.00 NA    Mortally wou… Mortally wounded b…</code></pre>
+##   who               season episode times
+##   &lt;chr&gt;              &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt;
+## 1 Will                   1       1 NA   
+## 2 Jon Arryn              1       1 NA   
+## 3 Jory Cassel            1       5 NA   
+## 4 Viserys Targaryen      1       6 NA   
+## 5 Benjen Stark           1       7 NA   
+## 6 Robert Baratheon       1       7 NA   
+##   how                                                                      
+##   &lt;chr&gt;                                                                    
+## 1 Beheaded for desertion by Ned Stark                                      
+## 2 Poisoned by Lysa Arryn and Littlefinger                                  
+## 3 Stabbed by Jaime Lannister through the eye                               
+## 4 Khal Drogo pours molten gold on his head at Daenerys’ command            
+## 5 Killed by White Walkers                                                  
+## 6 Mortally wounded by a wild boar after drinking wine given to him by Lanc…
+##   specific_how                                                             
+##   &lt;chr&gt;                                                                    
+## 1 Beheaded for desertion by Ned Stark                                      
+## 2 Poisoned by Lysa Arryn and Littlefinger                                  
+## 3 Stabbed by Jaime Lannister through the eye                               
+## 4 Khal Drogo pours molten gold on his head at Daenerys’ command            
+## 5 Killed by White Walkers                                                  
+## 6 Mortally wounded by a wild boar after drinking wine given to him by Lanc…</code></pre>
 </div>
 <div id="biases" class="section level2">
 <h2>Biases</h2>
-<p>There are some biases introduced that are immediatly obvious. First, we scrape the GoT scripts from <a href="www.genius.com" class="uri">www.genius.com</a> and not every episode was annotated. Therefore, there are a few episodes that we will be missing in our analysis later. Most of season 2 and 3 were not available when I wrote this post. I’ll continually check if someone annotates and update this blog post and future analysis if they appear. Second, the content on this site is supplied by users and is not verified by HBO. The content does contain some typo’s and may not exactly match the true script. Third, the character vector scraped from <a href="http://awoiaf.westeros.org/index.php/List_of_characters">“http://awoiaf.westeros.org/index.php/List_of_characters”</a> is similarly a fan generated page and is susceptible to inaccurate information.</p>
+<p>There are some biases introduced that are immediatly obvious. First, we scrape the GoT scripts from <a href="www.genius.com">www.genius.com</a> and not every episode was annotated. Therefore, there are a few episodes that we will be missing in our analysis later. Most of season 2 and 3 were not available when I wrote this post. I’ll continually check if someone annotates and update this blog post and future analysis if they appear. Second, the content on this site is supplied by users and is not verified by HBO. The content does contain some typo’s and may not exactly match the true script. Third, the character vector scraped from <a href="http://awoiaf.westeros.org/index.php/List_of_characters">“http://awoiaf.westeros.org/index.php/List_of_characters”</a> is similarly a fan generated page and is susceptible to inaccurate information.</p>
 </div>
 <div id="future-work" class="section level2">
 <h2>Future Work</h2>

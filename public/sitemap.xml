@@ -3,197 +3,197 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/blog/2019-04-05-gotapp/</loc>
+    <loc>https://www.alessandravalcarcel.com/blog/2019-04-05-gotapp/</loc>
     <lastmod>2019-04-05T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2018-06-04-rpackage/</loc>
+    <loc>https://www.alessandravalcarcel.com/blog/2018-06-04-rpackage/</loc>
     <lastmod>2018-06-04T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2018-04-1-r-rmarkdown-got-scrape/</loc>
+    <loc>https://www.alessandravalcarcel.com/blog/2018-04-1-r-rmarkdown-got-scrape/</loc>
     <lastmod>2018-04-01T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2018-03-15-r-rmarkdown-blogdown-basics/</loc>
+    <loc>https://www.alessandravalcarcel.com/blog/2018-03-15-r-rmarkdown-blogdown-basics/</loc>
     <lastmod>2018-03-15T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/cv/</loc>
+    <loc>https://www.alessandravalcarcel.com/cv/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://www.alessandravalcarcel.com/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
   </url>
   
   <url>
-    <loc>/research/</loc>
+    <loc>https://www.alessandravalcarcel.com/research/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
   </url>
   
   <url>
-    <loc>/software/</loc>
+    <loc>https://www.alessandravalcarcel.com/software/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/about/</loc>
-    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/about/</loc>
+    <loc>https://www.alessandravalcarcel.com/tags/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/</loc>
+    <loc>https://www.alessandravalcarcel.com/categories/about/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/</loc>
     <lastmod>2019-04-05T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/articles/</loc>
+    <loc>https://www.alessandravalcarcel.com/categories/articles/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/blogdown/</loc>
-    <lastmod>2018-03-15T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/blog/</loc>
-    <lastmod>2019-04-05T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/computing/</loc>
+    <loc>https://www.alessandravalcarcel.com/tags/blogdown/</loc>
     <lastmod>2018-03-15T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/data-scraping/</loc>
-    <lastmod>2018-04-01T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/data-scraping/</loc>
-    <lastmod>2018-04-01T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/game-of-thrones/</loc>
+    <loc>https://www.alessandravalcarcel.com/blog/</loc>
     <lastmod>2019-04-05T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/game-of-thrones/</loc>
-    <lastmod>2019-04-05T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/game-of-thrones-got/</loc>
-    <lastmod>2018-04-01T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/github/</loc>
+    <loc>https://www.alessandravalcarcel.com/categories/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/hugo/</loc>
+    <loc>https://www.alessandravalcarcel.com/categories/computing/</loc>
     <lastmod>2018-03-15T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/mimosa/</loc>
-    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <loc>https://www.alessandravalcarcel.com/tags/data-scraping/</loc>
+    <lastmod>2018-04-01T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/multiple-sclerosis/</loc>
-    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <loc>https://www.alessandravalcarcel.com/categories/data-scraping/</loc>
+    <lastmod>2018-04-01T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/network-analysis/</loc>
+    <loc>https://www.alessandravalcarcel.com/tags/game-of-thrones/</loc>
     <lastmod>2019-04-05T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/neuroconductor/</loc>
-    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r-package/</loc>
-    <lastmod>2018-06-04T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/r-package-creation/</loc>
-    <lastmod>2018-06-04T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/research/</loc>
-    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/shiny-app/</loc>
+    <loc>https://www.alessandravalcarcel.com/categories/game-of-thrones/</loc>
     <lastmod>2019-04-05T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://www.alessandravalcarcel.com/tags/game-of-thrones-got/</loc>
+    <lastmod>2018-04-01T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/github/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/usethis/</loc>
+    <loc>https://www.alessandravalcarcel.com/tags/hugo/</loc>
+    <lastmod>2018-03-15T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/mimosa/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/multiple-sclerosis/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/network-analysis/</loc>
+    <lastmod>2019-04-05T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/neuroconductor/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/r-package/</loc>
     <lastmod>2018-06-04T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/website/</loc>
+    <loc>https://www.alessandravalcarcel.com/categories/r-package-creation/</loc>
+    <lastmod>2018-06-04T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/research/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/shiny-app/</loc>
+    <lastmod>2019-04-05T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/</loc>
+    <lastmod>2016-10-02T22:55:05-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/usethis/</loc>
+    <lastmod>2018-06-04T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.alessandravalcarcel.com/tags/website/</loc>
     <lastmod>2018-03-15T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>

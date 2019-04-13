@@ -88,7 +88,7 @@ blogdown::build_site()</code></pre>
 <p>We will create a new repository (repo). To do this, log in to GitHub and in the right corner click the <code>+ &gt; New repository</code>.</p>
 <p>This will bring up a dialogue box. In this dialogue box, be sure to check to initialize with a README but don’t add .gitignore. We are going to use <a href="https://www.netlify.com/">Netlify</a> to host so name the repository whatever you want. If you want to use another hosting site, the name of the repository might matter.</p>
 <center>
-<img HEIGHT="450" src="/img/new_repo.png" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/new_repo.png" alt="New Repository">
 </center>
 </div>
 <div id="clone-your-repository" class="section level2">
@@ -107,11 +107,11 @@ Unpacking objects: 100% (3/3), done.</code></pre>
 <h2>3. Create a New Project in R</h2>
 <p>In R go to <code>File &gt; New Project &gt; Existing Directory</code>.</p>
 <center>
-<img HEIGHT="450" src="/img/existing.png" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/existing.png" alt="New Repository">
 </center>
 <p>Now click on <code>Browse</code> and select the directory where you just cloned the git repository and finish by clicking <code>Create</code>. This will restart R.</p>
 <center>
-<img HEIGHT="450" src="/img/createproj.png" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/createproj.png" alt="New Repository">
 </center>
 <p>When working on your website you should open the project or just be sure to set the working directory to the local GitHub hosted folder using <code>setwd()</code>.</p>
 </div>
@@ -151,7 +151,7 @@ Unpacking objects: 100% (3/3), done.</code></pre>
 </ol>
 <p>Go to <code>Tools &gt; Version Control &gt; Commit</code>. This will bring up this window</p>
 <center>
-<img HEIGHT="450" src="/img/Rcommit.png" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/Rcommit.png" alt="New Repository">
 </center>
 <p>The “Commit message” is blank by default and you should type in your message. Try to actually track the changes you have made. Click <code>Commit</code>. Then click <code>Push</code>. You must push both <code>Commit</code> and <code>Push</code>! Make sure messages returned don’t indicate any error then your changes should be visible on GitHub.</p>
 <p>For this to work, you have to be working in the project. So if you exit out of R Studio and return to work on the website you have to <code>File &gt; Open Project</code> and select the project you created.</p>
@@ -172,12 +172,12 @@ git push</code></pre>
 <p>Let’s deploy!</p>
 <p>Go to <a href="https://www.netlify.com/">https://www.netlify.com/</a> and “Sign Up”. Use your GitHub info to create an account.</p>
 <center>
-<img HEIGHT="450" src="/img/netlify.png" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/netlify.png" alt="New Repository">
 </center>
 <p>Just agree to what you need to (if you are comfortable with the agreements) and you now have a Netlify account. Click on “New site from Git &gt; Continuous Deployment: GitHub”.</p>
 <p>Netlify allows you to select from your existing GitHub repositories. Choose the repository you’ve been working from. This should bring you to this page:</p>
 <center>
-<img HEIGHT="450" src="/img/deploy.png" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/deploy.png" alt="New Repository">
 </center>
 <p>The “Publish directory” is blank by default. Change it to public then “Deploy Site”. The page that follows will give you information about your site such as the domain. Copy the domain into your URL window and notice it will take you to your new website. The website you see here should be the same as when you used <code>blogdown::serve_site()</code>. The content on the site updates automatically when you push changes to GitHub. That is, all you need to do is push your changes to GitHub and the website will automatically update. After this initial setup, you shouldn’t need to visit Netlify.</p>
 </div>
@@ -186,14 +186,14 @@ git push</code></pre>
 <p>Netlify generated a URL or domain for your website. You can adapt this slightly through their website options but the URL will still need to have the .netlify base. If you want a custom domain, which you should so people can find you, then we can buy one from <a href="https://domains.google/?gclid=EAIaIQobChMI28rWm4ft2QIVB16GCh2vDgeyEAAYASAAEgIhKvD_BwE&amp;dclid=CMCCiZ2H7dkCFQqwswodQHsLgQ#/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=na-US-all-en-dr-bkws-all-all-lead-e-domains-1004612&amp;utm_content=text-ad-none-none-DEV_all-CRE_212485976131-ADGP_%5B*Adgroup*%5D-KWID_%5B*TrackerID*%5D-kwd-1167675508&amp;utm_term=KW_google%20domains-ST_%5B*searchterm*%5D">GoogleDomains</a>. It is only 12$ per year, which is very cheap, and it is really easy to configure with Netlify.</p>
 <p>Log in or create an account and purchase a domain. For the domain of interest, go to “Configure DNS” and scroll down to the “Custom resource records”.</p>
 <center>
-<img HEIGHT="450" src="/img/google.png" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/google.png" alt="New Repository">
 </center>
 <p>Be sure that your settings match those listed here except alessandravalcarcel.netlify.com should be your Netlify generated domain. Now to connect it to Netlify, go to your Netlify home page. Click on the domain you would like to customize, then click on “Settings” and scroll down to “Domains”.</p>
 <center>
-<img HEIGHT="450" src="/img/domains.png" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/domains.png" alt="New Repository">
 </center>
 <p>Add your custom domain here. The new domain can take up to 24 hours to work.</p>
 <center>
-<img HEIGHT="450" src="/img/meme.jpeg" alt="New Repository">
+<img HEIGHT="450" src="/img/blogdown_site/meme.jpeg" alt="New Repository">
 </center>
 </div>

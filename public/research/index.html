@@ -10,7 +10,7 @@
 <meta name="description" content="Personal website">
 <meta name="keywords" content="student,statistics,biostatistics,Penn">
 
-<base href="/">
+<base href="https://www.alessandravalcarcel.com/">
 
 <title>Alessandra [Ali] Valcarcel</title>
 
@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://www.alessandravalcarcel.com/css/main.css">
 
 
 
@@ -64,13 +64,13 @@
 
 <p>Multiple sclerosis is an inflammatory disease of the brain and spinal cord characterized by demyelinating white matter referred to as white matter lesions. The number and volume of lesions are essential for evaluating disease-modifying therapies and monitoring disease activity. The current gold standard approach for lesion classification is the manual segmentation by a radiologist or other imaging scientist. Unfortunately, these methods are prone to a large amount of intra- and inter- observer variability. Automated segmentation reduces cost, variability, and time but remains challenging. The majority of statistical techniques for the automated segmentation of WML are based on a single imaging modality, recent advances have used multimodal techniques for identifying WML. This motivated me to develop MIMoSA a machine learning algorithm which leverages features that capture not only the mean structure within an image but also the covariance structure between complementary MRI contrasts. MIMoSA was built to automatically segment T2 hyperintense lesions.</p>
 
-<p><center><img src="/img/lesionseg.png" alt="picture" /></center></p>
+<p><center><img src="/img/research/lesionseg.png" alt="picture" /></center></p>
 
 <p>Our paper on this topic is available through the Journal of Neuroimaging <a href="http://onlinelibrary.wiley.com/doi/10.1111/jon.12506/full">here</a>. Our methods are implemented as an R package <code>mimosa</code>, hosted on Neuroconductor and GitHub. You can download it <a href="https://neuroconductor.org/package/details/mimosa">here</a>. For the most recent version, check out my GitHub repo <a href="https://github.com/avalcarcel9/mimosa">here</a>.</p>
 
-<p>I recently extended the MIMoSA method to segment T1 hypointense lesions. T2 hyperintense lesions lesions are non-specific to the level of multiple sclerosis tissue destruction and show weak correlations with clinical variables. T1 hypointense lesions are more specific to axonal loss and link closer with clinical covariates. Unfortunately, T1 hypointense lesions are very difficult to automatically segment since they present to gray matter.</p>
+<p>I recently extended the MIMoSA method to segment T1 hypointense lesions. T2 hyperintense lesions are non-specific to the level of multiple sclerosis tissue destruction and show weak correlations with clinical variables. T1 hypointense lesions are more specific to axonal loss and link closer with clinical covariates. Unfortunately, T1 hypointense lesions are very difficult to automatically segment since they present to gray matter.</p>
 
-<p>Our paper on this topic is published in the Neuroimage: Clinical journal <a href="https://linkinghub.elsevier.com/retrieve/pii/S2213-1582(18)30323-1">here</a>. The R package <code>mimosa</code> can still be utilized to implement the methods.</p>
+<p>Our paper on this topic is published in the Neuroimage: Clinical journal <a href="https://linkinghub.elsevier.com/retrieve/pii/S2213-1582(18)30323-1">here</a>. The R package <a href="www.github.com/avalcarcel9/mimosa"><code>mimosa</code></a> can be utilized to implement the methods.</p>
 
 <p><br></p>
 
@@ -80,19 +80,19 @@
 
 <p>To deal with my deep and intense sadness resulting from a lack of a new Game of Thrones season in 2018 I decided to make a shiny app available at this link <a href="https://alval.shinyapps.io/got_shiny/">https://alval.shinyapps.io/got_shiny/</a>. The app creates a network of the characters based on number of times a single character speaks another characters name using the TV scripts.</p>
 
-<p><center><img src="/img/got_network.png" alt="picture" /></center></p>
+<p><center><img src="/img/research/got_network.png" alt="picture" /></center></p>
 
-<p>The top left corner of the app provides links to a Description and About page. Code is readily available through links on the About page in the app. This project was mostly a learning experience so I could teach myself <code>dplyr</code>, <code>tidyr</code>, shiny, and get a basic understanding on network analysis.</p>
+<p>The top left corner of the app provides links to a Description and About page. Code is readily available through links on the About page in the app. This project was mostly a learning experience so I could teach myself <code>dplyr</code>, <code>tidyr</code>, shiny, and get a basic understanding on network analysis. If you&rsquo;re interested in learning more details about the patterns found in the network using the app I wrote a blog post that can be accessed <a href="www.alessandravalcarcel.com/blog/2019-04-05-gotapp">here</a>.</p>
 
-<p>In addition to the shiny app I played with some data graphics to summarize the show. With the Game of Thrones TV scripts I also created a bar graph to display the number of lines spoken by the top 27 speakers.</p>
+<p>In addition to the shiny app I played with some graphics to summarize the show. With the Game of Thrones TV scripts I also created a bar graph to display the number of lines spoken by the top 27 speakers.</p>
 
-<p><center><img src="/img/GoT_freq.png" alt="picture" /></center></p>
+<p><center><img src="/img/research/GoT_freq.png" alt="picture" /></center></p>
 
 <p>Unsurprisingly, Tyrion Lannister speaks the most lines in the show up to and including season 7. A somewhat more surprising result though, is that Eddard Stark is a top speaking character yet he died in season 1.</p>
 
-<p><center><img src="/img/GoT_sent.png" alt="picture" /></center></p>
+<p><center><img src="/img/research/GoT_sent.png" alt="picture" /></center></p>
 
-<p>This graphic include the most frequent words that appear in the Game of Thrones scripts and breaks them into positive and negative sentiment. The most frequent negative words used include kill, death, and words stemming from these but in different tenses. On the other hand, honor, protect, and free are some of the most commonly used positive words.</p>
+<p>This graphic includes the most frequent words that appear in the Game of Thrones scripts and breaks them into positive and negative sentiment. The most frequent negative words used include kill, death, and words stemming from these but in different tenses. On the other hand, honor, protect, and free are some of the most commonly used positive words.</p>
 
 <p>I developed an R package to aid in scraping the Game of Thrones TV script data. I discuss it in more detail on my <a href="http://www.alessandravalcarcel.com/software/">software</a> and <a href="https://github.com/avalcarcel9/GoT">GitHub</a> pages.</p>
 
@@ -111,7 +111,7 @@
   
   
   
-  <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
+  <h4 class="text-center"><a class="menu-item" href="https://www.alessandravalcarcel.com/">home</a></h4>
 </section>
 
 
