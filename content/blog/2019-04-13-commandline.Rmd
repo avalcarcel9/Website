@@ -120,7 +120,7 @@ knitr::include_graphics('img/commandline/examples_chunk2.png')
 
 Notice the 'test' directory is empty so nothing is returned.
 
-The next set of code creates three empty text files ('file1.txt', 'file2.txt', 'dummy.txt'), and then lists the newly created objects in 'test':
+The next set of code creates three empty text files ('file1.txt', 'file2.txt', 'dummy.txt'), and then lists the newly created objects in 'test'.
 
 ```{bash, eval = FALSE}
 touch file1.txt
