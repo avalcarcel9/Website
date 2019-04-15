@@ -42,6 +42,8 @@ You can find documentation and a tutorial provided on my GitHub [here](https://g
 
 ### Game of Thrones
 
+<a href="https://github.com/avalcarcel9/GoT"><img src="/img/software/GoT_sticker.png" height="192" alt="mimosa logo" align="right" /></a>
+
 The `GoT` R package is now live on [GitHub](https://github.com/avalcarcel9/GoT). This package allows you to scrape the Game of Thrones scripts from [www.genius.com](www.genius.com) and some character lists available online. For more information see the my [readme](https://github.com/avalcarcel9/GoT/blob/master/README.Rmd) on GitHub and [blog post](http://www.alessandravalcarcel.com/blog/2018-04-1-r-rmarkdown-got-scrape/) about how to use the package.
 
 To download run the following code:
