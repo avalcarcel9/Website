@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Usethis on Alessandra [Ali] Valcarcel</title>
-    <link>/tags/usethis/</link>
+    <link>https://www.alessandravalcarcel.com/tags/usethis/</link>
     <description>Recent content in Usethis on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Mon, 04 Jun 2018 21:13:14 -0500</lastBuildDate>
     
-	<atom:link href="/tags/usethis/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.alessandravalcarcel.com/tags/usethis/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>SMI R-Hack-A-Pack: Package creation - From functions to a (GitHub) package</title>
-      <link>/blog/2018-06-04-rpackage/</link>
+      <link>https://www.alessandravalcarcel.com/blog/2018-06-04-rpackage/</link>
       <pubDate>Mon, 04 Jun 2018 21:13:14 -0500</pubDate>
       
-      <guid>/blog/2018-06-04-rpackage/</guid>
+      <guid>https://www.alessandravalcarcel.com/blog/2018-06-04-rpackage/</guid>
       <description>Download my slides for SMI 2018 R-Hack-A-Pack. I covered Package creation: From function to a GitHub Package.
  Download Slides  For the .Rmd you can download here.
  Download .Rmd  </description>
