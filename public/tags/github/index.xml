@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Github on Alessandra [Ali] Valcarcel</title>
-    <link>https://www.alessandravalcarcel.com/tags/github/</link>
+    <link>/tags/github/</link>
     <description>Recent content in Github on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
     
-	<atom:link href="https://www.alessandravalcarcel.com/tags/github/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/github/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Software</title>
-      <link>https://www.alessandravalcarcel.com/software/</link>
+      <link>/software/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/software/</guid>
+      <guid>/software/</guid>
       <description>MIMoSA 
 The R package mimosa is now live on Neuroconductor with the development version on GitHub. This package allows you to implement the MIMoSA method discussed in our original paper and follow up paper to automatically segment white matter both T2 hyperintense lesions and T1 hypointense lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data.</description>
     </item>

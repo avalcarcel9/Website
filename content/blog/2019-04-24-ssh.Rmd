@@ -4,9 +4,7 @@ author: "Alessandra Valcarcel"
 date: 2019-04-24T21:01:01-06:00
 categories: ["Computing"]
 tags: ["Cluster", "CCEB", "LSF", "IBM"]
-output: 
-  bookdown::html_document2:
-    number_sections: false
+output: bookdown::html_document2
 ---
 
 ```{r global_options, include=FALSE}

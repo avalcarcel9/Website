@@ -2,31 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cceb on Alessandra [Ali] Valcarcel</title>
-    <link>https://www.alessandravalcarcel.com/tags/cceb/</link>
+    <link>/tags/cceb/</link>
     <description>Recent content in Cceb on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 14 Apr 2019 21:05:01 -0600</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2019 21:01:01 -0600</lastBuildDate>
     
-	<atom:link href="https://www.alessandravalcarcel.com/tags/cceb/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/cceb/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Using the CCEB High Performance Computing Cluster: Logging Onto The Cluster</title>
+      <link>/blog/2019-04-24-ssh/</link>
+      <pubDate>Wed, 24 Apr 2019 21:01:01 -0600</pubDate>
+      
+      <guid>/blog/2019-04-24-ssh/</guid>
+      <description>Introduction This is the third blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on logging onto the cluster and transfer remote clients.
+ Logging On In order to log onto the cluster you must have an account. For more resources on getting started and the cluster details are provided here. As of April 15, 2019 Martin Das (lablu@pennmedicine.</description>
+    </item>
+    
+    <item>
       <title>Using the CCEB High Performance Computing Cluster: Command Line</title>
-      <link>https://www.alessandravalcarcel.com/blog/2019-04-14-commandline/</link>
+      <link>/blog/2019-04-14-commandline/</link>
       <pubDate>Sun, 14 Apr 2019 21:05:01 -0600</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/blog/2019-04-14-commandline/</guid>
+      <guid>/blog/2019-04-14-commandline/</guid>
       <description>Introduction This is the second blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on basics of command line.
  Folder Versus Directory Most people use the terms folder and directory interchangeably. From a programmers point of view though there is a slight distinction. A directory is file organization system while a folder is the graphical user interface that is used to represent a directory.</description>
     </item>
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Introduction</title>
-      <link>https://www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/</link>
+      <link>/blog/2019-04-13-clusterintro/</link>
       <pubDate>Sat, 13 Apr 2019 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/</guid>
+      <guid>/blog/2019-04-13-clusterintro/</guid>
       <description>Introduction I’ve decided to dedicate the next few blog posts to using the Penn Medicine Academic Computing Services High-Performance Computing Cluster. I’ll loosely refer to the Penn HPC simply as the cluster, the CCEB cluster, the PMACs HPC, and the Penn HPC throughout this series of blog posts. These posts are intended for both beginners and advanced users and will include information about:
 Basics in command line Definitions and vocabulary Logging onto the cluster PMACS high performance computing (HPC) grid specifications Session types Parallelizing code Quality controlling your jobs Bash aliases  This series is designed by a student for students specifically in biostatistics.</description>
     </item>
