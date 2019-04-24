@@ -13,20 +13,20 @@
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Logging Onto The Cluster</title>
-      <link>/blog/2019-04-15-ssh/</link>
+      <link>/blog/2019-04-24-ssh/</link>
       <pubDate>Wed, 24 Apr 2019 21:01:01 -0600</pubDate>
       
-      <guid>/blog/2019-04-15-ssh/</guid>
+      <guid>/blog/2019-04-24-ssh/</guid>
       <description>Introduction This is the third blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on logging onto the cluster and transfer remote clients.
  Logging On In order to log onto the cluster you must have an account. For more resources on getting started and the cluster details are provided here. As of April 15, 2019 Martin Das (lablu@pennmedicine.</description>
     </item>
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Command Line</title>
-      <link>/blog/2019-04-13-commandline/</link>
+      <link>/blog/2019-04-14-commandline/</link>
       <pubDate>Sun, 14 Apr 2019 21:05:01 -0600</pubDate>
       
-      <guid>/blog/2019-04-13-commandline/</guid>
+      <guid>/blog/2019-04-14-commandline/</guid>
       <description>Introduction This is the second blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on basics of command line.
  Folder Versus Directory Most people use the terms folder and directory interchangeably. From a programmers point of view though there is a slight distinction. A directory is file organization system while a folder is the graphical user interface that is used to represent a directory.</description>
     </item>
