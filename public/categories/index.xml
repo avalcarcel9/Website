@@ -6,28 +6,10 @@
     <description>Recent content in Categories on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 23 Apr 2019 21:01:01 -2000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>About</title>
-      <link>/categories/about/</link>
-      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
-      
-      <guid>/categories/about/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Articles</title>
-      <link>/categories/articles/</link>
-      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
-      
-      <guid>/categories/articles/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Computing</title>
@@ -35,15 +17,6 @@
       <pubDate>Tue, 23 Apr 2019 21:01:01 -2000</pubDate>
       
       <guid>/categories/computing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Scraping</title>
-      <link>/categories/data-scraping/</link>
-      <pubDate>Sun, 01 Apr 2018 21:13:14 -0500</pubDate>
-      
-      <guid>/categories/data-scraping/</guid>
       <description></description>
     </item>
     
@@ -62,6 +35,33 @@
       <pubDate>Mon, 04 Jun 2018 21:13:14 -0500</pubDate>
       
       <guid>/categories/r-package-creation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Scraping</title>
+      <link>/categories/data-scraping/</link>
+      <pubDate>Sun, 01 Apr 2018 21:13:14 -0500</pubDate>
+      
+      <guid>/categories/data-scraping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>/categories/about/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/categories/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>articles</title>
+      <link>/categories/articles/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/categories/articles/</guid>
       <description></description>
     </item>
     
