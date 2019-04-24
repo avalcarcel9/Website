@@ -2,192 +2,192 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Alessandra [Ali] Valcarcel</title>
-    <link>https://www.alessandravalcarcel.com/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
     
-	<atom:link href="https://www.alessandravalcarcel.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>https://www.alessandravalcarcel.com/tags/about/</link>
+      <link>/tags/about/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/about/</guid>
+      <guid>/tags/about/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Blogdown</title>
-      <link>https://www.alessandravalcarcel.com/tags/blogdown/</link>
+      <link>/tags/blogdown/</link>
       <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/blogdown/</guid>
+      <guid>/tags/blogdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cceb</title>
-      <link>https://www.alessandravalcarcel.com/tags/cceb/</link>
-      <pubDate>Sun, 14 Apr 2019 21:05:01 -0600</pubDate>
+      <link>/tags/cceb/</link>
+      <pubDate>Tue, 23 Apr 2019 21:01:01 -2000</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/cceb/</guid>
+      <guid>/tags/cceb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cluster</title>
-      <link>https://www.alessandravalcarcel.com/tags/cluster/</link>
-      <pubDate>Sun, 14 Apr 2019 21:05:01 -0600</pubDate>
+      <link>/tags/cluster/</link>
+      <pubDate>Tue, 23 Apr 2019 21:01:01 -2000</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/cluster/</guid>
+      <guid>/tags/cluster/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Scraping</title>
-      <link>https://www.alessandravalcarcel.com/tags/data-scraping/</link>
+      <link>/tags/data-scraping/</link>
       <pubDate>Sun, 01 Apr 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/data-scraping/</guid>
+      <guid>/tags/data-scraping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Game of Thrones</title>
-      <link>https://www.alessandravalcarcel.com/tags/game-of-thrones/</link>
+      <link>/tags/game-of-thrones/</link>
       <pubDate>Fri, 05 Apr 2019 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/game-of-thrones/</guid>
+      <guid>/tags/game-of-thrones/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Game of Thrones Got</title>
-      <link>https://www.alessandravalcarcel.com/tags/game-of-thrones-got/</link>
+      <link>/tags/game-of-thrones-got/</link>
       <pubDate>Sun, 01 Apr 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/game-of-thrones-got/</guid>
+      <guid>/tags/game-of-thrones-got/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Github</title>
-      <link>https://www.alessandravalcarcel.com/tags/github/</link>
+      <link>/tags/github/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/github/</guid>
+      <guid>/tags/github/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>https://www.alessandravalcarcel.com/tags/hugo/</link>
+      <link>/tags/hugo/</link>
       <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/hugo/</guid>
+      <guid>/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ibm</title>
-      <link>https://www.alessandravalcarcel.com/tags/ibm/</link>
-      <pubDate>Sun, 14 Apr 2019 21:05:01 -0600</pubDate>
+      <link>/tags/ibm/</link>
+      <pubDate>Tue, 23 Apr 2019 21:01:01 -2000</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/ibm/</guid>
+      <guid>/tags/ibm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lsf</title>
-      <link>https://www.alessandravalcarcel.com/tags/lsf/</link>
-      <pubDate>Sun, 14 Apr 2019 21:05:01 -0600</pubDate>
+      <link>/tags/lsf/</link>
+      <pubDate>Tue, 23 Apr 2019 21:01:01 -2000</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/lsf/</guid>
+      <guid>/tags/lsf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mimosa</title>
-      <link>https://www.alessandravalcarcel.com/tags/mimosa/</link>
+      <link>/tags/mimosa/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/mimosa/</guid>
+      <guid>/tags/mimosa/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Multiple Sclerosis</title>
-      <link>https://www.alessandravalcarcel.com/tags/multiple-sclerosis/</link>
+      <link>/tags/multiple-sclerosis/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/multiple-sclerosis/</guid>
+      <guid>/tags/multiple-sclerosis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Network Analysis</title>
-      <link>https://www.alessandravalcarcel.com/tags/network-analysis/</link>
+      <link>/tags/network-analysis/</link>
       <pubDate>Fri, 05 Apr 2019 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/network-analysis/</guid>
+      <guid>/tags/network-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Neuroconductor</title>
-      <link>https://www.alessandravalcarcel.com/tags/neuroconductor/</link>
+      <link>/tags/neuroconductor/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/neuroconductor/</guid>
+      <guid>/tags/neuroconductor/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Package</title>
-      <link>https://www.alessandravalcarcel.com/tags/r-package/</link>
+      <link>/tags/r-package/</link>
       <pubDate>Mon, 04 Jun 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/r-package/</guid>
+      <guid>/tags/r-package/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Research</title>
-      <link>https://www.alessandravalcarcel.com/tags/research/</link>
+      <link>/tags/research/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/research/</guid>
+      <guid>/tags/research/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Shiny App</title>
-      <link>https://www.alessandravalcarcel.com/tags/shiny-app/</link>
+      <link>/tags/shiny-app/</link>
       <pubDate>Fri, 05 Apr 2019 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/shiny-app/</guid>
+      <guid>/tags/shiny-app/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Usethis</title>
-      <link>https://www.alessandravalcarcel.com/tags/usethis/</link>
+      <link>/tags/usethis/</link>
       <pubDate>Mon, 04 Jun 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/usethis/</guid>
+      <guid>/tags/usethis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Website</title>
-      <link>https://www.alessandravalcarcel.com/tags/website/</link>
+      <link>/tags/website/</link>
       <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
       
-      <guid>https://www.alessandravalcarcel.com/tags/website/</guid>
+      <guid>/tags/website/</guid>
       <description></description>
     </item>
     
