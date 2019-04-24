@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Research on Alessandra [Ali] Valcarcel</title>
-    <link>/tags/research/</link>
+    <link>https://www.alessandravalcarcel.com/tags/research/</link>
     <description>Recent content in Research on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
     
-	<atom:link href="/tags/research/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.alessandravalcarcel.com/tags/research/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Research</title>
-      <link>/research/</link>
+      <link>https://www.alessandravalcarcel.com/research/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>/research/</guid>
+      <guid>https://www.alessandravalcarcel.com/research/</guid>
       <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</description>
     </item>
     

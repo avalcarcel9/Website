@@ -2,51 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogs on Alessandra [Ali] Valcarcel</title>
-    <link>/blog/</link>
+    <link>https://www.alessandravalcarcel.com/blog/</link>
     <description>Recent content in Blogs on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 24 Apr 2019 21:01:01 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 14 Apr 2019 21:05:01 -0600</lastBuildDate>
     
-	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.alessandravalcarcel.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Using the CCEB High Performance Computing Cluster: Logging Onto The Cluster</title>
-      <link>/blog/2019-04-24-ssh/</link>
-      <pubDate>Wed, 24 Apr 2019 21:01:01 -0600</pubDate>
-      
-      <guid>/blog/2019-04-24-ssh/</guid>
-      <description>Introduction This is the third blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on logging onto the cluster and transfer remote clients.
- Logging On In order to log onto the cluster you must have an account. For more resources on getting started and the cluster details are provided here. As of April 15, 2019 Martin Das (lablu@pennmedicine.</description>
-    </item>
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Command Line</title>
-      <link>/blog/2019-04-14-commandline/</link>
+      <link>https://www.alessandravalcarcel.com/blog/2019-04-14-commandline/</link>
       <pubDate>Sun, 14 Apr 2019 21:05:01 -0600</pubDate>
       
-      <guid>/blog/2019-04-14-commandline/</guid>
+      <guid>https://www.alessandravalcarcel.com/blog/2019-04-14-commandline/</guid>
       <description>Introduction This is the second blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on basics of command line.
  Folder Versus Directory Most people use the terms folder and directory interchangeably. From a programmers point of view though there is a slight distinction. A directory is file organization system while a folder is the graphical user interface that is used to represent a directory.</description>
     </item>
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Introduction</title>
-      <link>/blog/2019-04-13-clusterintro/</link>
+      <link>https://www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/</link>
       <pubDate>Sat, 13 Apr 2019 21:13:14 -0500</pubDate>
       
-      <guid>/blog/2019-04-13-clusterintro/</guid>
+      <guid>https://www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/</guid>
       <description>Introduction I’ve decided to dedicate the next few blog posts to using the Penn Medicine Academic Computing Services High-Performance Computing Cluster. I’ll loosely refer to the Penn HPC simply as the cluster, the CCEB cluster, the PMACs HPC, and the Penn HPC throughout this series of blog posts. These posts are intended for both beginners and advanced users and will include information about:
 Basics in command line Definitions and vocabulary Logging onto the cluster PMACS high performance computing (HPC) grid specifications Session types Parallelizing code Quality controlling your jobs Bash aliases  This series is designed by a student for students specifically in biostatistics.</description>
     </item>
     
     <item>
       <title>A Maester-Level Network Analysis of Game of Thrones</title>
-      <link>/blog/2019-04-05-gotapp/</link>
+      <link>https://www.alessandravalcarcel.com/blog/2019-04-05-gotapp/</link>
       <pubDate>Fri, 05 Apr 2019 21:13:14 -0500</pubDate>
       
-      <guid>/blog/2019-04-05-gotapp/</guid>
+      <guid>https://www.alessandravalcarcel.com/blog/2019-04-05-gotapp/</guid>
       <description>Warning: This post contains spoilers for Game of Thrones seasons 1-7.
 Like 16.5+ million people across the globe, I anxiously await the return of the eighth and final season of Game of Thrones (GoT) on April, 14, 2019. After a two year hiatus, I wanted to refresh my memory on the plot lines across seasons 1 through 7 before HBO wraps up the conflict.
 In preparation, I decided to evaluate the statistical networks between characters across seasons 1 through 7 to consider how the network of characters has changed over time.</description>
@@ -54,10 +44,10 @@ In preparation, I decided to evaluate the statistical networks between character
     
     <item>
       <title>SMI R-Hack-A-Pack: Package creation - From functions to a (GitHub) package</title>
-      <link>/blog/2018-06-04-rpackage/</link>
+      <link>https://www.alessandravalcarcel.com/blog/2018-06-04-rpackage/</link>
       <pubDate>Mon, 04 Jun 2018 21:13:14 -0500</pubDate>
       
-      <guid>/blog/2018-06-04-rpackage/</guid>
+      <guid>https://www.alessandravalcarcel.com/blog/2018-06-04-rpackage/</guid>
       <description>Download my slides for SMI 2018 R-Hack-A-Pack. I covered Package creation: From function to a GitHub Package.
  Download Slides  For the .Rmd you can download here.
  Download .Rmd  </description>
@@ -65,10 +55,10 @@ In preparation, I decided to evaluate the statistical networks between character
     
     <item>
       <title>Scraping Game of Thrones Data</title>
-      <link>/blog/2018-04-1-r-rmarkdown-got-scrape/</link>
+      <link>https://www.alessandravalcarcel.com/blog/2018-04-1-r-rmarkdown-got-scrape/</link>
       <pubDate>Sun, 01 Apr 2018 21:13:14 -0500</pubDate>
       
-      <guid>/blog/2018-04-1-r-rmarkdown-got-scrape/</guid>
+      <guid>https://www.alessandravalcarcel.com/blog/2018-04-1-r-rmarkdown-got-scrape/</guid>
       <description>WARNING: This post contains spoilers for Game of Thrones and some foul language reproduced from the show script
 April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerly await April as the premiere of the new season. The final season is no different and will yet again return in April…2019 bypassing a season in 2018.
   As a loyal fan I’m determined to not let my April 2018 be any different and am dedicating a few blog posts to GoT.</description>
@@ -76,10 +66,10 @@ April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerl
     
     <item>
       <title>Make a Personal Website with blogdown</title>
-      <link>/blog/2018-03-15-r-rmarkdown-blogdown-basics/</link>
+      <link>https://www.alessandravalcarcel.com/blog/2018-03-15-r-rmarkdown-blogdown-basics/</link>
       <pubDate>Thu, 15 Mar 2018 21:13:14 -0500</pubDate>
       
-      <guid>/blog/2018-03-15-r-rmarkdown-blogdown-basics/</guid>
+      <guid>https://www.alessandravalcarcel.com/blog/2018-03-15-r-rmarkdown-blogdown-basics/</guid>
       <description>In this post, I am going to cover the basics to creating a website using blogdown and Hugo. We will create and deploy a template website as well as cover some basics about changing content. You should be extremely comfortable coding in R, writing in R Markdown, and have a working knowledge of GitHub. You should have R, R Studio, R Markdown all installed on your computer and an account on GitHub before we start.</description>
     </item>
     
