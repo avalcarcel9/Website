@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Personal website">
+<meta name="keywords" content="student,statistics,biostatistics,Penn">
+
+<base href="/">
+
+<title>Alessandra [Ali] Valcarcel</title>
+
+<meta name="generator" content="Hugo 0.36" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-US">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Using the CCEB High Performance Computing Cluster: Terminology and Specifications</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        PUBLISHED ON APR 15, 2019 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/computing">COMPUTING</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This is the third blog post in a series of articles about using the CCEB cluster. An overview of the series is available <a href="www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/">here</a>. This post focuses on the general terminology surrounding high performance computing clusters and an overview of the CCEB cluster specifications.</p>
+<p>Most of this information was taken from IBM <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_foundations/lsf_introduction_to.html">here</a> and the reamining content was taken from Microsoft <a href="https://blogs.technet.microsoft.com/windowshpc/2008/04/14/how-that-nodesocketcore-thing-works/">here</a>. You should explore these sites on your own for specific details.</p>
+</div>
+<div id="cluster-versus-grid" class="section level1">
+<h1>Cluster Versus Grid</h1>
+<p><strong>Cluster computing</strong> uses several nodes that are made to run as a single entity. These nodes are connected by a local area network (LAN). A cluster is homogenous in that they have all the same hardware and operating systems.</p>
+<p><strong>Grid computing</strong> is the segregation of resources across multiple sites. Grids are are heterogeneous. The computers that are part of a grid can run different operating systems, have different hardware, and be in different geographical locations.</p>
+<p><strong>Cloud computing</strong> is a new computing paradigm which provides a large pool of dynamic, scalable, and virtual resources to run processes. Think <a href="https://aws.amazon.com/">Amazon Web Services</a>.</p>
+<p><strong>Grid computing</strong> is sometimes distinguished from conventional high-performance computing systems such as <strong>cluster computing</strong> in that grid computers have each node set to perform a different task/application or may have clusters in different geographical locations. Technically, a grid is a cluster but a cluster is not necessarily a grid.</p>
+<p>Our CCEB resources were previously housed in different buildings meeting the spatial definition of a grid, but they were recently all moved into the same location. The operating system is the same across the entire machine but different machines are able to run different software programs (i.e. SAS, MATLAB, R). Technically, I believe the CCEB high performance computing resources are categorized as <strong>grid computing</strong>. Personally, I use cluster to reference the machine though. Others use grid. To be honest, for our purposes, the language of how we speak of the HPC doesn’t matter. Both won’t affect how effectively we Google questions or discuss the resources amongst ourselves.</p>
+<p>If you want to read more, the content was mostly taken from a really nice article in the International Journal of Advanced Research in Computer and Communication Engineering and <a href="https://www.wikipedia.org/">Wikipedia</a>. The links are provided below:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Grid_computing">Grid Definitions on Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Computer_cluster">Cluster Definitions on Wikipedia</a></li>
+<li><a href="https://pdfs.semanticscholar.org/5e6e/9b4b7f4d986bc9f1246198c50c8d43d2d695.pdf">Article discussing the subtle differences between Cloud Computing, Grid Computing, and Cluster Computing</a>.</li>
+</ul>
+</div>
+<div id="hosts" class="section level1">
+<h1>Hosts</h1>
+<p>Hosts on the cluster perform different functions.</p>
+<ul>
+<li><p><strong>Master host</strong>: A server host that acts as the overall coordinator for the cluster, doing all job scheduling and dispatch.</p></li>
+<li><p><strong>Server host</strong>: A host that submits and runs jobs.</p></li>
+<li><p><strong>Client host</strong>: A host that only submits jobs and tasks.</p></li>
+<li><p><strong>Execution host</strong>: A host that runs jobs and tasks.</p></li>
+<li><p><strong>Submission host</strong>: A host from which jobs and tasks are submitted.</p></li>
+</ul>
+<p>Typically, we only interact with <strong>server</strong>, <strong>client</strong>, <strong>execution</strong>, and <strong>submission</strong> hosts. The <strong>master</strong> host is working in the background after we submit jobs. In our department, we most commonly refer to all of these generically as <strong>host</strong> and don’t clarify which type of <strong>host</strong>. It can get confusing so for this document I’ll try to always clarify.</p>
+<p>If you simply <code>ssh</code> onto the CCEB cluster you are put onto a <strong>submission host</strong>. No jobs can be run on this host directly but are submit and sent to run on other <strong>execution hosts</strong>. If you are part of different clusters or queues, for example Taki or <a href="https://www.med.upenn.edu/pennsive/personnel.html">PennSIVE’s</a> group, then they use a <strong>server host</strong>, takim, so when you <code>ssh</code> onto the cluster your jobs are submit from there but can also be run on content on takim. Once you submit a job from these hosts, you tasks are run on <strong>execution hosts</strong>.</p>
+<div id="nodes-sockets-and-cores" class="section level3">
+<h3>Nodes, Sockets, and Cores</h3>
+<p>A <strong>node</strong> (a.k.a. host, machine, computer) refers to an entire compute node. Each node contains 1 or more sockets. Notice, this is synonymous with host/machine.</p>
+<p>A <strong>socket</strong> (a.k.a. numa node) refers to collection of cores with a direct pipe to memory. Each socket contains 1 or more cores. Note that this does not necessarily refer to a physical socket, but rather to the memory architecture of the machine, which will depend on your chip vendor. I pretty much never think about this level or use this language.</p>
+<p>A <strong>core</strong> (a.k.a. processor, cpu, cpu core, logical processor) refers to a single processing unit capable of performing computations. A <strong>core</strong> is the smallest unit of allocation available in high performance computing.</p>
+<p>When you <code>bsub</code> an interactive session with 1 core requested by definition you are using 1 core on 1 node or host. When you submit a normal job you can request multiple cores and unless specified they may be across multiple hosts/machines.</p>
+</div>
+<div id="job" class="section level2">
+<h2>Job</h2>
+<p>A <strong>job</strong> is the unit of work that is running on the cluster. A <strong>job</strong> is a command that is submitted for execution. The <strong>master host</strong> schedules, controls, and tracks the job according to configured policies. <strong>Jobs</strong> can be complex problems, simulation scenarios, extensive calculations, or anything that needs compute power.</p>
+<p>This can get confusing because we refer to the entire thing running as a batch or array job (i.e. all 1000 of your simulations running) and we refer to each 1000 iterations as single jobs. If you ever get confused just ask someone to clarify.</p>
+<p>When you submit a <strong>job</strong> it goes into a <strong>job slot</strong> or a bucket from which a single unit of work is assigned on the grid system.</p>
+<p>Hosts can be configured with multiple <strong>job slots</strong> and you can dispatch jobs from queues until all the <strong>job slots</strong> are filled. You can correlate <strong>job slots</strong> with the total number of CPUs in the cluster.</p>
+<p>Each job is assigned a number. You can use this number to check on the memory of your job, kill or stop your job, or include when emailing issues to PMACs.</p>
+</div>
+<div id="queue" class="section level2">
+<h2>Queue</h2>
+<p>A <strong>queue</strong> is a cluster-wide container for jobs. All jobs wait in queues until they are scheduled and dispatched to hosts.</p>
+<p><strong>Queues</strong> do not correspond to individual hosts; each queue can use all <strong>server hosts</strong> on the cluster, or a configured subset of the <strong>server hosts</strong>. When you submit a job to a <strong>queue</strong>, you do not need to specify an <strong>execution host</strong>. The <strong>master host</strong> dispatches the job to the best available <strong>execution host</strong> on the cluster to run that job. You can specify an <strong>execution host</strong> if you want though but this only useful for quality control.</p>
+<p>Queues implement different job scheduling and control policies.</p>
+</div>
+<div id="layout" class="section level2">
+<h2>“Layout”</h2>
+<div class="figure" style="text-align: center"><span id="fig:clusthardware"></span>
+<img src="graphics/cluster_hardware/cluster_hardware.png" alt="Pictoral representation of the hardware and layout of the grid. This graphic is not the accurate physical layout but simply provided as an example." width="100%" />
+<p class="caption">
+Figure 1: Pictoral representation of the hardware and layout of the grid. This graphic is not the accurate physical layout but simply provided as an example.
+</p>
+</div>
+<ul>
+<li>The <strong>server host</strong> also has nodes but you should not compute on this host because if a <strong>server host</strong> crashes all dependent <strong>execute hosts</strong> and screw everyone. For example, we can compute on takim but it is dangerous. When you ssh using scisub you are put on a <strong>submission host</strong> so it cannot run jobs on itself but rather submits jobs to run on <strong>execution hosts</strong>.</li>
+</ul>
+</div>
+</div>
+<div id="cluster-specs" class="section level1">
+<h1>PMACS High Performance Computing (HPC) Grids</h1>
+<p>These specifications were true as of Fall 2017.</p>
+<p>The CCEB HPC Statistical Grid has been run and supported over the past 15+ years by PMACS. The CCEB HPC is an LSF (“LSF”, short for load sharing facility) software. LSF is an <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4/product_welcome_platform_lsf.html">IBM platform</a>.</p>
+<ul>
+<li><p>This is industry-leading enterprise-class software that distributes work across existing heterogeneous IT resources to create a shared, scalable, and fault-tolerant infrastructure, that delivers faster, more reliable workload performance and reduces cost.</p></li>
+<li><p>LSF balances load, allocates resources, and provides access to those resources.</p></li>
+</ul>
+<p>This Statistical HPC is composed of a total of 352 available cores (32 Matlab; 16 SAS; 8 Stata; 360 unrestricted R and 212 priority restricted R).</p>
+<p>The current setup defaults to assigning one core for each job submitted to the HPC Grid, although proper set-up and usage of Matlab pools and R parallel packages will allow up to 12 cores to be used concurrently for a job.</p>
+<p>Any one user may only use up to 50 cores (e.g., 50 1-core jobs) running R concurrently on the grid (less for Matlab &amp; SAS).</p>
+<p>Queues consist of:</p>
+<ul>
+<li><p>R / all Queue: Nine IBM x3650 hosts, running Red Hat Linux OS, consisting of Intel Xeon CPU E5-2660 v3 at 2.6GHz (40 cores) and 128GB RAM.</p></li>
+<li><p>Matlab Queue: One Dell R810 host, running Red Hat Linux OS, consisting of Intel Xeon CPU E7-4860 at 2.26GHz (32 cores) and 512GB RAM.</p></li>
+<li><p>SAS Queue: Two IBM H22 hosts, running Red Hat Linux OS, consisting of two quad-core 2.4GHz processors and 12GB RAM per machine.</p></li>
+<li><p>Stata Queue: One IBM H22 hosts, running Red Hat Linux OS, consisting of two quad-core 2.4GHz processors and 12GB RAM.</p></li>
+</ul>
+<p>Use of this cluster is free to faculty, students, and post-doctoral fellows in the Division of Biostatistics. A very rough picture representation of the grid is provided in <strong>Figure <a href="#fig:clusthardware">1</a></strong>. It provides a general description based on the Penn HPC.</p>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      TAGS:
+      
+      
+      <a class="meta" href="/tags/cceb">CCEB</a>, 
+      
+      <a class="meta" href="/tags/cluster">CLUSTER</a>, 
+      
+      <a class="meta" href="/tags/ibm">IBM</a>, 
+      
+      <a class="meta" href="/tags/lsf">LSF</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/blog/2019-04-13-commandline/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  <span><a class="menu-item" href="/blog/2019-04-15-ssh/"> | next &gt;</a></span>
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2018. Alessandra [Ali] Valcarcel.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-115574303-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

@@ -1,7 +1,7 @@
 ---
 title: "Using the CCEB High Performance Computing Cluster: Command Line"
 author: "Alessandra Valcarcel"
-date: 2019-04-13T21:05:01-06:00
+date: 2019-04-14T21:05:01-06:00
 categories: ["Computing"]
 tags: ["Cluster", "CCEB", "LSF", "IBM"]
 output: 

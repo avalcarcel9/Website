@@ -1,0 +1,172 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Logging Onto The Cluster"
+author: "Alessandra Valcarcel"
+date: 2019-04-24T21:01:01-06:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(out.width = '80%',
+                      fig.align = 'center', 
+                      echo=FALSE, 
+                      warning=FALSE, 
+                      message=FALSE)
+```
+
+# Introduction
+
+This is the third blog post in a series of articles about using the CCEB cluster. An overview of the series is available [here](www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/). This post focuses on logging onto the cluster and transfer remote clients.
+
+# Logging On
+
+In order to log onto the cluster you must have an account. For more resources on getting started and the cluster details are provided [here](https://dbe.med.upenn.edu/biostat-research/resources-computing). As of April 15, 2019 Martin Das (lablu@pennmedicine.upenn.edu) can help you create an account and get started.
+
+In order to log onto the cluster you must:
+
+1. Create an account
+2. Connect to the Penn Medicine VPN through Pulse Secure
+3. Securely access the cluster (`ssh`)
+
+Steps 2-3 are explained in more detail in the sections below.
+
+## Pulse Secure
+
+Whether you are on campus or off, you first need to connect to the Penn Medicine [VPN](https://en.wikipedia.org/wiki/Virtual_private_network). This will require setting up [Pulse Secure](https://www.pulsesecure.net/).
+
+Pulse secure is a dynamic multiservice network client for mobile and personal computing devices. It will securely connect your computer to the Penn Medicine VPN so that you can connect to the cluster. This software is also required if you want to remote desktop into your desktop machine provided by the CCEB. 
+
+Other clients exist, but Penn Medicine uses this one. You can [download Pulse Secure here](https://www.pulsesecure.net/trynow/client-download/). You can submit a [PMACs ticket](https://helpdesk.pmacs.upenn.edu/) and they will help you download, install, and set up Pulse Secure. If you prefer to set up Pulse Secure on your own you can but you still need to submit a [PMACs ticket](https://helpdesk.pmacs.upenn.edu/) requesting your account access to the VPN. Without permission, you won't be able to connect even with the correct setup. Once Pulse Secure is downloaded and installed the connection has the following details:
+
+```{r}
+knitr::include_graphics('img/ssh/pulse.png')
+```
+
+After the remote connection is set up you'll have to use two-factor authentification to securely connect. The first step is to enter your PMACS username and password. 
+
+```{r}
+knitr::include_graphics('img/ssh/password.png')
+```
+ 
+You'll then get a second dialog box asking for a secondary password. 
+
+```{r}
+knitr::include_graphics('img/ssh/push.png')
+```
+
+This is not actually a secondary password but rather the two-factor authentification verification method. Type one of the options below in the Secondary Password field:
+
+1. Duo Moble App push – Type "push"
+2. Call Phone 1 – Type "phone1"
+3. Call Phone 2 – Type "phone2"
+4. Text phone – Type "sms" (When choosing this option you will be sent passcodes to enter in the secondary password field. Please login again and type a passcode instead of sms.)
+
+I personally suggest downloading the Duo Mobile App and always using that option. It works even if when you're in another country whereas the call and text features don't always go through.
+
+Once you're connected to the VPN you'll be able to log onto the cluster.
+
+```{r}
+knitr::include_graphics('img/ssh/connected.png')
+```
+
+When having problems logging onto the cluster check that you are in fact connected to the VPN. My most common mistake is attempting to log on without being connected.
+
+## SSH 
+
+SSH, also known as Secure Shell or Secure Socket Shell, is a network protocol that gives users, particularly system administrators, a secure way to access a computer over an unsecured network. You `ssh` from your local machine and network onto the cluster. From there, you can execute commands.
+
+After you have connected to the VPN through Pulse Secure, as a normal CCEB user you will open terminal on your local machine and run the following command to log onto the cluster:
+
+```{bash, echo = TRUE, eval = FALSE}
+ssh -X pennkey@scisub
+```
+
+For me this is as follows:
+
+```{r}
+knitr::include_graphics('img/ssh/ssh_scisub.png')
+```
+
+Then enter your password. The cursor doesn't move when you do this. If you mess up just delete a bunch of times and start over. Once you correctly specify your password you may have some output. For example, I see the following after logging into my account:
+
+```{r}
+knitr::include_graphics('img/ssh/ssh_password.png')
+```
+
+These come from your `.bash_aliases` file or `.bash_profile`. We will cover these files in a later post. For now, ignore any output you might have unless it relates to the application you are going to use. For example, I see some messages related to Python. I should investigate before using Python.
+
+You're now logged onto the cluster's submission host. We will talk about cluster terminology and the specifications of the cluster in the next blog post. You can move around within directories that you have permission to through the command line. For example, everyone should have access to their own `home` directory. It should be something like `/home/pennkey/`. 
+
+Simply type `exit` from the command line to log off. You'll see something like this when moving around on the command line and logging off:
+
+```{r}
+knitr::include_graphics('img/ssh/exit.png')
+```
+
+# Transfer Files
+
+In order to use the cluster, you will have to transfer files from your local machine to the cluster and vice versa. For example, if you run a simulation on the cluster, you'll likely need to retreive the results to write the paper on your local machine. This requries a file transfer client. 
+
+Some popular choices include [Cyberduck](https://cyberduck.io/) and [Fetch](https://Fetchsoftworks.com/). I personally use Fetch. It costs money but luckily they offer a free license for students. You can apply for the free license [here](https://Fetchsoftworks.com/Fetch/free) and once granted access you can download Fetch [here](http://Fetchsoftworks.com/Fetch/download/).
+
+To actually retrieve or transfer files using a client you will still need to be connected to the VPN through Pulse Secure.
+
+## Fetch
+
+After connecting to the VPN, Fetch needs a Hostname and Username. For the CCEB, the Hostname is `transfer.pmacs.upenn.edu` and your Username is your Pennkey. The connection should be set to SFTP. You can also specify an Initial folder for Fetch to direct you to. Your home drive (`/home/pennkey`) is typically best and should be the default. Below is a screenshot of my Fetch connection:
+
+```{r}
+knitr::include_graphics('img/ssh/Fetch_home.png')
+```
+
+notice I did not specify an Initial folder for this. You'll then be prompted for your password:
+
+```{r}
+knitr::include_graphics('img/ssh/Fetch_password.png')
+```
+
+which should be the same password you use to log onto the cluster. After, you will see directories and files inside of the path you specify.
+
+```{r}
+knitr::include_graphics('img/ssh/Fetch_directory.png')
+```
+
+By default, I was put into my home directory. You can navigate through Fetch just like a local computer. 
+
+Fetch has a few features worth noting. First, you can quick look at files on the cluster by selecting the file you'd like to look at and hitting the Quick Look icon on the tool bar (the eyeball looking icon). This will let you look at files without transferring them locally. You can also edit files on the cluster without transfering by selecting the file and hitting the Edit button on the tool bar (paper and pencil icon). These options can be also be accessed by right-clicking on the file. This opens a scrollable option menu for that file. Folders can be created using the New Folder icon on the tool bar and files and directories can be deleted with the Delete button in the top right. If you aren't comfortable with command line yet, this is a nice tool since it still feels like a graphical computer. Personally, I create folders and delete objects with the command line and not Fetch.
+
+Fetch also has the ability to create shortcuts. For example, if you always use the same Hostname, Username, and want a specific Initial Folder you should create a shortcut. You can create a shortcut by going to the Shortcuts menu option and following the menu to create a new shortcut. This can also be accomplished directly from the Fetch log in screen. First, fill out the log in with the shortcut you'd like to save. Then click on the heart icon.
+
+```{r}
+knitr::include_graphics('img/ssh/create_shortcut.png')
+```
+
+I already have a few shortcuts but you should also see the option to Make Shortcut. Click on that. You'll then be prompted to name the shortcut.
+
+```{r}
+knitr::include_graphics('img/ssh/name_shortcut.png')
+```
+
+Feel free to name it whatever you'd like. I typically name it by the Hostname or the Initial Folder. Then click OK and Connect. The next time you log in if you click on the heart you will see this shortcut already saved so you don't have to fill out all the info every time.
+
+The Hostname, Username, and Connect using settings should be the same in other file transfer clients.
+
+# Different Queues
+
+The information provided above is for using the generic CCEB cluster. Some students and faculty have access to special queues. We will cover what a queue is in the next blog post. Using a different queue changes how you log onto the cluster and the Hostname used with the file transfer client. If you have access to a special queue you'll need the login extension and the Hostname for the file transfer. For example, I have access to my advisor Taki's queue so when I log onto the cluster I use the following `ssh`:
+
+```{bash, echo = TRUE, eval = FALSE}
+ssh alval@takim
+```
+
+The Hostname I use for file transfer clients is `takim.pmacs.upenn.edu`. 
+
+Your advisor or the PMACs folks should have this information if you need it.
+
+
+
+
+

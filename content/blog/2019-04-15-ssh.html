@@ -1,0 +1,94 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Logging Onto The Cluster"
+author: "Alessandra Valcarcel"
+date: 2019-04-24T21:01:01-06:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This is the third blog post in a series of articles about using the CCEB cluster. An overview of the series is available <a href="www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/">here</a>. This post focuses on logging onto the cluster and transfer remote clients.</p>
+</div>
+<div id="logging-on" class="section level1">
+<h1>Logging On</h1>
+<p>In order to log onto the cluster you must have an account. For more resources on getting started and the cluster details are provided <a href="https://dbe.med.upenn.edu/biostat-research/resources-computing">here</a>. As of April 15, 2019 Martin Das (<a href="mailto:lablu@pennmedicine.upenn.edu" class="email">lablu@pennmedicine.upenn.edu</a>) can help you create an account and get started.</p>
+<p>In order to log onto the cluster you must:</p>
+<ol style="list-style-type: decimal">
+<li>Create an account</li>
+<li>Connect to the Penn Medicine VPN through Pulse Secure</li>
+<li>Securely access the cluster (<code>ssh</code>)</li>
+</ol>
+<p>Steps 2-3 are explained in more detail in the sections below.</p>
+<div id="pulse-secure" class="section level2">
+<h2>Pulse Secure</h2>
+<p>Whether you are on campus or off, you first need to connect to the Penn Medicine <a href="https://en.wikipedia.org/wiki/Virtual_private_network">VPN</a>. This will require setting up <a href="https://www.pulsesecure.net/">Pulse Secure</a>.</p>
+<p>Pulse secure is a dynamic multiservice network client for mobile and personal computing devices. It will securely connect your computer to the Penn Medicine VPN so that you can connect to the cluster. This software is also required if you want to remote desktop into your desktop machine provided by the CCEB.</p>
+<p>Other clients exist, but Penn Medicine uses this one. You can <a href="https://www.pulsesecure.net/trynow/client-download/">download Pulse Secure here</a>. You can submit a <a href="https://helpdesk.pmacs.upenn.edu/">PMACs ticket</a> and they will help you download, install, and set up Pulse Secure. If you prefer to set up Pulse Secure on your own you can but you still need to submit a <a href="https://helpdesk.pmacs.upenn.edu/">PMACs ticket</a> requesting your account access to the VPN. Without permission, you won’t be able to connect even with the correct setup. Once Pulse Secure is downloaded and installed the connection has the following details:</p>
+<p><img src="img/ssh/pulse.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>After the remote connection is set up you’ll have to use two-factor authentification to securely connect. The first step is to enter your PMACS username and password.</p>
+<p><img src="img/ssh/password.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>You’ll then get a second dialog box asking for a secondary password.</p>
+<p><img src="img/ssh/push.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>This is not actually a secondary password but rather the two-factor authentification verification method. Type one of the options below in the Secondary Password field:</p>
+<ol style="list-style-type: decimal">
+<li>Duo Moble App push – Type “push”</li>
+<li>Call Phone 1 – Type “phone1”</li>
+<li>Call Phone 2 – Type “phone2”</li>
+<li>Text phone – Type “sms” (When choosing this option you will be sent passcodes to enter in the secondary password field. Please login again and type a passcode instead of sms.)</li>
+</ol>
+<p>I personally suggest downloading the Duo Mobile App and always using that option. It works even if when you’re in another country whereas the call and text features don’t always go through.</p>
+<p>Once you’re connected to the VPN you’ll be able to log onto the cluster.</p>
+<p><img src="img/ssh/connected.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>When having problems logging onto the cluster check that you are in fact connected to the VPN. My most common mistake is attempting to log on without being connected.</p>
+</div>
+<div id="ssh" class="section level2">
+<h2>SSH</h2>
+<p>SSH, also known as Secure Shell or Secure Socket Shell, is a network protocol that gives users, particularly system administrators, a secure way to access a computer over an unsecured network. You <code>ssh</code> from your local machine and network onto the cluster. From there, you can execute commands.</p>
+<p>After you have connected to the VPN through Pulse Secure, as a normal CCEB user you will open terminal on your local machine and run the following command to log onto the cluster:</p>
+<pre class="bash"><code>ssh -X pennkey@scisub</code></pre>
+<p>For me this is as follows:</p>
+<p><img src="img/ssh/ssh_scisub.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Then enter your password. The cursor doesn’t move when you do this. If you mess up just delete a bunch of times and start over. Once you correctly specify your password you may have some output. For example, I see the following after logging into my account:</p>
+<p><img src="img/ssh/ssh_password.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>These come from your <code>.bash_aliases</code> file or <code>.bash_profile</code>. We will cover these files in a later post. For now, ignore any output you might have unless it relates to the application you are going to use. For example, I see some messages related to Python. I should investigate before using Python.</p>
+<p>You’re now logged onto the cluster’s submission host. We will talk about cluster terminology and the specifications of the cluster in the next blog post. You can move around within directories that you have permission to through the command line. For example, everyone should have access to their own <code>home</code> directory. It should be something like <code>/home/pennkey/</code>.</p>
+<p>Simply type <code>exit</code> from the command line to log off. You’ll see something like this when moving around on the command line and logging off:</p>
+<p><img src="img/ssh/exit.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="transfer-files" class="section level1">
+<h1>Transfer Files</h1>
+<p>In order to use the cluster, you will have to transfer files from your local machine to the cluster and vice versa. For example, if you run a simulation on the cluster, you’ll likely need to retreive the results to write the paper on your local machine. This requries a file transfer client.</p>
+<p>Some popular choices include <a href="https://cyberduck.io/">Cyberduck</a> and <a href="https://Fetchsoftworks.com/">Fetch</a>. I personally use Fetch. It costs money but luckily they offer a free license for students. You can apply for the free license <a href="https://Fetchsoftworks.com/Fetch/free">here</a> and once granted access you can download Fetch <a href="http://Fetchsoftworks.com/Fetch/download/">here</a>.</p>
+<p>To actually retrieve or transfer files using a client you will still need to be connected to the VPN through Pulse Secure.</p>
+<div id="fetch" class="section level2">
+<h2>Fetch</h2>
+<p>After connecting to the VPN, Fetch needs a Hostname and Username. For the CCEB, the Hostname is <code>transfer.pmacs.upenn.edu</code> and your Username is your Pennkey. The connection should be set to SFTP. You can also specify an Initial folder for Fetch to direct you to. Your home drive (<code>/home/pennkey</code>) is typically best and should be the default. Below is a screenshot of my Fetch connection:</p>
+<p><img src="img/ssh/Fetch_home.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>notice I did not specify an Initial folder for this. You’ll then be prompted for your password:</p>
+<p><img src="img/ssh/Fetch_password.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>which should be the same password you use to log onto the cluster. After, you will see directories and files inside of the path you specify.</p>
+<p><img src="img/ssh/Fetch_directory.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>By default, I was put into my home directory. You can navigate through Fetch just like a local computer.</p>
+<p>Fetch has a few features worth noting. First, you can quick look at files on the cluster by selecting the file you’d like to look at and hitting the Quick Look icon on the tool bar (the eyeball looking icon). This will let you look at files without transferring them locally. You can also edit files on the cluster without transfering by selecting the file and hitting the Edit button on the tool bar (paper and pencil icon). These options can be also be accessed by right-clicking on the file. This opens a scrollable option menu for that file. Folders can be created using the New Folder icon on the tool bar and files and directories can be deleted with the Delete button in the top right. If you aren’t comfortable with command line yet, this is a nice tool since it still feels like a graphical computer. Personally, I create folders and delete objects with the command line and not Fetch.</p>
+<p>Fetch also has the ability to create shortcuts. For example, if you always use the same Hostname, Username, and want a specific Initial Folder you should create a shortcut. You can create a shortcut by going to the Shortcuts menu option and following the menu to create a new shortcut. This can also be accomplished directly from the Fetch log in screen. First, fill out the log in with the shortcut you’d like to save. Then click on the heart icon.</p>
+<p><img src="img/ssh/create_shortcut.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>I already have a few shortcuts but you should also see the option to Make Shortcut. Click on that. You’ll then be prompted to name the shortcut.</p>
+<p><img src="img/ssh/name_shortcut.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Feel free to name it whatever you’d like. I typically name it by the Hostname or the Initial Folder. Then click OK and Connect. The next time you log in if you click on the heart you will see this shortcut already saved so you don’t have to fill out all the info every time.</p>
+<p>The Hostname, Username, and Connect using settings should be the same in other file transfer clients.</p>
+</div>
+</div>
+<div id="different-queues" class="section level1">
+<h1>Different Queues</h1>
+<p>The information provided above is for using the generic CCEB cluster. Some students and faculty have access to special queues. We will cover what a queue is in the next blog post. Using a different queue changes how you log onto the cluster and the Hostname used with the file transfer client. If you have access to a special queue you’ll need the login extension and the Hostname for the file transfer. For example, I have access to my advisor Taki’s queue so when I log onto the cluster I use the following <code>ssh</code>:</p>
+<pre class="bash"><code>ssh alval@takim</code></pre>
+<p>The Hostname I use for file transfer clients is <code>takim.pmacs.upenn.edu</code>.</p>
+<p>Your advisor or the PMACs folks should have this information if you need it.</p>
+</div>
