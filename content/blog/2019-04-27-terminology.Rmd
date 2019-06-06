@@ -109,7 +109,7 @@ PMACS Limited Performance Computing (LPC) cluster is a new grid (IBM Spectrum) a
 
 - LSF balances load, allocates resources, and provides access to those resources.
 
-This Statistical HPC is composed of a total of 352 available cores (144 Matlab; 80 SAS; 144 Stata; and 524 unrestricted R). More information about machine specification and memory is available through the [Wiki](https://dbe.med.upenn.edu/secure/wiki/index.php?title=Linux_Grid_Help).
+This Statistical HPC is composed of 144 Matlab cores, 80 SAS cores, 144 Stata cores, and 524 unrestricted R). More information about machine specification and memory is available through the [Wiki](https://dbe.med.upenn.edu/secure/wiki/index.php?title=Linux_Grid_Help).
 
 The current setup defaults to assigning one core for each job submitted to the HPC Grid, although proper set-up and usage of Matlab pools and R parallel packages will allow up to 12 cores to be used concurrently for a job.
 
