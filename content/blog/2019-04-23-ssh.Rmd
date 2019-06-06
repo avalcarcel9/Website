@@ -45,7 +45,7 @@ Other clients exist, but Penn Medicine uses this one. You can [download Pulse Se
 knitr::include_graphics('img/ssh/pulse.png')
 ```
 
-After the remote connection is set up you'll have to use two-factor authentification to securely connect. The first step is to enter your PMACS username and password. 
+After the remote connection is set up you'll have to use two-factor authentication to securely connect. The first step is to enter your PMACS username and password. 
 
 ```{r}
 knitr::include_graphics('img/ssh/password.png')
@@ -57,9 +57,9 @@ You'll then get a second dialog box asking for a secondary password.
 knitr::include_graphics('img/ssh/push.png')
 ```
 
-This is not actually a secondary password but rather the two-factor authentification verification method. Type one of the options below in the Secondary Password field:
+This is not actually a secondary password but rather the two-factor authentication verification method. Type one of the options below in the Secondary Password field:
 
-1. Duo Moble App push – Type "push"
+1. Duo Mobile App push – Type "push"
 2. Call Phone 1 – Type "phone1"
 3. Call Phone 2 – Type "phone2"
 4. Text phone – Type "sms" (When choosing this option you will be sent passcodes to enter in the secondary password field. Please login again and type a passcode instead of sms.)
@@ -108,7 +108,7 @@ knitr::include_graphics('img/ssh/exit.png')
 
 # Transfer Files
 
-In order to use the cluster, you will have to transfer files from your local machine to the cluster and vice versa. For example, if you run a simulation on the cluster, you'll likely need to retreive the results to write the paper on your local machine. This requries a file transfer client. 
+In order to use the cluster, you will have to transfer files from your local machine to the cluster and vice versa. For example, if you run a simulation on the cluster, you'll likely need to retrieve the results to write the paper on your local machine. This requires a file transfer client. 
 
 Some popular choices include [Cyberduck](https://cyberduck.io/) and [Fetch](https://Fetchsoftworks.com/). I personally use Fetch. It costs money but luckily they offer a free license for students. You can apply for the free license [here](https://Fetchsoftworks.com/Fetch/free) and once granted access you can download Fetch [here](http://Fetchsoftworks.com/Fetch/download/).
 
@@ -136,7 +136,7 @@ knitr::include_graphics('img/ssh/Fetch_directory.png')
 
 By default, I was put into my home directory. You can navigate through Fetch just like a local computer. 
 
-Fetch has a few features worth noting. First, you can quick look at files on the cluster by selecting the file you'd like to look at and hitting the Quick Look icon on the tool bar (the eyeball looking icon). This will let you look at files without transferring them locally. You can also edit files on the cluster without transfering by selecting the file and hitting the Edit button on the tool bar (paper and pencil icon). These options can be also be accessed by right-clicking on the file. This opens a scrollable option menu for that file. Folders can be created using the New Folder icon on the tool bar and files and directories can be deleted with the Delete button in the top right. If you aren't comfortable with command line yet, this is a nice tool since it still feels like a graphical computer. Personally, I create folders and delete objects with the command line and not Fetch.
+Fetch has a few features worth noting. First, you can quick look at files on the cluster by selecting the file you'd like to look at and hitting the Quick Look icon on the tool bar (the eyeball looking icon). This will let you look at files without transferring them locally. You can also edit files on the cluster without transferring by selecting the file and hitting the Edit button on the tool bar (paper and pencil icon). These options can be also be accessed by right-clicking on the file. This opens a scroll-able option menu for that file. Folders can be created using the New Folder icon on the tool bar and files and directories can be deleted with the Delete button in the top right. If you aren't comfortable with command line yet, this is a nice tool since it still feels like a graphical computer. Personally, I create folders and delete objects with the command line and not Fetch.
 
 Fetch also has the ability to create shortcuts. For example, if you always use the same Hostname, Username, and want a specific Initial Folder you should create a shortcut. You can create a shortcut by going to the Shortcuts menu option and following the menu to create a new shortcut. This can also be accomplished directly from the Fetch log in screen. First, fill out the log in with the shortcut you'd like to save. Then click on the heart icon.
 

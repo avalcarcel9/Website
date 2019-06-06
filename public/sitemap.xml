@@ -4,56 +4,61 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/cceb/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/cluster/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/computing/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/ibm/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/lsf/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-04-23T21:01:01-20:00</lastmod>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/2019-04-27-terminology/</loc>
+    <lastmod>2019-04-27T21:01:01-06:00</lastmod>
   </url>
   
   <url>

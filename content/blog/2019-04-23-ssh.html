@@ -31,13 +31,13 @@ output:
 <p>Pulse secure is a dynamic multiservice network client for mobile and personal computing devices. It will securely connect your computer to the Penn Medicine VPN so that you can connect to the cluster. This software is also required if you want to remote desktop into your desktop machine provided by the CCEB.</p>
 <p>Other clients exist, but Penn Medicine uses this one. You can <a href="https://www.pulsesecure.net/trynow/client-download/">download Pulse Secure here</a>. You can submit a <a href="https://helpdesk.pmacs.upenn.edu/">PMACs ticket</a> and they will help you download, install, and set up Pulse Secure. If you prefer to set up Pulse Secure on your own you can but you still need to submit a <a href="https://helpdesk.pmacs.upenn.edu/">PMACs ticket</a> requesting your account access to the VPN. Without permission, you won’t be able to connect even with the correct setup. Once Pulse Secure is downloaded and installed the connection has the following details:</p>
 <p><img src="img/ssh/pulse.png" width="80%" style="display: block; margin: auto;" /></p>
-<p>After the remote connection is set up you’ll have to use two-factor authentification to securely connect. The first step is to enter your PMACS username and password.</p>
+<p>After the remote connection is set up you’ll have to use two-factor authentication to securely connect. The first step is to enter your PMACS username and password.</p>
 <p><img src="img/ssh/password.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>You’ll then get a second dialog box asking for a secondary password.</p>
 <p><img src="img/ssh/push.png" width="80%" style="display: block; margin: auto;" /></p>
-<p>This is not actually a secondary password but rather the two-factor authentification verification method. Type one of the options below in the Secondary Password field:</p>
+<p>This is not actually a secondary password but rather the two-factor authentication verification method. Type one of the options below in the Secondary Password field:</p>
 <ol style="list-style-type: decimal">
-<li>Duo Moble App push – Type “push”</li>
+<li>Duo Mobile App push – Type “push”</li>
 <li>Call Phone 1 – Type “phone1”</li>
 <li>Call Phone 2 – Type “phone2”</li>
 <li>Text phone – Type “sms” (When choosing this option you will be sent passcodes to enter in the secondary password field. Please login again and type a passcode instead of sms.)</li>
@@ -64,7 +64,7 @@ output:
 </div>
 <div id="transfer-files" class="section level1">
 <h1>Transfer Files</h1>
-<p>In order to use the cluster, you will have to transfer files from your local machine to the cluster and vice versa. For example, if you run a simulation on the cluster, you’ll likely need to retreive the results to write the paper on your local machine. This requries a file transfer client.</p>
+<p>In order to use the cluster, you will have to transfer files from your local machine to the cluster and vice versa. For example, if you run a simulation on the cluster, you’ll likely need to retrieve the results to write the paper on your local machine. This requires a file transfer client.</p>
 <p>Some popular choices include <a href="https://cyberduck.io/">Cyberduck</a> and <a href="https://Fetchsoftworks.com/">Fetch</a>. I personally use Fetch. It costs money but luckily they offer a free license for students. You can apply for the free license <a href="https://Fetchsoftworks.com/Fetch/free">here</a> and once granted access you can download Fetch <a href="http://Fetchsoftworks.com/Fetch/download/">here</a>.</p>
 <p>To actually retrieve or transfer files using a client you will still need to be connected to the VPN through Pulse Secure.</p>
 <div id="fetch" class="section level2">
@@ -76,7 +76,7 @@ output:
 <p>which should be the same password you use to log onto the cluster. After, you will see directories and files inside of the path you specify.</p>
 <p><img src="img/ssh/Fetch_directory.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>By default, I was put into my home directory. You can navigate through Fetch just like a local computer.</p>
-<p>Fetch has a few features worth noting. First, you can quick look at files on the cluster by selecting the file you’d like to look at and hitting the Quick Look icon on the tool bar (the eyeball looking icon). This will let you look at files without transferring them locally. You can also edit files on the cluster without transfering by selecting the file and hitting the Edit button on the tool bar (paper and pencil icon). These options can be also be accessed by right-clicking on the file. This opens a scrollable option menu for that file. Folders can be created using the New Folder icon on the tool bar and files and directories can be deleted with the Delete button in the top right. If you aren’t comfortable with command line yet, this is a nice tool since it still feels like a graphical computer. Personally, I create folders and delete objects with the command line and not Fetch.</p>
+<p>Fetch has a few features worth noting. First, you can quick look at files on the cluster by selecting the file you’d like to look at and hitting the Quick Look icon on the tool bar (the eyeball looking icon). This will let you look at files without transferring them locally. You can also edit files on the cluster without transferring by selecting the file and hitting the Edit button on the tool bar (paper and pencil icon). These options can be also be accessed by right-clicking on the file. This opens a scroll-able option menu for that file. Folders can be created using the New Folder icon on the tool bar and files and directories can be deleted with the Delete button in the top right. If you aren’t comfortable with command line yet, this is a nice tool since it still feels like a graphical computer. Personally, I create folders and delete objects with the command line and not Fetch.</p>
 <p>Fetch also has the ability to create shortcuts. For example, if you always use the same Hostname, Username, and want a specific Initial Folder you should create a shortcut. You can create a shortcut by going to the Shortcuts menu option and following the menu to create a new shortcut. This can also be accomplished directly from the Fetch log in screen. First, fill out the log in with the shortcut you’d like to save. Then click on the heart icon.</p>
 <p><img src="img/ssh/create_shortcut.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>I already have a few shortcuts but you should also see the option to Make Shortcut. Click on that. You’ll then be prompted to name the shortcut.</p>

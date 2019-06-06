@@ -1,3 +1,13 @@
+# Website
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/250e59ba-d9d9-4aff-9972-ba45af73e1c1/deploy-status)](https://app.netlify.com/sites/alessandravalcarcel/deploys)
+
+[www.alessandravalcarcel.com](www.alessandravalcarcel.com)
+
+# Updates
+
+Had to go to netlify to actually build and deploy with last push.
+
 # Hugo Goa Demo
 
 ## About

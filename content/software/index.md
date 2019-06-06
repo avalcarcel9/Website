@@ -55,6 +55,8 @@ devtools::install_github("avalcarcel9/GoT")
 
 ### R Flow
 
+<a href="https://github.com/avalcarcel9/aliviateR/blob/master/vignettes/vignette.Rmd"><img src="/img/software/aliviateR_sticker.png" height="192" alt="aliviateR logo" align="right" /></a>
+
 `aliviateR` is an R package I've built to help automate my R workflow. It has functions that help to automate building R packages. Additionally, it has some functions to calculate the Sørensen–Dice coefficient, help create a tibble of filepaths organized by subject ID, load all R objects in a folder organizing in a clean tibble format. While this package was created by me for me it can if you make R packages frequently or use similar data it may serve you as well. This package will forever be a work in progress but is available as a development version. For documentation see the package [GitHub](https://github.com/avalcarcel9/aliviateR) and [readme](https://github.com/avalcarcel9/aliviateR/blob/master/README.Rmd).
 
 To download run the following code:
