@@ -1,0 +1,35 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Session Types"
+author: "Alessandra Valcarcel"
+date: 2019-06-05T21:01:01-06:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This is the fifth blog post in a series of articles about using the CCEB cluster. An overview of the series is available <a href="www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/">here</a>. This post focuses on the types of sessions available on the Penn HPC and when to use the different types.</p>
+<p>There are two types of sessions you can request when working on the cluster. An interactive session or a normal session. I will discuss each in more detail below and in future posts.</p>
+<p>After you have <code>ssh</code>’ed onto the cluster, you will run a <code>bsub</code> command to open an interactive session and run your code dynamically as a batch job in a normal session.</p>
+</div>
+<div id="interactive-session" class="section level1">
+<h1>Interactive Session</h1>
+<p>Of course, an interactive session allows you to work on the cluster in an interactive way. Once you request an interactive session, you can run code interactively and dynamically similar to how you work on your local machine. Interactive sessions are almost no different than how RStudio users run code from the the source code window with output generated in the console. Instead of code running in the console with output it will run on the cluster. You simply log on and run whatever commands you need to, whether on the command line or in a graphical environment and you log out when you’ve finished.</p>
+<p>Interactive sessions are great when you are writing code for the first time or are de-bugging problematic code since this session type allows you to play and run code with output in real time. Interactive sessions are also great when running short jobs or tasks.</p>
+</div>
+<div id="batch-jobs-or-normal-session" class="section level1">
+<h1>Batch Jobs or Normal Session</h1>
+<p>A batch job is run through a normal session. These jobs run a computer program or set of programs processed in batch mode or all at once without manual intervention. Normal sessions or batch jobs run several jobs, the number is specified by the user, simultaneously. All data and commands are preselected through shell scripts or command-line parameters and run to completion without human contact. Take note that I used the word completion here. Completion may mean your code had a bug and errored out and failed or ran successfully. We use the term “batch” because the input data are collected into batches of files or are processed in batches by the code.</p>
+<p>This is most useful when you need to run the same script of code multiple times, like in a simulation. Batch jobs are also great for longer running processes since you don’t have to wait for human input.</p>
+</div>
+<div id="comparison" class="section level1">
+<h1>Comparison</h1>
+<p>Both interactive and normal sessions can be used to run code in parallel. When running code in parallel, interactive sessions are best for very short running parallel processes that require only a small amount of memory. For longer processes that require larger amounts of memory a batch job is best. Submitting the jobs as a batch will allow the master host to track job statuses and memory so that the cluster doesn’t crash. Of course it is still possible to crash things in both types of environment but batch jobs have some extra oversight from the master host.</p>
+<p>Interactive sessions are great for writing code, de-bugging code, code that requires human interaction or dynamic coding, and running short code. Batch jobs are best at running longer code, repeated processing (i.e. simulations), and running large numbers of simulations.</p>
+<p>Learning how to use the cluster in an interactive session is very easy because it is similar to how you interact with R through RStudio. There is more of a learning curve with a batch job but if you can master it then you’ll save a lot of compute time later.</p>
+</div>
