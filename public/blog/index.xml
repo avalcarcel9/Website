@@ -6,10 +6,20 @@
     <description>Recent content in Blogs on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 05 Jun 2019 21:01:01 -0600</lastBuildDate>
+    <lastBuildDate>Wed, 12 Jun 2019 21:01:01 -0600</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using the CCEB High Performance Computing Cluster: Interactive Session Basics</title>
+      <link>/blog/2019-06-12-interactivesession1/</link>
+      <pubDate>Wed, 12 Jun 2019 21:01:01 -0600</pubDate>
+      
+      <guid>/blog/2019-06-12-interactivesession1/</guid>
+      <description>Introduction This is the sixth blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on the basics of using an interactive session.
+Interactive sessions are opened by requesting appropriate system parameters using the LSF bsub command. Once a session is open you can run your code on the loaded host interactively. This allows you to work dynamically on your code.</description>
+    </item>
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Session Types</title>

@@ -93,6 +93,10 @@
 <p>Interactive sessions are great for writing code, de-bugging code, code that requires human interaction or dynamic coding, and running short code. Batch jobs are best at running longer code, repeated processing (i.e. simulations), and running large numbers of simulations.</p>
 <p>Learning how to use the cluster in an interactive session is very easy because it is similar to how you interact with R through RStudio. There is more of a learning curve with a batch job but if you can master it then you’ll save a lot of compute time later.</p>
 </div>
+<div id="the-bsub" class="section level1">
+<h1>The <code>bsub</code></h1>
+<p>Once you’ve logged onto the cluster you’ll need to tell the host what type of session you want to work with. For example, do you want to submit to open an interactive session? Are you submitting a batch job? Should your session have more than one cores for parallelization? Do you want the job to fail after a certain amount of memory consumption? This is all done using the <code>bsub</code> command. The <code>bsub</code> command is used to submit a batch script to LSF. The master host will evaluate your <code>bsub</code> after submission and if there are requests or constraints that LSF cannot fulfill as specified it will reject your job.</p>
+</div>
 
   </div>
 </section>
@@ -136,6 +140,8 @@
   
   <span><a class="menu-item" href="/blog">blog</a></span>
   
+  
+  <span><a class="menu-item" href="/blog/2019-06-12-interactivesession1/"> | next &gt;</a></span>
   
   
   <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>

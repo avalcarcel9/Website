@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Personal website">
+<meta name="keywords" content="student,statistics,biostatistics,Penn">
+
+<base href="/">
+
+<title>Alessandra [Ali] Valcarcel</title>
+
+<meta name="generator" content="Hugo 0.55.3" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-US">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Using the CCEB High Performance Computing Cluster: Interactive Session Basics</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        PUBLISHED ON JUN 12, 2019 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/computing">COMPUTING</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This is the sixth blog post in a series of articles about using the CCEB cluster. An overview of the series is available <a href="www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/">here</a>. This post focuses on the basics of using an interactive session.</p>
+<p>Interactive sessions are opened by requesting appropriate system parameters using the LSF <code>bsub</code> command. Once a session is open you can run your code on the loaded host interactively. This allows you to work dynamically on your code. Utilizing this resource on the cluster is best for when you’re writing code for the first time, debugging code, or running code that uses a small amount of memory and runs fast.</p>
+<p>An interactive session can be utilized on a single core (default) and for parallel computing. This post is going to focus on a single core and the next will cover parallel computing.</p>
+</div>
+<div id="code-to-log-on" class="section level1">
+<h1>Code to Log On</h1>
+<p>A whole blog post is dedicated to logging onto the cluster and can be found <a href="https://www.alessandravalcarcel.com/blog/2019-04-23-ssh/">here</a>. As a refresher the code is below. Remember to connect to the VPN using Pulse Secure.</p>
+<pre class="bash"><code>ssh -X pennkey@scisub</code></pre>
+</div>
+<div id="interactive-session-basics" class="section level1">
+<h1>Interactive Session Basics</h1>
+<p>Once you’ve logged onto the cluster you need to use a <code>bsub</code> command to open an interactive session. A full reference manual of the <code>bsub</code> command is available online <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bsub.1.html">here</a>.</p>
+<p>The most basic <code>bsub</code> command to open an interactive session is below:</p>
+<pre class="bash"><code>bsub -Is -q cceb_interactive &quot;bash&quot;</code></pre>
+<ul>
+<li><code>bsub</code> is the command name which communicates to LSF to submit a job.</li>
+<li><code>-Is</code> is an option that submits an interactive job and creates a pseudo-terminal with shell mode support when the job starts.<br />
+</li>
+<li><code>-q cceb_interactive</code> submits the job to the specified queues. The specified queues must be defined for the local cluster. For a list of available queues in your local cluster, use <code>bqueues</code>. As a student or staff you should have access to the <code>cceb_interactive</code> queue. In certain groups you may have access to different queues. For example, in Taki’s group we have access to taki_interactive, a portion of the cluster reserved for the PennSIVE working group.</li>
+</ul>
+<p>After executing this command you’ll see some output that either successfully puts you onto an execution host or fails. The output will explicitly tell you which machine you’ve been put on. This can be useful for quality control in the event of problems with memory or speed.</p>
+<p>Now that you are on an execution host you need to load R or another computing language. To load R on the cluster just type <code>module load R/version</code>. I personally have been using R version 3.5.0 on the cluster so I’d type <code>module load R/3.5.0</code>. In a later blog post, I’ll discuss bash aliases and how you can bypass typing <code>module load R/3.5.0</code> before opening R. If you want to see what other versions of R are available on the cluster type <code>module load R</code> then hit tab twice. You will see some output with all the different versions installed. This is an excellent resource if the package you want to use requires an older version of R. You won’t have to uninstall and re-install R on your local machine.</p>
+<p><img src="img/interactive1/versions.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Once you have <code>ssh</code>’ed, <code>bsub</code>’ed, and <code>module load</code>’ed R, just type R.</p>
+<p><img src="img/interactive1/loadR.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Based on the output after my <code>bsub</code> I was successfully put onto the <code>amber03</code> machine. You’ll notice that the terminal with R open looks very similar to the console after opening a new R session in RStudio. At this point you can go about coding as you normally would in R.</p>
+<p>As an example, let’s run a simple and useful function for cluster computing. Provided below is a simple function:</p>
+<pre class="r"><code>lsos &lt;- function (..., n = 10) {
+  .ls.objects(..., order.by = &quot;Size&quot;, decreasing = TRUE, head = TRUE, n = n)
+}</code></pre>
+<p>This function will return what objects you have loaded in your R environment with some information about the type of object, the size, and the dimension of the object. For example, if you run the <code>lsos</code> function from above and then run the following:</p>
+<pre class="r"><code>first  = &#39;my first name is Ali&#39;
+last = &#39;my last name is Valcarcel&#39;
+number = 9
+lsos()</code></pre>
+<p>You should see the following returned:</p>
+<p><img src="img/interactive1/lsos.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>At this point, you’re ready to run code on the cluster. Remember you can always save data or plots to your home directory on the cluster or wherever appropriate given your permissions. If you need to continue working locally use Fetch to pull the material off the cluster.</p>
+<p>In future posts, I’ll discuss the power of the <code>bsub</code> and how to request different parameters on the cluster. For example, you can be given access to more than 1 core for parallelization or have your job be killed if you exceed a certain memory by using different options associated with the command.</p>
+<p>To exit out of R just type <code>q()</code> and hit enter. You’ll be asked if you would like to save your environment so just type what you would like to do.</p>
+<p>It is important to note that if you click the x, the exit button, on your terminal window to close terminal then the interactive session you had open will be terminated and killed. Essentially, you’re logged off. If you want to exit out of R and your entire session you are free to just exit the window and everything will quit and exit.</p>
+</div>
+<div id="screen" class="section level1">
+<h1>Screen</h1>
+<p>Unfortunately, in an interactive session if your WiFi connection drops, the VPN connection drops, or you exit the <code>ssh</code> session (i.e. exit out of terminal) then the interactive session will be interrupted, killed, and exited. Your work being done on the remote locally will be lost. This is especially frustrating for longer-running tasks. Luckily, there is a utility called screen that is already installed on the cluster that allows your work to continue running in the event of lost connections or exiting and you can resume the session later. For example, say you’re running a set of simulations that will take approximately 10 hours. You’re not going to sit there and make sure your computer doesn’t go to sleep or lose connections. You just want your code to run uninterrupted. Screen is the solution to this dilemma.</p>
+<p>Screen also referred to as GNU Screen is a terminal multiplexer. This means that you can start a screen session and then open any number of windows (virtual terminals) inside that session. Processes running in Screen will continue to run when their window is not visible even if you get disconnected. Screen is kind of like the movie Inception. Think dream within a dream. You’ll log onto the cluster from your local machine. Then from the remote host you’ll screen a session. This opens a session inside of session so that if you exit the terminal on your computer the session within a session will continue.</p>
+<p>For more information about screen and how to use it check out this <a href="https://linuxize.com/post/how-to-use-linux-screen/">How To Use Linux Screen</a> article or the the <a href="https://linux.die.net/man/1/screen">manual</a>.</p>
+<div id="starting-a-screen" class="section level2">
+<h2>Starting a Screen</h2>
+<p>Screen is already installed on the cluster for us to use. To create a screened session you’ll simply log onto the cluster and then just type <code>screen</code>. You always screen from the “scisub” machine or host. This is the machine you are put on directly after logging on. You do not screen after you have <code>bsub</code>’ed onto an execution host rather after you screen then you request the execute host with your <code>bsub</code>. Some sample code is provided below:</p>
+<pre class="bash"><code># Log onto the cluster
+ssh -X alval@scisub
+# Screen the session while on the scisub host
+screen
+# bsub and work interactively as you would like
+bsub -Is -q cceb_interactive &quot;bash&quot;
+# Load R
+module load R/3.5.0
+# Open R
+R
+# run stuff you&#39;d like</code></pre>
+<p>Screen is very convenient and you can even name each screen session you open. This is extremely useful when you are running multiple screen sessions. For example, maybe you are running one set of code for your research and one set of code for a homework assignment. To create a named session, simply type <code>screen -S session_name</code>. Keep the <code>session_name</code> short and descriptive.</p>
+<p>At this point, you are free to work without fear of losing your work in the event of a disruption.</p>
+</div>
+<div id="checking-screens" class="section level2">
+<h2>Checking Screen(s)</h2>
+<p>You can check how many screens you have open using the following code:</p>
+<pre class="bash"><code>screen -ls</code></pre>
+<p>This will return a small amount of output like below for example:</p>
+<p><img src="img/interactive1/screenls.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Notice in this example I have two screens open or on. One is called example1, and is attached, while the other is called example2, and detached. Attached simply means that the window is open and active somewhere on my local machine. I have not exited out of the terminal. Detached means that I have exited in some way.</p>
+</div>
+<div id="resuming-a-screen" class="section level2">
+<h2>Resuming a Screen</h2>
+<p>Assume you opened an interactive session on the cluster yesterday, screened, and submit a simulation function that takes about 10 hours to run, manually exited out of terminal by pressing the x button. You repeat this process but with homework code. You then logged off your computer and went home.</p>
+<p>You’re now at work and want to check on what you ran overnight. To resume a screen you’ll simply type the following:</p>
+<pre class="bash"><code>screen -r</code></pre>
+<p>If only one screen is open you will directly screen back into the session. If you have more than one session <code>screen -r</code> will return the screens you have open much like <code>screen -ls</code>.</p>
+<p><img src="img/interactive1/screenr.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>With multiple screens open to resume you must provide the number and/or name of the session.</p>
+<pre class="bash"><code>screen -r 30768.example1</code></pre>
+<p>Note: If one of your screens is attached and you’d like to detach it manually before resuming just type <code>screen -d &lt;screen number/name&gt;</code>. Once your session is detached you can resume it.</p>
+</div>
+<div id="exiting-a-screen" class="section level2">
+<h2>Exiting a Screen</h2>
+<p>Exiting a screen is very simple. Just quit the software (i.e. R) you are working in to return to the command line. From the command line type exit (this will take you off the execute host from your <code>bsub</code>), then exit again (this will exit the screen), and exit one more time (this will exit you off of scisub and return you to your local terminal).</p>
+<p><img src="img/interactive1/exit.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="common-courtesy" class="section level2">
+<h2>Common Courtesy</h2>
+<p>With a screened interactive session it is very easy to forget that you had a screen open. An open screen that is detached on an execute host will take up cores and memory. It is good practice to check if you have screens open every time you’re logging on and off the cluster. If you have screens that you are not using or are done using exit them so that others can utilize the resource.</p>
+</div>
+</div>
+<div id="downloading-r-packages-and-software" class="section level1">
+<h1>Downloading R Packages and Software</h1>
+<p>The cluster is already configured with a number of useful day to day packages that most of us use consistently. There will be times though that you need a specific package installed.</p>
+<p>For security reasons you will not be able to download packages manually. For example, <code>install.pacakges('ggplot2')</code> will error. Instead, email the Scientific Computing System Administration Team. I have excluded their email from this series of posts so they don’t inadvertently receive spam but just ask around and it should be easy to track down. In your email you should include the version(s) of R you would like the package installed, the package name, and package version you need downloaded. When they install the package, it will only be available in the version of R you specified. When possible it is also helpful to include a link to the package (i.e. CRAN or GitHub links).</p>
+<p>Similarly, if you need other non-R software downloaded on the cluster email them to install and configure.</p>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      TAGS:
+      
+      
+      <a class="meta" href="/tags/cceb">CCEB</a>, 
+      
+      <a class="meta" href="/tags/cluster">CLUSTER</a>, 
+      
+      <a class="meta" href="/tags/ibm">IBM</a>, 
+      
+      <a class="meta" href="/tags/lsf">LSF</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/blog/2019-06-05-sessions/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2018. Alessandra [Ali] Valcarcel.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-115574303-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

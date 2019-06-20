@@ -1,0 +1,189 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Interactive Session Basics"
+author: "Alessandra Valcarcel"
+date: 2019-06-12T21:01:01-06:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(out.width = '80%',
+                      fig.align = 'center', 
+                      echo=FALSE, 
+                      warning=FALSE, 
+                      message=FALSE)
+```
+
+# Introduction
+
+This is the sixth blog post in a series of articles about using the CCEB cluster. An overview of the series is available [here](www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/). This post focuses on the basics of using an interactive session. 
+
+Interactive sessions are opened by requesting appropriate system parameters using the LSF `bsub` command. Once a session is open you can run your code on the loaded host interactively. This allows you to work dynamically on your code. Utilizing this resource on the cluster is best for when you're writing code for the first time, debugging code, or running code that uses a small amount of memory and runs fast.
+
+An interactive session can be utilized on a single core (default) and for parallel computing. This post is going to focus on a single core and the next will cover parallel computing. 
+
+# Code to Log On
+
+A whole blog post is dedicated to logging onto the cluster and can be found [here](https://www.alessandravalcarcel.com/blog/2019-04-23-ssh/). As a refresher the code is below. Remember to connect to the VPN using Pulse Secure.
+
+```{bash, eval = FALSE, echo = TRUE}
+ssh -X pennkey@scisub
+```
+
+# Interactive Session Basics
+
+Once you've logged onto the cluster you need to use a `bsub` command to open an interactive session. A full reference manual of the `bsub` command is available online [here](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bsub.1.html).
+
+The most basic `bsub` command to open an interactive session is below:
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive "bash"
+```
+
+- `bsub` is the command name which communicates to LSF to submit a job. 
+- `-Is` is an option that submits an interactive job and creates a pseudo-terminal with shell mode support when the job starts.  
+- `-q cceb_interactive` submits the job to the specified queues. The specified queues must be defined for the local cluster. For a list of available queues in your local cluster, use `bqueues`. As a student or staff you should have access to the `cceb_interactive` queue. In certain groups you may have access to different queues. For example, in Taki's group we have access to taki_interactive, a portion of the cluster reserved for the PennSIVE working group.
+
+After executing this command you'll see some output that either successfully puts you onto an execution host or fails. The output will explicitly tell you which machine you've been put on. This can be useful for quality control in the event of problems with memory or speed.
+
+Now that you are on an execution host you need to load R or another computing language. To load R on the cluster just type `module load R/version`. I personally have been using R version 3.5.0 on the cluster so I'd type `module load R/3.5.0`. In a later blog post, I'll discuss bash aliases and how you can bypass typing `module load R/3.5.0` before opening R. If you want to see what other versions of R are available on the cluster type `module load R` then hit tab twice. You will see some output with all the different versions installed. This is an excellent resource if the package you want to use requires an older version of R. You won't have to uninstall and re-install R on your local machine. 
+
+```{r}
+knitr::include_graphics('img/interactive1/versions.png')
+```
+
+Once you have `ssh`'ed, `bsub`'ed, and `module load`'ed R, just type R.
+
+```{r}
+knitr::include_graphics('img/interactive1/loadR.png')
+```
+
+Based on the output after my `bsub` I was successfully put onto the `amber03` machine. You'll notice that the terminal with R open looks very similar to the console after opening a new R session in RStudio. At this point you can go about coding as you normally would in R.
+
+As an example, let's run a simple and useful function for cluster computing. Provided below is a simple function:
+
+```{r, eval = FALSE, echo = TRUE}
+lsos <- function (..., n = 10) {
+  .ls.objects(..., order.by = "Size", decreasing = TRUE, head = TRUE, n = n)
+}
+```
+
+This function will return what objects you have loaded in your R environment with some information about the type of object, the size, and the dimension of the object. For example, if you run the `lsos` function from above and then run the following:
+
+```{r, eval = FALSE, echo = TRUE}
+first  = 'my first name is Ali'
+last = 'my last name is Valcarcel'
+number = 9
+lsos()
+```
+
+You should see the following returned:
+
+```{r}
+knitr::include_graphics('img/interactive1/lsos.png')
+```
+
+At this point, you're ready to run code on the cluster. Remember you can always save data or plots to your home directory on the cluster or wherever appropriate given your permissions. If you need to continue working locally use Fetch to pull the material off the cluster. 
+
+In future posts, I'll discuss the power of the `bsub` and how to request different parameters on the cluster. For example, you can be given access to more than 1 core for parallelization or have your job be killed if you exceed a certain memory by using different options associated with the command.
+
+To exit out of R just type `q()` and hit enter. You'll be asked if you would like to save your environment so just type what you would like to do. 
+
+It is important to note that if you click the x, the exit button, on your terminal window to close terminal then the interactive session you had open will be terminated and killed. Essentially, you're logged off. If you want to exit out of R and your entire session you are free to just exit the window and everything will quit and exit.
+
+# Screen
+
+Unfortunately, in an interactive session if your WiFi connection drops, the VPN connection drops, or you exit the `ssh` session (i.e. exit out of terminal) then the interactive session will be interrupted, killed, and exited. Your work being done on the remote locally will be lost. This is especially frustrating for longer-running tasks. Luckily, there is a utility called screen that is already installed on the cluster that allows your work to continue running in the event of lost connections or exiting and you can resume the session later. For example, say you're running a set of simulations that will take approximately 10 hours. You're not going to sit there and make sure your computer doesn't go to sleep or lose connections. You just want your code to run uninterrupted. Screen is the solution to this dilemma. 
+
+Screen also referred to as GNU Screen is a terminal multiplexer. This means that you can start a screen session and then open any number of windows (virtual terminals) inside that session. Processes running in Screen will continue to run when their window is not visible even if you get disconnected. Screen is kind of like the movie Inception. Think dream within a dream. You'll log onto the cluster from your local machine. Then from the remote host you'll screen a session. This opens a session inside of session so that if you exit the terminal on your computer the session within a session will continue.
+
+For more information about screen and how to use it check out this [How To Use Linux Screen](https://linuxize.com/post/how-to-use-linux-screen/) article or the the [manual](https://linux.die.net/man/1/screen).
+
+## Starting a Screen
+
+Screen is already installed on the cluster for us to use. To create a screened session you'll simply log onto the cluster and then just type `screen`. You always screen from the "scisub" machine or host. This is the machine you are put on directly after logging on. You do not screen after you have `bsub`'ed onto an execution host rather after you screen then you request the execute host with your `bsub`. Some sample code is provided below:
+
+```{bash, eval = FALSE, echo = TRUE}
+# Log onto the cluster
+ssh -X alval@scisub
+# Screen the session while on the scisub host
+screen
+# bsub and work interactively as you would like
+bsub -Is -q cceb_interactive "bash"
+# Load R
+module load R/3.5.0
+# Open R
+R
+# run stuff you'd like
+```
+
+Screen is very convenient and you can even name each screen session you open. This is extremely useful when you are running multiple screen sessions. For example, maybe you are running one set of code for your research and one set of code for a homework assignment. To create a named session, simply type `screen -S session_name`. Keep the `session_name` short and descriptive.
+
+At this point, you are free to work without fear of losing your work in the event of a disruption.
+
+## Checking Screen(s)
+
+You can check how many screens you have open using the following code:
+
+```{bash, eval = FALSE, echo = TRUE}
+screen -ls
+```
+
+This will return a small amount of output like below for example:
+
+```{r}
+knitr::include_graphics('img/interactive1/screenls.png')
+```
+
+Notice in this example I have two screens open or on. One is called example1, and is attached, while the other is called example2, and detached. Attached simply means that the window is open and active somewhere on my local machine. I have not exited out of the terminal. Detached means that I have exited in some way. 
+
+## Resuming a Screen
+
+Assume you opened an interactive session on the cluster yesterday, screened, and submit a simulation function that takes about 10 hours to run, manually exited out of terminal by pressing the x button. You repeat this process but with homework code. You then logged off your computer and went home. 
+
+You're now at work and want to check on what you ran overnight. To resume a screen you'll simply type the following:
+
+```{bash, eval = FALSE, echo = TRUE}
+screen -r
+```
+
+If only one screen is open you will directly screen back into the session. If you have more than one session `screen -r` will return the screens you have open much like `screen -ls`.
+
+```{r}
+knitr::include_graphics('img/interactive1/screenr.png')
+```
+
+With multiple screens open to resume you must provide the number and/or name of the session.
+
+```{bash, eval = FALSE, echo = TRUE}
+screen -r 30768.example1
+```
+
+Note: If one of your screens is attached and you'd like to detach it manually before resuming just type `screen -d <screen number/name>`. Once your session is detached you can resume it.
+
+## Exiting a Screen
+
+Exiting a screen is very simple. Just quit the software (i.e. R) you are working in to return to the command line. From the command line type exit (this will take you off the execute host from your `bsub`), then exit again (this will exit the screen), and exit one more time (this will exit you off of scisub and return you to your local terminal).
+
+```{r}
+knitr::include_graphics('img/interactive1/exit.png')
+```
+
+## Common Courtesy
+
+With a screened interactive session it is very easy to forget that you had a screen open. An open screen that is detached on an execute host will take up cores and memory. It is good practice to check if you have screens open every time you're logging on and off the cluster. If you have screens that you are not using or are done using exit them so that others can utilize the resource.
+
+# Downloading R Packages and Software
+
+The cluster is already configured with a number of useful day to day packages that most of us use consistently. There will be times though that you need a specific package installed.
+
+For security reasons you will not be able to download packages manually. For example, `install.pacakges('ggplot2')` will error. Instead, email the Scientific Computing System Administration Team. I have excluded their email from this series of posts so they don't inadvertently receive spam but just ask around and it should be easy to track down. In your email you should include the version(s) of R you would like the package installed, the package name, and package version you need downloaded. When they install the package, it will only be available in the version of R you specified. When possible it is also helpful to include a link to the package (i.e. CRAN or GitHub links). 
+
+Similarly, if you need other non-R software downloaded on the cluster email them to install and configure. 
+
+
+
+
