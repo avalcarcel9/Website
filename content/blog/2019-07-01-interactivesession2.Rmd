@@ -21,19 +21,19 @@ knitr::opts_chunk$set(out.width = '80%',
 
 This is the seventh blog post in a series of articles about using the CCEB cluster. An overview of the series is available [here](www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/). This post focuses on advanced topics related to interactive sessions. 
 
-Though this post centers around advanced content related to interactive sessions, you'll still be requesting appropriate system parameters using the LSF `bsub` command. We focus here on more advanced options associated with the `bsub` to request more cores for parallelization, force memory constraints on your session, and request certain machines. Just like the working in interactive sessions before, once a session is open you can run your code on the loaded host interactively. This allows you to work dynamically on your code. Utilizing this resource on the cluster is best for when you're writing code for the first time, debugging code, or running code that uses a small amount of memory and runs fast.
+Though this post centers around advanced content related to interactive sessions, you'll still be requesting appropriate system parameters using the LSF `bsub` command. We focus here on more advanced options associated with the `bsub` to request more cores for parallelization, force memory constraints on your session, and request certain machines. Just like a basic interactive session, once a session is open you can run your code on the loaded host interactively. This allows you to work dynamically on your code. Utilizing this resource on the cluster is best for when you're writing code for the first time, debugging code, or running code that uses a small amount of memory and runs fast.
 
 # Interactive `bsub` Options
 
-In this section, I will cover some of what I find to be the most useful `bsub` commands. For a more rigorous full list of `bsub` commands and their usage see the IBM documentation [here](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bsub.1.html).
+In this section, I will cover some of what I find to be the most useful `bsub` options. For a more rigorous full list of `bsub` commands and their usage see the IBM documentation [here](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bsub.1.html).
 
-Recall the most basic `bsub` command and options for opening an interactive session is as follows:
+Recall the most basic `bsub` for opening an interactive session is as follows:
 
 ```{bash, eval = FALSE, echo = TRUE}
 bsub -Is -q cceb_interactive "bash"
 ```
 
-This command opens an interactive session and requested 1 core by default.
+This command opens an interactive session with 1 core by default.
 
 Some common additions include:
 
@@ -45,7 +45,7 @@ bsub -Is -q cceb_interactive -n 8 "bash"
 
 This command opens an interactive session and requested 8 cores by default.
 
-2. `-R "span[hosts=1]"` - to request that the number of cores you are requesting be on the same execution host.
+2. `-R "span[hosts=1]"` - to request that the number of cores you obtain be on the same execution host.
 
 ```{bash, eval = FALSE, echo = TRUE}
 bsub -Is -q cceb_interactive -n 8 -R "span[hosts=1]" "bash"
@@ -87,15 +87,15 @@ Again, interactive sessions should be avoided unless writing or quality controll
 
 # Example
 
-The grid is a Unix based machine so the easiest way to parallelize is by using `parallel::mclapply()` in R. This is a nice overview of [HPC computing in R](https://www.hpc.dtu.dk/?page_id=2723) it does not exactly align with what I showed here but provides nice descriptions. 
+The grid is a Unix based machine so the easiest way to parallelize is by using `parallel::mclapply()` in R. This is a nice overview of [HPC computing in R](https://www.hpc.dtu.dk/?page_id=2723). The information does not exactly align with what I showed here but provides nice descriptions. 
 
-On the cluster in R, the classical `parallel::detectCores()` does not work. Other package variants that check the system for how many cores are available also do not work. These functions report the number of cores available to use on your execution host not the number you requested in your `bsub`. 
+On the cluster in R, the classic `parallel::detectCores()` does not work. Other package variants that check the system for how many cores are available also do not work. These functions report the number of cores available to use on your execution host not the number you requested in your `bsub`. 
 
 Instead, if you want to automatically detect cores based on the number you requested after you `bsub` use `Sys.getenv('LSB_DJOB_NUMPROC')`. This will return a character vector with the number of cores you are currently hosting.
 
 We will run example code that will utilize parallel computing with a `parallel::mclapply` statement on 8 cores. 
 
-First, `ssh` onto the cluster, request 8 cores using the `bsub` command below, load R, and open R. The code below is the `bsub` you should run after `ssh`'ing onto the cluster.
+First, `ssh` onto the cluster, request 8 cores with a `bsub`, load R, and open R. The code below is the `bsub` you should run after `ssh`'ing onto the cluster and loads R.
 
 ```{bash, eval = FALSE, echo = TRUE}
 bsub -Is -q cceb_interactive -n 8 -R  "span[hosts=1] rusage[mem=5000]" -M 5000 "bash"
@@ -119,7 +119,7 @@ knitr::include_graphics('img/advancedinteractive/cores.png')
 
 Notice that `parallel::detectCores()` incorrectly reports 40 cores. This is the number of cores available on this machine but since you only requested 8 with the `bsub` command you only have access to 8. `Sys.getenv('LSB_DJOB_NUMPROC')` does properly report access to 8 cores. A character vector is returned from this function call so it is often useful to `as.numeric(Sys.getenv('LSB_DJOB_NUMPROC'))`.
 
-Below I provide a function, `example`, that takes a random sample of the `iris` dataset provided by R then fits the the linear model described here $Petal.Width = \beta_0 + Petal.Length \beta_1 + Sepal.Width \beta_2 + Sepal.Length \beta_3$, and returns the fitted model.
+Below I provide a function, `example`, that takes a random sample of the `iris` dataset provided by R then fits `Petal.Width` against `Petal.Length`, `Sepal.Width`, and `Sepal.Length` using a linear model. The function returns the fitted model.
 
 ```{r, eval = FALSE}
 library(lme4)
@@ -153,8 +153,7 @@ Rationale behind some of this code:
 - It is good practice to save anything you need within each iteration in case the code fails somewhere. Then you don't need to re-run everything all over again. Delete it when you're done if you're tight on memory.
     - I like `saveRDS()` because it is really fast. 
     - I prefer .rds over .RData because you can rename an .rds object when you load it into R whereas .RData objects are loaded with their previous name. You have to remember what they were named locally in R.
-- Using the `message()` function let's you know how your code is progressing and gives insight into where bugs may be if the code errors.
-
+- Using the `message()` function let's you know how your code is progressing and gives insight as to where bugs may be if the code errors.
 
 To run this code on your own machine, you should set `wd` to the working directory where you would like to save your results. 
 
@@ -182,14 +181,14 @@ knitr::include_graphics('img/advancedinteractive/results.png')
 
 Notice, the results returned in the first element of the `results` list is not the same as the second. This indicates each iteration properly randomly sampled from the iris dataset. If each model in each element of the list was the same it would indicate you did not properly randomly sample across iterations in parallel and there is a bug in your code.
 
-Now exit out of R and your session.
+Now exit out of R and your interactive session.
 
 ```{r, eval = FALSE, echo = TRUE}
 q()
 exit
 ```
 
-This should keep you logged onto the cluster but put you back onto the submission host. Now, let's use a `bsub` command with insufficient memory for the job.
+This should keep you logged onto the cluster but put you back onto the submission host. Now, let's use a `bsub` command with an insufficient memory allocation for the job.
 
 ```{bash, eval = FALSE, echo = TRUE}
 bsub -Is -q cceb_interactive -n 8 -R  "span[hosts=1] rusage[mem=5000]" -M 30 "bash"
@@ -197,7 +196,7 @@ module load R/3.5.0
 R
 ```
 
-Here we request a session using `-M 30` rather than `-M 5000`. Recall that the `-M ####` option will kill the interactive session if your memory goes beyond that requested. We requested 10 megabytes, a very small amount of memory. If you re-run the `example` function in this session and then run the code using the `parallel::mclapply` statement. The code will freeze and your session will terminate since your job will use more than 30.
+Here we request a session using `-M 30` rather than `-M 5000`. Recall that the `-M ####` option will kill the interactive session if your memory goes beyond that requested. We requested 30 megabytes, a very small amount of memory. If you re-run the `example` function in this session and then run the code using the `parallel::mclapply` statement. The code will freeze and your session will terminate since your job will use more than 30 megabytes.
 
 ```{r, echo = FALSE}
 knitr::include_graphics('img/advancedinteractive/terminate.png')

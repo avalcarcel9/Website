@@ -14,14 +14,14 @@ output:
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>This is the seventh blog post in a series of articles about using the CCEB cluster. An overview of the series is available <a href="www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/">here</a>. This post focuses on advanced topics related to interactive sessions.</p>
-<p>Though this post centers around advanced content related to interactive sessions, you’ll still be requesting appropriate system parameters using the LSF <code>bsub</code> command. We focus here on more advanced options associated with the <code>bsub</code> to request more cores for parallelization, force memory constraints on your session, and request certain machines. Just like the working in interactive sessions before, once a session is open you can run your code on the loaded host interactively. This allows you to work dynamically on your code. Utilizing this resource on the cluster is best for when you’re writing code for the first time, debugging code, or running code that uses a small amount of memory and runs fast.</p>
+<p>Though this post centers around advanced content related to interactive sessions, you’ll still be requesting appropriate system parameters using the LSF <code>bsub</code> command. We focus here on more advanced options associated with the <code>bsub</code> to request more cores for parallelization, force memory constraints on your session, and request certain machines. Just like a basic interactive session, once a session is open you can run your code on the loaded host interactively. This allows you to work dynamically on your code. Utilizing this resource on the cluster is best for when you’re writing code for the first time, debugging code, or running code that uses a small amount of memory and runs fast.</p>
 </div>
 <div id="interactive-bsub-options" class="section level1">
 <h1>Interactive <code>bsub</code> Options</h1>
-<p>In this section, I will cover some of what I find to be the most useful <code>bsub</code> commands. For a more rigorous full list of <code>bsub</code> commands and their usage see the IBM documentation <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bsub.1.html">here</a>.</p>
-<p>Recall the most basic <code>bsub</code> command and options for opening an interactive session is as follows:</p>
+<p>In this section, I will cover some of what I find to be the most useful <code>bsub</code> options. For a more rigorous full list of <code>bsub</code> commands and their usage see the IBM documentation <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bsub.1.html">here</a>.</p>
+<p>Recall the most basic <code>bsub</code> for opening an interactive session is as follows:</p>
 <pre class="bash"><code>bsub -Is -q cceb_interactive &quot;bash&quot;</code></pre>
-<p>This command opens an interactive session and requested 1 core by default.</p>
+<p>This command opens an interactive session with 1 core by default.</p>
 <p>Some common additions include:</p>
 <ol style="list-style-type: decimal">
 <li><code>-n #</code> - to request multiple cores</li>
@@ -29,7 +29,7 @@ output:
 <pre class="bash"><code>bsub -Is -q cceb_interactive -n 8 &quot;bash&quot;</code></pre>
 <p>This command opens an interactive session and requested 8 cores by default.</p>
 <ol start="2" style="list-style-type: decimal">
-<li><code>-R "span[hosts=1]"</code> - to request that the number of cores you are requesting be on the same execution host.</li>
+<li><code>-R "span[hosts=1]"</code> - to request that the number of cores you obtain be on the same execution host.</li>
 </ol>
 <pre class="bash"><code>bsub -Is -q cceb_interactive -n 8 -R &quot;span[hosts=1]&quot; &quot;bash&quot;</code></pre>
 <p>This command opens an interactive session and requested 8 cores all on the same execution host. The option provided in 2 will also open a session on 8 cores but does not guarantee that all 8 cores are the on the same machine. For example, 4 cores could be on “silver01” and 4 on “silver02”.</p>
@@ -59,11 +59,11 @@ bsub -Is -q cceb_interactive -m &quot;silver01&quot; -n 8 -R &quot;rusage[mem=50
 </div>
 <div id="example" class="section level1">
 <h1>Example</h1>
-<p>The grid is a Unix based machine so the easiest way to parallelize is by using <code>parallel::mclapply()</code> in R. This is a nice overview of <a href="https://www.hpc.dtu.dk/?page_id=2723">HPC computing in R</a> it does not exactly align with what I showed here but provides nice descriptions.</p>
-<p>On the cluster in R, the classical <code>parallel::detectCores()</code> does not work. Other package variants that check the system for how many cores are available also do not work. These functions report the number of cores available to use on your execution host not the number you requested in your <code>bsub</code>.</p>
+<p>The grid is a Unix based machine so the easiest way to parallelize is by using <code>parallel::mclapply()</code> in R. This is a nice overview of <a href="https://www.hpc.dtu.dk/?page_id=2723">HPC computing in R</a>. The information does not exactly align with what I showed here but provides nice descriptions.</p>
+<p>On the cluster in R, the classic <code>parallel::detectCores()</code> does not work. Other package variants that check the system for how many cores are available also do not work. These functions report the number of cores available to use on your execution host not the number you requested in your <code>bsub</code>.</p>
 <p>Instead, if you want to automatically detect cores based on the number you requested after you <code>bsub</code> use <code>Sys.getenv('LSB_DJOB_NUMPROC')</code>. This will return a character vector with the number of cores you are currently hosting.</p>
 <p>We will run example code that will utilize parallel computing with a <code>parallel::mclapply</code> statement on 8 cores.</p>
-<p>First, <code>ssh</code> onto the cluster, request 8 cores using the <code>bsub</code> command below, load R, and open R. The code below is the <code>bsub</code> you should run after <code>ssh</code>’ing onto the cluster.</p>
+<p>First, <code>ssh</code> onto the cluster, request 8 cores with a <code>bsub</code>, load R, and open R. The code below is the <code>bsub</code> you should run after <code>ssh</code>’ing onto the cluster and loads R.</p>
 <pre class="bash"><code>bsub -Is -q cceb_interactive -n 8 -R  &quot;span[hosts=1] rusage[mem=5000]&quot; -M 5000 &quot;bash&quot;
 module load R/3.5.0
 R</code></pre>
@@ -74,7 +74,7 @@ Sys.getenv(&#39;LSB_DJOB_NUMPROC&#39;)</code></pre>
 <p>The screen shot below shows the output from running these two commands.</p>
 <p><img src="img/advancedinteractive/cores.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Notice that <code>parallel::detectCores()</code> incorrectly reports 40 cores. This is the number of cores available on this machine but since you only requested 8 with the <code>bsub</code> command you only have access to 8. <code>Sys.getenv('LSB_DJOB_NUMPROC')</code> does properly report access to 8 cores. A character vector is returned from this function call so it is often useful to <code>as.numeric(Sys.getenv('LSB_DJOB_NUMPROC'))</code>.</p>
-<p>Below I provide a function, <code>example</code>, that takes a random sample of the <code>iris</code> dataset provided by R then fits the the linear model described here <span class="math inline">\(Petal.Width = \beta_0 + Petal.Length \beta_1 + Sepal.Width \beta_2 + Sepal.Length \beta_3\)</span>, and returns the fitted model.</p>
+<p>Below I provide a function, <code>example</code>, that takes a random sample of the <code>iris</code> dataset provided by R then fits <code>Petal.Width</code> against <code>Petal.Length</code>, <code>Sepal.Width</code>, and <code>Sepal.Length</code> using a linear model. The function returns the fitted model.</p>
 <p>Rationale behind some of this code:</p>
 <ul>
 <li>It is good practice to save anything you need within each iteration in case the code fails somewhere. Then you don’t need to re-run everything all over again. Delete it when you’re done if you’re tight on memory.
@@ -82,7 +82,7 @@ Sys.getenv(&#39;LSB_DJOB_NUMPROC&#39;)</code></pre>
 <li>I like <code>saveRDS()</code> because it is really fast.</li>
 <li>I prefer .rds over .RData because you can rename an .rds object when you load it into R whereas .RData objects are loaded with their previous name. You have to remember what they were named locally in R.</li>
 </ul></li>
-<li>Using the <code>message()</code> function let’s you know how your code is progressing and gives insight into where bugs may be if the code errors.</li>
+<li>Using the <code>message()</code> function let’s you know how your code is progressing and gives insight as to where bugs may be if the code errors.</li>
 </ul>
 <p>To run this code on your own machine, you should set <code>wd</code> to the working directory where you would like to save your results.</p>
 <p>We can run this code in parallel over 100 iterations using <code>parallel::mclapply()</code>. Each iteration will take a unique random sample from the full iris dataset, fit the linear model, save the model, and also return the model locally. Please set the same seed if you would like results to exactly match what is presented here. Running this code should output the messages directed from running the <code>example</code> function for the 100 iterations.</p>
@@ -97,14 +97,14 @@ results[[2]]
 list.files(&#39;/project/taki3/amv/cluster/&#39;)</code></pre>
 <p><img src="img/advancedinteractive/results.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Notice, the results returned in the first element of the <code>results</code> list is not the same as the second. This indicates each iteration properly randomly sampled from the iris dataset. If each model in each element of the list was the same it would indicate you did not properly randomly sample across iterations in parallel and there is a bug in your code.</p>
-<p>Now exit out of R and your session.</p>
+<p>Now exit out of R and your interactive session.</p>
 <pre class="r"><code>q()
 exit</code></pre>
-<p>This should keep you logged onto the cluster but put you back onto the submission host. Now, let’s use a <code>bsub</code> command with insufficient memory for the job.</p>
+<p>This should keep you logged onto the cluster but put you back onto the submission host. Now, let’s use a <code>bsub</code> command with an insufficient memory allocation for the job.</p>
 <pre class="bash"><code>bsub -Is -q cceb_interactive -n 8 -R  &quot;span[hosts=1] rusage[mem=5000]&quot; -M 30 &quot;bash&quot;
 module load R/3.5.0
 R</code></pre>
-<p>Here we request a session using <code>-M 30</code> rather than <code>-M 5000</code>. Recall that the <code>-M ####</code> option will kill the interactive session if your memory goes beyond that requested. We requested 10 megabytes, a very small amount of memory. If you re-run the <code>example</code> function in this session and then run the code using the <code>parallel::mclapply</code> statement. The code will freeze and your session will terminate since your job will use more than 30.</p>
+<p>Here we request a session using <code>-M 30</code> rather than <code>-M 5000</code>. Recall that the <code>-M ####</code> option will kill the interactive session if your memory goes beyond that requested. We requested 30 megabytes, a very small amount of memory. If you re-run the <code>example</code> function in this session and then run the code using the <code>parallel::mclapply</code> statement. The code will freeze and your session will terminate since your job will use more than 30 megabytes.</p>
 <p><img src="img/advancedinteractive/terminate.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>This <code>-M ####</code> option is a really great way to quality control your job and ensure you do not accidentally use all the memory on a machine.</p>
 </div>
