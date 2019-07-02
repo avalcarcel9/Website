@@ -1,0 +1,210 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Advanced Topics for Interactive Sessions"
+author: "Alessandra Valcarcel"
+date: 2019-07-01T21:01:01-06:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(out.width = '80%',
+                      fig.align = 'center', 
+                      echo=FALSE, 
+                      warning=FALSE, 
+                      message=FALSE)
+```
+
+# Introduction
+
+This is the seventh blog post in a series of articles about using the CCEB cluster. An overview of the series is available [here](www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/). This post focuses on advanced topics related to interactive sessions. 
+
+Though this post centers around advanced content related to interactive sessions, you'll still be requesting appropriate system parameters using the LSF `bsub` command. We focus here on more advanced options associated with the `bsub` to request more cores for parallelization, force memory constraints on your session, and request certain machines. Just like the working in interactive sessions before, once a session is open you can run your code on the loaded host interactively. This allows you to work dynamically on your code. Utilizing this resource on the cluster is best for when you're writing code for the first time, debugging code, or running code that uses a small amount of memory and runs fast.
+
+# Interactive `bsub` Options
+
+In this section, I will cover some of what I find to be the most useful `bsub` commands. For a more rigorous full list of `bsub` commands and their usage see the IBM documentation [here](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bsub.1.html).
+
+Recall the most basic `bsub` command and options for opening an interactive session is as follows:
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive "bash"
+```
+
+This command opens an interactive session and requested 1 core by default.
+
+Some common additions include:
+
+1. `-n #` - to request multiple cores
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive -n 8 "bash"
+```
+
+This command opens an interactive session and requested 8 cores by default.
+
+2. `-R "span[hosts=1]"` - to request that the number of cores you are requesting be on the same execution host.
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive -n 8 -R "span[hosts=1]" "bash"
+```
+
+This command opens an interactive session and requested 8 cores all on the same execution host. The option provided in 2 will also open a session on 8 cores but does not guarantee that all 8 cores are the on the same machine. For example, 4 cores could be on "silver01" and 4 on "silver02".
+
+3. `-R "rusage[mem=####]"` - to request the amount of memory required for your job to run. You job will not run until this amount of memory is available and once running you will retain/reserve the memory. Note, #### memory is in megabytes.
+
+__Warning__: Only request the amount of memory you think your job requires or else other users will not have it available to them! Remember, sharing is caring! In a future blog post I'll share some tips on quality controlling and detecting the amount of memory your jobs are using to input an educated amount.
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive -n 8 -R "span[hosts=1] rusage[mem=5000]" "bash"
+bsub -Is -q cceb_interactive -n 8 -R "rusage[mem=5000]" "bash"
+```
+
+4. `-m "machinename"` - to request a specific __execution host__ by name.
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive -m "silver01" -n 8 -R  "span[hosts=1] rusage[mem=5000]" "bash"
+bsub -Is -q cceb_interactive -m "silver01" -n 8 -R "rusage[mem=5000]" "bash"
+```
+
+- This option is only useful when you are quality controlling your job or testing cluster performance because you think another user is over-loading.
+- This can conflict with the normal queue, or __master host__, and mess up allocation of jobs so only do this if the machine is empty and you are quality controlling code.
+
+5. `-M ####` - kills the job if it exceeds the #### memory amount you allotted.
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive -m "silver01" -n 8 -R  "span[hosts=1] rusage[mem=5000]" -M 10000 "bash"
+bsub -Is -q cceb_interactive -m "silver01" -n 8 -R "rusage[mem=5000]" -M 10000 "bash"
+```
+
+You don't necessarily need to use these all together. I commonly use the last set of code and fill in the options. Order doesn't always matter but with a few (like -m "machinename") it does. If the `bsub` errors first try re-arranging the arguments more logically or looking up the order of options in the manual.
+
+The `rusage[mem=####]` and `-M #####` are good cluster etiquette so that your job doesn't take all the memory on a host and crash or slow the entire host. You should try to always use either `-M ####` or "rusage[mem=####]" so that you don't accidentally run out of memory and crash the system.
+
+Again, interactive sessions should be avoided unless writing or quality controlling your code. Full jobs should always be sent through the normal queue. 
+
+# Example
+
+The grid is a Unix based machine so the easiest way to parallelize is by using `parallel::mclapply()` in R. This is a nice overview of [HPC computing in R](https://www.hpc.dtu.dk/?page_id=2723) it does not exactly align with what I showed here but provides nice descriptions. 
+
+On the cluster in R, the classical `parallel::detectCores()` does not work. Other package variants that check the system for how many cores are available also do not work. These functions report the number of cores available to use on your execution host not the number you requested in your `bsub`. 
+
+Instead, if you want to automatically detect cores based on the number you requested after you `bsub` use `Sys.getenv('LSB_DJOB_NUMPROC')`. This will return a character vector with the number of cores you are currently hosting.
+
+We will run example code that will utilize parallel computing with a `parallel::mclapply` statement on 8 cores. 
+
+First, `ssh` onto the cluster, request 8 cores using the `bsub` command below, load R, and open R. The code below is the `bsub` you should run after `ssh`'ing onto the cluster.
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive -n 8 -R  "span[hosts=1] rusage[mem=5000]" -M 5000 "bash"
+module load R/3.5.0
+R
+```
+
+We can compare the output returned from running `parallel::detectCores()` and `Sys.getenv('LSB_DJOB_NUMPROC')` using the code below.
+
+```{r, eval = FALSE, echo = TRUE}
+library(parallel)
+parallel::detectCores()
+Sys.getenv('LSB_DJOB_NUMPROC')
+```
+
+The screen shot below shows the output from running these two commands.
+
+```{r, echo = FALSE}
+knitr::include_graphics('img/advancedinteractive/cores.png')
+```
+
+Notice that `parallel::detectCores()` incorrectly reports 40 cores. This is the number of cores available on this machine but since you only requested 8 with the `bsub` command you only have access to 8. `Sys.getenv('LSB_DJOB_NUMPROC')` does properly report access to 8 cores. A character vector is returned from this function call so it is often useful to `as.numeric(Sys.getenv('LSB_DJOB_NUMPROC'))`.
+
+Below I provide a function, `example`, that takes a random sample of the `iris` dataset provided by R then fits the the linear model described here $Petal.Width = \beta_0 + Petal.Length \beta_1 + Sepal.Width \beta_2 + Sepal.Length \beta_3$, and returns the fitted model.
+
+```{r, eval = FALSE}
+library(lme4)
+library(parallel)
+library(dplyr)
+
+# Example function
+example <- function(i, wd = '/project/taki3/amv/cluster/') {
+  message('Number of cores detected ', Sys.getenv('LSB_DJOB_NUMPROC'))
+  message(paste0('Sampling data for iter ', i))
+  # Randomly sample without replacement iris data
+  iris_sample = dplyr::sample_n(tbl = iris, size = 75, replace = FALSE)
+  message(paste0('Calculating model for iter ', i))
+  # Fit linear mixed effects model
+  model = lm(Petal.Width ~ Petal.Length + Sepal.Width + Sepal.Length, data = iris_sample)
+  # If the directory doesn't exist for job create it
+  if(dir.exists(paste0(wd, 'linear_models')) == FALSE){
+    dir.create(paste0(wd, 'linear_models'))
+  }
+  message(paste0('Ssaving model for iter ', i))
+  # Save each iteration of results
+  saveRDS(object = model, file = paste0(wd, "linear_models/model_int_session_", i, ".rds"))
+  message(paste0('Completed iter ', i))
+  # Return the fitted model
+  return(model)
+}
+```
+
+Rationale behind some of this code:
+
+- It is good practice to save anything you need within each iteration in case the code fails somewhere. Then you don't need to re-run everything all over again. Delete it when you're done if you're tight on memory.
+    - I like `saveRDS()` because it is really fast. 
+    - I prefer .rds over .RData because you can rename an .rds object when you load it into R whereas .RData objects are loaded with their previous name. You have to remember what they were named locally in R.
+- Using the `message()` function let's you know how your code is progressing and gives insight into where bugs may be if the code errors.
+
+
+To run this code on your own machine, you should set `wd` to the working directory where you would like to save your results. 
+
+We can run this code in parallel over 100 iterations using `parallel::mclapply()`. Each iteration will take a unique random sample from the full iris dataset, fit the linear model, save the model, and also return the model locally. Please set the same seed if you would like results to exactly match what is presented here. Running this code should output the messages directed from running the `example` function for the 100 iterations. 
+
+```{r, eval = FALSE, echo = TRUE}
+set.seed(23)
+# Run the example function using 100 iterations on 8 cores
+# as.numeric the system report of 8 cores
+results = parallel::mclapply(1:100, example, wd = '/project/taki3/amv/cluster/', mc.cores = as.numeric(Sys.getenv('LSB_DJOB_NUMPROC')))
+```
+
+You MUST ALWAYS specify `mc.cores`! Do not use the default `NULL` on the cluster.
+
+```{r, eval = FALSE, echo = TRUE}
+length(results)
+results[[1]]
+results[[2]]
+list.files('/project/taki3/amv/cluster/')
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics('img/advancedinteractive/results.png')
+```
+
+Notice, the results returned in the first element of the `results` list is not the same as the second. This indicates each iteration properly randomly sampled from the iris dataset. If each model in each element of the list was the same it would indicate you did not properly randomly sample across iterations in parallel and there is a bug in your code.
+
+Now exit out of R and your session.
+
+```{r, eval = FALSE, echo = TRUE}
+q()
+exit
+```
+
+This should keep you logged onto the cluster but put you back onto the submission host. Now, let's use a `bsub` command with insufficient memory for the job.
+
+```{bash, eval = FALSE, echo = TRUE}
+bsub -Is -q cceb_interactive -n 8 -R  "span[hosts=1] rusage[mem=5000]" -M 30 "bash"
+module load R/3.5.0
+R
+```
+
+Here we request a session using `-M 30` rather than `-M 5000`. Recall that the `-M ####` option will kill the interactive session if your memory goes beyond that requested. We requested 10 megabytes, a very small amount of memory. If you re-run the `example` function in this session and then run the code using the `parallel::mclapply` statement. The code will freeze and your session will terminate since your job will use more than 30.
+
+```{r, echo = FALSE}
+knitr::include_graphics('img/advancedinteractive/terminate.png')
+```
+
+This `-M ####` option is a really great way to quality control your job and ensure you do not accidentally use all the memory on a machine. 
+
+# Summary
+
+There are a number of options available when opening an interactive session. Depending on what you want and need for your job you may only specify a small subset or you may need more sophisticated options available for quality control. Interactive sessions are best when writing code, de-bugging and quality control, and running short fast sets of code. For longer more intensive jobs a normal session will be more appropriate.

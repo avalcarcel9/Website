@@ -6,10 +6,20 @@
     <description>Recent content on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 12 Jun 2019 21:01:01 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jul 2019 21:01:01 -0600</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using the CCEB High Performance Computing Cluster: Advanced Topics for Interactive Sessions</title>
+      <link>/blog/2019-07-01-interactivesession2/</link>
+      <pubDate>Mon, 01 Jul 2019 21:01:01 -0600</pubDate>
+      
+      <guid>/blog/2019-07-01-interactivesession2/</guid>
+      <description>Introduction This is the seventh blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on advanced topics related to interactive sessions.
+Though this post centers around advanced content related to interactive sessions, you’ll still be requesting appropriate system parameters using the LSF bsub command. We focus here on more advanced options associated with the bsub to request more cores for parallelization, force memory constraints on your session, and request certain machines.</description>
+    </item>
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Interactive Session Basics</title>
