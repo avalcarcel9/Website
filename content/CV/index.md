@@ -21,29 +21,36 @@ showpagemeta = false
 
 __Education:__  
 
-Ph.D. Biostatistics _(anticipated 2020)_  
+Ph.D., Biostatistics  
 University of Pennsylvania  
+Advisors: Drs. Russell [Taki] Shinohara and Kristin Linn  
+Thesis Title: Comprehensive Multiple Sclerosis Lesion Analysis Methods for Magnetic Resonance Imaging  
+_(anticipated 2020)_  
 
-M.S. Biostatistics _(2017)_  
+M.S., Biostatistics  
 University of Pennsylvania  
+Advisor: Dr. Russell [Taki] Shinohara  
+Thesis Title: MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions  
+_(2017)_   
 
+B.A., Biology and Statistics (Honors)  
+University of Connecticut  
+Advisor: Dr. Ofer Harel  
+Thesis Title: Estimating causal effects in incomplete observational studies using multiple imputation and propensity score analysis: A simulation study  
+_(2015)_  
 
-B.A. Biology and Statistics (Honors) _(2015)_  
-University of Connecticut
 
 ***
 
 __Select Publications:__
 
-2018 - Neuroimage: Clinical. "A dual modeling approach to automatic segmentation of cerebral T2 hyperintensities and T1 black holes in multiple sclerosis."
+__Valcarcel, A.M.__, Linn, K.A., Khalid, F., Vandekar, S.N., Tauhid, S., Satterthwaite, T.D., Muschelli, J., Bakshi, R., Shinohara, R.T.: MIMoSA: An Approach to Automatically Segment T2 Hyperintense and T1 Hypointense Lesions in Multiple Sclerosis. In: Crimi, A., Bakas, S., Kuijf, H., Keyvan, F., Reyes, M., and van Walsum, T. (eds.) Brainlesion: Glioma, Multiple Sclerosis, Stroke and Traumatic Brain Injuries. pp. 47–56. Springer International Publishing (2019).
 
-2018 - Journal of Neuroimaging. "MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions."
+__Valcarcel, A.M.__, Linn, K.A., Khalid, F., Vandekar, S.N., Tauhid, S., Satterthwaite, T.D., Muschelli, J., Martin, M.L., Bakshi, R., Shinohara, R.T.: A dual modeling approach to automatic segmentation of cerebral T2 hyperintensities and T1 black holes in multiple sclerosis. NeuroImage: Clinical. 20, 1211–1221 (2018).
 
-2017 - Frontiers in Genetics. "Illustrating, Quantifying and Correcting for Bias in Post-hoc Analysis of Gene-Based Rare Variant Tests of Association."
+__Valcarcel, A.M.__, Linn, K.A., Vandekar, S.N., Satterthwaite, T.D., Muschelli, J., Calabresi, P.A., Pham, D.L., Martin, M.L., Shinohara, R.T.: MIMoSA: An Automated Method for Intermodal Segmentation Analysis of Multiple Sclerosis Brain Lesions. Journal of Neuroimaging. 28, 389–398 (2018).
 
-2016 - BioMed Central. "A multistep approach to single nucleotide polymorphism–set analysis: an evaluation of power and type I error of gene-based tests of association after pathway-based association tests."
-
-2016 - BioMed Central. "A general method for combining different family-based rare-variant tests of association to improve power and robustness of a wide range of genetic architectures."
+__Valcarcel, A.__, Grinde, K., Cook, K., Green, A., Tintle, N.: A multistep approach to single nucleotide polymorphism–set analysis: an evaluation of power and type I error of gene-based tests of association after pathway-based association tests. BMC Proc. 10, 349–355 (2016).
 
 For a complete listing of my publications please check out my [Google Scholar Page](https://scholar.google.com/citations?user=u22eIVEAAAAJ&hl=en).
 
@@ -57,16 +64,16 @@ University of Pennsylvania
 Teaching Assistant _(2016 - 2018)_  
 University of Pennsylvania
 
-Educational Fellowship Recipient _(2015 - 2017)_  
-University of Pennsylvania
+Research Assistant _(2014-2015)_
+Dordt College Research Internship in Statistical Genetics
 
 ***
 
 __Programming:__
 
-Expert: R  
-Some experience: SAS, bash scripting, Python, MATLAB, Stata, HTML  
-Other tools: GitHub, LaTeX, Office Suite, RMarkdown  
+Expertise: R
+Working Knowledge: SAS, bash scripting, MATLAB, Stata, HTML, css
+Applications: LaTeX, Microsoft Office, knitr, RMarkdown, StatWeave, GitHub
 
 ***
 
@@ -102,7 +109,7 @@ Other tools: GitHub, LaTeX, Office Suite, RMarkdown
          <br>
          <br>
          <br>
-        <a href="CV -- 2019.pdf" download=""><button>Download CV</button></a>
+        <a href="CV -- July 2019.pdf" download=""><button>Download CV</button></a>
          <br>
          <br>
          <br>
