@@ -9,9 +9,6 @@ output:
     number_sections: false
 ---
 
-module load R/3.2.2
-
-
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(out.width = '80%',
                       fig.align = 'center', 
