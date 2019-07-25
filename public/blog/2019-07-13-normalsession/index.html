@@ -75,37 +75,36 @@
 <h1>Introduction</h1>
 <p>This is the eighth blog post in a series of articles about using the CCEB cluster. An overview of the series is available <a href="www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/">here</a>. This post focuses on normal sessions and submitting batch jobs.</p>
 <p>Initializing a normal session and submitting a batch job is an advanced topic but you’ll still be requesting appropriate system parameters using the LSF <code>bsub</code> command. We will again focus on the <code>bsub</code> for a normal session and common advanced options associated with the <code>bsub</code> to request more cores for parallelization, force memory constraints on your session, and request certain machines. We will also set up the source Rscript to allow for efficient batch job submission.</p>
-<p>A note on vocabulary. A batch job is used to refer to the DEFINE BATCH JOB USING WIKIPEDIA HERE. The way in which a batch job is run or submit is through a normal session on the cluster.</p>
-<p>Unlike the interactive session, normal sessions are requested and submit through your <code>bsub</code> command. Once the jobs is submit, it will either run or error. These processes are not interactive or dynamic. After the submission, you have to wait for the job to finish as a success or with an exit code (error). In the next blog post, we will cover ways to check in on a submit batch job through the normal session.</p>
-<p>A normal session is no different than literally waiting in a queue. You submit your job to run. The <strong>master host</strong> assesses your job request based on the availability of machines, memory, cores, etc and your requested specifications. The job is then sent to run, pend, or killed. The benefit of this approach is that the cluster can self-manage the resources and jobs submit. It is possible that some of your jobs will be run while others pend.</p>
-<p>Complex code, code that takes a long time to run, or requires a lot of memory should always be submit to the normal queue. The system maintainers prefer that we submit jobs as often as possible as normal rather than interactive to allow the master host to self regulate efficiently. It is slightly more cumbersome to de-bug though so spend time checking your code thoroughly before hand in an interactive session.</p>
+<p>A note on vocabulary. A batch job is used to refer to the <a href="https://www.ibm.com/support/knowledgecenter/zosbasics/com.ibm.zos.zconcepts/zconc_whatisbatch.htm">jobs that can run without end user interaction, or can be scheduled to run as resources permit</a>. Batch processing is for those frequently used programs that can be executed with minimal human interaction. The way in which a batch job is run or submit is through a normal session on the cluster.</p>
+<p><strong>Note</strong>: The vocabulary of batch jobs can become quite confusing as the name itself is an oxymoron. In this blog post I will use the word job to refer to the entire batch job submit. The iterations that are run within the batch job are referred to as tasks. Also normal and batch are used interchangeably here.</p>
+<p>Unlike the interactive session, normal sessions are requested and submit through your <code>bsub</code> command. Once the job is submit, tasks will either run or error. These processes are not interactive or dynamic. After the submission, you have to wait for the individual tasks in the batch to finish as a success or with an exit code (error). In the next blog post, I will cover ways to check in on a submit batch job through the normal session.</p>
+<p>A normal session is no different than physically waiting in a queue. You submit your job to run. The <strong>master host</strong> assesses your job request based on the availability of machines, memory, cores, etc and your requested specifications. The job and eventual tasks are then sent to run, pend, or killed. The benefit of this approach is that the cluster can self-manage the resources and jobs submit. It is possible that some of your tasks will run while others pend.</p>
+<p>Complex code, code that takes a long time to run, or requires a lot of memory should always be submit to the normal queue. The system maintainers prefer that we submit jobs as often as possible as normal rather than interactive to allow the master host to self regulate efficiently. As a user it is more cumbersome to de-bug a batch job so spend time checking your code thoroughly before hand in an interactive session.</p>
 </div>
 <div id="normal-session-setup" class="section level1">
 <h1>Normal Session Setup</h1>
 <p>Like anything on the cluster you need to <code>ssh</code> onto the submission host. From the submission host you can use the <code>bsub</code> command to submit a normal session or batch job.</p>
-<p>A normal session, is more slightly more annoying to setup than an interactive session. You first will need to put your code on the cluster. Recall I use <a href="https://fetchsoftworks.com/">fetch</a> a file transfer client free for students and academics, to do this. Then you’ll need to submit the <code>bsub</code> command.</p>
+<p>A normal session, is more annoying to setup than an interactive session. You first will need to put your code on the cluster. Recall, I use <a href="https://fetchsoftworks.com/">fetch</a> a file transfer client free for students and academics, to do this. Then you’ll need to submit the <code>bsub</code> command.</p>
 <p>With a normal session and batch jobs it is common to put a number of the unchanged portions of the <code>bsub</code> into a shell script. A shell script, or .sh file, is a place to store commonly used <code>bsub</code> options so you don’t have to run them every time within the interactive <code>bsub</code> command. This may be confusing now but we will go though an example.</p>
 </div>
 <div id="normal-bsub-options" class="section level1">
 <h1>Normal <code>bsub</code> Options</h1>
 <p>Many of the normal submission options are the same as an interactive session but we’ll cover them in the context of a normal job here.</p>
 <p>The most basic <code>bsub</code> to submit a normal job is as follows:</p>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R</code></pre>
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
 <ul>
 <li>The normal session is requested since we use <code>-q cceb_normal</code> rather than <code>-q cceb_interactive</code>.</li>
-<li>This submits a job with the name <code>jobname</code> to run the <code>Rscript</code> found in <code>/project/taki3/amv/cluster/code/normal_example.R</code>. You can specify whatever you’d like for this. For example, <code>sims</code>, <code>tapas</code>, <code>alisjob</code>.</li>
-<li><code>1-n</code> jobs or iterations are to be run.</li>
-<li>Since a normal session is not interactive, the job has to report some details about what happened. Details regarding the job and messages from printed from code are returned in the <code>output.txt</code> and since the full path is specified this file is saved in <code>/project/taki3/amv/cluster/code</code>.</li>
-<li>This does not specify how many jobs to run simultaneously so the cluster will allocate the number running based on how free machines are.
-<ul>
-<li>In a normal/batch session, we are limited by PMACS to a total of 50 cores running simultaneously so keep that in mind when submitting jobs. The host won’t give you more than that even if you specify more.</li>
-</ul></li>
+<li>This submits a job with the name <code>jobname</code> but you can specify whatever you’d like for this. For example, <code>sims</code>, <code>tapas</code>, <code>alisjob</code>.</li>
+<li><code>1-n</code> tasks or iterations are to be run.</li>
+<li>Since a normal session is not interactive, the job has to report some details about what happened. Details regarding the job and messages from code printed are returned in the <code>output.txt</code> and since the full path is specified this file is saved in <code>/project/taki3/amv/cluster/normal_session_examples</code>.</li>
+<li>The code run in the <code>Rscript</code> found in <code>/project/taki3/amv/cluster/normal_session_examples/normal_example.R</code>.</li>
 </ul>
+<p>This <code>busb</code> does not specify how many jobs to run simultaneously so the cluster will allocate the number running based on how free machines are. In a normal/batch session, we are limited by PMACS to a total of 50 cores running simultaneously so keep that in mind when submitting jobs. The host won’t give you more than that even if you specify more.</p>
 <p>Some common additions include:</p>
 <ol style="list-style-type: decimal">
 <li><code>-n #</code> - to request multiple cores for each job</li>
 </ol>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R</code></pre>
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
 <ul>
 <li>If you have another layer of parallelization inside your R script you need to specify the requested cores here and the <code>mc.cores</code> inside the R function.</li>
 <li>Again, <code>-n #</code> cannot exceed 50 by PMACs usage restrictions. If you’re on another cluster or queue this may be possible. For example, when I use the <code>taki</code> queue I have access to all the cores in his cluster queue.</li>
@@ -113,35 +112,36 @@
 <ol start="2" style="list-style-type: decimal">
 <li><code>-R "span[hosts=1]"</code> - to request that the total number of cores you are requesting in a single iteration of the job be all on the same host. This is only true for a single job in the batch not across all batches. For example, job 1 may span <code>silver01</code> while job 2 may span <code>silver02</code>.</li>
 </ol>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -R &quot;span[hosts=1]&quot; -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R</code></pre>
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -R &quot;span[hosts=1]&quot; -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li><code>-R "rusage[mem=####]"</code> - to request the amount of memory required for your a single iteration in your job to run. An iteration of the job will not run until this amount of memory is available and once running you will retain/reserve the memory. Note, the memory is in megabytes.</li>
+<li><code>-R "rusage[mem=####]"</code> - This option will not run your task until the amount of memory input is free. Note, the memory is in megabytes.</li>
 </ol>
 <ul>
 <li>Only request the amount of memory you think your job requires or else other users will not have it available to them! I will show in the next blog post how to quality control and detect the amount of memory your jobs are using to input an educated amount.</li>
 </ul>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -R &quot;span[hosts=1] rusage[mem=5000]&quot; -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -R &quot;span[hosts=1] rusage[mem=5000]&quot; -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R
 
-bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -R &quot;rusage[mem=5000]&quot; -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R</code></pre>
+bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -R &quot;rusage[mem=5000]&quot; -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li><code>-m "machinename"</code> - to request a specific host by name.</li>
 </ol>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -m &quot;silver02&quot; -R &quot;span[hosts=1] rusage[mem=5000]&quot; -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -m &quot;silver02&quot; -R &quot;span[hosts=1] rusage[mem=5000]&quot; -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R
 
-bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -m &quot;silver02&quot; -R &quot;rusage[mem=5000]&quot; -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R</code></pre>
-<p>It is not advisable to request specific machines on the CCEB cluster. This over-rides the master hosts allocation and result in core and memory issues. Additionally, cluster maintenance is scheduled it could error and kill all of your jobs.</p>
+bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -m &quot;silver02&quot; -R &quot;rusage[mem=5000]&quot; -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
+<p>It is not advisable to request specific machines on the CCEB cluster. This over-rides the master hosts allocation and result in core and memory issues. Additionally, if cluster maintenance is scheduled on a machine it could kill all of your jobs and sub-tasks.</p>
 <ol start="5" style="list-style-type: decimal">
 <li><code>-M ####</code> - to kill the job if it exceeds the #### memory amount.</li>
 </ol>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -m &quot;silver02&quot; -R &quot;span[hosts=1] rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -m &quot;silver02&quot; -R &quot;span[hosts=1] rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R
 
-bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -m &quot;silver02&quot; -R &quot;rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R</code></pre>
+bsub -q cceb_normal -J &quot;jobname[1-n]&quot; -m &quot;silver02&quot; -R &quot;rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
+<p>Again, memory is in megabytes.</p>
 <ol start="6" style="list-style-type: decimal">
-<li><code>"jobname[1-n]%N"</code> -this command names the job, sets the total <code>n</code> number of iterations to run, and also sets the number of iterations <code>%N</code> that are possible to run simultaneously.</li>
+<li><code>"jobname[1-n]%N"</code> - this command names the job, sets the total <code>n</code> number of iterations or tasks to run, and also sets the number of iterations or tasks<code>%N</code> that are possible to run simultaneously.</li>
 </ol>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]%5&quot; -m &quot;silver02&quot; -R &quot;span[hosts=1] rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-n]%5&quot; -m &quot;silver02&quot; -R &quot;span[hosts=1] rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R
 
-bsub -q cceb_normal -J &quot;jobname[1-n]%5&quot; -m &quot;silver02&quot; -R &quot;rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R</code></pre>
+bsub -q cceb_normal -J &quot;jobname[1-n]%5&quot; -m &quot;silver02&quot; -R &quot;rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
 <ul>
 <li>The 50 core limit still applies here so <code>-n #</code> * <code>%N</code> cannot exceed 50.</li>
 <li>This will specify that N jobs run simultaneously and each job requires <code>-n #</code> cores. Do your math to be sure you don’t use more than 50.</li>
@@ -150,7 +150,7 @@ bsub -q cceb_normal -J &quot;jobname[1-n]%5&quot; -m &quot;silver02&quot; -R &qu
 <div id="work-flow" class="section level1">
 <h1>Work Flow</h1>
 <ol style="list-style-type: decimal">
-<li>Create and de-bug the R code you will run as a batch job. It is easiest to create this code in an interactive session to be sure there are no bugs and it will not error out. A good programmer will write the code as a function and execute the function in the R script. If one iteration of the R script runs in an interactive session the most likely you’re ready for the normal batch job.</li>
+<li>Create and de-bug the R code you will run as a batch job. It is easiest to create this code in an interactive session to be sure there are no bugs and it will not error out. A good programmer will write the code as a function and execute the function in the R script. If one iteration of the R script runs in an interactive session then most likely you’re ready for the normal batch job.</li>
 <li>Use a file transfer client (i.e. Fetch) to put the R code on the cluster.</li>
 <li><code>ssh</code> onto the cluster.</li>
 <li>Use a <code>bsub</code> to submit the batch job and initiate a normal session.</li>
@@ -160,71 +160,42 @@ bsub -q cceb_normal -J &quot;jobname[1-n]%5&quot; -m &quot;silver02&quot; -R &qu
 </ol>
 <div id="bjob-example" class="section level2">
 <h2><code>bjob</code> Example</h2>
-<p>PUT AN EXAMPLE OF RUNNING bjobs where to run it, what it returns, and a screen shot.</p>
+<p>TODO: PUT AN EXAMPLE OF RUNNING bjobs where to run it, what it returns, and a screen shot.</p>
 </div>
 </div>
 <div id="examples" class="section level1">
 <h1>Examples</h1>
-<p>Below I provide 3 unique examples of running code using a normal session. These are the most common job types you will run when using a normal session. Each example is executing the same code but utilizing the cluster in different ways. Therefore, the code is not exactly the same but the results should all be the same assuming the same seed is specified across the methods. I’ve adapted the example code provided in the <a href="INSERT%20SITE%20HERE">Advanced Topics for Interactive Sessions</a> blog post.</p>
+<p>Below I provide 3 unique examples of running code using a normal session. These are the most common job types you will run when using a normal session. Each example is executing the same code but utilizing the cluster in different ways. Therefore, the code is not exactly the same but the results should all be the same assuming the same seed is specified across the methods. I’ve adapted the example code provided in the <a href="https://www.alessandravalcarcel.com/blog/2019-07-01-interactivesession2">Advanced Topics for Interactive Sessions</a> blog post.</p>
+<p>You can download the code and sample output files used below here.</p>
+<center>
+<a href="normal_session_examples.zip" download=""><button>Download Code and Output</button></a>
+</center>
 <div id="example-1-classic-batch-job" class="section level2">
 <h2>Example 1: Classic Batch Job</h2>
-<p>This example runs the code provided below as 100 separate jobs in a normal session. After ssh’ing onto takim/scisub run the following:</p>
+<p>This example runs the code provided below as 100 separate jobs in a normal session. After <code>ssh</code>’ing onto scisub run the following:</p>
 <div id="r-code" class="section level3">
 <h3>R Code</h3>
-<p>Copy and paste the code below into an R script. Change the paths in the code to match those related to your machine. Save the script with the title <code>normal_example1.R</code>. Use a transfer client and put this file on the cluster. Note, you should specify the file paths to where you put the script and would like to save output on the cluster.</p>
-<pre class="r"><code>library(lme4)
-library(parallel)
-
-normal_example1 &lt;- function(i, wd = &#39;/project/taki3/amv/cluster/&#39;) {
-  message(&#39;Number of cores detected &#39;, Sys.getenv(&#39;LSB_DJOB_NUMPROC&#39;))
-  message(paste0(&#39;Sampling data for iter &#39;, i))
-  # Randomly sample without replacement iris data
-  iris_sample = dplyr::sample_n(tbl = iris, size = 75, replace = FALSE)
-  message(paste0(&#39;Calculating model for iter &#39;, i))
-  # Fit linear mixed effects model
-  model = lm(Petal.Width ~ Petal.Length + Sepal.Width + Sepal.Length, data = iris_sample)
-  # If the directory doesn&#39;t exist for job create it
-  if(dir.exists(paste0(wd, &#39;linear_models&#39;)) == FALSE){
-    dir.create(paste0(wd, &#39;linear_models&#39;))
-  }
-  message(paste0(&#39;Ssaving model for iter &#39;, i))
-  # Save each iteration of results
-  saveRDS(object = model, file = paste0(wd, &quot;linear_models/model_norm1_session_&quot;, i, &quot;.rds&quot;))
-  message(paste0(&#39;Completed iter &#39;, i))
-  # Return the fitted model
-  return(model)
-}
-
-# Set a master seed
-set.seed(23)
-# Create a vector of seeds for the normal batch job
-i = as.numeric(Sys.getenv(&quot;LSB_JOBINDEX&quot;))
-# If i = 0 set it to 1
-# Useful for when you&#39;re de-bugging code in an interactive session
+<p>This code is given through the zipped file above in ‘normal_session_examples/normal_example1/normal_example1.R’. Change the paths in the code to match those related to your machine. Use a transfer client and put this file on the cluster. Note, you should specify the file paths to where you put the script and would like to save output on the cluster.</p>
+<p>For simplicity, I’ve provided the code below to explain some special characterstics of the code related to a batch job.</p>
+<pre class="r"><code>TODO normal_example1 code here after debug</code></pre>
+<p>Notes on the code above related to a batch job:</p>
+<p>The <code>i = as.numeric(Sys.getenv("LSB_JOBINDEX"))</code> line assigns an object <code>i</code> to the task index running. For example, say task 17 is running then within the task <code>i = 17</code>. This helps index and set unique seeds in every task or iteration.</p>
+<p>The code below is useful if you are debugging in an interactive session.</p>
+<pre class="r"><code># Useful for when you&#39;re de-bugging code in an interactive session
 if(i == 0){
   i = 1
-}
-#Create a vector of seeds for array job
-iter = 100
-seed_vec = sample(1:100000, iter, replace=F)
-set.seed(seed_vec[i])
-
-# Run the example function using 1000 iterations on 8 cores
-normal_example1(i = i, wd = &#39;/project/taki3/amv/cluster/&#39;)</code></pre>
-<p>EXPLAIN THIS IS LIKE RUNNING A FOR LOOP BUT IT ISN"T
-NOTE THE SPECIAL THINGS ABOUT THIS CODE:
-- <code>i = as.numeric(Sys.getenv("LSB_JOBINDEX"))</code>
-- <code># If i = 0 set it to 1 # Useful for when you're de-bugging code in an interactive session if(i == 0){i = 1}</code>
-- <code>iter = 100</code>
-- <code>seed_vec = sample(1:100000, iter, replace=F)</code>
-- <code>set.seed(seed_vec[i])</code></p>
+}</code></pre>
+<p>In an interactive session <code>i = as.numeric(Sys.getenv("LSB_JOBINDEX"))</code> will return <code>i = 0</code> or <code>i = NA</code>. This is not ideal as you’re debugging and running things all together. This step simply says if <code>i = 0</code> then re-assign it to <code>1</code> so that the code does not error and runs.</p>
+<p>The <code>iter = 100</code> must match the number of tasks assigned in the <code>bsub</code>. I set <code>iter = 100</code> so that I can sample 100 unique random seeds to assign each iteration or task. This ensures the sample we obtain in the function is reproducible and not the same across iterations.</p>
+<p>The <code>seed_vec = sample(1:100000, iter, replace=F)</code> takes 100 random samples of numbers from 1 to 1000000 without replacement. Since the original seed was set to 23 these 100 numbers will be the same every time you submit the job.</p>
+<p>Finally set the seed based on the task being run using <code>set.seed(seed_vec[i])</code>.</p>
 <p>To be sure that this function is ready to submit as a batch job and there are no bugs run a single iteration of the <code>normal_example1</code> function. You can just run everything after the comment <code># Set a master seed</code> in an interactive session.</p>
 </div>
 <div id="bsub" class="section level3">
 <h3><code>bsub</code></h3>
 <p>After you have your R code ready to execute and saved on the cluster <code>ssh</code> onto the submission host and run the following <code>bsub</code> command.</p>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;norm1[1-100]%20&quot; -R &quot;rusage[mem=500]&quot; -M 1000 -o /project/taki3/amv/cluster/code/normal_example1_output.txt Rscript /project/taki3/amv/cluster/code/normal_example1.R</code></pre>
-<p>This command is going to run the <code>normal_example1.R</code> code as a batch job. 100 iterations or jobs were submit to the queue with the name <code>norm</code>. I have forced this example to run only 20 jobs (<code>%20</code>) simultaneously or in parallel simply for example purposes. An iteration will not be submit to run until 500 megabytes are free and will error out if a single job exceeds 1000 megabytes. The output from both the LSF normal session jobs and anything output from R to <code>/project/taki3/amv/cluster/code/normal_example1_output.txt</code>.</p>
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;norm1[1-100]%20&quot; -R &quot;rusage[mem=500]&quot; -M 1000 -o /project/taki3/amv/cluster/normal_session_examples/normal_example1_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example1.R</code></pre>
+<p>This command is going to run the <code>normal_example1.R</code> code as a batch job. 100 iterations or jobs were submit to the queue with the name <code>norm</code>. I have forced this example to run only 20 jobs (<code>%20</code>) simultaneously or in parallel simply for example purposes. An iteration will not be submit to run until 500 megabytes are free and will error out if a single job exceeds 1000 megabytes. The output from both the LSF normal session jobs and anything output from R to <code>/project/taki3/amv/cluster/normal_session_examples/normal_example1_output.txt</code>.</p>
 </div>
 </div>
 <div id="example-2-a-single-parallel-batch-job" class="section level2">
@@ -251,7 +222,7 @@ NOTE THE SPECIAL THINGS ABOUT THIS CODE:
 <div id="example-1" class="section level4">
 <h4>Example 1</h4>
 <p>This example runs the code provided in “normal_example.R” as 100 separate jobs. After ssh’ing onto takim/scisub run the following:</p>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-100]%20&quot; -R &quot;rusage[mem=500]&quot; -M 1000 -o /project/taki3/amv/cluster/code/example_output.txt Rscript /project/taki3/amv/cluster/code/normal_example.R</code></pre>
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-100]%20&quot; -R &quot;rusage[mem=500]&quot; -M 1000 -o /project/taki3/amv/cluster/normal_session_examples/example_output.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
 <ul>
 <li>I am not running another layer of parallelization inside of the code so no need to request multiple cores</li>
 <li>Jobs are not dependent so I do not request the job to span only 1 host</li>
@@ -263,7 +234,7 @@ NOTE THE SPECIAL THINGS ABOUT THIS CODE:
 <div id="example-2" class="section level4">
 <h4>Example 2</h4>
 <p>This example will run the “normal_example2.R” code. This example calls a single <code>mclapply</code> to run in as a single normal batch job on 8 cores. After ssh’ing onto takim/scisub run the following:</p>
-<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-1]&quot; -R &quot;rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/code/example_output2.txt Rscript /project/taki3/amv/cluster/code/normal_example2.R</code></pre>
+<pre class="bash"><code>bsub -q cceb_normal -J &quot;jobname[1-1]&quot; -R &quot;rusage[mem=5000]&quot; -M 10000 -n 8 -o /project/taki3/amv/cluster/normal_session_examples/example_output2.txt Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example2.R</code></pre>
 <ul>
 <li>Only 1 job is submit because the R script runs the 1000 iterations on 8 cores</li>
 <li>Because the single job requires 8 cores you have to request -n 8 cores in the <code>bsub</code></li>
