@@ -180,10 +180,57 @@ With a screened interactive session it is very easy to forget that you had a scr
 
 The cluster is already configured with a number of useful day to day packages that most of us use consistently. There will be times though that you need a specific package installed.
 
-For security reasons you will not be able to download packages manually. For example, `install.pacakges('ggplot2')` will error. Instead, email the Scientific Computing System Administration Team. I have excluded their email from this series of posts so they don't inadvertently receive spam but just ask around and it should be easy to track down. In your email you should include the version(s) of R you would like the package installed, the package name, and package version you need downloaded. When they install the package, it will only be available in the version of R you specified. When possible it is also helpful to include a link to the package (i.e. CRAN or GitHub links). 
+For security reasons you will not be able to download packages manually. For example, `install.packages('ggplot2')` will error. Instead, email the Scientific Computing System Administration Team. I have excluded their email from this series of posts so they don't inadvertently receive spam but just ask around and it should be easy to track down. In your email you should include the version(s) of R you would like the package installed, the package name, and package version you need downloaded. When they install the package, it will only be available in the version of R you specified. When possible it is also helpful to include a link to the package (i.e. CRAN or GitHub links). 
 
 Similarly, if you need other non-R software downloaded on the cluster email them to install and configure. 
 
+# `module load R`
 
+After `ssh`ing onto the cluster and `bsub`ing onto an execution host in order to load R you have to type the following:
+
+```{bash, eval = FALSE}
+module load R/3.5.0
+R
+```
+
+Of course, you can use whatever version of R you prefer or need. I find typing this everytime I log on really annoying. This also has to be loaded when submitting a job as a normal session. I'll talk more about normal sessions later but you'll end up typing `module load R/#.#.#` almost every time you're doing something on the cluster. Luckily, there are start up scripts that we can add this to so that it is automatically run when we begin our session.
+
+To avoid typing `module load R/#.#.#` everytime you can put `module load R/3.5.0` (or whatever version of R you use the most) in your `.bash_profile`. A [`.bash_profile`](https://www.quora.com/What-is-bash_profile-and-what-is-its-use) is essentially a start up script. Anything in your `.bash_profile` is run for you immediatly after logging on. Therefore, if you put `module load R/3.5.0` this line of code is run as soon as you log on to the submission and execution host automatically and there is no need to type it. After this is added all you have to type is `R` on the command line and R will open.
+
+Remember, this bash command will be run upon logging on. If you want to load a different R module, you'll have to first unload the one specified in your `.bash_profile` and then load the one you'd like to use.
+
+```{bash, eval = FALSE}
+module unload R/3.5.0
+module load R/3.6.1
+```
+
+You can do this with any `module load` you use often. 
+
+There are a number of ways to edit your `.bash_profile`. You can use the command line but I like to do this using Fetch.
+
+Edit `.bash_profile` instructions:
+
+1. Connect to the VPN
+2. Open Fetch into your `home` directory. The full path is normally `/pennkey/home`.
+3. Right-click on `.bash_aliases` within Fetch and choose the option `Edit`. You might get a pop-up asking you to choose what program you'd like to edit the file with. I personally like TextEdit.
+
+```{r}
+knitr::include_graphics('img/interactive1/fetch_edit.png')
+```
+
+4. A pop up text editor of your `.bash_profile` will open.
+
+```{r}
+knitr::include_graphics('img/interactive1/fetch_edit.png')
+```
+
+5. Add the line `module load R/3.5.0` or whatever R version you like to this file.
+6. Save and exit.
+
+Now, if you open an interactive session you only need to type R.
+
+```{r}
+knitr::include_graphics('img/interactive1/R.png')
+```
 
 

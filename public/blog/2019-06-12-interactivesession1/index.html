@@ -169,8 +169,34 @@ R
 <div id="downloading-r-packages-and-software" class="section level1">
 <h1>Downloading R Packages and Software</h1>
 <p>The cluster is already configured with a number of useful day to day packages that most of us use consistently. There will be times though that you need a specific package installed.</p>
-<p>For security reasons you will not be able to download packages manually. For example, <code>install.pacakges('ggplot2')</code> will error. Instead, email the Scientific Computing System Administration Team. I have excluded their email from this series of posts so they don’t inadvertently receive spam but just ask around and it should be easy to track down. In your email you should include the version(s) of R you would like the package installed, the package name, and package version you need downloaded. When they install the package, it will only be available in the version of R you specified. When possible it is also helpful to include a link to the package (i.e. CRAN or GitHub links).</p>
+<p>For security reasons you will not be able to download packages manually. For example, <code>install.packages('ggplot2')</code> will error. Instead, email the Scientific Computing System Administration Team. I have excluded their email from this series of posts so they don’t inadvertently receive spam but just ask around and it should be easy to track down. In your email you should include the version(s) of R you would like the package installed, the package name, and package version you need downloaded. When they install the package, it will only be available in the version of R you specified. When possible it is also helpful to include a link to the package (i.e. CRAN or GitHub links).</p>
 <p>Similarly, if you need other non-R software downloaded on the cluster email them to install and configure.</p>
+</div>
+<div id="module-load-r" class="section level1">
+<h1><code>module load R</code></h1>
+<p>After <code>ssh</code>ing onto the cluster and <code>bsub</code>ing onto an execution host in order to load R you have to type the following:</p>
+<p>Of course, you can use whatever version of R you prefer or need. I find typing this everytime I log on really annoying. This also has to be loaded when submitting a job as a normal session. I’ll talk more about normal sessions later but you’ll end up typing <code>module load R/#.#.#</code> almost every time you’re doing something on the cluster. Luckily, there are start up scripts that we can add this to so that it is automatically run when we begin our session.</p>
+<p>To avoid typing <code>module load R/#.#.#</code> everytime you can put <code>module load R/3.5.0</code> (or whatever version of R you use the most) in your <code>.bash_profile</code>. A <a href="https://www.quora.com/What-is-bash_profile-and-what-is-its-use"><code>.bash_profile</code></a> is essentially a start up script. Anything in your <code>.bash_profile</code> is run for you immediatly after logging on. Therefore, if you put <code>module load R/3.5.0</code> this line of code is run as soon as you log on to the submission and execution host automatically and there is no need to type it. After this is added all you have to type is <code>R</code> on the command line and R will open.</p>
+<p>Remember, this bash command will be run upon logging on. If you want to load a different R module, you’ll have to first unload the one specified in your <code>.bash_profile</code> and then load the one you’d like to use.</p>
+<p>You can do this with any <code>module load</code> you use often.</p>
+<p>There are a number of ways to edit your <code>.bash_profile</code>. You can use the command line but I like to do this using Fetch.</p>
+<p>Edit <code>.bash_profile</code> instructions:</p>
+<ol style="list-style-type: decimal">
+<li>Connect to the VPN</li>
+<li>Open Fetch into your <code>home</code> directory. The full path is normally <code>/pennkey/home</code>.</li>
+<li>Right-click on <code>.bash_aliases</code> within Fetch and choose the option <code>Edit</code>. You might get a pop-up asking you to choose what program you’d like to edit the file with. I personally like TextEdit.</li>
+</ol>
+<p><img src="img/interactive1/fetch_edit.png" width="80%" style="display: block; margin: auto;" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>A pop up text editor of your <code>.bash_profile</code> will open.</li>
+</ol>
+<p><img src="img/interactive1/fetch_edit.png" width="80%" style="display: block; margin: auto;" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Add the line <code>module load R/3.5.0</code> or whatever R version you like to this file.</li>
+<li>Save and exit.</li>
+</ol>
+<p>Now, if you open an interactive session you only need to type R.</p>
+<p><img src="img/interactive1/R.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 
   </div>

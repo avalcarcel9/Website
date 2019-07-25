@@ -6,10 +6,21 @@
     <description>Recent content in CCEB on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 01 Jul 2019 21:01:01 -0600</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jul 2019 21:01:01 -0600</lastBuildDate>
     
 	<atom:link href="/tags/cceb/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using the CCEB High Performance Computing Cluster: Batch Jobs and Normal Sessions</title>
+      <link>/blog/2019-07-13-normalsession/</link>
+      <pubDate>Sat, 13 Jul 2019 21:01:01 -0600</pubDate>
+      
+      <guid>/blog/2019-07-13-normalsession/</guid>
+      <description>module load R/3.2.2
+Introduction This is the eighth blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on normal sessions and submitting batch jobs.
+Initializing a normal session and submitting a batch job is an advanced topic but you’ll still be requesting appropriate system parameters using the LSF bsub command. We will again focus on the bsub for a normal session and common advanced options associated with the bsub to request more cores for parallelization, force memory constraints on your session, and request certain machines.</description>
+    </item>
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Advanced Topics for Interactive Sessions</title>
