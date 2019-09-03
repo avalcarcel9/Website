@@ -6,10 +6,21 @@
     <description>Recent content on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sat, 31 Aug 2019 21:01:01 -0600</lastBuildDate>
+    <lastBuildDate>Tue, 03 Sep 2019 21:01:01 -0600</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using the CCEB High Performance Computing Cluster: Commands and References</title>
+      <link>/blog/2019-09-03-references/</link>
+      <pubDate>Tue, 03 Sep 2019 21:01:01 -0600</pubDate>
+      
+      <guid>/blog/2019-09-03-references/</guid>
+      <description>Introduction This is the tenth and final blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post includes all the commands and references used throughout the series.
+ Commands The commands presented below are sometimes generalizations of what was presented throughout the series.
+Command Line # Change the working directory cd # List folders/files in a directory ls # Report working directory pwd # Move files or directories mv # Copy files or directories cp # Summons the manual man # Create a directory mkdir # Removes a directory rmdir # Removes files or a directory rm # Clear the screen/command board in Terminal clear # Uses all files with the pattern indicated in the command applied *pattern* # Creates an empty text file touch   Log On ssh -X pennkey@scisub  Screen # Screen the session while on the scisub host screen # Check how many screens you have open screen -ls # Resuming a screen screen -r  Interactive Session # Full bsub for an interactive session bsub -Is -q cceb_interactive -m &amp;quot;silver01&amp;quot; -n 8 -R &amp;quot;span[hosts=1] rusage[mem=5000]&amp;quot; -M 10000 &amp;quot;bash&amp;quot; # R code to detect the number of cores requested by bsub # Recall parallel::detectCores() does not report the proper number Sys.</description>
+    </item>
     
     <item>
       <title>Using the CCEB High Performance Computing Cluster: Quality Control</title>
@@ -17,16 +28,6 @@
       <pubDate>Sat, 31 Aug 2019 21:01:01 -0600</pubDate>
       
       <guid>/blog/2019-08-31-qualitycontrol/</guid>
-      <description>Introduction This is the ninth blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on various ways to quality control jobs running on the cluster. Most commands covered work for both normal and interactive sessions.
-The first time the command appears below it is hyperlinked to the manual or reference material. All the commands listed and linked to references in the last section of the post All Commands.</description>
-    </item>
-    
-    <item>
-      <title>Using the CCEB High Performance Computing Cluster: Quality Control</title>
-      <link>/blog/2019-09-31-qualitycontrol/</link>
-      <pubDate>Sat, 31 Aug 2019 21:01:01 -0600</pubDate>
-      
-      <guid>/blog/2019-09-31-qualitycontrol/</guid>
       <description>Introduction This is the ninth blog post in a series of articles about using the CCEB cluster. An overview of the series is available here. This post focuses on various ways to quality control jobs running on the cluster. Most commands covered work for both normal and interactive sessions.
 The first time the command appears below it is hyperlinked to the manual or reference material. All the commands listed and linked to references in the last section of the post All Commands.</description>
     </item>
@@ -108,7 +109,7 @@ Most of the information presented in this article was taken from IBM resources h
       
       <guid>/blog/2019-04-13-clusterintro/</guid>
       <description>Introduction I’ve decided to dedicate the next few blog posts to using the Penn Medicine Academic Computing Services High-Performance Computing Cluster. I’ll loosely refer to the Penn HPC simply as the cluster, the CCEB cluster, the PMACs HPC, and the Penn HPC throughout this series of blog posts. These posts are intended for both beginners and advanced users and will include information about:
-Basics in command line Definitions and vocabulary Logging onto the cluster PMACS high performance computing (HPC) grid specifications Session types Parallelizing code Quality controlling your jobs Bash aliases  This series is designed by a student for students specifically in biostatistics.</description>
+Basics in command line Definitions and vocabulary Logging onto the cluster PMACS high performance computing (HPC) grid specifications Session types Parallelizing code in interactive and normal sessions Quality controlling your jobs Bash aliases  This series is designed by a student for students specifically in biostatistics.</description>
     </item>
     
     <item>

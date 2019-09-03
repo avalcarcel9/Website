@@ -20,16 +20,16 @@ knitr::opts_chunk$set(out.width = '100%',
 
 I've decided to dedicate the next few blog posts to using the [Penn Medicine Academic Computing Services High-Performance Computing Cluster](https://www.med.upenn.edu/hpc/). I'll loosely refer to the Penn HPC simply as the cluster, the CCEB cluster, the PMACs HPC, and the Penn HPC throughout this series of blog posts. These posts are intended for both beginners and advanced users and will include information about:
 
-1. Basics in command line
-2. Definitions and vocabulary
-3. Logging onto the cluster
-4. PMACS high performance computing (HPC) grid specifications
-5. Session types
-6. Parallelizing code
-7. Quality controlling your jobs
-8. Bash aliases
+1. [Basics in command line](https://www.alessandravalcarcel.com/blog/2019-04-14-commandline/)
+2. [Definitions and vocabulary](https://www.alessandravalcarcel.com/blog/2019-04-27-terminology/)
+3. [Logging onto the cluster](https://www.alessandravalcarcel.com/blog/2019-04-23-ssh/)
+4. [PMACS high performance computing (HPC) grid specifications](https://www.alessandravalcarcel.com/blog/2019-04-27-terminology/)
+5. [Session types](https://www.alessandravalcarcel.com/blog/2019-06-05-sessions/)
+6. Parallelizing code in [interactive](https://www.alessandravalcarcel.com/blog/2019-07-01-interactivesession2/) and [normal sessions](https://www.alessandravalcarcel.com/blog/2019-07-13-normalsession/)
+7. [Quality controlling your jobs](https://www.alessandravalcarcel.com/blog/2019-08-31-qualitycontrol/)
+8. [Bash aliases](https://www.alessandravalcarcel.com/blog/2019-06-12-interactivesession1/)
 
-This series is designed by a student for students specifically in biostatistics. All code and examples will use R or the command line. After I've writtin and posted each subject area, I'll link the topics above to their respective posts online.
+This series is designed by a student for students specifically in biostatistics. All code and examples will use R or the command line. After I've written and posted each subject area, I'll link the topics above to their respective posts online.
 
 # About Me
 
@@ -53,7 +53,7 @@ This series of posts is intended specifically for use of the CCEB cluster but mu
 
 <br>
 
-__Warning__: I use exclusively MacOS and Unix operating systems (OS) so commands shown will specifically work on these OS. Windows should be equivalent, similar, or exist. The cluster is a Unix based machine so these will work on the cluster.
+__Warning__: I use exclusively macOS and Unix operating systems (OS) so commands shown will specifically work on these OS. Windows should be equivalent, similar, or exist. The cluster is a Unix based machine so these will work on the cluster.
 
 Happy programming!
 

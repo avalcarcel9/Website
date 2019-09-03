@@ -90,7 +90,7 @@ For me this is as follows:
 knitr::include_graphics('img/ssh/ssh_scisub.png')
 ```
 
-Then enter your password. The cursor doesn't move when you do this. If you mess up just delete a bunch of times and start over. Once you correctly specify your password you may have some output. For example, I see the following after logging into my account:
+Then enter your password. The cursor doesn't move when you do this. If you mess up just delete a bunch of times and start over. If you would like to bypass typing your password check out [this blog post on generating `ssh` key-pairs](https://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id). Once you correctly specify your password you may have some output. For example, I see the following after logging into my account:
 
 ```{r}
 knitr::include_graphics('img/ssh/ssh_password.png')
