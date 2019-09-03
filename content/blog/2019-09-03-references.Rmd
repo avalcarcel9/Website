@@ -215,9 +215,3 @@ top
 [`bresume`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bresume.1.html) -  Resume a suspended job.
 
 [`bkill`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bkill.1.html) - Terminate a job.
-
-
-
-
-
-
