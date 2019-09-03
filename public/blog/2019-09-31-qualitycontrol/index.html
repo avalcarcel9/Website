@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Personal website">
+<meta name="keywords" content="student,statistics,biostatistics,Penn">
+
+<base href="/">
+
+<title>Alessandra [Ali] Valcarcel</title>
+
+<meta name="generator" content="Hugo 0.55.3" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-US">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Using the CCEB High Performance Computing Cluster: Quality Control</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        PUBLISHED ON AUG 31, 2019 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/computing">COMPUTING</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This is the ninth blog post in a series of articles about using the CCEB cluster. An overview of the series is available <a href="www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/">here</a>. This post focuses on various ways to quality control jobs running on the cluster. Most commands covered work for both normal and interactive sessions.</p>
+<p>The first time the command appears below it is hyperlinked to the manual or reference material. All the commands listed and linked to references in the last section of the post All Commands. All the commands presented should be run from the submission host (i.e. the machine you’re put onto after you <code>ssh</code>) with the exception of <code>top</code>.</p>
+</div>
+<div id="assess-cluster-traffic" class="section level1">
+<h1>Assess Cluster Traffic</h1>
+<p>Before submitting larger jobs it is always useful to check the traffic on the cluster in the queue you will be submitting from. This may help you decide which submission parameters to use. For example, if the cluster is very highly trafficked it may be useful to request fewer cores so that your job runs promptly rather than queues up waiting for cores to become available.</p>
+<p>To check the various queues available as well as some summary information about the number of jobs running you can run <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bqueues.1.html"><code>bqueues</code></a>. To see what queues you have access to as well as general information about their traffic you can run the following <code>bqueues -u username</code> where you input your username.</p>
+<pre class="bash"><code>bqueues -u alval</code></pre>
+<p><img src="img/qc/bqueues.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>The output is useful to see which queues you have access to and allows you to quickly assess which queues are busy. I have access to a few different queues so I try to work on the queues that are unoccupied as much as possible.</p>
+<p>To get a summary of all the execution hosts use the command <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bhosts.1.html"><code>bhosts</code></a>. This command lists information for hosts that you may not have access to so use with caution.</p>
+<p><img src="img/qc/bhosts.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>If you know the names of the various execution machines you have access to through various queues this command helps you check the total number of cores available on different machines and how many are in use or free. For example, in the screenshot provided above you’ll notice that <code>amber01</code> has 79 total cores and 21 are being used or are not available.</p>
+<p>You can also check the general traffic of a queue. For example, to check the cceb traffic I can run the following:</p>
+<pre class="bash"><code>bjobs -u all | grep cceb</code></pre>
+<p>If I wanted to check the taki queue I would replace <code>cceb</code> with <code>taki</code>.</p>
+<p><img src="img/qc/bjobsall.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><code>bjobs</code> is explained in more detail in the next section but this command will help you assess who is using the cluster and which queues and resources they are utilizing.</p>
+</div>
+<div id="monitor-submit-jobs" class="section level1">
+<h1>Monitor Submit Jobs</h1>
+<p>The <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html"><code>bjobs</code></a> LSF command displays information about pending, running, and suspended jobs. This is useful to check to see the status of your jobs running or to check if you accidentally left an interactive session on screen running without meaning to. This command is quite powerful and has a number of different options to add that will give you detailed summaries about jobs. My favorite options include <code>-r</code> to list what jobs are currently running, <code>-p</code> to list what jobs are pending, <code>-s</code> to list what jobs are suspended, <code>-sum</code> to list summary information about unfinished jobs, and <code>-WF</code> which lists estimated finish times for running or pending jobs. We will use these commands throughout this post to show their usage with real examples. Below, I’ve simply listed the commands out individually.</p>
+<pre class="bash"><code># List all your jobs (pending and running)
+bjobs
+# List all running jobs
+bjobs -r
+# List all pening jobs
+bjobs -p
+# List all suspended jobs
+bjobs -s
+# List summary information
+bjobs -sum
+# Estimate run time
+bjobs -WF</code></pre>
+<p>It is worth going to the <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html">documentation page</a> hosted by IBM to explore the different options that may be more useful for you.</p>
+<p>To check historical information about jobs such as information about the job status and time run you can run <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bhist.1.html"><code>bhist</code></a>.</p>
+<pre class="bash"><code># Check history of current jobs running
+bhist</code></pre>
+<p>We will again use this in the example below.</p>
+<p>When running longer tasks within a normal job you may want to check the tasks are running properly rather than wait for the task to finish to check the output text file. To peek into a task of a normal job you can use <code>bpeek</code>. You will see any live output messages from your code as if you were in an interactive session. Not all R functions give output so I suggest writing your own within your functions using the <code>paste()</code> and <code>message()</code> base R functions.</p>
+<pre class="bash"><code># Use the job name to peek
+bpeek -J &quot;jobname[38]&quot;
+# Use the job ID to peek
+bpeek 2147852[38]</code></pre>
+<p>The example code below runs too fast to peek into it since each task only takes a few seconds to run. I don’t have an example in this blog post but it is very useful in practice.</p>
+</div>
+<div id="control-job-execution" class="section level1">
+<h1>Control Job Execution</h1>
+<p>After submitting jobs you may want to <a href="https://www.ibm.com/support/knowledgecenter/en/SSWRJV_10.1.0/lsf_admin_foundations/control_job_exec.html">pause or suspend them, resume a previously paused job, or kill the job</a> entirely. The LSF command to suspend or pause a job is <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bstop.1.html"><code>bstop</code></a>, to resume a job you can use <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bresume.1.html"><code>bresume</code></a>, and to kill a job <a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bkill.1.html"><code>bkill</code></a>.</p>
+<p>Most commonly you will use the <code>job_ID</code> or <code>job_name</code> to to identify which jobs to pause, resume, or kill. For example, we can run submit some normal jobs using code <a href="https://www.alessandravalcarcel.com/blog/2019-07-13-normalsession/">covered in my last post</a> and then pause, resume and kill the job.</p>
+<pre class="bash"><code># Submit a job
+bsub -q cceb_normal \
+-J &quot;jobname[1-500]&quot; \
+-o /project/taki3/amv/cluster/normal_session_examples/example_output.txt \
+Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R</code></pre>
+<p>Notice, the job ID is printed after submitting a job. In this case, the job ID assigned is 2147852.</p>
+<p><img src="img/qc/submit.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="bash"><code># Check job status
+bjobs</code></pre>
+<p><img src="img/qc/bjobs.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="bash"><code># Check the jobs pending
+bjobs -p</code></pre>
+<p><img src="img/qc/bjobspend.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="bash"><code># Pause the job using the job name
+bstop -J &quot;jobname&quot;</code></pre>
+<p><img src="img/qc/pause.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="bash"><code># Check the jobs suspended
+bjobs -s</code></pre>
+<p><img src="img/qc/suspend.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="bash"><code># Resume the job using the job name
+bresume -J &quot;jobname&quot;
+# Check the jobs run
+bjobs -r</code></pre>
+<p><img src="img/qc/resume.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="bash"><code># Kill the job using the job name
+bkill -J &quot;jobname&quot;
+# Check that none of these jobs are running
+bjobs</code></pre>
+<p><img src="img/qc/kill.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="bash"><code># Check history of a job by the ID
+bhist 2147852</code></pre>
+<p><img src="img/qc/bhist.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Similarly, the previous commands can be carried out using the job ID as a reference.</p>
+<pre class="bash"><code># Stop the job using the job ID
+bstop 2147852
+
+# Resume the job using the job ID
+bresume 2147852
+
+# Kill the job using the job ID
+bkill 2147852</code></pre>
+</div>
+<div id="monitor-execution-hosts" class="section level1">
+<h1>Monitor Execution Hosts</h1>
+<p>When submitting a job for the first time or to quality control a job running you may want to check the memory usage live rather than after the job finishes in the output. <a href="https://www.alessandravalcarcel.com/blog/2019-07-13-normalsession/">In the last blog post</a> I discussed reading the output file from a normal job submission to understand the memory profile and speed of the full job and sub-tasks. If you are submitting something for the first time you may not know what parameters to set and therefore will need to monitor live.</p>
+<p>To do this you can utilize the linux command <a href="https://www.tecmint.com/12-top-command-examples-in-linux/"><code>top</code></a>. This command works on macOS as well and will display the different processes running on the machine. The command also displays memory usage and other important summaries. <code>top</code> specifically summarizes the information for the machine you are on. In order to utilize this properly you need to <code>bsub</code> onto the machine you’d like to monitor after <code>ssh</code>ing onto the cluster. As an example, I currently have an active interactive job running on 60 cores on the taki queue.</p>
+<p><img src="img/qc/bjobstaki.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Running <code>bjobs</code> I notice that the interactive job is running on the <code>amber04</code> host. I can <code>ssh</code> onto the cluster and <code>bsub</code> onto <code>amber04</code> to check the live usage of my tasks on this machine. Below is a common workflow of monitoring the usage of your tasks.</p>
+<pre class="bash"><code># ssh onto the clsuter
+ssh -X alval@takim
+# Check your jobs and figure out what machine they are running on
+bjobs
+# bsub onto the machine you want to monitor
+bsub -Is -q taki_interactive -m &quot;amber04&quot; &quot;bash&quot;
+# Obtain summary information
+top</code></pre>
+<p><img src="img/qc/top.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>When monitoring the <code>top</code> summary you don’t want the number of cores running (you and others) * %MEM of a single average core to surpass 100%. This would indicate the machine is out of memory and may crash. For example, if you are running 5 jobs and each job has a %MEM of about 20% this is bad. These numbers fluctuate so you should monitor them and just use quick math to assess your usage combined with others.</p>
+<p>Similarly, you never want the total memory usage to hit 0. Pay special attention to these numbers: <code>KiB Mem : 59362067+total, 34483747+free, 16509742+used</code>. If the free memory is approaching 0 while the used memory approaches the total you will run out of memory and crash as well.</p>
+</div>
+<div id="all-commands" class="section level1">
+<h1>All Commands</h1>
+<p>The commands discussed in this post are listed below. The code is hyperlinked to the IBM documentation. Click for more information and to view all command options.</p>
+<ul>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bqueues.1.html"><code>bqueues</code></a> - Display information about queues.</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bhosts.1.html"><code>bhosts</code></a> - Display information about execution hosts.</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html"><code>bjobs</code></a> - Check job status .</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html"><code>bhist</code></a> - Check job and task status history and summary.</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bpeek.1.html"><code>bpeek</code></a> - Peek into job to view output.</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bstop.1.html"><code>bstop</code></a> - Suspend a job.</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bresume.1.html"><code>bresume</code></a> - Resume a suspended job.</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bkill.1.html"><code>bkill</code></a> - Terminate a job.</li>
+<li><a href="https://www.tecmint.com/12-top-command-examples-in-linux/"><code>top</code></a> - Check the live memory consumption of running processes.</li>
+</ul>
+<p>There is a very nice LSF cheat sheet available <a href="https://www.tu-ilmenau.de/fileadmin/media/unirz/Services/Struktureinheiten/Advanced_Computing/lsf6.2_quick_ref.pdf">here</a>.</p>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      TAGS:
+      
+      
+      <a class="meta" href="/tags/cceb">CCEB</a>, 
+      
+      <a class="meta" href="/tags/cluster">CLUSTER</a>, 
+      
+      <a class="meta" href="/tags/ibm">IBM</a>, 
+      
+      <a class="meta" href="/tags/lsf">LSF</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/blog/2019-07-13-normalsession/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2018. Alessandra [Ali] Valcarcel.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-115574303-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

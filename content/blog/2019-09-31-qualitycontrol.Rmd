@@ -1,0 +1,253 @@
+---
+title: "Using the CCEB High Performance Computing Cluster: Quality Control"
+author: "Alessandra Valcarcel"
+date: 2019-08-31T21:01:01-06:00
+categories: ["Computing"]
+tags: ["Cluster", "CCEB", "LSF", "IBM"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(out.width = '80%',
+                      fig.align = 'center', 
+                      echo=TRUE,
+                      eval = FALSE, 
+                      warning=FALSE, 
+                      message=FALSE)
+```
+
+# Introduction
+
+This is the ninth blog post in a series of articles about using the CCEB cluster. An overview of the series is available [here](www.alessandravalcarcel.com/blog/2019-04-13-clusterintro/). This post focuses on various ways to quality control jobs running on the cluster. Most commands covered work for both normal and interactive sessions.
+
+The first time the command appears below it is hyperlinked to the manual or reference material. All the commands listed and linked to references in the last section of the post All Commands. All the commands presented should be run from the submission host (i.e. the machine you're put onto after you `ssh`) with the exception of `top`.
+
+# Assess Cluster Traffic
+
+Before submitting larger jobs it is always useful to check the traffic on the cluster in the queue you will be submitting from. This may help you decide which submission parameters to use. For example, if the cluster is very highly trafficked it may be useful to request fewer cores so that your job runs promptly rather than queues up waiting for cores to become available. 
+
+To check the various queues available as well as some summary information about the number of jobs running you can run [`bqueues`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bqueues.1.html). To see what queues you have access to as well as general information about their traffic you can run the following `bqueues -u username` where you input your username.
+
+```{bash}
+bqueues -u alval
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/bqueues.png')
+```
+
+The output is useful to see which queues you have access to and allows you to quickly assess which queues are busy. I have access to a few different queues so I try to work on the queues that are unoccupied as much as possible.
+
+To get a summary of all the execution hosts use the command [`bhosts`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bhosts.1.html). This command lists information for hosts that you may not have access to so use with caution. 
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/bhosts.png')
+```
+
+If you know the names of the various execution machines you have access to through various queues this command helps you check the total number of cores available on different machines and how many are in use or free. For example, in the screenshot provided above you'll notice that `amber01` has 79 total cores and 21 are being used or are not available.
+
+You can also check the general traffic of a queue. For example, to check the cceb traffic I can run the following:
+
+```{bash}
+bjobs -u all | grep cceb
+```
+
+If I wanted to check the taki queue I would replace `cceb` with `taki`.
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/bjobsall.png')
+```
+
+`bjobs` is explained in more detail in the next section but this command will help you assess who is using the cluster and which queues and resources they are utilizing.
+
+# Monitor Submit Jobs
+
+The [`bjobs`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html) LSF command displays information about pending, running, and suspended jobs. This is useful to check to see the status of your jobs running or to check if you accidentally left an interactive session on screen running without meaning to. This command is quite powerful and has a number of different options to add that will give you detailed summaries about jobs. My favorite options include `-r` to list what jobs are currently running, `-p` to list what jobs are pending, `-s` to list what jobs are suspended, `-sum` to list summary information about unfinished jobs, and `-WF` which lists estimated finish times for running or pending jobs. We will use these commands throughout this post to show their usage with real examples. Below, I've simply listed the commands out individually.
+
+```{bash}
+# List all your jobs (pending and running)
+bjobs
+# List all running jobs
+bjobs -r
+# List all pening jobs
+bjobs -p
+# List all suspended jobs
+bjobs -s
+# List summary information
+bjobs -sum
+# Estimate run time
+bjobs -WF
+```
+
+It is worth going to the [documentation page](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html) hosted by IBM to explore the different options that may be more useful for you.
+
+To check historical information about jobs such as information about the job status and time run you can run [`bhist`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bhist.1.html). 
+
+```{bash}
+# Check history of current jobs running
+bhist
+```
+
+We will again use this in the example below.
+
+When running longer tasks within a normal job you may want to check the tasks are running properly rather than wait for the task to finish to check the output text file. To peek into a task of a normal job you can use `bpeek`. You will see any live output messages from your code as if you were in an interactive session. Not all R functions give output so I suggest writing your own within your functions using the `paste()` and `message()` base R functions. 
+
+```{bash}
+# Use the job name to peek
+bpeek -J "jobname[38]"
+# Use the job ID to peek
+bpeek 2147852[38]
+```
+
+The example code below runs too fast to peek into it since each task only takes a few seconds to run. I don't have an example in this blog post but it is very useful in practice.
+
+# Control Job Execution
+
+After submitting jobs you may want to [pause or suspend them, resume a previously paused job, or kill the job](https://www.ibm.com/support/knowledgecenter/en/SSWRJV_10.1.0/lsf_admin_foundations/control_job_exec.html) entirely. The LSF command to suspend or pause a job is [`bstop`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bstop.1.html), to resume a job you can use [`bresume`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bresume.1.html), and to kill a job [`bkill`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bkill.1.html).
+
+Most commonly you will use the `job_ID` or `job_name` to to identify which jobs to pause, resume, or kill. For example, we can run submit some normal jobs using code [covered in my last post](https://www.alessandravalcarcel.com/blog/2019-07-13-normalsession/) and then pause, resume and kill the job.
+
+```{bash, eval = FALSE}
+# Submit a job
+bsub -q cceb_normal \
+-J "jobname[1-500]" \
+-o /project/taki3/amv/cluster/normal_session_examples/example_output.txt \
+Rscript /project/taki3/amv/cluster/normal_session_examples/normal_example.R
+```
+
+Notice, the job ID is printed after submitting a job. In this case, the job ID assigned is 2147852.
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/submit.png')
+```
+
+```{bash}
+# Check job status
+bjobs
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/bjobs.png')
+```
+
+```{bash}
+# Check the jobs pending
+bjobs -p
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/bjobspend.png')
+```
+
+```{bash}
+# Pause the job using the job name
+bstop -J "jobname"
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/pause.png')
+```
+
+```{bash}
+# Check the jobs suspended
+bjobs -s
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/suspend.png')
+```
+
+```{bash}
+# Resume the job using the job name
+bresume -J "jobname"
+# Check the jobs run
+bjobs -r
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/resume.png')
+```
+
+```{bash}
+# Kill the job using the job name
+bkill -J "jobname"
+# Check that none of these jobs are running
+bjobs
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/kill.png')
+```
+
+```{bash}
+# Check history of a job by the ID
+bhist 2147852
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/bhist.png')
+```
+
+Similarly, the previous commands can be carried out using the job ID as a reference.
+
+```{bash}
+# Stop the job using the job ID
+bstop 2147852
+
+# Resume the job using the job ID
+bresume 2147852
+
+# Kill the job using the job ID
+bkill 2147852
+```
+
+# Monitor Execution Hosts
+
+When submitting a job for the first time or to quality control a job running you may want to check the memory usage live rather than after the job finishes in the output. [In the last blog post](https://www.alessandravalcarcel.com/blog/2019-07-13-normalsession/) I discussed reading the output file from a normal job submission to understand the memory profile and speed of the full job and sub-tasks. If you are submitting something for the first time you may not know what parameters to set and therefore will need to monitor live. 
+
+To do this you can utilize the linux command [`top`](https://www.tecmint.com/12-top-command-examples-in-linux/). This command works on macOS as well and will display the different processes running on the machine. The command also displays memory usage and other important summaries. `top` specifically summarizes the information for the machine you are on. In order to utilize this properly you need to `bsub` onto the machine you'd like to monitor after `ssh`ing onto the cluster. As an example, I currently have an active interactive job running on 60 cores on the taki queue.
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/bjobstaki.png')
+```
+
+Running `bjobs` I notice that the interactive job is running on the `amber04` host. I can `ssh` onto the cluster and `bsub` onto `amber04` to check the live usage of my tasks on this machine. Below is a common workflow of monitoring the usage of your tasks.
+
+```{bash}
+# ssh onto the clsuter
+ssh -X alval@takim
+# Check your jobs and figure out what machine they are running on
+bjobs
+# bsub onto the machine you want to monitor
+bsub -Is -q taki_interactive -m "amber04" "bash"
+# Obtain summary information
+top
+```
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics('img/qc/top.png')
+```
+
+When monitoring the `top` summary you don't want the number of cores running (you and others) * %MEM of a single average core to surpass 100%. This would indicate the machine is out of memory and may crash. For example, if you are running 5 jobs and each job has a %MEM of about 20% this is bad. These numbers fluctuate so you should monitor them and just use quick math to assess your usage combined with others. 
+
+Similarly, you never want the total memory usage to hit 0. Pay special attention to these numbers: `KiB Mem : 59362067+total, 34483747+free, 16509742+used`. If the free memory is approaching 0 while the used memory approaches the total you will run out of memory and crash as well.
+
+# All Commands
+
+The commands discussed in this post are listed below. The code is hyperlinked to the IBM documentation. Click for more information and to view all command options.
+
+- [`bqueues`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bqueues.1.html) - Display information about queues.
+- [`bhosts`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bhosts.1.html) - Display information about execution hosts.
+- [`bjobs`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html) - Check job status .
+- [`bhist`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html) - Check job and task status history and summary.
+- [`bpeek`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bpeek.1.html) - Peek into job to view output.
+- [`bstop`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bstop.1.html) -   Suspend a job.
+- [`bresume`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bresume.1.html) -  Resume a suspended job.
+- [`bkill`](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bkill.1.html) - Terminate a job.
+- [`top`](https://www.tecmint.com/12-top-command-examples-in-linux/) - Check the live memory consumption of running processes.
+
+There is a very nice LSF cheat sheet available [here](https://www.tu-ilmenau.de/fileadmin/media/unirz/Services/Struktureinheiten/Advanced_Computing/lsf6.2_quick_ref.pdf).
+
+
