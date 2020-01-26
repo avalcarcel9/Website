@@ -79,6 +79,8 @@
 <p>Total brain white matter lesion volume is the most widely established MRI outcome measure in studies of multiple sclerosis (MS). To estimate white matter lesion volume, there are a number of automatic segmentation methods available. MIMoSA, described above, is just one of many automatic segmentation approaches that exist.
 Even with a number of automatic options, manual delineation remains the gold standard approach. Automatic approaches, including MIMoSA, often yield a probability map to which a threshold is applied to create binary lesion segmentation masks. Few approaches systematically determine the threshold employed; many methods use a manually selected threshold, thus introducing human error and bias into the automated procedure. To overcome some of these issues, I developed and validated an automatic thresholding algorithm, Thresholding Approach for Probability Map Automatic Segmentation in Multiple Sclerosis (TAPAS), to obtain subject-specific threshold estimates for probability map automatic segmentation of T2-weighted (T2) hyperintense white matter lesions.</p>
 
+<p><center><img src="/img/research/tapas.png" alt="picture" /></center></p>
+
 <p>Our paper on this topic is under review at the journal NeuroImage: Clinical but you can find a draft on bioRxiv <a href="https://www.biorxiv.org/content/10.1101/609156v1">here</a>. The R package <a href="www.github.com/avalcarcel9/rtapas"><code>rtapas</code></a> can be utilized to implement the methods.</p>
 
 <h3 id="multi-modal-analysis-and-neurodevelopment">Multi-Modal Analysis and Neurodevelopment</h3>
