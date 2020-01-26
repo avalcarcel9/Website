@@ -190,8 +190,8 @@ B.A., Biology and Statistics (Honors)</description>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/about/</guid>
-      <description>I&amp;rsquo;m currently a fifth-year doctoral student studying Biostatistics in the Department of Biostatistics, Epidemiology, and Informatics at the University of Pennsylvania. I am an active researcher in the PennSIVE working group under the co-mentorship of Russell [Taki] Shinohara and Kristin Linn.
-Primarily, my research interests lie in the development of statistical methods for analyzing neuroimaging data sets with the goal of understanding disease processes in the brain. Currently, my projects involve the analysis of multi-sequence structural MRI for the study of multiple sclerosis.</description>
+      <description>I&amp;rsquo;m currently a fifth-year doctoral student studying Biostatistics in the Department of Biostatistics, Epidemiology, and Informatics at the University of Pennsylvania. I am an active researcher within the PennSIVE Center under the co-mentorship of Russell [Taki] Shinohara and Kristin Linn.
+Primarily, my research interests lie in the development of statistical methods for analyzing neuroimaging data sets with the goal of understanding disease processes in the brain. Currently, my projects involve the analysis of multi-sequence structural MRI to study neurodevelopment and multiple sclerosis.</description>
     </item>
     
     <item>
@@ -200,7 +200,7 @@ Primarily, my research interests lie in the development of statistical methods f
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/research/</guid>
-      <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</description>
+      <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from classification using machine learning and novel feature exploration in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Recently, I&amp;rsquo;ve been interested in developing statistical methods for multi-modal analysis to better characterize and understand neurodevelopment.</description>
     </item>
     
     <item>

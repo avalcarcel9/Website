@@ -28,7 +28,7 @@ In preparation, I decided to evaluate the statistical networks between character
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/research/</guid>
-      <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from machine learning algorithms and feature extraction development in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Specifically, I am interested in developing statistical methods to advance automated lesion detection in multiple sclerosis.</description>
+      <description>I am motivated by current scientific questions to develop general, principled methods for the analysis of data arising from neuroimaging studies. My work balances ideas from classification using machine learning and novel feature exploration in order to develop data analysis tools required to solve problems in structural imaging data sets in a clinically meaningful manner. Recently, I&amp;rsquo;ve been interested in developing statistical methods for multi-modal analysis to better characterize and understand neurodevelopment.</description>
     </item>
     
   </channel>
