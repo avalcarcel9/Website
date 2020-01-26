@@ -23,9 +23,9 @@ __Education:__
 
 Ph.D., Biostatistics  
 University of Pennsylvania  
-Advisors: Drs. Russell [Taki] Shinohara and Kristin Linn  
+Advisors: Drs. Kristin Linn and Russell [Taki] Shinohara  
 Thesis Title: Comprehensive Multiple Sclerosis Lesion Analysis Methods for Magnetic Resonance Imaging  
-_(anticipated 2020)_  
+_(anticipated May 2020)_  
 
 M.S., Biostatistics  
 University of Pennsylvania  
@@ -43,6 +43,8 @@ _(2015)_
 ***
 
 __Select Publications:__
+
+__Valcarcel, A.M.,__ Muschelli, J., Crainiceanu, C., Pham, D., Calabresi, P., Martin, M.L., Bakshi, R., & Shinohara, R. (2019). TAPAS: Threshold Adjustment to Probability Map Automatic Segmentation. Under revision, NeuroImage: Clinical.
 
 __Valcarcel, A.M.__, Linn, K.A., Khalid, F., Vandekar, S.N., Tauhid, S., Satterthwaite, T.D., Muschelli, J., Bakshi, R., Shinohara, R.T.: MIMoSA: An Approach to Automatically Segment T2 Hyperintense and T1 Hypointense Lesions in Multiple Sclerosis. In: Crimi, A., Bakas, S., Kuijf, H., Keyvan, F., Reyes, M., and van Walsum, T. (eds.) Brainlesion: Glioma, Multiple Sclerosis, Stroke and Traumatic Brain Injuries. pp. 47–56. Springer International Publishing (2019).
 
@@ -72,8 +74,27 @@ Dordt College Research Internship in Statistical Genetics
 __Programming:__
 
 Expertise: R
-Working Knowledge: SAS, bash scripting, MATLAB, Stata, HTML, css
+Working Knowledge: SAS, bash scripting, MATLAB, Stata, HTML, css, python
 Applications: LaTeX, Microsoft Office, knitr, RMarkdown, StatWeave, GitHub
+
+__Select Service and Leadership:__
+
+Council for Emerging and New Statisticians (CENS) _(2017-2020)_    
+Eastern North American Region (ENAR) Regional Advisory Board (RAB)  
+- Council member 2017-2018, Steering Committee member (2018-2019), Steering Committee Co-Chair (2019-2020).  
+- Advise RAB on how ENAR can better serve graduate students and recent graduates.  
+- Coordinated a proposal for an invited session at the ENAR Meeting as well as plan activities for ENAR members throughout the year and at the meeting.  
+
+Digital Program Chair _(2018-2019)_  
+Eastern North American Region (ENAR) Spring Meeting  
+- Programmed the ENAR mobile application conference content (e.g. conference schedule, abstracts, and special events).  
+
+Recruitment Committee Representative _(2016-2020)_  
+University of Pennsylvania Department of Biostatistics, Epidemiology, and Informatics  
+- Counsel faculty on modern recruitment strategies for potential applicants and recruits.  
+- Present recruitment talks to various groups around Penn as well as
+nearby universities.  
+
 
 ***
 

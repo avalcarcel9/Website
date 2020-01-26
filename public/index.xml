@@ -173,9 +173,9 @@ April may as well be Game of Thrones (GoT) month. For 7 loyal years, fans eagerl
       <description>Alessandra [Ali] Valcarcel Born in Miami, FL Lives in Philadelphia, PA Education:
 Ph.D., Biostatistics
 University of Pennsylvania
-Advisors: Drs. Russell [Taki] Shinohara and Kristin Linn
+Advisors: Drs. Kristin Linn and Russell [Taki] Shinohara
 Thesis Title: Comprehensive Multiple Sclerosis Lesion Analysis Methods for Magnetic Resonance Imaging
-(anticipated 2020)
+(anticipated May 2020)
 M.S., Biostatistics
 University of Pennsylvania
 Advisor: Dr. Russell [Taki] Shinohara
@@ -210,7 +210,7 @@ Primarily, my research interests lie in the development of statistical methods f
       
       <guid>/software/</guid>
       <description>MIMoSA 
-The R package mimosa is now live on Neuroconductor with the development version on GitHub. This package allows you to implement the MIMoSA method discussed in our original paper and follow up paper to automatically segment white matter both T2 hyperintense lesions and T1 hypointense lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data.</description>
+The R package mimosa is now live on Neuroconductor with the development version on GitHub. This package allows you to implement the MIMoSA method discussed in our original paper and follow up paper to automatically segment both T2 hyperintense lesions and T1 hypointense lesions. The package comes with some pre-trained models if you do not have manual segmentations to train the model. If you do have manual segmentations, we suggest you train the model with your data.</description>
     </item>
     
   </channel>
