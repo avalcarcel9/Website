@@ -44,7 +44,8 @@ _(2015)_
 
 __Select Publications:__
 
-__Valcarcel, A.M.,__ Muschelli, J., Crainiceanu, C., Pham, D., Calabresi, P., Martin, M.L., Bakshi, R., & Shinohara, R. (2019). TAPAS: Threshold Adjustment to Probability Map Automatic Segmentation. Under revision, NeuroImage: Clinical.
+__Valcarcel, A.M.__, Muschelli, J., Pham, D., Calabresi, P., Martin, M.L.,
+Yushkevich, P., Calabresi, P.A., Bakshi, R., & Shinohara, R.T. (2019). TAPAS: Threshold Adjustment to Probability Map Automatic Segmentation. Under revision, NeuroImage: Clinical.
 
 __Valcarcel, A.M.__, Linn, K.A., Khalid, F., Vandekar, S.N., Tauhid, S., Satterthwaite, T.D., Muschelli, J., Bakshi, R., Shinohara, R.T.: MIMoSA: An Approach to Automatically Segment T2 Hyperintense and T1 Hypointense Lesions in Multiple Sclerosis. In: Crimi, A., Bakas, S., Kuijf, H., Keyvan, F., Reyes, M., and van Walsum, T. (eds.) Brainlesion: Glioma, Multiple Sclerosis, Stroke and Traumatic Brain Injuries. pp. 47–56. Springer International Publishing (2019).
 
@@ -66,7 +67,7 @@ University of Pennsylvania
 Teaching Assistant _(2016 - 2018)_  
 University of Pennsylvania
 
-Research Assistant _(2014-2015)_
+Research Assistant _(2014-2015)_  
 Dordt College Research Internship in Statistical Genetics
 
 ***
@@ -76,6 +77,8 @@ __Programming:__
 Expertise: R  
 Working Knowledge: SAS, bash scripting, MATLAB, Stata, HTML, css, SQL  
 Applications: LaTeX, Microsoft Office, RMarkdown, knitr, RMarkdown, StatWeave, GitHub  
+
+***
 	
 __Select Service and Leadership:__
 

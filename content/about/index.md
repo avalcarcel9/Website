@@ -71,4 +71,4 @@ Below I'm baby-sitting my niece Maia and my nephew Max. Since this photo was tak
 
 <br>
 
-If you couldn't tell from my captions, I also really love puns. All puns in this post are _italicize_. Did you catch them all?
+If you couldn't tell from my captions, I also really love puns. All puns in this post are in _italics_. Did you catch them all?

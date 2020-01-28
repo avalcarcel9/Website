@@ -19,7 +19,7 @@ Below are a few images stemming from my recent work:
 
 ### Automatic Lesion Segmentation
 
-Multiple sclerosis is an inflammatory disease of the brain and spinal cord characterized by demyelinating white matter referred to as white matter lesions. The number and volume of lesions are essential for evaluating disease-modifying therapies and monitoring disease activity. The current gold standard approach for lesion classification is the manual segmentation by a radiologist or other imaging scientist. Unfortunately, these methods are prone to a large amount of intra- and inter- observer variability. Automated segmentation reduces cost, variability, and time but remains challenging. The majority of statistical techniques for the automated segmentation of white matter lesion are based on a single imaging modality, but recent advances have used multimodal techniques for identifying white matter lesions. This motivated me to develop MIMoSA a machine learning algorithm which leverages features that capture not only the mean structure within an image but also the covariance structure between complementary MRI contrasts. MIMoSA was built to automatically segment T2 hyperintense lesions.
+Multiple sclerosis is an inflammatory disease of the brain and spinal cord characterized by demyelinating white matter referred to as white matter lesions. The number and volume of lesions are essential for evaluating disease-modifying therapies and monitoring disease activity. The current gold standard approach for lesion classification is manual segmentation by a radiologist or other imaging scientist. Unfortunately, these methods are prone to a large amount of intra- and inter- observer variability. Automated segmentation reduces cost, variability, and time but remains challenging. The majority of statistical techniques for the automated segmentation of white matter lesions are based on a single imaging modality, but recent advances have used multimodal techniques for identifying white matter lesions. This motivated me to develop MIMoSA a machine learning algorithm which leverages features that capture not only the mean structure within an image but also the covariance structure between complementary MRI contrasts. MIMoSA was built to automatically segment T2 hyperintense lesions.
 
 <center>![picture](/img/research/lesionseg.png)</center>
 
@@ -33,12 +33,12 @@ Our paper on this topic is published in the NeuroImage: Clinical journal [here](
 
 ### Automatic Threshold Detection for Classification of Lesions
 
-Total brain white matter lesion volume is the most widely established MRI outcome measure in studies of multiple sclerosis (MS). To estimate white matter lesion volume, there are a number of automatic segmentation methods available. MIMoSA, described above, is just one of many automatic segmentation approaches that exist.
+Total brain white matter lesion volume is the most widely established MRI outcome measure in studies of multiple sclerosis. To estimate white matter lesion volume, there are a number of automatic segmentation methods available. MIMoSA, described above, is just one of many automatic segmentation approaches that exist.
 Even with a number of automatic options, manual delineation remains the gold standard approach. Automatic approaches, including MIMoSA, often yield a probability map to which a threshold is applied to create binary lesion segmentation masks. Few approaches systematically determine the threshold employed; many methods use a manually selected threshold, thus introducing human error and bias into the automated procedure. To overcome some of these issues, I developed and validated an automatic thresholding algorithm, Thresholding Approach for Probability Map Automatic Segmentation in Multiple Sclerosis (TAPAS), to obtain subject-specific threshold estimates for probability map automatic segmentation of T2-weighted (T2) hyperintense white matter lesions.
 
 <center>![picture](/img/research/tapas.png)</center>
 
-Our paper on this topic is under review at the journal NeuroImage: Clinical but you can find a draft on bioRxiv [here](https://www.biorxiv.org/content/10.1101/609156v1). The R package [`rtapas`](www.github.com/avalcarcel9/rtapas) can be utilized to implement the methods.
+Our paper on this topic is under review at NeuroImage: Clinical but you can find a draft on bioRxiv [here](https://www.biorxiv.org/content/10.1101/609156v1). The R package `rtapas` can be utilized to implement the methods. You can download it from Neuroconductor [here](https://neuroconductor.org/package/rtapas) or the development version from GitHub [here](www.github.com/avalcarcel9/rtapas).
 
 ### Multi-Modal Analysis and Neurodevelopment
 
@@ -54,9 +54,9 @@ To deal with my deep and intense sadness resulting from a lack of a new Game of 
 
 <center>![picture](/img/research/got_network.png)</center>
 
-The top left corner of the app provides links to a Description and About page. Code is readily available through links on the About page in the app. This project was mostly a learning experience so I could teach myself `dplyr`, `tidyr`, shiny, and get a basic understanding on network analysis. If you're interested in learning more details about the patterns found in the network using the app I wrote a blog post that can be accessed [here](www.alessandravalcarcel.com/blog/2019-04-05-gotapp).
+The top left corner of the app provides links to a Description and About page. Code is readily available through links on the About page in the app. This project was mostly a learning experience so I could teach myself `dplyr`, `tidyr`, shiny, and get a basic understanding of network analyses. If you're interested in learning more details about the patterns found in the network using the app I wrote a blog post that can be accessed [here](www.alessandravalcarcel.com/blog/2019-04-05-gotapp).
 
-In addition to the shiny app I played with some graphics to summarize the show. With the Game of Thrones TV scripts I also created a bar graph to display the number of lines spoken by the top 27 speakers.
+In addition to the shiny app I played with some graphics to summarize the show. With the Game of Thrones TV scripts I also created a bar graph to display the number of lines spoken from the top 27 characters.
 
 <center>![picture](/img/research/GoT_freq.png)</center>
 
