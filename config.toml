@@ -22,7 +22,7 @@ enableRobotsTXT = true
 [params]
 author = "Alessandra [Ali] Valcarcel"
 intro = "Biostatistics PhD Candidate at the University of Pennsylvania"
-description = "I come from a (bio)statistics background with extensive coding and computational experience. That being said, I always love to pick up more computation, coding, and visualization skills. I'm finishing my PhD in biostatistics at the University of Pennsylvania with Drs. Kristin Linn and Russell [Taki] Shinohara as co-advisors."
+description = "I come from a (bio)statistics background with extensive coding and computational experience. That being said, I always love to pick up more computation, coding, and visualization skills. I'm finishing my PhD in Biostatistics at the University of Pennsylvania with Drs. Kristin Linn and Russell [Taki] Shinohara as co-advisors."
 authorimage = "main.jpg" 
 dateformat = "Jan 2, 2006"
 

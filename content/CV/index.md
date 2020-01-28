@@ -36,7 +36,7 @@ _(2017)_
 B.A., Biology and Statistics (Honors)  
 University of Connecticut  
 Advisor: Dr. Ofer Harel  
-Thesis Title: Estimating causal effects in incomplete observational studies using multiple imputation and propensity score analysis: A simulation study  
+Thesis Title: Estimating Causal Effects in Incomplete Observational Studies Using Multiple Imputation and Propensity Score Analysis: A Simulation Study  
 _(2015)_  
 
 

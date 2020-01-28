@@ -17,9 +17,9 @@ I'm currently a fifth-year doctoral student studying Biostatistics in the [Depar
 
 Primarily, my research interests lie in the development of statistical methods for analyzing neuroimaging data sets with the goal of understanding disease processes in the brain. Currently, my projects involve the analysis of multi-sequence structural MRI to study neurodevelopment and multiple sclerosis. I collaborate regularly with experts in bioengineering, radiology, and neurology. Beyond my statistical work in neuroimaging, I love building software tools that make data science better, faster, and more accessible.
 
-I earned my M.S. in Biostatistics from University of Pennsylvania in 2017. My thesis proposed a novel machine learning algorithm, MIMoSA, to automatically detect T2 hyperintense white matter lesions in multiple sclerosis. Before coming to Penn, I obtained my undergraduate degree in Biology and Statistics (Honors) from University of Connecticut (Go Huskies).
+I earned my M.S. in Biostatistics from the University of Pennsylvania in 2017. My thesis proposed a novel machine learning algorithm, MIMoSA, to automatically detect T2 hyperintense white matter lesions in multiple sclerosis. Before coming to Penn, I obtained my undergraduate degree in Biology and Statistics (Honors) from the University of Connecticut (Go Huskies).
 
-Outside of biostatistics and data science, you can find me baby-sitting my nieces and nephew, at concerts, running, hiking, and traveling. I love wandering where the wifi is weak. Sometimes it is _in tents_. 
+Outside of biostatistics and data science, I love going to concerts, running, hiking, traveling, and baby-sitting my nieces and nephew. I love wandering where the wifi is weak. Sometimes it is _in tents_. 
 
 The photo at the top of this page is from hiking in a cloud forest in Monteverde, Costa Rica. Some of my favorite adventures are included below.
 
@@ -29,7 +29,7 @@ Not sure I understood the _gravity_ of the whole sky diving thing.
 
 <br>
 
-While an undergraduate at the University of Connecticut, I studied abroad in Granada, Spain. Queen Isabel said once, "Esta ciudad, que la tengo en mas que a mi vida" Roughly translated this means that Queen Isabel carries Granada in more than just her life. It is more poetic in Spanish but I couldn't have said it better myself. This is a picture of me in front of La Alhambra on a recent visit back to Granada in 2019. La Alhambra is a palace built by the Moors and conquered by the Catholics and is one of the most visited sites tourist attractions in all of Europe.
+While an undergraduate at the University of Connecticut, I studied abroad in Granada, Spain. Queen Isabel said once, "Esta ciudad, que la tengo en mas que a mi vida." Roughly translated this means that Queen Isabel carries Granada in more than just her life. It is more poetic in Spanish but I couldn't have said it better myself. This is a picture of me in front of La Alhambra on a recent visit back to Granada in 2019. La Alhambra is a palace built by the Moors and conquered by the Catholics and is one of the most visited tourist attractions in Europe.
 
 <center>![picture](/img/about/alhambra.jpg)</center>
 
