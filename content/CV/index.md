@@ -73,10 +73,10 @@ Dordt College Research Internship in Statistical Genetics
 
 __Programming:__
 
-Expertise: R
-Working Knowledge: SAS, bash scripting, MATLAB, Stata, HTML, css, python
-Applications: LaTeX, Microsoft Office, knitr, RMarkdown, StatWeave, GitHub
-
+Expertise: R  
+Working Knowledge: SAS, bash scripting, MATLAB, Stata, HTML, css, SQL  
+Applications: LaTeX, Microsoft Office, RMarkdown, knitr, RMarkdown, StatWeave, GitHub  
+	
 __Select Service and Leadership:__
 
 Council for Emerging and New Statisticians (CENS) _(2017-2020)_    

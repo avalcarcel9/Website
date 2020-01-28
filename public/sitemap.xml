@@ -117,13 +117,13 @@
   </url>
   
   <url>
-    <loc>/tags/game-of-thrones/</loc>
+    <loc>/categories/game-of-thrones/</loc>
     <lastmod>2019-04-05T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/game-of-thrones/</loc>
+    <loc>/tags/game-of-thrones/</loc>
     <lastmod>2019-04-05T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
@@ -164,13 +164,13 @@
   </url>
   
   <url>
-    <loc>/tags/data-scraping/</loc>
+    <loc>/categories/data-scraping/</loc>
     <lastmod>2018-04-01T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/data-scraping/</loc>
+    <loc>/tags/data-scraping/</loc>
     <lastmod>2018-04-01T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
@@ -230,13 +230,13 @@
   </url>
   
   <url>
-    <loc>/tags/about/</loc>
+    <loc>/categories/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/about/</loc>
+    <loc>/tags/about/</loc>
     <lastmod>2016-10-02T22:55:05-04:00</lastmod>
     <priority>0</priority>
   </url>
