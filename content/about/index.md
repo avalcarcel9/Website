@@ -29,13 +29,13 @@ Not sure I understood the _gravity_ of the whole sky diving thing.
 
 <br>
 
-While an undergraduate at the University of Connecticut, I studied abroad in Granada, Spain. Queen Isabel said once, "Esta ciudad, que la tengo en mas que a mi vida" Roughly translated this means means that Queen Isabel carries Granada in more than just her life. It is more poetic in Spanish but I couldn't have said it better myself. This is a picture of me in front of La Alhambra on a recent visit back to Granada in 2019. La Alhambra is a palace built by the Moors and conquered by the Catholics and is one of the most visited sites tourist attractions in all of Europe.
+While an undergraduate at the University of Connecticut, I studied abroad in Granada, Spain. Queen Isabel said once, "Esta ciudad, que la tengo en mas que a mi vida" Roughly translated this means that Queen Isabel carries Granada in more than just her life. It is more poetic in Spanish but I couldn't have said it better myself. This is a picture of me in front of La Alhambra on a recent visit back to Granada in 2019. La Alhambra is a palace built by the Moors and conquered by the Catholics and is one of the most visited sites tourist attractions in all of Europe.
 
 <center>![picture](/img/about/alhambra.jpg)</center>
 
 <br>
 
-I had the fortune of taking a class in Spanish culture during my study abroad experience where I got to visit lots of Spanish cities. This photo is from a hike in Ronda, Spain. It is my favorite hike of all time since it is not too _main stream_. 
+I had the fortune of taking a class in Spanish culture during my study abroad experience where I got to visit numerous Spanish cities. This photo is from a hike in Ronda, Spain. It is my favorite hike of all time since it is not too _main stream_. 
 
 <center>![picture](/img/about/ronda.jpeg)</center>
 
