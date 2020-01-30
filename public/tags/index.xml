@@ -12,9 +12,36 @@
     
     
     <item>
+      <title>Food</title>
+      <link>/tags/food/</link>
+      <pubDate>Wed, 04 Sep 2019 21:01:01 -0600</pubDate>
+      
+      <guid>/tags/food/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Graduate School</title>
+      <link>/tags/graduate-school/</link>
+      <pubDate>Wed, 04 Sep 2019 21:01:01 -0600</pubDate>
+      
+      <guid>/tags/graduate-school/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Imposter Syndrome</title>
+      <link>/tags/imposter-syndrome/</link>
+      <pubDate>Wed, 04 Sep 2019 21:01:01 -0600</pubDate>
+      
+      <guid>/tags/imposter-syndrome/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>CCEB</title>
       <link>/tags/cceb/</link>
-      <pubDate>Wed, 04 Sep 2019 21:01:01 -0600</pubDate>
+      <pubDate>Tue, 03 Sep 2019 21:01:01 -0600</pubDate>
       
       <guid>/tags/cceb/</guid>
       <description></description>
@@ -23,7 +50,7 @@
     <item>
       <title>Cluster</title>
       <link>/tags/cluster/</link>
-      <pubDate>Wed, 04 Sep 2019 21:01:01 -0600</pubDate>
+      <pubDate>Tue, 03 Sep 2019 21:01:01 -0600</pubDate>
       
       <guid>/tags/cluster/</guid>
       <description></description>
@@ -32,7 +59,7 @@
     <item>
       <title>IBM</title>
       <link>/tags/ibm/</link>
-      <pubDate>Wed, 04 Sep 2019 21:01:01 -0600</pubDate>
+      <pubDate>Tue, 03 Sep 2019 21:01:01 -0600</pubDate>
       
       <guid>/tags/ibm/</guid>
       <description></description>
@@ -41,7 +68,7 @@
     <item>
       <title>LSF</title>
       <link>/tags/lsf/</link>
-      <pubDate>Wed, 04 Sep 2019 21:01:01 -0600</pubDate>
+      <pubDate>Tue, 03 Sep 2019 21:01:01 -0600</pubDate>
       
       <guid>/tags/lsf/</guid>
       <description></description>

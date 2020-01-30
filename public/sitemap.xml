@@ -15,25 +15,13 @@
   </url>
   
   <url>
-    <loc>/tags/cceb/</loc>
-    <lastmod>2019-09-04T21:01:01-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/</loc>
     <lastmod>2019-09-04T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/cluster/</loc>
-    <lastmod>2019-09-04T21:01:01-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/computing/</loc>
+    <loc>/tags/food/</loc>
     <lastmod>2019-09-04T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
@@ -44,13 +32,19 @@
   </url>
   
   <url>
-    <loc>/tags/ibm/</loc>
+    <loc>/tags/graduate-school/</loc>
     <lastmod>2019-09-04T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/lsf/</loc>
+    <loc>/tags/imposter-syndrome/</loc>
+    <lastmod>2019-09-04T21:01:01-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/personal-experience/</loc>
     <lastmod>2019-09-04T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
@@ -58,6 +52,36 @@
   <url>
     <loc>/tags/</loc>
     <lastmod>2019-09-04T21:01:01-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/cceb/</loc>
+    <lastmod>2019-09-03T21:01:01-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/cluster/</loc>
+    <lastmod>2019-09-03T21:01:01-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/computing/</loc>
+    <lastmod>2019-09-03T21:01:01-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/ibm/</loc>
+    <lastmod>2019-09-03T21:01:01-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/lsf/</loc>
+    <lastmod>2019-09-03T21:01:01-06:00</lastmod>
     <priority>0</priority>
   </url>
   
