@@ -24,7 +24,7 @@ __Education:__
 Ph.D., Biostatistics  
 University of Pennsylvania  
 Advisors: Drs. Kristin Linn and Russell [Taki] Shinohara  
-Thesis Title: Comprehensive Multiple Sclerosis Lesion Analysis Methods for Magnetic Resonance Imaging  
+Thesis Title: Statistical Methods for Multi-Modal Image Analysis with Applications in Multiple Sclerosis and Neurodevelopment  
 _(anticipated May 2020)_  
 
 M.S., Biostatistics  
