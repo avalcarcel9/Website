@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(out.width = '100%', fig.path='Figs/',
+knitr::opts_chunk$set(out.width = '100%', 
                       echo=FALSE, warning=FALSE, message=FALSE)
 ```
 
@@ -41,25 +41,25 @@ Unfortunately, the data have some limitations that must be addressed. Since this
 ## Season 1 
 
 ```{r, echo = FALSE, eval = FALSE}
-img = c(magick::image_read(path = "/img/got_network/season1/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode4.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode5.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode6.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode7.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode8.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode9.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode10.png"))
+../../static/img = c(magick::image_read(path = "../../static/img/got_network/season1/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode4.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode5.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode6.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode7.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode8.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode9.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode10.png"))
 
-season1episodes = magick::image_animate(img, fps = 0.1)
-magick::image_write_gif(season1episodes, '/img/got_network/season1/all_episodes.gif')
+season1episodes = magick::image_animate(../../static/img, fps = 0.1)
+magick::image_write_gif(season1episodes, '../../static/img/got_network/season1/all_episodes.gif')
 ```
 
 It is no surprise that the network developed in the first season is mostly described by family ties and geographical location as the conflict and plot lines are revealed. Characters with strong connections tend to be in the same family or in the same location. The first season focuses on the family of nobleman Eddard "Ned" Stark and King Robert Baratheon. Robert travels to Winterfell to ask Ned, his long time friend and ally, to accept the position of King's Hand. Ned and his daughters, Sansa and Arya, move to King's Landing while his wife Catelyn and sons Robb, Bran, and Rickon are left in Winterfell. Jon Snow, Ned's bastard, heads to the wall protect the realm and join the Night's Watch. __Figure \@ref(fig:seas1eps)__ shows each episode network across season 1. In episode 1 the Stark children are connected to their parents with the only non-family member in the cluster being Ned's old friend Robert. Jon Arryn, the previous King's Hand, has been killed and Ned is tasked with discovering the details of his mysterious death.
 
 ```{r, seas1eps, echo = FALSE, fig.align = "center", fig.cap = "The season 1 episode networks are presented. The networks are created using data from each unique episode and do not use cumulative information across episodes. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/season1/all_episodes.gif')
+knitr::include_graphics('../../static/img/got_network/season1/all_episodes.gif')
 ```
 
 While in King's Landing Ned uncovers dark secrets about the Lannister family. Ned disputes the legitimacy of the Baratheon children, Joffrey, Tommen, and Myrcella and claims they have no rights to the Iron Throne. By episode 6, Ned has quickly become connected with Jaime Lannister, Tyrion Lannister, and Petyr Baelish, all powerful advisors or guardians of Robert that reside in King's Landing, the same geographic location as Ned.
@@ -73,7 +73,7 @@ Similarly, in episode 6, Daenerys and Viserys further evidence the family and lo
 The family-location pattern is even more evident when we create a cumulative network that quantifies the network using data across all episodes in season 1. __Figure \@ref(fig:seas1)__ shows the full season 1 network. To generate this network, the data is combined across all 10 episodes in season 1. The Starks, Baratheons, and Lannisters form a large single cluster with some important peripheral characters like Petyr. Each family cluster is easily identifiable inside the larger network showing the immediate connections are between family members or old friends. Since Daenerys is in Essos, a continent far from Westeros, she forms her own cluster with Viserys, Khal Drogo, and Jorah Mormont.
 
 ```{r, seas1, echo = FALSE, fig.align = "center", fig.cap = "The season 1 cumulative network is presented. The network is created using data across all episodes in season 1. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/cumulative/within season/final/season1.png')
+knitr::include_graphics('../../static/img/got_network/cumulative/within season/final/season1.png')
 ```
 
 The cumulative season 1 network also reveals that Ned is the most central character across the entire season. 
@@ -83,24 +83,24 @@ Season 1 sets up major plot lines so its obvious that the series opens with char
 ## Season 2
 
 ```{r, echo = FALSE, eval = FALSE}
-img = c(magick::image_read(path = "/img/got_network/season2/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season2/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season2/final/episode3.png"))
+../../static/img = c(magick::image_read(path = "../../static/img/got_network/season2/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season2/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season2/final/episode3.png"))
 
-season2episodes = magick::image_animate(img, fps = 0.1)
-magick::image_write_gif(season2episodes, '/img/got_network/season2/all_episodes.gif')
+season2episodes = magick::image_animate(../../static/img, fps = 0.1)
+magick::image_write_gif(season2episodes, '../../static/img/got_network/season2/all_episodes.gif')
 ```
 
 The network develops quite differently in season 2. With data from only the first three episodes interpreting the overall season network pattern is more difficult due to the missing data. Family and location connections are still present, but there are more conflict based connections in these episodes. Focusing on episode 1 in __figure \@ref(fig:seas2eps)__ there is a prominent cluster connecting Joffrey Baratheon, Robb Stark, Renly Baratheon, Stannis Baratheon, and Jaime Lannister. After Ned's public claims surrounding the royal children and King Robert's death the War of the Five Kings breaks out around the Seven Kingdoms. The five kings that emerge include Robert's supposed heir, Joffrey Baratheon, Robert's two younger brothers, Stannis and Renly Baratheon, Robb Stark the "King in the North", and Balon Greyjoy the "King of the Iron Islands". 
 
 ```{r, seas2eps, echo = FALSE, fig.align = "center", fig.cap = "The season 2 episode networks are presented. The networks are created using data from each unique episode and do not use cumulative information across episodes. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/season2/all_episodes.gif')
+knitr::include_graphics('../../static/img/got_network/season2/all_episodes.gif')
 ```
 
 A clear pattern presents in the episode networks displayed in __figure \@ref(fig:seas2eps)__ and the season network shown in __figure \@ref(fig:seas2)__ revealing a cluster joining Robb Stark, Cersei Lannister, Stannis Baratheon, Joffrey Baratheon, Tyrion, Catelyn, Stannis Baratheon, and Renly Baratheon the characters fighting each other in civil war. Interestingly, each character fighting for the Iron Throne is distracted by mainly one other character. We do not see each character in conflict with all others fighting but rather tunnel vision and fixation on a single threat. For example, in the episode 1 network Robb Stark is mainly concerned with Cersei Lannister and Joffrey Baratheon in King's Landing while Renly Baratheon is largely concerned with Stannis Baratheon. This is consistent with the plot lines in the show. Robb at the start was mostly concerned with Cersei while Renly was fending off Cersei and Stannis.
 
 ```{r, seas2, echo = FALSE, fig.align = "center", fig.cap = "The season 2 cumulative network is presented. The network is created using data across all episodes in season 2. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/cumulative/within season/final/season2.png')
+knitr::include_graphics('../../static/img/got_network/cumulative/within season/final/season2.png')
 ```
 
 Robb sends Theon Greyjoy and his mother Catelyn Stark separately to seek alliances with Balon Greyjoy in the Iron Islands and Renly Baratheon on the battle field while Robb and his army progress South. Robb and his army cross paths with Jaime Lannister and they take him as a prisoner of war. After Theon returns home and reunites with his family he crosses Robb by taking up arms with the Ironborn and recaptures Winterfell for the Iron Islands. Bran and Rickon Stark escape into the wilderness but Theon claims falsely that he killed the Lords. Catelyn fails to convince Renly to align and he is murdered by an evil spirit dispatched by Melisandre "The Red Woman" a Red Priestess working with Stannis Baratheon. Since the only other living people in the room are Catelyn and Brienne of Tarth, Renly's bodyguard, they are accused of the assassination and quickly flee. Catelyn and Brienne later reunite with Robb and devise a plan to take Jaime Lannister back to King's Landing in order to extort Jaime for Sansa.
@@ -120,7 +120,7 @@ Season 3 begins with the fall season settling across the Seven Kingdoms. Rather 
 Robb Stark remains in the South while the North is under Ironborn occupation. Robb breaks a marriage pact with Walder Frey by marrying Talisa Maegyr, a healer working in the battlefields of the Westerlands. In an attempt to salvage the alliance, Robb meets with Walder Frey to beg for forgiveness and promises marriage alliances with his single siblings in a last ditch effort to join the families. Walder Frey crosses Robb and kills his pregnant wife Talisa, his mother Catelyn, and him in a brutal betrayal that has come to be known as "The Red Wedding". The only data available online was for The Red Wedding (episode 9). In the episode 9 network shown in __figure \@ref(fig:seas3eps)__ Robb and Catelyn are joined in a cluster since Catelyn realizes the betrayal moments before it occurs and calls out to Robb. Arya  braves the Riverlands in order to reunite with her brother and mother but arrives at the wedding just as her family is being murdered. Sandor Clegane, the Hound, knocks her unconscious and pulls her away before anyone realizes her true identity.
 
 ```{r, seas3eps, echo = FALSE, fig.align = "center", fig.cap = "The season 3 episode 9 network is presented. This is the only episode with data available for interpretation. The network is created using data from the unique episode and does not use cumulative information across episodes. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/season3/final/episode9.png')
+knitr::include_graphics('../../static/img/got_network/season3/final/episode9.png')
 ```
 
 __Figure \@ref(fig:seas3eps)__ joins Bran, Hodor, and Jojen into a cluster since Bran and his protectors reach the Wall and cross into Wildling territory in search of the Three-Eyed Raven. 
@@ -152,19 +152,19 @@ Arya Stark spends most of season 4 traveling with The Hound. The two cross paths
 ## Season 5 
 
 ```{r, echo = FALSE, eval = FALSE}
-img = c(magick::image_read(path = "/img/got_network/season5/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode4.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode5.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode6.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode7.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode8.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode9.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode10.png"))
+../../static/img = c(magick::image_read(path = "../../static/img/got_network/season5/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode4.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode5.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode6.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode7.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode8.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode9.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode10.png"))
 
-season5episodes = magick::image_animate(img, fps = 0.1)
-magick::image_write_gif(season5episodes, '/img/got_network/season5/all_episodes.gif')
+season5episodes = magick::image_animate(../../static/img, fps = 0.1)
+magick::image_write_gif(season5episodes, '../../static/img/got_network/season5/all_episodes.gif')
 ```
 
 The network patterns are similar to previous seasons and geographic location starts as the largest indicator of connections and clusters. Episode 1 displayed in __figure \@ref(fig:seas5eps)__ shows connections between Stannis and Davos, Samwell Tarly and Alliser Thorne, and Cersei and Loras Tyrell all characters in the same location. Season 5 starts with a prophecy that Cersei Lannister will lose everyone and everything she holds dear. The prophecy seems well on its way to coming to fruition. Cersei tries everything in her power to prevent the prediction by controlling the fate of her remaining children Tommen and Myrcella.
@@ -172,7 +172,7 @@ The network patterns are similar to previous seasons and geographic location sta
 The network moves away from spatial links and begins to build around the conflict. With Tommen Baratheon infatuated with his new wife Margaery Tyrell, Cersei is losing influence and control. Episode 3 shows the first connections between Cersei and the High Sparrow, the leader of a fanatical new religious sect Cersei recruits to dominate her enemies. At first this works, and in episode 4 Tommen, the High Sparrow, and Cersei are connected without Margaery since both Loras Tyrell and Margaery are arrested for homosexuality and perjury. Later though, Cersei herself is arrested for incest. Episode 6 shows the cluster of sinners, Cersei, Loras, Margaery, and Ser Lancel Lannister, all connected to the High Sparrow both directly and indirectly. After episode 6, this conflict and cluster subsides while Cersei herself is imprisoned. Through extensive physical and psychological torture, Cersei finally pleads guilty to having committed adultery with her cousin Lancel and is subject to a walk of shame through King's Landing. 
 
 ```{r, seas5eps, echo = FALSE, fig.align = "center", fig.cap = "The season 5 episode networks are presented. The networks are created using data from each unique episode and do not use cumulative information across episodes. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/season5/all_episodes.gif')
+knitr::include_graphics('../../static/img/got_network/season5/all_episodes.gif')
 ```
 
 After episode 2 the network clusters grow in size. Episode 2 shows a large cluster connecting Catelyn Stark, Petyr Baelish, Brienne of Tarth, Sansa Stark, and Podrick Payne. Petyr marries Sansa to Ramsay Bolton in an effort to return her to her roots in the North. Ramsay can't even treat Sansa, a noble born, with dignity. The Boltons find their way into the network in a large way as central characters connected with other main characters. In episode 3 Roose and Ramsay are highly connected to Petyr, Sansa, Cersei, and Tyrion. They remain in the network connected to both major and minor characters up to episode 8. After this, Theon finally comes to his senses and helps Sansa escape Ramsay's extensive mis-treatment and Winterfell. They head North to find Jon Snow. 
@@ -190,25 +190,25 @@ Jon Snow refuses to join forces with Stannis sacrificing his chances of becoming
 The network developed using data across all episodes in season 5 (__figure \@ref(fig:seas5)__) becomes more dense than previous seasons. Deservedly, Petyr Baelish is the most central character in season 5. Jaime and his cluster in Dorne, Daenerys and her cluster in Slaver's Bay, and Davos' special relationship with Shireen describe a few small clusters that make up the season 5 network. These characters and those in their clusters are geographically separated from the main conflict throughout the season explaining their isolated small clusters. In the end, HBO producers distract us with all their conflict, except Daenerys', and their conflict ends in death and unsuccessful missions. The larger cluster of characters begins to join Lannister, Tyrell, Stark, Baratheon, Bolton, and Greyjoy houses together. Petyr has ties to each of these houses, mainly Stark, Lannister, and Bolton, and is unsurprisingly the most central character in the season. These families are joined loosely by Jon Snow and the Night's Watch in the North at the Wall. The uniting of these important houses and characters finally joins the number of smaller plot lines into a single more cohesive game. 
 
 ```{r, seas5, echo = FALSE, fig.align = "center", fig.cap = "The season 5 cumulative network is presented. The network is created using data across all episodes in season 5. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/cumulative/within season/final/season5.png')
+knitr::include_graphics('../../static/img/got_network/cumulative/within season/final/season5.png')
 ```
 
 ## Season 6
 
 ```{r, echo = FALSE, eval = FALSE}
-img = c(magick::image_read(path = "/img/got_network/season6/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode4.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode5.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode6.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode7.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode8.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode9.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode10.png"))
+../../static/img = c(magick::image_read(path = "../../static/img/got_network/season6/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode4.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode5.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode6.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode7.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode8.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode9.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode10.png"))
 
-season6episodes = magick::image_animate(img, fps = 0.1)
-magick::image_write_gif(season6episodes, '/img/got_network/season6/all_episodes.gif')
+season6episodes = magick::image_animate(../../static/img, fps = 0.1)
+magick::image_write_gif(season6episodes, '../../static/img/got_network/season6/all_episodes.gif')
 ```
 
 Season 5 deviates from previous season finale patterns. In seasons 1 through 4, typically the most exciting conflict happens in the episodes leading up to the finale and the finale itself resolves the plot or sets up for future seasons. In season 5 Stannis battles for the North and is killed by Brienne, Theon finally turns against Ramsay and helps Sansa escape his torturous ways in Winterfell, Arya is blinded for violating her mission with the Faceless Men, Ellaria poisons and kills Myrcella in front of Jaime, after attacking the Sons of the Harpy Daenerys' dragon takes her into Dothraki territory, Cersei has her walk of shame, and Jon Snow is stabbed by his fellow Night's Watch. We are left with the frame panning into Jon laying in the snow, possibly alive or dead. Most pivotal characters conflict is left open to resume in season 6.
@@ -216,7 +216,7 @@ Season 5 deviates from previous season finale patterns. In seasons 1 through 4, 
 Season 6 therefore, starts more chaotic than previous seasons right in the middle of the conflict left open from season 5. In seasons 1 through 4, Jon's cluster was mostly populated by Samwell Tarly, Gilly, and others in the Night's Watch. In season 5, Jon's network diversifies and he is often connected to Tormund and Davos Seaworth. After being brought back to life by Melisandre in episode 1 (see __figure \@ref(fig:seas6eps)__), Jon's network continues to expand throughout season 6. In early portions of the season like episode 3 his cluster includes classic connections to Sam and Gilly but by episodes 5, 7, 9 and 10 his network grows to include Sansa, Davos, Ramsay, Lyanna Mormont, Stannis, Tormund, and Melisandre. Jon fufilled his oath to the Night's Watch and "lived and died by his post." He is liberated and leaves the Wall to take back Winterfell from the Boltons. The network surrounding Jon reflects his quest to join the houses in the North. Jon's cluster also includes Sansa since they are reunited in episode 4. Sansa is helping Jon rally the Northern families. Even with a reunited North, Jon and Sansa don't have the numbers to re-take Winterfell from Ramsay Bolton. 
 
 ```{r, seas6eps, echo = FALSE, fig.align = "center", fig.cap = "The season 6 episode networks are presented. The networks are created using data from each unique episode and do not use cumulative information across episodes. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/season6/all_episodes.gif')
+knitr::include_graphics('../../static/img/got_network/season6/all_episodes.gif')
 ```
 
 Since Jon and Sansa are reunited with a common goal, their networks and conflict overlap in most of season 6. Unlike Jon, Sansa's connections over the previous seasons persist and she has an extensive number of connections with a diverse set of characters throughout the season. Mainly, she still has ties to Petyr Baelish and Rob (Robin) Arryn (episode 4) the controlling power in the Vale.
@@ -236,7 +236,7 @@ The War of the Five Kings has ended and now the conflict shifts to the Lannister
 The cumulative season 6 network shown in __figure \@ref(fig:seas6)__ displays Sansa Stark and Jaime Lannister as the most central characters. Sansa intuitively is central since is uniting the North to fight Ramsay and brings her ties from King's Landing into the conflict. Jaime on the other hand is somewhat surprising since he really has no conflict of his own this season. For the most part, he is just working to support Cersei. The cumulative network in season 6 is the largest of all the aired seasons including season 7. All of the individual plot lines in season 6 climax and resolve somewhat setting up season 7 to focus on the final cohesive plot line against the White Walkers.
 
 ```{r, seas6, echo = FALSE, fig.align = "center", fig.cap = "The season 6 cumulative network is presented. The network is created using data across all episodes in season 6. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/cumulative/within season/final/season6.png')
+knitr::include_graphics('../../static/img/got_network/cumulative/within season/final/season6.png')
 ```
 
 The season 6 network in __figure \@ref(fig:seas6)__ also shows the cluster around Hodor is very small, it just includes Bran and Meera, but Hodor himself is one of the most central characters in the season. In fact, across all the seasons Hodor is one of the most central characters. Hodor plays a pivotal role in allowing Bran to see the origins of the White Walkers and due to this may be one of the most important characters in the series.
@@ -244,15 +244,15 @@ The season 6 network in __figure \@ref(fig:seas6)__ also shows the cluster aroun
 ## Season 7
 
 ```{r, echo = FALSE, eval = FALSE}
-img = c(magick::image_read(path = "/img/got_network/season7/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode4.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode5.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode6.png"))
+../../static/img = c(magick::image_read(path = "../../static/img/got_network/season7/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode4.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode5.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode6.png"))
 
-season7episodes = magick::image_animate(img, fps = 0.1)
-magick::image_write_gif(season7episodes, '/img/got_network/season7/all_episodes.gif')
+season7episodes = magick::image_animate(../../static/img, fps = 0.1)
+magick::image_write_gif(season7episodes, '../../static/img/got_network/season7/all_episodes.gif')
 ```
 
 Seasons 5 and 6 kill off a most major and minor characters leaving the network across season 7 somewhat sparse. The season 7 network is mostly populated by the major characters that have survived the game of thrones. Episode 1 is only filled by 9 characters in the network. Episode 2 and 3 quickly grow and unite the remaining houses. Episodes 2 and 3 show the Starks, Lannisters, Targaryens, and Tyrells have all finally connected into a single cluster. This is the first time these families are all jointly connected. After their loved ones are killed by Cersei Lannister even House Tyrell and Sands pledge their allegience to Daenerys. Episode 2 shows Daenerys and Olenna Tyrell connected. The network in the second to last season focuses on the convergence of the show's characters and main plotlines to set up the conflict in the final season.
@@ -260,7 +260,7 @@ Seasons 5 and 6 kill off a most major and minor characters leaving the network a
 Arya takes Walder Frey's face, kills him, and poisons the other members of the Frey family. This isn't present in the network because she is Walder as she carries out the murder to avenger her brother and mother. In episode 2, presented in __figure \@ref(fig:seas7eps)__, Arya meets Ed Sheeren and is reunited with Hot Pie. Hot Pie tells Arya Winterfell is once again safe and the King in the North is none other than Jon Snow. She returns home to Winterfell and is reunited with Sansa and Bran.
 
 ```{r, seas7eps, echo = FALSE, fig.align = "center", fig.cap = "The season 7 episode networks are presented. The networks are created using data from each unique episode and do not use cumulative information across episodes. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/season7/all_episodes.gif')
+knitr::include_graphics('../../static/img/got_network/season7/all_episodes.gif')
 ```
 
 Sam discovers and alerts Jon that Dragonstone is full of Dragonglass. Jon just misses Arya's return to Winterfell and arrives at Dragonstone to mine the glass in order to create weapons to fight the White Walkers. Episode 2 shows Jon connected to Tyrion since Tyrion is his reference into meeting Daenerys and in episode 3 we see Daenerys and Jon are directly joined in a cluster. In an effort to defeat the Army of the Dead, Jon, the King in the North, bends the knee to Daenerys. Daenerys struggles to believe the White Walkers exist until Jon shows her the cave art of the White Walkers proving to her the reality of the threat. Meanwhile in episode 2, Sam becomes connected to Jorah Mormont while he is studying at the Citadel to become a Maester. Ser Jorah Mormont contracted greyscale and Sam finds an ancient, experimental, and painful method to cure the otherwise terminal illness. Against his mentor's instructions, he treats and cures Jorah who eventually returns to Daenerys to serve loyally. With the imminent attack of the White Walkers, Sam loses his patience at the slow pace of learning at the Citadel, takes some useful books, and heads North.
@@ -282,7 +282,7 @@ Sam makes it to Winterfell and with Bran finds out Jon's real name is Aegon Targ
 The season 7 episode networks do not reflect the conflict present across the season. Likely, because season 7 is setting up for season 8. The season 7 cumulative network is shown in __figure \@ref(fig:seas7)__ and proves slightly more descriptive.
 
 ```{r, seas7, echo = FALSE, fig.align = "center", fig.cap = "The season 7 cumulative network is presented. The network is created using data across all episodes in season 7. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/cumulative/within season/final/season7.png')
+knitr::include_graphics('../../static/img/got_network/cumulative/within season/final/season7.png')
 ```
 
 The most central characters in season 7 are Daenerys, Arya, and Sansa. While Daenerys' centrality is clear, Arya and Sansa aren't as evident. The cumulative network shows the ties between Tyrion, Cersei, Daenerys, Arya, and Jon and the merging of the minor plot lines for the final season. Notably, the season 7 network is substantially smaller than the previous seasons cumulative networks.
@@ -290,74 +290,74 @@ The most central characters in season 7 are Daenerys, Arya, and Sansa. While Dae
 ## General Themes
 
 ```{r, echo = FALSE, eval = FALSE}
-img = c(magick::image_read(path = "/img/got_network/season1/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode4.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode5.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode6.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode7.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode8.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode9.png"),
-        magick::image_read(path = "/img/got_network/season1/final/episode10.png"),
-        magick::image_read(path = "/img/got_network/season2/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season2/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season2/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season3/final/episode9.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode4.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode5.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode6.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode7.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode8.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode9.png"),
-        magick::image_read(path = "/img/got_network/season5/final/episode10.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode4.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode5.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode6.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode7.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode8.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode9.png"),
-        magick::image_read(path = "/img/got_network/season6/final/episode10.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode1.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode2.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode3.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode4.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode5.png"),
-        magick::image_read(path = "/img/got_network/season7/final/episode6.png"))
+../../static/img = c(magick::image_read(path = "../../static/img/got_network/season1/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode4.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode5.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode6.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode7.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode8.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode9.png"),
+        magick::image_read(path = "../../static/img/got_network/season1/final/episode10.png"),
+        magick::image_read(path = "../../static/img/got_network/season2/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season2/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season2/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season3/final/episode9.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode4.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode5.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode6.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode7.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode8.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode9.png"),
+        magick::image_read(path = "../../static/img/got_network/season5/final/episode10.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode4.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode5.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode6.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode7.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode8.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode9.png"),
+        magick::image_read(path = "../../static/img/got_network/season6/final/episode10.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode1.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode2.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode3.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode4.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode5.png"),
+        magick::image_read(path = "../../static/img/got_network/season7/final/episode6.png"))
 
-all_season_episodes = magick::image_animate(img, fps = 0.1)
-magick::image_write_gif(all_season_episodes, '/img/got_network/cumulative/all_season_episodes.gif')
+all_season_episodes = magick::image_animate(../../static/img, fps = 0.1)
+magick::image_write_gif(all_season_episodes, '../../static/img/got_network/cumulative/all_season_episodes.gif')
 ```
 
 ```{r, echo = FALSE, eval = FALSE}
-img = c(magick::image_read(path = '/img/got_network/cumulative/within season/final/season1.png'),
-        magick::image_read(path = '/img/got_network/cumulative/within season/final/season2.png'),
-        magick::image_read(path = '/img/got_network/cumulative/within season/final/season3.png'),
-        magick::image_read(path = '/img/got_network/cumulative/within season/final/season5.png'),
-        magick::image_read(path = '/img/got_network/cumulative/within season/final/season6.png'),
-        magick::image_read(path = '/img/got_network/cumulative/within season/final/season7.png'))
+../../static/img = c(magick::image_read(path = '../../static/img/got_network/cumulative/within season/final/season1.png'),
+        magick::image_read(path = '../../static/img/got_network/cumulative/within season/final/season2.png'),
+        magick::image_read(path = '../../static/img/got_network/cumulative/within season/final/season3.png'),
+        magick::image_read(path = '../../static/img/got_network/cumulative/within season/final/season5.png'),
+        magick::image_read(path = '../../static/img/got_network/cumulative/within season/final/season6.png'),
+        magick::image_read(path = '../../static/img/got_network/cumulative/within season/final/season7.png'))
 
-all_seasons = magick::image_animate(img, fps = 0.1)
-magick::image_write_gif(all_seasons, '/img/got_network/cumulative/all_seasons.gif')
+all_seasons = magick::image_animate(../../static/img, fps = 0.1)
+magick::image_write_gif(all_seasons, '../../static/img/got_network/cumulative/all_seasons.gif')
 ```
 
 While digging into the network patterns on the micro-episode scale I noticed some interesting patterns more globally. HBO tends to slowly build conflict then have a massive episode or two in a row. __Figure \@ref(fig:alleps)__ below rotates between all networks produced from each episode across the series.
 
 ```{r, alleps, echo = FALSE, fig.align = "center", fig.cap = "Episode networks are presented across all seasons. The networks are created using data only from each unique episode and do not use cumulative information across episodes or seasons. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/cumulative/all_season_episodes.gif')
+knitr::include_graphics('../../static/img/got_network/cumulative/all_season_episodes.gif')
 ```
 
 __Figure \@ref(fig:number)__ plots the total number of characters in the network across each season and episode. The first thing that jumps out is that the number of characters in the show is constantly rising and falling in a pattern consistent with a repeated pattern of exciting episodes followed by some relief. Generally, the seasons start with very little conflict, shown by the sparse networks across episodes 1-2. Then the conflicts builds in episodes 3-5 and the network structures grow in size indicating lots of character conflict in these sets of episodes. After we have been emotionally beat up, the networks lean out again for episodes 6-7 and then tend to climax around episodes 8 and 9. These episodes again grow in size similar to episodes 3-5. Episode 10 normally ties up loose ends from the season and provides some relief from major conflict often setting the scene for the upcoming season. This pattern is made clear by the sin-wave like trend in seasons 5 through 7 in __figure \@ref(fig:number)__.
 
 
 ```{r, number, echo = FALSE, fig.align = 'center', fig.cap = 'A scatter plot with lines connecting points is presented. The number of characters in the network is plotted against the season and episode indicator. The figure shows a sin-wave pattern where the number of characters in the constantly network grows and then falls only to grow again. Typically, the first portion of the season shows a rising trend while the end of the season shows a decline.'}
-knitr::include_graphics('/img/got_network/character_number_plot.png')
+knitr::include_graphics('../../static/img/got_network/character_number_plot.png')
 ```
 
 My friend [Jordan Dworkin](https://www.jordandworkin.com/) found a similar conflict pattern using a sentiment analysis on the Stranger Things scripts. He notes across season 1 and 2 of Stranger Things the overall episode sentiment constantly rotates between ordinally between episodes that begin and end with neutral emotion and have slow fluctuations in the middle, episodes that begin with negative emotion and gradually climb towards a positive ending, and episodes that begin on a positive note and oscillate downwards towards a darker ending. 
@@ -410,7 +410,7 @@ character_number_plot = ggplot(n_network, aes(episode, n)) +
   xlab('Episode by Season') +
   ylab('Number of Characters in the Network')
 
-ggsave(filename = '/img/got_network/character_number_plot.png', plot = character_number_plot, units = "in", width = 10, height = 4)
+ggsave(filename = '../../static/img/got_network/character_number_plot.png', plot = character_number_plot, units = "in", width = 10, height = 4)
 ```
 
 A few characters are worth following across all the networks throughout the series. The cluster surrounding Cersei constantly grows and thins. This pattern reflects Cersei's plotline throughout the series. She either kills those she is in conflict with, or they kill those that are close to her for revenge. Cersei's network is also normally filled with characters that she has direct conflict with. While in the show she seems to always be a step ahead, the cluster pattern indicates she is more narrow minded and deals with drama coming head on rather than strategizing for the long-term game of thrones.
@@ -420,7 +420,7 @@ The cluster surrounding Arya is also one worth following. Arya's network, simila
 Lastly, the season 7 episode networks were unremarkable. While there is still quite a bit of conflict in season 7, the networks don't quantitatvely capture the excitment. The graphic below, taken from [https://blog.reedsy.com/narrative-arc/](https://blog.reedsy.com/narrative-arc/), shows the universal story arc. 
 
 ```{r, echo = FALSE, fig.align='center'}
-knitr::include_graphics('/img/got_network/lit_journey.jpg')
+knitr::include_graphics('../../static/img/got_network/lit_journey.jpg')
 ```
 
 Back in my seventh grade english class (shout-out to Mrs. McCarty), I learned that this is the common plot structure for story telling. Game of Thones revolutionized TV by regularly killing off main characters. While it has been radical in surprising the viewer, I don't think it will go against the universal story arc. Season 1 was the exposition with Ned's death the inciting incident. Seasons 2-5 are the rising action and season 6 was the climax. Season 7 begins the falling action. Season 8 will hold the resolution and have some mini-climax related to the White Walkers.
@@ -428,7 +428,7 @@ Back in my seventh grade english class (shout-out to Mrs. McCarty), I learned th
 For fun, __figure \@ref(fig:allseas)__ shows the network grow across seasons.
 
 ```{r, allseas, echo = FALSE, fig.align = "center", fig.cap = "Episode networks are presented across all seasons. The networks are created using data only from each unique episode and do not use cumulative information across episodes or seasons. The size of the character name indicates the the degree of their centrality."}
-knitr::include_graphics('/img/got_network/cumulative/all_seasons.gif')
+knitr::include_graphics('../../static/img/got_network/cumulative/all_seasons.gif')
 ```
 
 The Walls watch has ended but until season 8 our watch begins.

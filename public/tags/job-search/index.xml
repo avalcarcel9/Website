@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Personal Experience on Alessandra [Ali] Valcarcel</title>
-    <link>/categories/personal-experience/</link>
-    <description>Recent content in Personal Experience on Alessandra [Ali] Valcarcel</description>
+    <title>Job Search on Alessandra [Ali] Valcarcel</title>
+    <link>/tags/job-search/</link>
+    <description>Recent content in Job Search on Alessandra [Ali] Valcarcel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Thu, 01 Oct 2020 21:01:01 -0600</lastBuildDate>
     
-	<atom:link href="/categories/personal-experience/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/job-search/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,16 +19,6 @@
       <guid>/blog/2020-10-01-job_advice/</guid>
       <description>It is never too early to start preparing for the job market. You never know who you’ll meet and what advice or opportunities they might be able to offer you. If you’re prepared it makes exploiting connections and navigating the job market much easier.
 When I first started graduate school I really had no idea what I wanted to do beyond graduate school. Academia, industry, or government all seemed appealing for different reasons and I wasn’t quite sure yet which field would align with my wants and needs best.</description>
-    </item>
-    
-    <item>
-      <title>Grad School: What I&#39;ve Learned (so far at least)</title>
-      <link>/blog/2019-09-04-advice/</link>
-      <pubDate>Wed, 04 Sep 2019 21:01:01 -0600</pubDate>
-      
-      <guid>/blog/2019-09-04-advice/</guid>
-      <description>While the end of summer doesn’t always guarantee cooler weather it does always mean the start of a fresh and new school year.
-   via GIPHY  I’ve been enrolled in full time school of some sort for 23 straight years now including pre-k and grad school. As a fifth year PhD student, I’m starting to get nostalgic that this is likely (and hopefully) my last year in school.</description>
     </item>
     
   </channel>
