@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Personal website">
+<meta name="keywords" content="student,statistics,biostatistics,Penn">
+
+<base href="/">
+
+<title>Alessandra [Ali] Valcarcel</title>
+
+<meta name="generator" content="Hugo 0.55.0" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-US">
+<div class="container">
+  
+
+</head>
+<body lang="en-US">
+<div class="container">
+  
+
+<header class="row text-left title">
+  <h1 class="title">Mining your Own Apple Music Data</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        PUBLISHED ON OCT 2, 2020 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/data-science">DATA SCIENCE</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p>Streaming services like Pandora, Apple Music, and Spotify have changed how we consume and identify with music. In the olden days of purchasing music, whether a physical CD or music through iTunes, users made decisive choices about the music they were consuming. Additionally, you had a physical or digital copy of the music you were consuming. If you wanted to listen to music you would have to look through your CD collection or scroll through your iTunes library and select what you wanted. Now, we have access to an endless amount of music content all at our fingertips. Streaming services have simplified the process of finding and selecting music but with such vast options we are more passive users. You just go to your app of choice and there are suggestions or recently listened to options. Personally, without having to go through the effort of finding and buying albums or songs I find that I am a less active participant in what I consume. These days, when I choose what music I want to play I tend to play the same set of artists, albums, and curated playlists. While having the streaming service curate playlists for me gives me some diversity in the music content I feel like what I put on is not as eclectic as the choices I used to make when I could scroll through my iTunes library and would manually select my music or create playlists.</p>
+
+<p>With that in mind, I decided to use my data science skills to create a music library. I use Apple Music to stream content on an iPhone and a Mac computer. Apple collects my music history like the songs I &ldquo;Love&rdquo; or &ldquo;Dislike&rdquo; and what content I manually select to play. The data they collect is my own personal data and I just learned that you can request the data that Apple tracks and obtain a copy.</p>
+
+<p>If you go to <a href="https://smartphones.gadgethacks.com/how-to/view-all-songs-youve-loved-apple-music-one-convenient-list-0199808/#:~:text=Since%20you're%20an%20Apple,on%20your%20phone%20right%20away.">this blog post</a> you can follow the instructions to download your ownApple Music data. Apple will have you sign into your account and then you can request your data. I only requested my music data but you can also request your location history or other data Apple collects about you. Follow the prompts and eventually they&rsquo;ll send you a confirmation email noting your data is being prepared. After a few days, I got a follow up email that my data was ready for me to download. I downloaded my data, saved it on my computer, and will be cleaning it here so that I could mimic as much as possible a music library for artists and playlists that I list to.</p>
+
+<p>The data you download about yourself from Apple is rich. All your media consumption data through Apple Music is saved as .json files. I personally have never worked with these and simply want a unique list of artists and playlists so I am going to use the .csv music data in &ldquo;Apple Media Services information/Apple_Media_Services/Apple Music Activity&rdquo;.</p>
+
+<p>First, let&rsquo;s load the data.</p>
+
+<p>Now let&rsquo;s retain only the columns from each data that we will need. From the &ldquo;Music - Favorite Stations.csv&rdquo; let&rsquo;s keep only the &ldquo;Station Description&rdquo;. From &ldquo;Apple Music Likes and Dislikes.csv&rdquo; let&rsquo;s keep only the &ldquo;Item Description&rdquo;. From &ldquo;Apple Music Play Activity.csv&rdquo; let&rsquo;s keep two columns &ldquo;Artist Name&rdquo; and &ldquo;Content Specific Type&rdquo;.</p>
+
+<p>From the &ldquo;Music - Favorite Stations.csv&rdquo; we will rename the <code>Station Description</code> as <code>Name</code> and add a column <code>Tag</code> set to &ldquo;Radio&rdquo;.</p>
+
+<p>From the &ldquo;Apple Music Play Activity.csv&rdquo; we will filter to songs only and then remove the &ldquo;Content Specific Type&rdquo; column. We will then retain only unique <code>Artist Name</code>&rsquo;s, rename the <code>Artist Name</code> column to <code>Name</code> and then arrange the column alphabetically. Lastly, let&rsquo;s add a column &ldquo;Tag&rdquo; and fill it with all &ldquo;Artist&rdquo;.</p>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      TAGS:
+      
+      
+      <a class="meta" href="/tags/apple">APPLE</a>, 
+      
+      <a class="meta" href="/tags/data-science">DATA SCIENCE</a>, 
+      
+      <a class="meta" href="/tags/music">MUSIC</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  <h4 class="text-center"><a class="menu-item" href="/">home</a></h4>
+</section>
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2018. Alessandra [Ali] Valcarcel.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-115574303-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>
+
+
+

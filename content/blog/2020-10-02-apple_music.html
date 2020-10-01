@@ -1,0 +1,26 @@
+---
+title: "Mining your Own Apple Music Data"
+author: "Alessandra Valcarcel"
+date: 2020-10-02T21:05:01-06:00
+categories: ["Data Science"]
+tags: ["Data Science", "Music", "Apple"]
+output: 
+  bookdown::html_document2:
+    number_sections: false
+---
+
+
+
+<p>Streaming services like Pandora, Apple Music, and Spotify have changed how we consume music. In the olden days of purchasing music, whether a physical CD or through iTunes, users had to seek out music and make decisive choices about the music they were choosing to buy. Additionally, you had a physical or digital copy of the music you were consuming. If you wanted to listen to music you would have to look through your CD collection or scroll through your iTunes library and select what you wanted.</p>
+<p>Now, we have access to an endless amount of music content all at our fingertips. Streaming services have simplified the process of finding and selecting music but with curated playlists and content have become more passive users. You just go to your app of choice and there are suggestions or recently listened to options. Personally, without having to go through the effort of finding and buying albums or songs I find that I am a less active participant in what I consume. These days, when I choose what music I want to play I tend to play the same set of artists, albums, and curated playlists. While having the streaming service curate playlists for me [provides diversity in the music content I listen to I find my selection is not as eclectic as the choices I used to make when I could scroll through my iTunes library and would manually select my music or create playlists.</p>
+<p>With that in mind, I decided to use my data science skills to create a music library. I use Apple Music to stream content on an iPhone and a Mac computer. Apple collects my music history like the songs I “Love” or “Dislike” and what content I manually select to play. The data they collect is my own personal data and I just learned that you can request the data that Apple tracks and obtain a copy.</p>
+<p>If you go to <a href="https://smartphones.gadgethacks.com/how-to/view-all-songs-youve-loved-apple-music-one-convenient-list-0199808/#:~:text=Since%20you&#39;re%20an%20Apple,on%20your%20phone%20right%20away.">this blog post</a> you can follow the instructions to download your own Apple Music data. Apple will have you sign into your account and then you can request your data. I only requested my music data but you can also request your location history or other data Apple collects about you. Follow the prompts and eventually they’ll send you a confirmation email noting your data is being prepared. After a few days, I got a follow up email that my data was ready for download. I downloaded my data, saved it on my computer, and will be cleaning it here so that I could mimic as much as possible a library that tracks the artists and radio stations I have played.</p>
+<p>The data you download about yourself from Apple is rich. All your media consumption data through Apple Music is saved as .json files. I personally have never worked with these and simply want a unique list of artists and playlists so I am going to use the provided .csv music data in “Apple Media Services information/Apple_Media_Services/Apple Music Activity”.</p>
+<p>Here are the packages we will use for this analysis:</p>
+<p>First, let’s load the data.</p>
+<p>Now let’s retain only the columns from each .csv that we will need to create a library. From the “Music - Favorite Stations.csv” let’s keep only the “Station Description”. From “Apple Music Likes and Dislikes.csv” let’s keep only the “Item Description”. From “Apple Music Play Activity.csv” let’s keep two columns “Artist Name” and “Content Specific Type”. We will also rename all but the “Content Specific Type” columns “Name”</p>
+<p>From the “Music - Favorite Stations.csv” we will add a column <code>Tag</code> set it to “Radio” for all rows.</p>
+<p>From the “Apple Music Likes and Dislikes.csv” we will replace the “N/A” values with <code>NA</code> and then drop the rows with <code>NA</code>. The items in the “Apple Music Likes and Dislikes.csv” are named using the convention “Artist - Item” so we also want to extract the artist name by splitting the string at " - " and then keeping the first split column. Lastly, we will retain only distinct artist names and create a column “Tag” that is assigned “Artist”.</p>
+<p>From the “Apple Music Play Activity.csv” we will filter to songs only and then remove the “Content Specific Type” column. We will then retain only unique <code>Artist Name</code>’s, rename the <code>Artist Name</code> column to <code>Name</code>. Lastly, let’s add a column “Tag” and fill it with all “Artist”.</p>
+<p>Finally, we will bind all the music data (<code>favorite_stations</code>, <code>likes</code>, <code>activity</code>), alphabetically arrange the data by “Name” then “Tag”, and save it as a csv.</p>
+<p>Check out your new music library and enjoy!</p>

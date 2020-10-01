@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apple on Alessandra [Ali] Valcarcel</title>
+    <link>/tags/apple/</link>
+    <description>Recent content in Apple on Alessandra [Ali] Valcarcel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 02 Oct 2020 21:05:01 -0600</lastBuildDate>
+    
+	<atom:link href="/tags/apple/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mining your Own Apple Music Data</title>
+      <link>/blog/2020-10-02-apple_music/</link>
+      <pubDate>Fri, 02 Oct 2020 21:05:01 -0600</pubDate>
+      
+      <guid>/blog/2020-10-02-apple_music/</guid>
+      <description>Streaming services like Pandora, Apple Music, and Spotify have changed how we consume music. In the olden days of purchasing music, whether a physical CD or through iTunes, users had to seek out music and make decisive choices about the music they were choosing to buy. Additionally, you had a physical or digital copy of the music you were consuming. If you wanted to listen to music you would have to look through your CD collection or scroll through your iTunes library and select what you wanted.</description>
+    </item>
+    
+  </channel>
+</rss>
